@@ -1,0 +1,224 @@
+REPORTS
+
+S4 gating-charge residue is appropriately mutated to a smaller, polar, uncharged residue (37, 44, 45). Such mutation of Shaker R1 to histidine or serine permits H+ or alkali cation and guanidinium currents (38, 46).
+We introduced an R2Ser mutation (37) into the resting-state conformation (R2 to R4 down) (18, 38). The mutant VSD exhibited significant inward K+ current (no Cl− current) (movie S8, table S2, and fig. S5). This current arises because apposition of Phe233 with the mutated residue, which lacks the large, positive guanidinium group of the gating-charge residues, leads to increased hydration of the VSD hydrophobic constriction and thereby permits permeation of cations (Fig. 4, B and C). Depolarization halted the current and transferred ~2 e of gating charge (table S2).
+The transition into the resting state, as well as the conformation of the state itself, demonstrates that the VSD omega and gating-permeation pathways are one and the same. Mutation of gatingcharge residues enables pathological cation leaks through the VSD along the identical pathway taken by the physiological gating-charge guanidinium groups. We thus provide a structural explanation for hyperpolarization-induced (as well as depolarization-induced) cationic leak currents associated with channelopathies in certain human voltage-gated ion channels.
+References and Notes 1. A. L. Hodgkin, A. F. Huxley, J. Physiol. 117, 500 (1952). 2. M. Noda et al., Nature 312, 121 (1984). 3. B. L. Tempel, D. M. Papazian, T. L. Schwarz, Y. N. Jan,
+L. Y. Jan, Science 237, 770 (1987). 4. R. D. Nelson, G. Kuan, M. H. Saier Jr., M. Montal,
+J. Mol. Microbiol. Biotechnol. 1, 281 (1999).
+
+5. F. Bezanilla, Physiol. Rev. 80, 555 (2000). 6. K. J. Swartz, Nature 456, 891 (2008). 7. F. J. Sigworth, Nature 423, 21 (2003). 8. N. E. Schoppa, K. McCormack, M. A. Tanouye,
+F. J. Sigworth, Science 255, 1712 (1992). 9. S. K. Aggarwal, R. MacKinnon, Neuron 16, 1169 (1996). 10. S. B. Long, X. Tao, E. B. Campbell, R. MacKinnon, Nature
+450, 376 (2007). 11. V. Ruta, J. Chen, R. MacKinnon, Cell 123, 463 (2005). 12. M. M. Pathak et al., Neuron 56, 124 (2007). 13. W. A. Catterall, Neuron 67, 915 (2010). 14. X. Tao, R. MacKinnon, J. Mol. Biol. 382, 24 (2008). 15. A. M. VanDongen, G. C. Frech, J. A. Drewe, R. H. Joho,
+A. M. Brown, Neuron 5, 433 (1990). 16. W. R. Kobertz, C. Miller, Nat. Struct. Biol. 6, 1122 (1999). 17. D. Schmidt, Q. X. Jiang, R. MacKinnon, Nature 444,
+775 (2006). 18. Materials and methods are available as supplementary
+materials on Science Online. 19. D. E. Shaw et al., Proc. Conf. High Performance
+Computing, Networking, Storage and Analysis (SC09) (ACM Press, New York, 2009). 20. H. Ando, M. Kuno, H. Shimizu, I. Muramatsu, S. Oiki, J. Gen. Physiol. 126, 529 (2005). 21. M. Ø. Jensen et al., Proc. Natl. Acad. Sci. U.S.A. 107, 5833 (2010). 22. J. Zimmerberg, F. Bezanilla, V. A. Parsegian, Biophys. J. 57, 1049 (1990). 23. O. Yifrach, R. MacKinnon, Cell 111, 231 (2002). 24. B. M. Rodríguez, F. Bezanilla, Neuropharmacology 35, 775 (1996). 25. B. M. Rodríguez, D. Sigg, F. Bezanilla, J. Gen. Physiol. 112, 223 (1998). 26. X. Tao, A. Lee, W. Limapichat, D. A. Dougherty, R. MacKinnon, Science 328, 67 (2010). 27. Y. Xu, Y. Ramu, Z. Lu, Nature 451, 826 (2008). 28. L. D. Islas, F. J. Sigworth, J. Gen. Physiol. 114, 723 (1999). 29. A. Loboda, C. M. Armstrong, Biophys. J. 81, 905 (2001). 30. N. E. Schoppa, F. J. Sigworth, J. Gen. Physiol. 111, 313 (1998). 31. J. L. Ledwell, R. W. Aldrich, J. Gen. Physiol. 113, 389 (1999). 32. J. Payandeh, T. Scheuer, N. Zheng, W. A. Catterall, Nature 475, 353 (2011). 33. A. J. Labro et al., J. Gen. Physiol. 132, 667 (2008).
+
+34. K. McCormack et al., Proc. Natl. Acad. Sci. U.S.A. 88, 2931 (1991).
+35. A. A. Alabi, M. I. Bahamonde, H. J. Jung, J. I. Kim, K. J. Swartz, Nature 450, 370 (2007).
+36. F. Bosmans, M. F. Martin-Eauclaire, K. J. Swartz, Nature 456, 202 (2008).
+37. S. Sokolov, T. Scheuer, W. A. Catterall, Nature 446, 76 (2007).
+38. F. Tombola, M. M. Pathak, E. Y. Isacoff, Neuron 45, 379 (2005).
+39. S. Sokolov, T. Scheuer, W. A. Catterall, Neuron 47, 183 (2005).
+40. S. C. Cannon, J. Physiol. 588, 1887 (2010). 41. A. Banerjee, R. MacKinnon, J. Mol. Biol. 381, 569 (2008). 42. H. P. Larsson, O. S. Baker, D. S. Dhillon, E. Y. Isacoff,
+Neuron 16, 387 (1996). 43. F. Tombola, M. M. Pathak, P. Gorostiza, E. Y. Isacoff,
+Nature 445, 546 (2007). 44. L. Delemotte, W. Treptow, M. L. Klein, M. Tarek,
+Biophys. J. 99, L72 (2010). 45. F. Khalili-Araghi, E. Tajkhorshid, B. Roux, K. Schulten,
+Biophys. J. 102, 258 (2012). 46. D. M. Starace, F. Bezanilla, Nature 427, 548 (2004). 47. M. Lainé et al., Neuron 39, 467 (2003). 48. K. H. Hong, C. Miller, J. Gen. Physiol. 115, 51 (2000). 49. F. V. Campos, B. Chanda, B. Roux, F. Bezanilla,
+Proc. Natl. Acad. Sci. U.S.A. 104, 7904 (2007).
+Acknowledgments: We thank R. MacKinnon for useful discussions; K. Lindorff-Larsen, S. Piana, and K. Palmo for their help with force-field modifications; A. Philippsen and J. Gullingsrud for creating the animations; E. Chow, K. Mackenzie, and D. Scarpazza for developing simulation software; and R. Kastleman and M. Kirk for editorial assistance.
+Supplementary Materials www.sciencemag.org/cgi/content/full/336/6078/229/DC1 Materials and Methods Figs. S1 to S5 Tables S1 to S4 References (50–66) Movies S1 to S8
+31 January 2011; accepted 29 February 2012 10.1126/science.1216533
+
+Downloaded from http://science.sciencemag.org/ on October 21, 2016
+
+Ribosome Profiling Shows That miR-430 Reduces Translation Before Causing mRNA Decay in Zebrafish
+
+Ariel A. Bazzini,1* Miler T. Lee,1* Antonio J. Giraldez1,2†
+
+MicroRNAs regulate gene expression through deadenylation, repression, and messenger RNA (mRNA) decay. However, the contribution of each mechanism in non-steady-state situations remains unclear. We monitored the impact of miR-430 on ribosome occupancy of endogenous mRNAs in wild-type and dicer mutant zebrafish embryos and found that miR-430 reduces the number of ribosomes on target mRNAs before causing mRNA decay. Translational repression occurs before complete deadenylation, and disrupting deadenylation with use of an internal polyadenylate tail did not block target repression. Lastly, we observed that ribosome density along the length of the message remains constant, suggesting that translational repression occurs by reducing the rate of initiation rather than affecting elongation or causing ribosomal drop-off. These results show that miR-430 regulates translation initiation before inducing mRNA decay during zebrafish development.
+
+MicroRNAs (miRNAs) control multiple processes, including development, physiology, and disease. These ~22nucleotide (nt) RNAs regulate gene expression through translational repression and mRNA de-
+
+adenylation and decay. The contribution and timing of these effects remain unclear (1, 2). Al-
+though some studies show translational repression without mRNA decay (3–7), others point to decay as a primary effect (8–11). Ribosome-
+
+profiling experiments, which quantify the number of ribosomes bound to a message (12), and polysome profiling (13) have suggested that the main effect of miRNAs is to accelerate decay, with only a minor (8) or moderate (13) contribution from translational repression. This disparity may stem from the steady-state conditions used to assess the molecular effects of miRNAs, resulting in insufficient temporal resolution to identify the first step in miRNA-mediated repression (2).
+To dissect the temporal effects of miRNAmediated regulation and to distinguish between translational repression and mRNA decay, we have analyzed the ribosome profiles and RNA levels of endogenous messages in zebrafish embryos (fig. S1) (14). At the onset of zygotic transcription, zebrafish express a predominant miRNA (miR-430) that facilitates clearance of maternal mRNAs (15, 16) (Fig. 1, A and B). By comparing the ribosome profile of wild-type embryos
+1Department of Genetics, Yale University School of Medicine, New Haven, CT 06510, USA. 2Yale Stem Cell Center, Yale University School of Medicine, New Haven, CT 06520, USA.
+*These authors contributed equally to this work. †To whom correspondence should be addressed. E-mail: antonio.giraldez@yale.edu
+
+www.sciencemag.org SCIENCE VOL 336 13 APRIL 2012
+
+233
+
+REPORTS
+
+with maternal and zygotic dicer mutants (MZdicer) before [2 hours postfertilization (hpf)] and after (4 and 6 hpf ) miR-430 expression (fig. S1), we can analyze the dynamics of translational repression and mRNA decay in vivo. We sequenced 54 million reads generated by ribosome profiling, which predominately map to ribosomes, tRNAs, and coding sequences (CDS) compared with untranslated regions (UTRs), and 59 million reads generated by polyadenylated [poly(A)+] selection (input RNA), which map equally to CDS and UTRs (Fig. 1C, table S1, and figs. S1 and S2). We focused our analysis on 4476 genes that are present and translated at 2 hpf before miR-430 is expressed (≥15 reads per kilobase, per million reads, RPKM) (fig. S2).
+We reasoned that, if mRNA decay is the main effect of miR-430 on their targets, a reduction in ribosome-protected fragments (RPFs) should parallel the loss of input reads. Alternatively, if translation repression precedes decay, RPF loss should precede loss of input (fig. S1). Before miR-430 is expressed (2 hpf), we found no significant reduction of either RPFs or mRNA in wild-type compared to MZdicer embryos for known miR-430
+
+targets (15) or nontargets (Figs. 1D and 2A). At 4 hpf, once miR-430 is expressed, we observed a significant decrease in RPF number for miR-430 targets in wild type compared with MZdicer (P = 1.3 × 10–24, Wilcoxon rank-sum test), without a corresponding decrease in mRNA (Figs. 1E and 2A). Thus, translation repression by miR-430 is occurring independent of RNA decay. However, at 6 hpf, we observed a significant reduction in the number of RPFs that coincided with a reduction in input reads (P < 1 × 10–43), suggesting that, by 6 hpf, miR-430 targets have undergone mRNA decay with a mild contribution from additional translational repression (Figs. 1F and 2A). These results show that, for targets experimentally identified by their miR-430–dependent decay (15), translation repression occurs before the decay.
+To determine the predominant effect of miR430–mediated regulation independent of these experimentally identified targets, we asked whether translational repression or mRNA decay is (i) more associated with miRNA target sites and (ii) better correlated with miRNA seed strength. First, we found that miR-430 target sites are enriched in both transcripts with lower RPF at
+
+4 hpf (P = 1.6 × 10–19 for septamers, Fisher’s exact test) and transcripts with lower input at 6 hpf (P = 8.9 × 10–41) in wild type compared
+with MZdicer, but not those with lower input at
+4 hpf (P > 0.33) (figs. S3 and S4). Second, when
+we identified all putative miR-430 targets that contain 3′UTR and CDS seed matches, the level of regulation followed the order of seed strength
+(multiple sites > octamer > septamer > hexamer)
+for both translational repression at 4 hpf (P = 1.2 × 10–6, Kruskal-Wallis) and mRNA decay at 6 hpf (P = 2.0 × 10–10) (Fig. 2, B and C, and figs. S5
+and S6). Further analysis confirmed that targets
+that are first translationally repressed predom-
+inantly coincide with those that undergo mRNA
+decay later, suggesting that most targets undergo
+both regulatory effects (Fig. 3A). These mRNAs
+correspond to the most strongly regulated targets (P = 5.0 × 10–10, Kruskal-Wallis) (Fig. 3B), are
+the most significantly enriched for miR-430 target sites (P < 2.2 × 10–16, c2 test, 4 df) (Fig. 3C), and are correlated with various 3′UTR sequence characteristics (fig. S8).
+It has been postulated that loss of the poly(A)
+tail may be the underlying cause of miRNA-
+
+Downloaded from http://science.sciencemag.org/ on October 21, 2016
+
+Fig. 1. Temporal analysis of miR-430–mediated translational repression in zebrafish. (A) In situ hybridization (purple) for the miR-430 target gene sod1 in wild-type and MZdicer embryos at 2, 4, and 6 hpf. Decay of the target is observed at 6 hpf in a miRNA-dependent manner. (B) Northern blot showing miR-430 expression in wild type and MZdicer. (C) RPF and input reads mapped to a composite transcript. RPFs mainly map to the CDS. Input reads map to both the UTRs and CDS. (D to F) Biplots show log2-fold RPKM
+
+differences of RPFs (y axis) and mRNA (x axis) between wild type and MZdicer at 2 (D), 4 (E), and 6 (F) hpf. Known miR-430 targets are in red (15), nontargets lacking miR-430 seeds in gray. Mean values per group are indicated
+as lines. Mean difference between targets and nontargets are as follows: (E) RPF 2.26-fold, P = 1.3 × 10–24; RNA, 1.05-fold, P = 0.12; (F) RPF 4.6-fold, P = 1.5 × 10–44; RNA 3.1-fold, P = 8.1 × 10–44, by two-sided Wilcoxon rank sum test.
+
+234 13 APRIL 2012 VOL 336 SCIENCE www.sciencemag.org
+
+REPORTS
+
+mediated repression (1, 2, 15, 17, 18). Because the input was poly(A)+-selected, lower mRNA levels for miR-430 targets at 6 hpf could arise from mRNA deadenylation or decay (14) (fig S3). Conversely, the similar mRNA levels at 4 hpf between wild type and MZdicer suggest that full deadenylation has not occurred by the onset of translational repression. To analyze the dynamics of deadenylation of individual endogenous mRNAs, we first combined poly(A) tail analysis with highresolution gel electrophoresis (Fig. 4A and fig. S9). We found that the endogenous miR-430 target rhotekin2 (repressed ~80% in wild type) is fully deadenylated by 6 hpf but is still polyadenylated at 4 hpf in wild type and MZdicer (albeit
+
+slightly shorter in wild-type embryos). There was no difference in poly(A) tail length at 2 hpf, before miR-430 is expressed, nor for a nontarget between wild type and MZdicer (Fig. 4B and fig. S10). Second, when we analyzed adipor1a, which undergoes translational repression at 4 and 6 hpf without decay, we found no apparent deadenylation by 6 hpf (fig. S10). Although these results indicate that loss of RPFs occur before complete deadenylation, they cannot exclude that initial deadenylation might be responsible for the translational repression observed. Next, to determine whether repression requires deadenylation, we disrupted deadenylation of a green fluorescent protein (GFP)–zgc:63829-3′UTR reporter mRNA by
+
+using an internal poly(A) tail followed by 10C (A98C10) (19, 20) and compared repression of this reporter with one containing a polyadenylation signal (Fig. 4, C and D). We observed repression of both reporters compared with versions where the miR-430 site was mutated GCACTT to GGTCTT, even when deadenylation was reduced (Fig. 4C). These results indicate that translational repression by miR-430 observed at 4 hpf occurs before and independently of complete deadenylation.
+miRNAs have been proposed to influence protein translation by either reducing the rate of translation initiation, reducing elongation, or accelerating ribosome drop-off (1, 2, 18). Ribosome
+
+Fig. 2. miR-430 induces translation repression before RNA decay. (A) Cumulative distributions of mRNA, RPF, and translation efficiency differences (∆) between wild type and MZdicer for known miR-430 targets (red), all genes with 3′UTR miR-430 seed sites (blue), and nontargets (gray), with number of genes
+in parentheses. P values for rank-sum tests are shown for nontargets versus known targets (red) and versus all predicted targets (blue). (B and C) Cumulative distribution plots with
+predicted targets separated by seed type as indicated.
+
+Downloaded from http://science.sciencemag.org/ on October 21, 2016
+
+Fig. 3. miR-430 induces translation repression followed by RNA decay. (A) Pie charts of different repression categories (cutoffs defined in fig. S7). Seventy percent of the targets translationally repressed at 4 hpf go on to be deadenylated or degraded at 6 hpf (group I). Among transcripts decayed at 6 hpf, 41% were translationally repressed at 4 hpf (I), 47% were not observed to be translationally repressed (II), and the remainder experienced concurrent translation repression at 6 hpf not explained by the decay (III). (B) Box and whisker plot showing that the level of RNA decay at 6 hpf is highest among genes that are translationally repressed early. (C) The different modes of translation repression (TR) induce significant enrichment in miR-430 target seeds (*P < 0.05, Fisher’s exact test). See table S2 for counts.
+www.sciencemag.org SCIENCE VOL 336 13 APRIL 2012
+
+235
+
+REPORTS
+
+Downloaded from http://science.sciencemag.org/ on October 21, 2016
+
+Fig. 4. Poly(A) length and ribosome distribution. (A and B) Single nucleotide
+resolution electrophoresis for poly(A) length for a target (A) and nontarget (B)
+in wild type and MZdicer (14). A0 represents the polyadenylation site confirmed by DNA sequencing (fig. S9). (C) GFP expression (green) from an injected miR-430 reporter mRNA containing the 3′UTR for zgc:63829 with wild-type (wt-UTR) or mutated (mut-UTR) miR-430 sites. The 3′UTRs are followed by an internal poly(A) tail (A98C10) or a polyadenylation signal. Expression of a coinjected dsRed control mRNA is shown in red. Note the repression of the wild-
+type reporter compared to the mutant reporter when an internal poly(A) tail is used. (D) Gel electrophoresis of a PCR to determine the length of the poly(A)
+tail (ending in A, top) and A98C10 (bottom). Note the polyadenylation by 2 hpf
+
+and deadenylation by 6 hpf, but deadenylation of the mRNA with the internal poly(A) tail (A98C10) is delayed. Deadenylated product size is shown (A0). (E) Two models for translational repression are shown: reducing translation ini-
+tiation (left) or causing ribosome drop-off and slower elongation rate (right). (F) Plot showing relative RPF read density (top) and mRNA density (bottom)
+along the length of miR-430 targets (red) undergoing >1.5-fold translation repression at 4 hpf and those for nontargets (gray). Points show mean T SEM log2-fold differences between wild-type and MZdicer expression in 50-nt bins spanning the first and last 1000 nts of the genes (13). Bins represent 41 ≥ N ≥ 277 genes for targets, 107 ≥ N ≥ 906 genes for nontargets. Bin values do not significantly differ (P = 0.53, Friedman rank sum test).
+
+profiling allows us to quantify ribosome position by examining the RPF distribution along the length of the message. If miR-430 functions primarily by reducing translation initiation, then we would expect lower ribosome occupancy but uniform density along repressed messages. In contrast, if miR-430 causes ribosomal drop-off or reduced translation elongation with the same initiation rate, we would expect a graded distribution of ribosomes, with fewer RPFs in the 3′ end than the 5′ end (Fig. 4E). When we aggregated the reads of miR-430 targets translationally repressed at 4 hpf, we found uniform loss of RPF density along the length of the target mRNAs, suggesting that miR-430 inhibits translation initiation (Fig. 4F).
+We show that miR-430 first induces translational repression by reducing the rate of translation initiation and then induces mRNA decay through deadenylation (fig. S11). Our results reconcile observations in vitro (6, 7, 21–23), which typically used short time courses and observed repression before deadenylation, with observations in vivo (8–11, 24), which are carried out over longer time scales after perturbing miRNA function, where the strongest effect appears to be deadenylation and decay. Most of the miR-430– regulated genes undergo translational repression followed by decay. A small group of targets appear
+
+to be primarily regulated only at the level of translation; however, because of the limited number of time points analyzed, it is possible that those targets could undergo decay at later time points (15).
+Previously, several laboratories, including ours, identified deadenylation as a main effect of miRNA-mediated regulation (15, 17, 24, 25), leading to our initial hypothesis that complete deadenylation (at 6 hpf) disrupts the interaction between the poly(A)-binding protein and the cap through eukaryotic translation initiation factor 4g, thus reducing translation of the message (15, 18). Although it is clear that deadenylation contributes to the rate of decay and overall level of repression, our findings show that, in the case of miR-430, initial repression can occur before complete deadenylation and that reducing deadenylation does not block translational repression. These data align with the observation that miRNAs can induce repression in transcripts that lack a poly(A) but include instead a histone tail or a self-cleaving ribozyme (17, 24). Recent studies have reported that the CCR4-NOT complex is recruited by GW182/TNRC6 to target mRNAs (26–28) and can repress translation independent of its deadenylase activity (26–29). Furthermore, it appears that GW182 has two distinct domains that are independently required to elicit repres-
+
+sion and deadenylation (19, 20). These results suggest that repression can occur independent of deadenylation in vivo and that miRNAs trigger these two mechanisms in parallel to ensure maximum target mRNA repression and decay. Yet, the degree by which each mechanism regulates different genes may vary depending on the 3′UTR context [as shown in Caenorhabditis elegans (30)], the miRNA, or even the cell type.
+References and Notes 1. M. R. Fabian, N. Sonenberg, W. Filipowicz, Annu. Rev.
+Biochem. 79, 351 (2010). 2. S. Djuranovic, A. Nahvi, R. Green, Science 331, 550
+(2011). 3. R. S. Pillai et al., Science 309, 1573 (2005). 4. P. H. Olsen, V. Ambros, Dev. Biol. 216, 671 (1999). 5. R. C. Lee, R. L. Feinbaum, V. Ambros, Cell 75, 843 (1993). 6. G. Mathonnet et al., Science 317, 1764 (2007). 7. R. Thermann, M. W. Hentze, Nature 447, 875 (2007). 8. H. Guo, N. T. Ingolia, J. S. Weissman, D. P. Bartel,
+Nature 466, 835 (2010). 9. D. Baek et al., Nature 455, 64 (2008). 10. L. P. Lim et al., Nature 433, 769 (2005). 11. S. Bagga et al., Cell 122, 553 (2005). 12. N. T. Ingolia, S. Ghaemmaghami, J. R. Newman,
+J. S. Weissman, Science 324, 218 (2009). 13. D. G. Hendrickson et al., PLoS Biol. 7, e1000238
+(2009). 14. See supporting material on Science Online. 15. A. J. Giraldez et al., Science 312, 75 (2006). 16. A. J. Giraldez et al., Science 308, 833 (2005).
+
+236 13 APRIL 2012 VOL 336 SCIENCE www.sciencemag.org
+
+Downloaded from http://science.sciencemag.org/ on October 21, 2016
+
+REPORTS
+
+17. L. Wu, J. Fan, J. G. Belasco, Proc. Natl. Acad. Sci. U.S.A. 103, 4034 (2006).
+18. E. Huntzinger, E. Izaurralde, Nat. Rev. Genet. 12, 99 (2011).
+19. T. Fukaya, Y. Tomari, EMBO J. 30, 4998 (2011). 20. Y. Mishima et al., Proc. Natl. Acad. Sci. U.S.A. 109,
+1104 (2012). 21. M. R. Fabian et al., Mol. Cell 35, 868 (2009). 22. M. R. Fabian, Y. V. Svitkin, N. Sonenberg, Methods Mol.
+Biol. 725, 207 (2011). 23. A. Zdanowicz et al., Mol. Cell 35, 881 (2009). 24. A. Eulalio et al., RNA 15, 21 (2009). 25. T. H. Beilharz et al., PLoS ONE 4, e6783 (2009). 26. M. Chekulaeva et al., Nat. Struct. Mol. Biol. 18, 1218
+(2011). 27. M. R. Fabian et al., Nat. Struct. Mol. Biol. 18, 1211
+(2011).
+
+28. J. E. Braun, E. Huntzinger, M. Fauser, E. Izaurralde, Mol. Cell 44, 120 (2011).
+29. A. Cooke, A. Prigge, M. Wickens, J. Biol. Chem. 285, 28506 (2010).
+30. E. Wu et al., Mol. Cell 40, 558 (2010).
+Acknowledgments: We thank S. Wolin and the Wolin laboratory for vital intellectual and technical support and access to equipment and reagents; N. Ignolia, J. Weissman, D. Schoenberg, D. Patil, A. Staton, C. Takacs, and Y. Mishima for reagents and discussions; and S. Baserga, D. Cazalla, D. Cifuentes, and S. Moxon for discussions. Supported by the Pew Fellows Program in Biomedical Sciences (A.A.B.), the Pew Scholars Program in the Biomedical Sciences, the Yale Scholar Program, and NIH grants R01GM081602-05 (A.J.G). Contributions: A.A.B. and A.J.G. designed the project. A.A.B. performed the experiments. A.A.B. and M.T.L. performed
+
+data analysis. A.A.B., M.T.L., and A.J.G. interpreted the data and wrote the manuscript. Sequencing data are deposited in the Gene Expression Omnibus (GEO) database with accession number GSE34743.
+Supporting Online Material www.sciencemag.org/cgi/content/full/science.1215704/DC1 Materials and Methods SOM Text Figs. S1 to S11 Tables S1 and S2 Reference (31) Database S1
+24 October 2011; accepted 5 March 2012 Published online 15 March 2012; 10.1126/science.1215704
+
+miRNA-Mediated Gene Silencing by Translational Repression Followed by mRNA Deadenylation and Decay
+
+Sergej Djuranovic, Ali Nahvi, Rachel Green*
+
+microRNAs (miRNAs) regulate gene expression through translational repression and/or messenger
+
+RNA (mRNA) deadenylation and decay. Because translation, deadenylation, and decay are
+
+closely linked processes, it is important to establish their ordering and thus to define the molecular
+
+mechanism of silencing. We have investigated the kinetics of these events in miRNA-mediated
+
+gene silencing by using a Drosophila S2 cell-based controllable expression system and show that
+
+mRNAs with both natural and engineered 3′ untranslated regions with miRNA target sites are
+
+first subject to translational inhibition, followed by effects on deadenylation and decay. We next
+
+used a natural translational elongation stall to show that miRNA-mediated silencing inhibits
+
+translation at an early step, potentially translation initiation.
+
+m icroRNAs (miRNAs) are short endogenous RNAs that regulate protein
+
+studies showed that miRNAs principally affect protein expression of miRNA-targeted genes with-
+
+expressio1n from targeted genes by pairing to out obvious effects on mRNA abundance (7–10).
+
+sites in the 3′ untranslated region (3′UTR) (1). By simultaneously measuring translational effi-
+
+Although some studies showed a strong corre- ciencies (thus indirectly levels of protein synthe-
+
+lation between the diminution of protein and sis) and mRNA abundance, global analyses have
+
+mRNA levels of miRNA-targeted genes (2–6), other shown evidence of significant mRNA destabili-
+
+zation and translational repression (11, 12). Because only slightly more translational repression is observed than mRNA destabilization, it is possible that most of the loss in protein synthesis could directly result from effects on mRNA stability. Most of these studies have not, however, evaluated the kinetics of the miRNA-related cellular processes (5, 10, 13, 14). Exceptions include several analyses of in vitro systems that concluded that the effects of miRNAs on translational repression precede effects on mRNA target deadenylation or decay (15–17), but concerns remain that the in vitro reactions may not fully recapitulate the in vivo situation.
+We used an in vivo luciferase-based reporter system in Drosophila melanogaster S2 cells under the control of an inducible metallothionein promoter (Mtn) (18). The reporter constructs consist of one of the luciferase reporter genes [Firefly (F-Luc) or Renilla (R-Luc)] fused at its 5′ end to the Mtn promoter and at its 3′ end to synthetic or
+Howard Hughes Medical Institute (HHMI) and Department of Molecular Biology and Genetics, Johns Hopkins University School of Medicine, Baltimore, MD 21205, USA.
+*To whom correspondence should be addressed. E-mail: ragreen@jhmi.edu
+
+Fig. 1. Steady state evaluation of miRNA-mediated gene silencing using a copper-inducible in vivo reporter system. (A) Measured protein amounts (luminescence) from transfected nontargeted (NT), targeted (T), and control (con) constructs 24 hours after induction. Additional expression of bantam miRNA, not Argonaute 1, results in increased repression for synthetic bantam targeted constructs (fig. S1). (B to E) Ratios of steady-state protein amounts for synthetic and natural miRNA-targeted constructs 48 hours after induction. In each case, mean values T SD from three independent triplicate experiments are shown as a normalized ratio of protein amounts (NT/T).
+
+www.sciencemag.org SCIENCE VOL 336 13 APRIL 2012
+
+237
+
+Downloaded from http://science.sciencemag.org/ on October 21, 2016
+
+Editor's Summary
+
+Ribosome Profiling Shows That miR-430 Reduces Translation Before Causing mRNA Decay in Zebrafish Ariel A. Bazzini, Miler T. Lee and Antonio J. Giraldez (March 15, 2012) Science 336 (6078), 233-237. [doi: 10.1126/science.1215704] originally published online March 15, 2012
+
+Translation Block MicroRNAs (miRNAs) are small, noncoding RNA genes that are found in the genomes of most
+eukaryotes, where they play an important role in the regulation of gene expression. Although whether gene activity is repressed by blocking translation of messenger RNA (mRNA) targets, or by promoting their deadenylation and then degradation, has been open to debate. Bazzini et al. (p. 233, published online 15 March) and Djuranovic et al. (p. 237) looked at early points in the repression reaction in the zebrafish embryo or in Drosophila tissue culture cells, respectively, and found that translation was blocked before target mRNAs were significantly deadenylated and degraded. Thus, miRNAs appear to interfere with the initiation step of translation.
+
+This copy is for your personal, non-commercial use only.
+
+Article Tools Permissions
+
+Visit the online version of this article to access the personalization and article tools: http://science.sciencemag.org/content/336/6078/233
+Obtain information about reproducing this article: http://www.sciencemag.org/about/permissions.dtl
+
+Science (print ISSN 0036-8075; online ISSN 1095-9203) is published weekly, except the last week in December, by the American Association for the Advancement of Science, 1200 New York Avenue NW, Washington, DC 20005. Copyright 2016 by the American Association for the Advancement of Science; all rights reserved. The title Science is a registered trademark of AAAS.
+

@@ -1,0 +1,509 @@
+数据库名和表单名一般不大写
+
+创建一个叫做 gregs_list 的数据库
+CREATE DATABASE gregs_list;
+
+进入 gregs_list 数据库
+USE gregs_list;
+
+创建一个叫做 doughnut_list 的表单
+CREATE TABLE doughnut_list
+(doughnut_name VARCHAR(10), #第一列的名称 数据类型
+doughnut_type VARCHAR(6));
+
+不允许缺项+缺省值
+CREATE TABLE doughnut_list
+(doughnut_name VARCHAR(10) NOT NULL,
+doughnut_type VARCHAR(6) NOT NULL DEFAULT 'something');
+
+常用数据类型 # 并非所有数据类型适用于没一个RDBMS
+CHAR		CHAR(1)			小于255字符的定长文本
+VARCHAR		VARCHAR(5)		小于255字符的变长文本
+TEXT		TEXT			长文本
+BLOB		BLOB			二进制长文本
+INT			INT				整数
+DECIMAL		DECIMAL(6,2)	小数
+DATETIME	DATETIME		时间+日期
+DATE		DATE			日期
+TIME		TIME			时间
+YEAR		YEAR			年份
+ENUM		????			限定合法输入，只能存一个预定值
+SET			????			限定合法输入，可以存多个预定值
+
+查看表单的结构
+DESC doughnut_list;
+或者
+DESCRIBE doughnut_list;
+
+不能通过覆盖重新建立一个表单或数据库
+
+删除表单
+# 删除表单和里面的内容
+DROP TABLE doughnut_list;
+
+添加数据
+# 数据要与列一一对应
+INSERT INTO my_table
+(colname1,colname2,...)
+VALUES
+('value1','value2',...);
+一次键入多条记录
+INSERT INTO a(cost,name,data) VALUES(2,'a1','da1'),(3,'a2','da2'),(4,'a3','da3');
+
+---***---
+提取全部数据
+SELECT * FROM my_table;
+
+筛选指定记录
+SELECT table_name1.colunm_name1,table_name2.colunm_name2 FROM table_name1, table_name2
+SELECT * FROM my_table WHERE col_name = value;
+SELECT col_name1, col_name2, col_name3 FROM my_table WHERE col_name  value;
+SELECT * FROM my_table WHERE col_name1 = value1 AND col_name2 > value2;
+SELECT * FROM my_table WHERE col_name1 = value1 OR col_name2 > value2;
+SELECT * FROM my_table WHERE col_name IS NULL;
+SELECT * FROM my_table WHERE col_name IS NOT NULL; #注意NOT 的位置
+SELECT * FROM my_table WHERE col_name LIKE '%CA'; # 查找所有以CA结尾的记录，%表示任意数量的字符
+SELECT * FROM my_table WHERE NOT col_name LIKE '%CA'; #注意NOT 的位置
+SELECT * FROM my_table WHERE col_name LIKE '_CA';  # 查找XAC形式的记录，_表示任意一个字符
+SELECT * FROM my_table WHERE col_name BETWEEN value1 and value2;
+SELECT * FROM my_table WHERE NOT col_name BETWEEN value1 and value2; #注意NOT 的位置
+SELECT * FROM my_table WHERE col_name IN (value1, value2, ...);
+SELECT * FROM my_table WHERE col_name NOT IN (value1, value2, ...); #注意NOT 的位置
+
+---***---
+删除指定记录（用法与SELECT相同，只能删除完整的行）
+DELETE  FROM my_table;
+DELETE FROM my_table WHERE col_name  value;
+
+更新数据 (更改个别记录的个别列)
+UPDATE my_table SET col_name1 = value1, col_name2 = value2,... WHERE ...;
+UPDATE my_table SET col_name = col_name + 1,... WHERE ...;
+
+操作符：
+数字： +-*/
+字符： UPPER() LOWER()
+
+在文本中的引号会导致出错，使用\来转义
+
+比较符号
+等号		=
+不等号		<>
+小于号		<
+大于号		>
+小于等于号	<=
+大于等于号	>=
+
+---***---
+FRIST NORMAL FORMS
+设计一个表单
+1.确定想要描述什么
+2.确定在使用中需要用到哪些信息
+3.将已有信息分成字段组织成表单
+
+规则
+1.一列的数据不要含有多个搜寻值
+2.一个表单不要有多个列表述同一个属性
+
+标准化表单：
+1.不应该有重复的数据
+2.最少的数据用于搜索
+
+标准化过程：
+1.每一行必须包含原子值
+2.每一行必须拥有唯一特征（Primary Key）
+
+Primary Key 规则
+1.不能有NULL
+2.在新建时必须输入
+3.只包含使它唯一的最少信息
+4.不能改变
+
+查看信息
+SHOW CREATE TABLE my_table;
+SHOW CREATE DATABASE my_database;
+SHOW INDEX FROM my_table;
+SHOw COLUMNS FROM my_table;
+SHOW WARNINGS;
+
+新建含有 Primary Key 的表单
+CREATE TABLE doughnut_list
+(contact_id INT NOT NULL AUTO_INCREMENT,
+doughnut_name VARCHAR(10),
+doughnut_type VARCHAR(6),
+PRIMARY KEY (contact_id));
+
+INSERT INTO doughnut_list(doughnut_name,doughnut_type) VALUES ('val1','val2'); 
+
+---***---
+ALTER TABLE my_table
+ADD COLUMN contact_id INT NOT NULL AUTO_INCREMENT FIRST, # FIRST表示放在第一列
+ADD PRIMARY KEY(contact_id);
+
+ALTER TABLE my_table
+ADD COLUMN my_col VARCHAR(10)
+AFTER col_name; # 表示在col_name之后插入
+
+其他关键词
+SECOND
+LAST
+BEFORE
+
+ALTER TABLE my_table
+RENAME TO new_table_name;
+
+ALTER TABLE my_table
+CHANGE COLUMN col_name new_col_name VARCHAR(10);
+
+ALTER TABLE my_table
+MODIFY COLUMN col_name new_type;
+
+ALTER TABLE my_table
+DROP COLUMN col_name;
+
+ALTER TABLE my_table
+DROP PRIMARY KEY;
+
+字符串函数
+SELECT RIGHT(col_name,3) FROM my_table; # 选择最右边3个字符
+SELECT LEFT(col_name,2) FROM my_table; # 选择最左边2个字符
+SELECT SUBSTRING_INDEX(col_name,',',1) FROM my_table; # 选择第一个','左边的左右字符
+其他函数
+REVERSE(string) # 字符串取反
+LTRIM(string) # 删掉左边的空格
+RTRIM(string) # 删掉右边的空格
+LENGTH(string) # 返回字符串长度
+UPPER(string) # 返回大写
+LOWER(string) # 返回小写
+SUBSRT(string,nun) # 返回 string 删掉前 num 个字符的字符串
+
+---***---
+分支结构,可以用在SELECT INSERT DELETE UPDATE
+UPDATE my_table
+SET new_column =
+CASE
+WHEN col_name1 = value1 THEN new_value1
+WHEN col_name2 = value2 THEN new_value2
+ELSE new_value3
+END;
+
+输出排序
+SELECT * FROM my_table WHERE col_name = value ORDER by col_name1, col_name2 DESC; #先按照col_name1升序排列，再按照col_name2降序排列
+
+数字函数/分组
+SELECT first_name SUM(sales) FROM my_table GROUP BY first_name ORDER BY SUM(sales) DESC;
+其他函数
+AVE(NUM)
+MAX(NUM)
+MIN(NUM)
+
+查看行数
+SELECT COUNT(sale_data) FROM my_table;
+
+查看唯一值
+SELECT DISTINCT sale_date FROM my_table;
+
+输出部分记录
+SELECT * FROM my_table LIMIT 2;	#输出前两条记录
+SELECT * FROM my_table LIMIT 19, 10; #输出第20-30条记录
+
+---***---
+创建子表
+CREATE TABLE interests(
+int_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+interest VARCHAR(50) NOT NULL,
+contact_id INT NOT NULL,
+CONSTRAINT my_contacts_contact_id_fk FOREIGN KEY (contact_id) REFERENCES my_contacts (contact_id) 
+);
+当有CONSTRAINT时
+1.子表contact_id只能填入母表contact_id的值
+2.如果子表中存在一个FOREIGN KEY记录，母表不能删除对应记录
+
+关系模式：
+one-to-one
+优点
+1.当只进行子表PRIMARY KEY检索的时候可以让搜索速度更快
+2.如果有一行数据暂时不知道，可以不把它放到子表去而不用写NULL
+3.可以限制部分数据的读取权限
+4.将BLOB等巨大的数据和主表分开
+
+one-to-many
+
+many-to-many
+需要一个junction table
+多对多关系的两个表与junction table形成两个一对多关系
+
+Second Nomal Form
+1.Be in 1NF
+2.Have no partial functional dependency(a non-key column is dependent on some, but not all, of the columns in a composite primary key)
+方法
+将partial functional dependency的列放到新的table中
+
+Third Nomal Form
+1.Be in 2NF
+3.Have no transitive dependencies(any non-key columns is related to any non-key columns)
+
+---***---
+用已有信息新建填充新表的三种方法
+方法一: CREATE TABLE then INSERT with SELECT
+CREAT TABLE profession
+(
+id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY;
+profession VARCHAR(20)
+);
+INSERT INTO profession (profession)
+SELECT profession FROM my_contacts
+GROUP BY profession
+ORDER BY profession;
+
+方法二: CREATE TABLE with SELECT, then ALTER to ADD PRIMARY KEY
+CREATE TABLE profession AS
+SELECT profession FROM my_contacts
+GROUP BY profession
+ORDER BY profession;
+ALTER TABLE profession
+ADD COLUMN id INT NOT NULL AUTO_INCREMENT FIRST,
+ADD PRIMARY KEY (id);
+
+方法三: CREAT TABLE with PRIMARY KAY and with SELECT all in time
+CREATE TABLE profession
+(
+id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+profession VARCHAR(20)
+)AS
+SELECT profession FROM my_contacts
+GROUP BY profession
+ORDER BY profession;
+若列名不同
+CREATE TABLE profession
+(
+id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+profession VARCHAR(20)
+)AS
+SELECT profession AS mc_prof FROM my_contacts
+GROUP BY mc_prof
+ORDER BY mc_prof;
+
+当别名与原名相连时可以省略AS
+SELECT profession AS mc_prof
+FROM my_contacts AS mc
+GROUP BY mc_prof
+ORDER BY mc_prof;
+等价于
+SELECT profession mc_prof
+FROM my_contacts mc
+GROUP BY mc_prof
+ORDER BY mc_prof;
+
+将两个表的数据进行全部组合生成一个新的表
+SECLCT t.toy, b.boy FROM toys AS t
+CROSS JOIN
+boys AS b;
+
+An INNER JOIN is a CROSS JOIN with some result rows removed by a condition in the query.
+An INNER JOIN combines the records from two tables using comparision operators in a condition.
+SELECT somecolumns
+FROM table1
+INNER JOIN
+table2
+ON somecondition;
+
+EQUIJOIN
+SELECT mc.last_name,
+mc.first_name,
+p.profession
+FROM my_contacts AS mc
+INNER JOIN
+profession AS p
+ON mc.prof_id = p.prof_id; # 返回两个table选中两列匹配的全部组合
+
+NON-EQUIJOIN
+SECLCT t.toy, b.boy
+FROM toys AS t
+INNER JOIN
+boys AS b;
+ON b.toy_id <> t.toy_id; # 返回两个table选中两列不匹配的全部组合
+ORDER BY b.boy
+
+NATURAL JOIN (with same column name)
+SECLCT toys.toy, boys.boy
+FROM toys
+NATURAL JOIN
+boys;
+
+---***---
+嵌套检索
+方法一：只返回两个列表同时匹配的项
+SELECT mc.first_name AS firstname, mc.last_name AS lastname, mc.phone AS phone, jc.title AS title #改变生成表的列名
+FROM job_current AS jc
+NATURAL JOIN
+my_contacts AS mc
+WHERE
+jc.tittle IN (SELECT title FROM job_listings);
+
+方法二：返回所有外层列表中的项，每项只返回一个內层列表的值，未找到返回NULL
+SELECT mc.first_name AS firstname,mc.last_name AS lastname,
+(SELECT state FROM zip_code WHERE mc.zhi_code = zip_code) AS state
+FROM my_contacts mc;
+
+SELECT mc.first_name, mc.last_name,jc.salary
+FROM my_contacts AS mc
+NATURAL JOIN
+job_current jc
+WHERE jc.salary > (SELECT js.salary
+FROM my_contacts mc NATURAL JOIN job_current jc
+WHERE email = 'andy@xxx.com');
+
+SELECT mc.first_name, mc.last_name,jc.salary,
+jc.salary-(SELECT AVG(salary) FROM job_current WHERE title = 'Web Developer')
+FROM my_contacts mc
+NATURAL JOIN job_current jc
+WHERE jc.title = 'Web Developer';
+
+SELECT mc.first_name, mc.last_name, mc.phone, jc.title
+FROM job_current AS jc NATURAL JOIN my_contacts AS mc
+WHERE jc.title IN (SELECT title FROM job_listings);
+
+SELECT mc.first_name, mc.last_name, mc.phone, jc.title
+FROM job_current AS jc NATURAL JOIN my_contacts AS mc
+WHERE jc.title NOT IN (SELECT title FROM job_listings);
+
+先生成外层检索的指定行，在将指定行的数据带入内层检索
+SELECT mc.first_name, mc.last_name
+FROM my_contacts AS mc
+WHERE
+3 = (SELECT COUNT(*) FROM contact_interest
+WHERE contact_id = mc.contact_id);
+
+EXISTS/NOT EXISTS
+SE:ECT mc.first_name firstname, mc.last_name lastname, mc.email email
+FROM my_contacts mc
+WHERE EXISTS
+(SELECT * FROM contact_interest ci WHERE mc.contact_id = ci.contact_id);
+
+---***---
+The LEFT OUTER JOIN matches every row in the left table with a row from the right table.
+A NULL value in the results of a LEFT OUTER JOIN means that the right table has no values that correspond to the left table.
+SELECT g.girl, t.toy
+FROM toys t
+LEFT OUTER JOIN
+girls g
+ON g.toy_id = t.toy_id
+
+The RIGHT JOIN
+结果同上，只不过table顺序反过来
+SELECT g.girl, t.toy
+FROM girls g
+LEFT OUTER JOIN
+toys t
+ON g.toy_id = t.toy_id
+
+self-join
+SELECT c1.name, c2.name AS boss
+FROM
+clown_info c1
+INNER JOIN 
+clown_info c2
+ON c1.boss_id = c2.id
+
+UNION(返回几个SELECT的交集，不重复)
+要求：、
+1.每个SELECT的列数必须一样，数据类型应该对应一致
+2.在任意一个SELECT中使用ORDER都不能改变结果的顺序,ORDAR应放在最后
+3.每个SELECT的结构应该一致
+
+SELECT title FROM job_current
+UNION
+SELECT title FROM job_desired
+UNION
+SELECT title FROM job_listings
+ORDAR BY tittle;
+
+CREATE TABLE my_union AS
+SELECT title FROM job_current
+UNION
+SELECT title FROM job_desired
+UNION
+SELECT title FROM job_listings
+ORDAR BY tittle;
+
+UNION ALL(返回几个SELECT的交集，不删重)
+SELECT title FROM job_current
+UNION ALL
+SELECT title FROM job_desired
+UNION ALL
+SELECT title FROM job_listings
+ORDAR BY tittle;
+
+其他集合关键词
+INTERSECT	交集
+EXCEPT		差集
+
+JOIN 与 subquery 可以互相转化！！！
+
+---***---
+CHECK Bool
+CREATE TABLE piggy_bank(
+id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+coin CHAR(1) CHECK (coin IN ('P','N','D','Q'))
+);
+
+ALTER TABLE my_contacts
+ADD CONSTRAINT CHEAK gender IN ('M','F');
+
+VIEW
+储存查询过程（SELECT,UPDATE,INSERT,DELETE）
+CREATE VIEW web_designers AS
+SELECT mc.firstname, mc.last_name, mc.phone, mc.email
+FROM my_contacts mc
+NATUEAL JOIN job_desired jd
+WHERE jd.title = 'Web Designer';
+查看VIEW
+SELECT * FROM web_designers;
+删除VIEW
+DROP VIEW web_designers;
+优点
+1.可以新建一个数据结构而不改变原有结构
+2.将常用的检索过程进行储存可以简化检索命令
+3.可以新建一个VIEW从而对使用者进行访问限制
+
+TRANSACTION
+If all the steps can't be completed without interference, none of then should be completed.
+步骤
+1.确保自己的table类型为BDB或者InnoDB
+ALTER TABLE my_table TYPE = InnoDB;
+2.
+START TRANSACTION;
+some commands;
+ROLLBACK; #返回START TRANSACTION的状态
+
+START TRANSACTION;
+some commands;
+COMMIT; #保存状态
+
+---***---
+设置密码
+SET PASSWORD FOR 'root'@'localhost' = PASSWARD('dgw24s2d');
+添加用户
+create user elise IDENTIFIED BY 'af3rffs';
+赋予权限
+GRAND SELECT, INSERT ON my_table TO user1, user2 WITH GRANT OPTION;
+GRAND SELECT(col_name), DELEATE ON my_table TO user1, user2;
+GRAND ALL ON my_table TO user;
+GRANT SELECT ON *.* TO user; # 第一个*表示所有database，第二个*表示所有table
+解除权限
+REVOKE SELECT ON my_table FROM elise;
+REVOKE GRANT OPTION ON DELETE ON my_table FROM user;
+当A赋予B SELECT 权限后，直接解除A的 GRANT OPTION ON SELECT 权限，B将同时失去SELECT权限
+REVOKE SELECT ON my_table FROM A CASADE; # 解除A的SELECT权限，同时解除A的 GRANT OPTION ON SELECT 权限和B的SELECT权限
+REVOKE SELECT ON my_table FROM A RESTRICT; # 因为A赋予了BSELECT权限，所以返回错误
+建立权限组群
+CREATE ROLE data_entry;
+CRANT SELECT, INSERT ON my_table TO data_entry;
+GRANT data_entry TO user1, user2;
+GRANT data_entry TO user1, user2 WITH ADMIN OPTION; # 赋予user1, user2 data_entry的权限以及将data_entry赋予其他人的权限
+DROP ROLE data_entry;
+REVOKE data_entry FROM user CASCADE;
+REVOKE data_entry FROM user RESTRICT;
+新建用户并赋予权限
+GRANT SELECT ON database.table TO user IDENTIFIED BY 'passward';
+

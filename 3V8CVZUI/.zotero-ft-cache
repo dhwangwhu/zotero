@@ -1,0 +1,784 @@
+Articles
+
+© 2016 Nature America, Inc. All rights reserved.
+
+An inducible long noncoding RNA amplifies DNA damage signaling
+
+Adam M Schmitt1,2,8,9, Julia T Garcia1,9, Tiffany Hung1,9, Ryan A Flynn1, Ying Shen1, Kun Qu1, Alexander Y Payumo3,4, Ashwin Peres-da-Silva1, Daniela Kenzelmann Broz5, Rachel Baum6, Shuling Guo7, James K Chen3,4, Laura D Attardi2,5 & Howard Y Chang1
+
+Long noncoding RNAs (lncRNAs) are prevalent genes with frequently precise regulation but mostly unknown functions. Here we demonstrate that lncRNAs guide the organismal DNA damage response. DNA damage activated transcription of the DINO (Damage Induced Noncoding) lncRNA via p53. DINO was required for p53-dependent gene expression, cell cycle arrest and apoptosis in response to DNA damage, and DINO expression was sufficient to activate damage signaling and cell cycle arrest in the absence of DNA damage. DINO bound to p53 protein and promoted its stabilization, mediating a p53 auto-amplification loop. Dino knockout or promoter inactivation in mice dampened p53 signaling and ameliorated acute radiation syndrome in vivo. Thus, inducible lncRNA can create a feedback loop with its cognate transcription factor to amplify cellular signaling networks.
+
+Cells are constantly subject to an array of external stimuli. Signal transduction pathways must record diverse inputs and integrate these with prior experiences of the cell to decide whether to proliferate, differentiate, or die. The DNA damage response is critical for normal cell proliferation and suppression of cancer and relies on the transcription factor p53. In mammals, the p53-dependent response to DNA damage is complex and tissue specific1. While p53-dependent, p21-mediated cell cycle arrest in response to DNA damage can protect against radiation-induced gastrointestinal, cardiac, and hematologic toxicity2–4, p53-dependent apoptosis drives radiation toxicity in hematopoietic cells in a p53 dose-dependent manner5. Indeed, Trp53−/− mice are strikingly resistant to myeloablative doses of ionizing radiation because they do not activate the intrinsic apoptosis pathway, while Trp53+/− mice have intermediate radiation sensitivity between that of Trp53+/+ and Trp53−/− mice. Thus, fine-tuning the choice and amplitude of different p53 target genes is a critical aspect of the DNA damage response.
+Eukaryotic genomes are pervasively transcribed to generate diverse lncRNAs, especially from highly regulated enhancers and promoters6,7. Recently, several lncRNAs have been identified that regulate specific subsets of the p53-dependent gene expression signature8,9. The DNA damage-induced lncRNA PANDA negatively regulates apoptosis by blocking the transcription factor NF-YA, while long intergenic noncoding RNA (lincRNA)-p21 recruits heterogeneous nuclear ribonucleoprotein K (hnRNPK) to regulate p21 in cis10–12. Furthermore, the APELA RNA expressed in mouse embryonic stem
+
+cells binds to heterogeneous nuclear ribonucleoprotein L (hnRNPL) to block its interaction with p53 and permit p53 accumulation in the mitochondria to elicit apoptosis13. While p53 is known to bind RNA14, the role of lncRNAs in regulating the p53 protein remains mostly unknown.
+p53 signaling is modulated by the regulation of p53 protein abundance. During normal cell cycles, a low level of damage resulting from DNA replication transiently activates p53 but is insufficient to robustly induce p53-responsive genes. This is because p53 has a short half-life and exists in a conformation with limited DNA binding efficiency15,16. With sustained DNA damage, p53 is stabilized and p53-responsive genes (such as CDKN1A, DDB2 and PUMA) are activated, leading to either cell cycle arrest or apoptosis. While still poorly understood, sustained DNA damage is believed to invoke a signal amplification mechanism that requires an as-yet-unidentified coactivator of the p53 response16. Here we report that a p53-inducible lncRNA serves as a key gating mechanism in the DNA damage response.
+RESULTS DINO is a conserved, DNA damage-inducible lncRNA We identified a DNA-damage-induced transcription unit upstream of CDKN1A, hereinafter named DINO (Damage Induced Noncoding), in a screen for transcribed regions in human cell cycle promoters10 (Fig. 1a and Supplementary Fig. 1a–d). RACE showed that DINO is a 951base RNA transcribed divergently from CDKN1A. Codon substitution
+
+1Center for Personal Dynamic Regulomes, Stanford University School of Medicine, Stanford, California, USA. 2Department of Radiation Oncology, Stanford University School of Medicine, Stanford, California, USA. 3Department of Chemical and Systems Biology, Stanford University School of Medicine, Stanford, California, USA. 4Department of Developmental Biology, Stanford University School of Medicine, Stanford, California, USA. 5Department of Genetics, Stanford University School of Medicine, Stanford, California, USA. 6Department of Radiation Oncology, Memorial Sloan Kettering Cancer Center, New York, New York, USA. 7Department of Antisense Drug Discovery, Ionis Pharmaceuticals, Carlsbad, California, USA. 8Present address: Department of Radiation Oncology, Memorial Sloan Kettering Cancer Center, New York, New York, USA. 9These authors contributed equally to this work. Correspondence should be addressed to H.Y.C. (howchang@stanford.edu). Received 7 April; accepted 22 August; published online 26 September 2016; doi:10.1038/ng.3673
+
+Nature Genetics  ADVANCE ONLINE PUBLICATION	
+
+
+
+Articles
+
+© 2016 Nature America, Inc. All rights reserved.
+
+RNA
+
+a
+100 Control 0
+100 + Dox 0
+200 Control 0
+200 + Dox 0
+
+PANDAR
+
+DINO
+
+GAACATGTCCCAACATGTTG
+
+1 kb CDKN1A
+
+Fold ∆/untreated
+
+b 150 130 110 90 70 50 30 10 10
+0
+IB: p53
+IB: H3
+
+DINO AS-DINO
+CDKN1A 0 1 2 4 6 8 10 12 16 20 24
++ Doxorubicin (h)
+
+Fold ∆/siCTRL
+
+c
+2.0 1.5 1.0 0.5
+0
+
+DINO CDKN1A TP53
+
+siCTRL siTP53 siCDKN1A
+
+Dox: – + – + – + p53 H3
+
+RNA (fold ∆)
+
+d
+12 10
+8 6 4 2 0 Dox:
+
+DINO CDKN1A
+
+–+ WT
+
+–+ TP53–/–
+
+WT TP53–/–
+Dox: – + – + p53 p21 H3
+
+p53 ChIP-seq
+
+Figure 1  DINO encodes a p53-dependent DNA damage-induced transcript. (a) Top, transcription across the CDKN1A locus in human fibroblasts before or after 24 h of doxorubicin (Dox) treatment10. Bottom, p53 ChIP-seq in untreated or Dox-treated U2OS cells. (b) Time course of DINO, DINO antisense (AS-DINO) and CDKN1A expression in human fibroblasts after DNA damage. Below is a p53 and histone H3 immunoblot (IB). Mean ± s.d. are shown, n = 3. (c) DINO expression and p53 immunoblot in fibroblasts treated with control siRNA (siCTRL) or siRNA against TP53 (siTP53) or CDKN1A (siCDKN1A) 24 h before Dox treatment. Mean ± s.d. are shown, n = 3. (d) DINO and CDKN1A expression and p53 immunoblot in TP53+/+ wild-type (WT) or TP53−/− HCT116 cells with or without Dox (16 h). Mean ± s.d. are shown, n = 3. See also Supplementary Figures 1 and 2.
+
+frequency (score = −55.7) and in vitro translation suggested that DINO does not encode a protein (Supplementary Fig. 1e). DINO was induced ~100-fold in primary human fibroblasts in response to sustained doxorubicin-induced DNA damage, peaking at 10–24 h after damage and reaching ~1,000 copies per cell (Supplementary Fig. 1f). In contrast, the known p53 target gene CDKN1A was induced 5–10 fold (Fig. 1b). DINO was also induced upon DNA damage in human cancer cell lines and by other stressors, albeit at lower levels (Supplementary Fig. 1g,h).
+Because DINO is situated adjacent to a p53 binding site (Fig. 1a), we reasoned that its induction may require p53. Knockdown of p53 in human fibroblasts abrogated DINO induction (Fig. 1c). Wild-type HCT116 colon cancer cells induced DINO in response to doxorubicin, while isogenic TP53−/− cells did not (Fig. 1d). Similarly, TP53-null H1299 human lung adenocarcinoma cells only induced DINO after complementation with wild-type p53, but not with a p53 mutant derived from cancer-prone Li-Fraumeni syndrome (Supplementary Fig. 1i). DINO was not induced in p53 mutant tumor cell lines (Supplementary Fig. 1j).
+One indication of a lncRNA’s functional significance is its evolutionary conservation. Functionally related lncRNAs between human, mouse and zebrafish can be identified by genomic synteny and conserved regions of microhomology, despite limited overall sequence identity17,18. Thus, we queried the mouse Cdkn1a and zebrafish CDKN1A promoters for a DNA damage-inducible lncRNA immediately upstream of the first exon. A mouse transcript sense to Cdkn1a was observed at this position in mouse embryonic fibroblasts (MEFs) after doxorubicin treatment (Supplementary Fig. 2a). RACE, RNA blotting, and reverse transcription (RT)-PCR established the identity of the putative mouse Dino (Supplementary Fig. 2a–c). DNA damage induction of mouse Dino was also attenuated in Trp53−/− MEFs (Supplementary Fig. 2a). Similarly, RT-PCR and RACE analysis of zebrafish embryos identified a UV-inducible sense-strand lncRNA at the precise syntenic location upstream of CDKN1A (Supplementary Fig. 2d–f). We observed several regions of microhomology in human, mouse, and zebrafish DINO that were also conserved in the putative DINO encoding regions of five additional mammalian species (Supplementary Fig. 2g–i). Thus, DINO represents a potentially conserved transcriptional response to DNA damage, though notably, the predicted DNA strand encoding DINO varies across the eight species examined (Supplementary Fig. 2i).
+
+DINO regulates the p53-dependent DNA damage response LncRNAs can regulate gene expression both in cis and in trans. Depletion of DINO by RNA interference identified a key role in the DNA damage response. DINO depletion by multiple independent short interfering RNAs (siRNAs) in primary human fibroblasts blunted CDKN1A induction upon DNA damage (Fig. 2a). Microarray analysis showed that 215 of 417 genes normally regulated by DNA damage failed to respond after DINO depletion, including canonical p53responsive genes CDKN1A, DDB2, and GADD45A (Fig. 2b). Kyoto Encyclopedia of Genes and Genomes (KEGG) pathway analysis identified an enrichment of the p53 signaling pathway (P = 7.9 × 10−3, false discovery rate = 0.09) (Gene Ontology terms, Supplementary Table 1; gene lists, Supplementary Table 2), and a majority of the genes affected by siRNA to DINO (60%) had a canonical p53-binding site. Assay of Transposase Accessible Chromatin by sequencing (ATAC-seq)19 showed that chromatin accessibility at cognate p53 binding sites was induced by DNA damage genome-wide, but was reduced in DINOdepleted human fibroblasts (Fig. 2c and Supplementary Fig. 3b). Indeed, chromatin immunoprecipitation (ChIP) followed by quantitative PCR (qPCR) showed that DINO depletion caused a loss of p53 occupancy at its cognate target genes, such as at CDKN1A (Fig. 2d) and additional genes (Supplementary Fig. 3c,d). Finally, DINO is required for cell cycle arrest in response to DNA damage. Like cells treated with p53 short hairpin RNA (shRNA) cells, DINO-depleted, human osteosarcoma U2OS cells continued to divide following DNA damage to a greater extent than control DINO-proficient cells (Fig. 2e and Supplementary Fig. 3e). Similar results were obtained with independent siRNAs targeting DINO (Supplementary Fig. 3f). DINO and p53 physically interact following DNA damage LncRNAs can act as modular scaffolds for chromatin modification complexes20, but their roles in mediating signal transduction are less understood. Therefore, we asked whether DINO may physically interact with p53. In vitro transcribed DINO RNA preferentially retrieved p53 from the lysate of DNA-damaged cells, but did not retrieve the Polycomb complex or several other control proteins (Supplementary Fig. 4a,b). DINO also had higher affinity for recombinant purified p53 than for Polycomb Repressive Complex 2 (PRC2) (Fig. 3a). In complementary experiments, immunoprecipitation of p53 from the chromatin of DNA-damaged cells retrieved endogenous DINO RNA (Fig. 3b). Analysis of RNA fragments UV-crosslinked to endogenous p53 in
+
+ 	 aDVANCE ONLINE PUBLICATION  Nature Genetics
+
+Articles
+
+© 2016 Nature America, Inc. All rights reserved.
+
+Fold change Dox/Ctrl siCTRL siDINO A siDINO B siDINO C siCTRL siDINO A siDINO B siDINO C
+
+a
+180 DINO 140 100
+60 20
+3 CDKN1A 2
+1
+0
+
+* **
+***
+
+Induced
+
+b + Dox siDINO + Dox Ctrl siCTRL + Dox +2
+
+Repressed
+
+c – Dox 2.5
+
++ Dox
+
+3
+
+2.0 2
+
+1.5 1
+1.0
+
+–1000 –500 0
+
+500 1000
+
+Distance to p53 motif (bp)
+
+–2
+* CNTRL ASO DINO ASO CNTRL ASO + Dox DINO ASO + Dox
+
+ATAC-seq signal CNDITNROLCAANDISSTNROOOL++AADDSSooxOOx
+
+d
+100 80 60 40 20 0
+
+CDKN1A GAPDH
+**
+
+% total cells
+
+e
+100 80 60 40 20 0
+
+G2 Vehicle only
+
+S G1 Doxorubicin (26 h)
+100 80 60 40 20 0
+
+p53 ChIP/IgG
+
+shSCR sshhDDIIsNNhpOO--53AC
+shSCR sshhDDIIsNhNpOO-5-3AC
+
+ssiiDsDiIICNNTOORBAL
+
+Figure 2  Loss of DINO abrogates DNA-damage-induced gene regulation and cell cycle arrest. (a) DINO and CDKN1A expression in fibroblasts treated with three different siRNAs to DINO (siDINO) in the presence or absence of doxorubicin (Dox; 24 h), as measured by RT-qPCR. Mean ± s.d. are shown; *P < 0.05 compared to control siRNA (siCTRL) (Student’s t-test), n = 3. (b) Columns 1 and 2 show a heat map of genes >2-fold changed in fibroblasts upon DNA damage with doxorubicin (26 h) by microarray analysis. The same genes are represented as DINO knockdown + Dox relative to control + Dox in columns 3–5. (c) Genome-wide chromatin accessibility at p53 binding elements in fibroblasts treated with Dox and DINO knockdown as indicated (24 h), as measured by ATAC-seq. Mean ± s.e.m. are shown. *P = 1.2 × 10−4, control (CNTRL) antisense oligonucleotide (ASO) (n = 4), control ASO + Dox (n = 4), DINO ASO (n = 6), DINO ASO + Dox (n = 7). (d) p53 ChIP-qPCR at indicated promoters in control or DINO knockdown fibroblasts treated with Dox (24 h). *P < 0.01. Mean ± s.d. are shown, n = 3. (e) Cell cycle arrest following 26 h of Dox treatment in control shRNA (shControl) and DINO shRNA (shDINO) U2OS cells. See also Supplementary Figure 3 and Supplementary Tables 1 and 2.
+DNA-damaged cells identified a major p53-binding site in DINO (Fig. 3c). Expression of wild-type p53 or a DNA-binding-incompetent R273H p53 in Trp53-null cells enabled p53 retrieval of DINO, but a C-terminal deletion truncating a RNA-binding region of p53 (ref. 14) decreased DINO interaction (Fig. 3d). Thus, the C terminus of p53, which is also known to undergo extensive post-translational modification, binds to a discrete domain of DINO. To investigate whether DINO localized to regulatory regions adjacent to DINO-dependent
+
+genes, we used chromatin isolation by RNA purification (ChIRP)21 to map DINO’s chromatin occupancy. DINO RNA was specifically retrieved with orthogonal ‘even’ and ‘odd’ pools of biotinylated capture probes along with associated DNA; RNase-treated chromatin served as a negative control (Supplementary Fig. 4c,d). We observed DINO occupancy at p53 binding elements in seven of ten p53-target genes examined, including CDKN1A, GADD45A, and DDB2; DINO occupancy was not detected at any of the five negative control loci (Supplementary Fig. 4e). These results suggest that DINO and p53 colocalize at multiple p53 target genes throughout the genome. DINO stabilizes p53 and induces p53 target genes Since DINO directly binds p53, we examined whether DINO expression regulates p53 protein following DNA damage. In response to DNA damage, p53 is stabilized by a series of post-translational modifications and inhibition of ubiquitination, leading to protein accumulation and transactivation of p53 targets. DINO depletion blocked the ability of DNA damage to induce p53 stabilization and p21 induction, despite preservation of p53 phosphorylation at Ser9 (Fig. 4a), suggesting that DINO is required for p53 stability in the DNA damage response.
+If DINO binding stabilizes p53 protein directly, overexpression of DINO in the absence of DNA damage may be sufficient to stabilize p53 and activate DNA damage signaling. Cycloheximide chase showed that p53 protein was rapidly degraded in control cells, whereas enforced human or mouse DINO expression, in the absence of DNA damage, caused p53 stabilization and increased p21 protein levels (Fig. 4b). DINO overexpression induced a large panel of p53 target genes, including RRM2, DDB2, and GADD45A, as measured by nCounter and RT-qPCR assays, and also caused substantial G2 cell cycle arrest, a well-known p53-dependent checkpoint22 (Fig. 4c,d). These results indicate that DINO can act in trans when expressed separately from the CDKN1A locus and highlight the functional conservation of human and mouse DINO.
+Although DINO directly binds p53, it is possible that DINO regulates p53 in a manner independent of p53 binding. To examine this possibility, we generated DINO constructs with focal deletion of the p53-binding motif. This motif forms a stem loop structure in vitro (Supplementary Fig. 5a,b), and deletion of this motif abrogated p53 binding in vivo (Fig. 4e). Overexpression of DINO mutants failed to induce p53 target genes (Fig. 4f) or stabilize p53 protein (Supplementary Fig. 5c), confirming that DINO binding to p53 is important for activating the DNA damage response. Dino knockout mice are deficient in p53 pathway functions We generated C57BL/6 mice with genetic modification of Dino to characterize the role of the mouse lncRNA in the p53 response (Fig. 5a). The knock-in allele Dinogfp was designed to achieve two purposes: (i) report the activity of the putative Dino promoter and (ii) disrupt the function of Dino by replacing the bulk of Dino sequence with GFP. We designed the targeting construct to avoid removal of endogenous p53 response elements within the Cdkn1a promoter (asterisks in Fig. 5a). Frt-flanked neomycin selection cassettes were removed by recombination in ES cells before blastocyst injection. Dinogfp/gfp mice were born with the expected male:female Mendelian ratio and were viable, fertile, and without apparent developmental defects.
+MEFs isolated from Dino+/gfp E13.5 embryos induced GFP expression in response to DNA damage (Supplementary Fig. 6a), indicating that we did capture the Dino promoter. While Dino+/gfp MEFs retained 90% of the basal and DNA-damage-induced Cdkn1a expression found in Dino+/+ MEFs, the expression of Cdkn1a in homozygous Dinogfp/gfp
+
+Nature Genetics  ADVANCE ONLINE PUBLICATION	
+
+
+
+Articles
+
+© 2016 Nature America, Inc. All rights reserved.
+
+a
+
+Specific interaction with DINO
+
+p53 +
+
+ASH2L LSD1
+
+– –
+
+p53
+
+SIRT1 SIRT6
+
+– –
+
+SUZ12
+
+SUZ12 –
+
+RNA
+
+lIancpZut DINO RIP (% input)
+
+RNA pull down
+1.7% 0%
+
+b
+1.4 1.2 1.0 0.8 0.6 0.4 0.2
+0
+
+*
+DINO GAPDH
+
+IgG p53
+U6
+
+CLIP (% input) Input
+IgG p53 Input IgG p53
+
+c DINO
+
+d
+
+5′ 20 18 16 14 12 10
+8 6 4 2 0
+a
+
+ab
+*
+
+c de
+
+3′
+
+p53 IgG
+
++ UV
+
+p53 IgG
+
+– UV
+
+RIP (% input)
+
+2.5 2.0 1.5 1.0 0.5
+
+**
+bcde
+
+0 TP53–/– cells:
+
+IB: p53
+
+IP: p53
+
+– UV + UV
+
+IP: IgG
+
+p5Rp3p2cp∆575D33C3N3Hw1At
+
+* IgG
+p53 p53 (– RT)
+IB: p53
+
+Figure 3  p53 is a DINO-binding protein. (a) Left, summary of RNA chromatography with DINO retrieval of proteins from whole cell lysate of
+doxorubicin (24 h)-treated fibroblasts. Right, RNA chromatography using 6 pmol RNA and 1 µg of each recombinant protein as indicated. (b) RNA immunoprecipitation (RIP) with p53 in human fibroblasts followed by RT-qPCR of DINO, GAPDH and U6 small nuclear RNA. *P = 0.01 compared to IgG control (Student’s t-test). Mean ± s.d. are shown, n = 3. (c) CLIP of p53-bound DINO RNA in doxorubicin (24 h)-treated human fibroblasts. RT-qPCR identifies the DINO region bound by p53 in vivo. Location of primer pairs along the DINO transcript indicated in the diagram above. Bottom shows immunoblot (IB) of p53 retrieved by CLIP. *P = 0.0001, **P = 0.002. Mean ± s.d. are shown, n = 3. Shaded box over DINO transcript maps to the identified DINO hairpin structure (Supplementary Fig. 4a,b). (d) p53 RIP of DINO with pcDNA vector or pcDNA containing the indicated p53 constructs in TP53−/− H1299 cells, p53 lacking the C-terminal 31 amino acids (p53∆C31). A control lacking reverse transcriptase (RT) is also shown. IP, immunoprecipitation; IB, immunoblot. *P < 0.01. Mean ± s.d. are shown, n = 3. See also Supplementary Figure 4.
+
+MEFs decreased by nearly 50% relative to Dino+/+ MEFs (Fig. 5b). That Cdkn1a expression remains largely intact in Dino+/gfp MEFs, unlike in Dinogfp/gfp MEFs, suggests that a single wild-type allele of Dino is sufficient to maintain near wild-type levels of Cdkn1a. This supports a model of Dino regulation of gene expression in trans. We next examined whether mouse Dino, like human DINO, regulates p53-dependent gene expression in response to DNA damage. We cultured MEFs under low physiologic oxygen tension (2%), avoiding hyperoxic
+
+conditions that can activate p53 and induce senescence23. Dinogfp/gfp MEFs exhibited substantially dampened induction of canonical p53 target genes that control cell cycle, apoptosis, and DNA repair, including Cdkn1a, Mdm2, Bax, Puma, and Gadd45a (Fig. 5c).
+Since gene expression analysis indicated that mouse Dino regulated apoptosis signaling, we next examined Dinogfp mice for defects in DNA-damage-induced apoptosis. Ex vivo irradiation of thymocytes produced diminished apoptosis and enhanced survival in Dinogfp/gfp
+
+a
+Dox p53 p53 S9phos p21 H3
+
+shSCR
+
+p53 CLIP/input
+
+bc
+
+shDINO
+
+Vector
+
+DINO
+
+Dino
+
+CHX (h): 0 1 4 8 0 1 4 8 0 1 4 8
+
+p53
+
+p21
+
+Tubulin p53:
+
+1.0 log 0.5 –1.25
++1.25
+
+e 1.2
+1.0
+
+Anti-p53 IgG
+
+0.8
+
+0.6
+
+0.4
+
+0.2
+
+0 pcDNA + p53 + p53 + DINO DINO ∆320–450
+
+IP: Anti-p53
+IP: IgG Input
+
+f DINO 5′ DINO ∆323–405 5′ DINO ∆320–450 5′
+
+0.018
+0.014
+0.010
+0.006 0.002
+0
+
+CDKN1A
+
+Dox – – + + DINO – + – +
+
+0.008 0.006 0.004 0.002
+0
+
+RRM2B
+
+Relative expression % of total cells
+
+3 2
+
+RRM2B
+***
+
+1
+
+0
+
+4 3
+
+DDB2
+**
+
+*
+
+2
+
+1
+6 GADD45A *
+
+4 2
+
+**
+
+0 ––++ –+–+
+
+d 100 80 60 40 20 0 Empty Vector DINO alone
+
+G2 S G1
+
+3′ 3′ 3′
+0.05 0.04 0.03 0.02 0.01
+0
+
+DDB2
+
+Relative expression pcDNA ∆∆332203D––I44N5005O Relative expression pcDNA ∆∆332230D––I44N0550O Relative expression pcDNA ∆∆332203D––I44N5005O
+
+Figure 4  DINO stabilizes p53 and enhances regulation of its target genes. (a) Immunoblot of p53, p53 phospho-Ser9 (S9phos), and p21 in control
+shRNA (shSCR) and DINO shRNA (shDINO) U2OS cells. Doxorubicin (Dox; 12 h) was used at the following concentrations: 0, 0.05, 0.1, 0.2 µg/ml. (b) Human DINO or mouse Dino expression stabilizes p53 in fibroblasts, as indicated by cycloheximide (CHX) chase analysis. p53 and p21 are shown at indicated hours after CHX addition. p53 densitometry values are indicated below. (c) p53 target gene expression in human embryonic kidney (HEK 293)
+cells with empty vector, DINO overexpression, Dox treatment (16 h), or DINO + Dox. Left, nCounter quantification. Right, confirmation using RT-qPCR. Mean ± s.d. are shown; *P < 0.05 (Student’s t-test), n = 3. (d) Cell cycle analysis of DINO-transfected HEK 293 cells labeled with bromodeoxyuridine and propidium iodide. (e) p53 retrieval of wild-type DINO or a DINO mutant lacking the putative p53 binding site, measured by p53 CLIP-RT-qPCR. Mean ± s.d. are shown, n = 3. (f) RT-qPCR for p53 target genes in HEK 293 cells transfected with vector, full length DINO, or DINO deletion mutants DINO∆323–405 or DINO∆320–450 that lack the CLIP RNA fragment. Blue box indicates the primary p53 binding site identified by UV-CLIP-qPCR. Mean ± s.d. are shown, n = 3. See also Supplementary Figure 5.
+
+ 	 aDVANCE ONLINE PUBLICATION  Nature Genetics
+
+Articles
+
+a
+Wild type
+
+Dinogfp
+
+*
+
+c 7 6 5 4 3 2 1 0
+
+Cdkn1a
+
+4.5 Puma 4.0 3.5 3.0 2.5 2.0 1.5 1.0 0.5
+0
+
+Relative expression DinoDingfop/g+f/+p
+
+Cdkn1a isoform 2
+
+*
+Dino
+
+*
+
+Cdkn1a isoform 2
+
+Relative expression DinoDingfop/g+f/+p
+
+Dino
+
+EGFP
+
+14 Mdm2 12 10
+8 6 4 2 0
+
+4.0 3.5 3.0 2.5 2.0 1.5 1.0 0.5
+0
+
+WPRE
+
+Sv40 poly(A)
+
+dBax
+
+3.5
+**
+3.0 2.5 2.0
+
+2.5 Gadd45a 2.0 1.5 1.0 0.5
+0
+
+Untreated Dox
+
+1.5 1.0 0.5
+0
+
+% viable (treated/untreated)
+
+Cdkn1a isoform 1
+Frt
+*
+**
+80 70 60 50 40 30 20 10
+0
+
+Relative expression
+
+b
+4.0 3.5 3.0 2.5 2.0 1.5 1.0 0.5 0.0 Dox:
+e
+
+Dino+/+ Dino
+–+
+
+Relative expression
+
+Dino+/gfp
+4.5 4.0 3.5 3.0 2.5 2.0 1.5 1.0 0.5 0.0 Dox:
+
+Dinogfp/gfp Cdkn1a
+–+
+
+Fraction surviving
+
+100 P = 0.01
+
+50 0 0
+
+Dino+/+ n = 7 Dino+/gfp n = 7 Dinogfp/gfp n = 8
+5
+Days after 12 Gy TBI
+
+10
+
+AnnexinV+/PI– (treated/untreated) DinWoipl5gdf3tp/yg+f/p–pe
+
+Relative expression DinoDingfop/g+f/p+
+
+DiTnrWoipl5gdf3tp/yg+f/p–pe
+
+Relative expression DinoDingfop/g+f/p+
+
+Relative expression DinoDingfop/g+f/+p
+
+© 2016 Nature America, Inc. All rights reserved.
+
+Figure 5  Germline disruption of mouse Dino impairs p53-dependent, DNA-damage-induced apoptosis. (a) Design of the Dinogfp allele. Asterisks indicate p53 binding motifs within the Cdkn1a promoter. (b) DNA damage induces Dino and Cdkn1a expression in MEFs of indicated genotype 16 h after 0.2 µg/mL doxorubicin (Dox), measured by RT-qPCR. Mean ± s.d. are shown, n = 3. (c) RT-qPCR of DNA-damage-inducible, p53-responsive genes in MEFs of the indicated genotype under conditions of physiologic oxygen (2%). Mean ± s.d. are shown, n = 3. (d) Relative apoptotic (positive for AnnexinV and negative for propidium iodide (PI) staining) and viable fractions of thymocytes of indicated genotypes 6 h after 1 Gy irradiation.
+The apoptotic or viable fraction of irradiated thymocytes is normalized to the respective apoptosis of viable fraction of unirradiated thymocytes for
+each genotype (treated/untreated). Mean ± s.d. are shown, **P < 0.01 (Student’s t-test), n = 3. (e) Kaplan–Meier survival curve of mice treated with a single fraction of lethal total body irradiation of 12 Gy. P < 0.01 (log-rank test for trend). See also Supplementary Figure 6.
+
+thymocytes relative to Dino+/+ thymocytes (Supplementary Fig. 6b). Since p53-dependent radiation-induced apoptosis differs among thymocyte subsets24, we specifically examined the subset most sensitive to radiation, CD4+CD8+ thymocytes. We observed reduced levels of apoptosis in the CD4+CD8+ thymocytes of Dinogfp/gfp mice relative to those of Dino+/+ mice 6 h after in vivo irradiation with 5 Gy total body irradiation (Supplementary Fig. 6c). The significant but partial defect in apoptosis in Dinogfp/gfp thymocytes was similar to the defect observed in heterozygous Trp53+/− thymocytes (Fig. 5d)24. Such partial abrogation of DNA-damage-induced apoptosis has also been observed in mice mutant for other important mediators of p53-induced apoptosis, such as Perp−/− and Puma+/− mice25,26.
+p53 modulates the organismal response to DNA damage and is a major determinant of tissue injury following lethal irradiation. Therefore, we examined whether loss of Dino altered the sensitivity of mice to lethal irradiation. Following exposure to a single, high dose of 12 Gy total body irradiation, Dinogfp/gfp mice lived significantly longer than Dino+/+ and Dino+/gfp littermates (P = 0.01, Fig. 5e). Heterozygous Dino+/gfp mice had radiation sensitivity that was indistinguishable from that of wild-type mice. The organismal resistance to radiation toxicity in Dinogfp/gfp is reminiscent of that in mice deficient in Puma, a key mediator of p53-induced apoptosis26–28. Furthermore, because Cdkn1a−/− animals have increased radiation sensitivity by several regimes2,4, the opposite of the Dinogfp/gfp phenotype, our findings indicate that Dino’s role in DNA damage response must extend beyond cis regulation of Cdkn1a.
+
+Dino regulates p53 signaling independent of p21 While the Dinogfp allele created a robust gene knockout and was ideally suited to investigate the role of Dino in regulating genes in trans, we created a second mouse with a focal modification of the Dino promoter to study the activity of Dino both in cis and in trans (Fig. 6a). The Dinolox allele contains ~150 bp of exogenous DNA consisting of Frt and loxP recombination sites and was intended to be used as a conditional knockout. This targeting strategy resulted in a minimal alteration of the Dino locus and did not disturb any known transcription factor binding sites or Cdkn1a exons. Unexpectedly, Dino expression was nearly completely attenuated in Dinolox/lox MEFs even in the absence of Cre-mediated recombination, and DNAdamage-induced Dino was abrogated to a level to similar to that in Trp53−/− MEFs (Fig. 6b). The Dinolox/lox allele thus serves as a Dino promoter knockout.
+Dinolox/lox MEFs exhibited significant defects in the activation of a subset of DNA damage-inducible genes, including Cdkn1a, Bax, Sfn (encoding 14-3-3σ), and Pmaip1 (encoding Noxa) (Fig. 6c, P < 0.05 for each), despite p53 mRNA being at or above wild-type levels (Supplementary Fig. 7a,b). Furthermore, Cdkn1a−/− MEFs had no defect in the induction of these p53 target genes, demonstrating that Dino regulates DNA damage-inducible genes independently of p21 (Supplementary Fig. 7c). Both isoforms of Cdkn1a were impaired in Dinolox/lox MEFs (Supplementary Fig. 7d). Furthermore, DNA-damageinduced expression of Mdm2 exhibited a greater dependence on Dino when MEFs were cultured in 0.1% serum, when proliferative stress is
+
+Nature Genetics  ADVANCE ONLINE PUBLICATION	
+
+
+
+Articles
+
+© 2016 Nature America, Inc. All rights reserved. Relative expression
+
+a
+Wild type
+
+*
+Dino
+
+Cdkn1a isoform 2
+*
+
+LoxP, Frt Cdkn1a isoform 2
+
+Dinolox
+
+*
+
+Dino
+
+c
+
+Dino+/+
+
+Dinoloxl/lox
+
+8 7
+
+Cdkn1a
+
+6
+
+5
+
+4
+
+3
+
+2
+
+3.5 Sfn 3.0 2.5 2.0 1.5 1.0
+
+16 14
+
+Mdm2
+
+12
+
+10
+
+8
+
+6
+
+4
+
+1 0.5
+
+2
+
+0 00
+
+0 0.05 0.1 0.15 0.2
+
+0 0.05 0.1 0.15 0.2
+
+0 0.05 0.1 0.15 0.2
+
+2.5 Bax 2.0 1.5 1.0 0.5
+0 0 0.05 0.1 0.15 0.2
+
+30 Pmaip1 25 20 15 10
+5 0
+0 0.05 0.1 0.15 0.2 Doxorubicin (µg/mL)
+
+6 Ccng1 5 4 3 2 1 0
+0 0.05 0.1 0.15 0.2
+
+Cdkn1a isoform 1
+loxP
+*
+
+Relative expression
+
+b 2.0
+1.8 1.6
+
+Dino
+
+Untreated Dox
+
+1.4
+
+1.2
+
+1.0
+
+0.8
+
+0.6
+
+0.4
+
+0.2
+
+0 Wild type Trp53–/– Dinolox/lox
+
+d
+Dino+/+ Dox (µg/mL): 0 0.05 0.1 0.2
+Tubulin p53
+p21
+
+Dinolox/lox 0 0.05 0.1 0.2
+
+p53/tub
+
+5 4 3
+
+Dino+/+ Dinoloxl/lox
+
+2
+
+1
+
+0 0
+
+0.05 0.1 0.2
+
+2
+
+1
+
+0 0
+
+0.05 0.1 0.2
+
+Doxorubicin (µg/mL)
+
+p53/tub AUC
+
+–40% 1 0.8 0.6 0.4 0.2 0
+
+DinDoi lnoox/l+o/x+
+
+p21/tub
+
+Population doublings
+
+Fraction in S phase relative to untreated
+
+e 0.06
+
+0.05
+
+0.04
+
+0.03
+
+0.02
+
+0.01
+
+f 14 12 10 8 6 4 2 0
+
+0 Dino+/+ Dinolox/lox
+Dino+/+ Dinoloxl/lox
+
+2 4 6 8 10 Passage number
+
+Figure 6  Dino regulates the DNA damage response in both a p21-dependent and p21-independent manner. (a) Design of Dinolox allele. Asterisks indicate p53 binding motifs within the Cdkn1a promoter. (b) Dinolox/lox inactivates basal and DNA-damage inducible expression of Dino lncRNA. Dino expression in MEFs with indicated genotypes with or without 0.2 µg/mL doxorubicin (Dox) for 8 h as measured by RT-qPCR. Trp53−/− MEFs are shown for comparison. Mean ± s.d. are shown, n = 3. (c) RT-qPCR of p53-dependent transcripts in MEFs of indicated genotype 8 h after treatment with the indicated doses of Dox. Mean ± s.d. are shown, n = 3. (d) p53 protein abundance following DNA damage with Dox. Top, immunoblot. Bottom, quantification of p53 and p21 protein abundance normalized to β-tubulin. Summed area under the curve (AUC) shows 40% reduction of p53 protein accumulation in Dinolox/lox cells. (e) Cell cycle analysis of Dox-treated Dino+/+ and Dinolox/lox MEFs. Mean ± s.d. are shown, n = 3. (f) Representative population doublings of serially passaged primary Dino+/+ and Dinolox/lox MEFs, repeated three times. See also Supplementary Figure 7.
+
+diminished compared to standard growth conditions of 10% serum (Supplementary Fig. 7d). We observed less p53 protein in Dinolox/lox MEFs than in Dino+/+ MEFs in response to increasing doses of DNA damage (Fig. 6d), indicating that Dino is required for robust accumulation of mouse p53 protein following DNA damage, especially at moderate doses of DNA damage. Similar results were observed in Dinogfp/gfp MEFs (Supplementary Fig. 7e). This defect in Dinolox/lox cells also translated to a substantial reduction in damage-induced accumulation of p21 protein, as an example of a p53 target. These results are analogous to the findings on the effect of human DINO on human p53 stabilization. The defect in p53 protein abundance in Dinolox/lox MEFs occurred despite a slightly elevated level of Trp53 mRNA, and p53 protein abundance was rescued by the proteasome inhibitor MG-132 (Supplementary Fig. 7f), demonstrating that p53 protein is efficiently translated but is relatively unstable in Dinolox/lox MEFs. Finally, p53 UV crosslinking and immunoprecipitation (CLIP) in mouse MEFs specifically retrieved mouse Dino, confirming that Dino and p53 directly interact in mouse cells (Supplementary Fig. 7g).
+Consistent with the defects in DNA damage-inducible gene expression, Dino promoter knockout cells exhibited attenuated cell-cycle arrest following DNA damage. Doxorubicin-treated Dinolox/lox MEFs showed an increase in the proportion of S-phase populations relative
+
+to Dino+/+ MEFs (Fig. 6e). Moreover, Dinolox/lox MEFs failed to undergo replicative senescence and continued to proliferate well after Dino+/+ MEFs had entered crisis (Fig. 6f). DISCUSSION Our studies have identified the lncRNA DINO as a component of the DNA damage response, providing a feed forward mechanism that amplifies p53 activity in response to DNA damage (Fig. 7). In the absence of DINO expression, p53 protein remains destabilized. However, induction of DINO by DNA damage or by enforced expression of DINO from a heterologous plasmid enhanced p53 protein stability and transactivation of p53 targets. Thus, the feed forward loop of DINO and p53 stabilization may serve as a filter, ensuring that the DNA damage response is activated only after surpassing a threshold of damage. Moreover, these results highlight the concept of a direct physical feedback loop between a transcription factor and its target inducible lncRNA for coordinating cell fate. Because proteins are synthesized in cytoplasm (thus away from chromatin, where transcription factors act), inducible lncRNAs are uniquely suited to providing direct feedback in situ to the transcription factor regarding the status of the signaling pathway. The co-occupancy of DINO with p53 protein at the p53 response element of multiple p53-responsive loci is consistent with this model.
+
+ 	 aDVANCE ONLINE PUBLICATION  Nature Genetics
+
+© 2016 Nature America, Inc. All rights reserved.
+p53 p53
+p53 p53
+p53
+
+Articles
+
+DNA damage
+
+DINO
+
+and R.B. performed experiments. A.M.S., J.T.G., T.H., R.A.F., Y.S., and K.Q. performed statistical analyses and analyzed the data. D.K.B., S.G., J.K.C., and L.D.A. contributed materials and advice. A.M.S., T.H., and H.Y.C. wrote the paper. COMPETING FINANCIAL INTERESTS The authors declare competing financial interests: details are available in the online version of the paper.
+
+p53 stabilization
+Cell cycle arrest Apoptosis DNA repair
+Figure 7  Model of DINO function in p53 signaling. p53-mediated induction of DINO in turn stabilizes p53 through RNA–protein interaction, amplifying DNA damage response.
+These findings reinforce the importance of p53 protein dosage in the DNA damage response. Like Trp53+/− cells, Dino knockout cells contain diminished p53 protein levels both at baseline and following DNA damage. While the remaining p53 protein is able to elicit cell cycle arrest and apoptosis following DNA damage, these responses are dampened. The moderate reduction in p53 protein abundance can alter animal survival following lethal irradiation. Furthermore, the observations that Dino knockout mice and cells are phenotypically similar to Trp53+/− mice in the acute DNA damage response raises the intriguing possibility that Dino knockout mice may be tumor prone, like Trp53+/− and epi-allelic p53 hypomorphs29.
+That DINO’s interaction can functionally regulate p53 protein suggest a possible broader function for RNAs in the regulation of p53 signaling. The maternally imprinted lncRNA MEG3 can also enhance p53 activity30, suggesting that multiple lncRNAs can regulate p53. Additionally, the fact that lncRNAs are expressed in a highly tissueand context-specific manner31 may provide cells with unique opportunities to confer specificity on otherwise global processes. Methods Methods, including statements of data availability and any associated accession codes and references, are available in the online version of the paper. Accession codes. GEO: microarray and sequencing data sets are available under accession codes GSE42368 and GSE76420. GenBank: human DINO and mouse Dino sequences are deposited under accession codes JX993265 and JX993266, respectively.
+Note: Any Supplementary Information and Source Data files are available in the online version of the paper. Acknowledgments We thank K. Nabel for able assistance. This study was supported by NIH R01-ES023168, R01-CA118750, R01-HG004361, P50-HG007735 to H.Y.C., NIH DP1-HD075622 to J.K.C., and ASCO Conquer Cancer Foundation/Susan G. Komen Young Investigator Award and Stanford Radiation Oncology Kaplan Funds to A.M.S. This research was funded in part through the NIH/NCI Cancer Center Support Grant P30 CA008748. AUTHOR CONTRIBUTIONS H.Y.C. conceived and supervised the study. A.M.S., T.H., and H.Y.C. designed the experiments. A.M.S., J.T.G., T.H., R.A.F., A.Y.P., A.P.-d.-S.,
+
+Reprints and permissions information is available online at http://www.nature.com/
+reprints/index.html.
+1.	 Komarova, E.A. et al. Dual effect of p53 on radiation sensitivity in vivo: p53 promotes hematopoietic injury, but protects from gastro-intestinal syndrome in mice. Oncogene 23, 3265–3271 (2004).
+2.	 Kirsch, D.G. et al. p53 controls radiation-induced gastrointestinal syndrome in mice independent of apoptosis. Science 327, 593–596 (2010).
+3.	 Lee, C.L. et al. p53 functions in endothelial cells to prevent radiation-induced myocardial injury in mice. Sci. Signal. 5, ra52 (2012).
+4.	 Johnson, S.M. et al. Mitigation of hematologic radiation toxicity in mice through pharmacological quiescence induced by CDK4/6 inhibition. J. Clin. Invest. 120, 2528–2536 (2010).
+5.	 Westphal, C.H. et al. Loss of atm radiosensitizes multiple p53 null tissues. Cancer Res. 58, 5637–5639 (1998).
+6.	 Andersson, R. et al. An atlas of active enhancers across human cell types and tissues. Nature 507, 455–461 (2014).
+7.	 Forrest, A.R. et al. A promoter-level mammalian expression atlas. Nature 507, 462–470 (2014).
+8.	 Sánchez, Y. et al. Genome-wide analysis of the human p53 transcriptional network unveils a lncRNA tumour suppressor signature. Nat. Commun. 5, 5812 (2014).
+9.	 Léveillé, N. et al. Genome-wide profiling of p53-regulated enhancer RNAs uncovers a subset of enhancers controlled by a lncRNA. Nat. Commun. 6, 6520 (2015).
+10.	Hung, T. et al. Extensive and coordinated transcription of noncoding RNAs within cell-cycle promoters. Nat. Genet. 43, 621–629 (2011).
+11.	Dimitrova, N. et al. LincRNA-p21 activates p21 in cis to promote Polycomb target gene expression and to enforce the G1/S checkpoint. Mol. Cell 54, 777–790 (2014).
+12.	Huarte, M. et al. A large intergenic noncoding RNA induced by p53 mediates global gene repression in the p53 response. Cell 142, 409–419 (2010).
+13.	Li, M. et al. An Apela RNA-containing negative feedback loop regulates p53-mediated apoptosis in embryonic stem cells. Cell Stem Cell 16, 669–683 (2015).
+14.	Riley, K.J. & Maher, L.J. III. p53 RNA interactions: new clues in an old mystery. RNA 13, 1825–1833 (2007).
+15.	Lakin, N.D. & Jackson, S.P. Regulation of p53 in response to DNA damage. Oncogene 18, 7644–7655 (1999).
+16.	Loewer, A., Batchelor, E., Gaglia, G. & Lahav, G. Basal dynamics of p53 reveal transcriptionally attenuated pulses in cycling cells. Cell 142, 89–100 (2010).
+17.	Ulitsky, I., Shkumatava, A., Jan, C.H., Sive, H. & Bartel, D.P. Conserved function of lincRNAs in vertebrate embryonic development despite rapid sequence evolution. Cell 147, 1537–1550 (2011).
+18.	Quinn, J.J. et al. Rapid evolutionary turnover underlies conserved lncRNA-genome interactions. Genes Dev. 30, 191–207 (2016).
+19.	Buenrostro, J.D., Giresi, P.G., Zaba, L.C., Chang, H.Y. & Greenleaf, W.J. Transposition of native chromatin for fast and sensitive epigenomic profiling of open chromatin, DNA-binding proteins and nucleosome position. Nat. Methods 10, 1213–1218 (2013).
+20.	Tsai, M.C. et al. Long noncoding RNA as modular scaffold of histone modification complexes. Science 329, 689–693 (2010).
+21.	Chu, C., Qu, K., Zhong, F.L., Artandi, S.E. & Chang, H.Y. Genomic maps of long noncoding RNA occupancy reveal principles of RNA-chromatin interactions. Mol. Cell 44, 667–678 (2011).
+22.	Giono, L.E. & Manfredi, J.J. The p53 tumor suppressor participates in multiple cell cycle checkpoints. J. Cell. Physiol. 209, 13–20 (2006).
+23.	Parrinello, S. et al. Oxygen sensitivity severely limits the replicative lifespan of murine fibroblasts. Nat. Cell Biol. 5, 741–747 (2003).
+24.	Lowe, S.W., Schmitt, E.M., Smith, S.W., Osborne, B.A. & Jacks, T. p53 is required for radiation-induced apoptosis in mouse thymocytes. Nature 362, 847–849 (1993).
+25.	Ihrie, R.A. et al. Perp is a mediator of p53-dependent apoptosis in diverse cell types. Curr. Biol. 13, 1985–1990 (2003).
+26.	Jeffers, J.R. et al. Puma is an essential mediator of p53-dependent and -independent apoptotic pathways. Cancer Cell 4, 321–328 (2003).
+27.	Qiu, W. et al. PUMA regulates intestinal progenitor cell radiosensitivity and gastrointestinal syndrome. Cell Stem Cell 2, 576–583 (2008).
+28.	Leibowitz, B.J. et al. Ionizing irradiation induces acute haematopoietic syndrome and gastrointestinal syndrome independently in mice. Nat. Commun. 5, 3494 (2014).
+29.	Hemann, M.T. et al. An epi-allelic series of p53 hypomorphs created by stable RNAi produces distinct tumor phenotypes in vivo. Nat. Genet. 33, 396–400 (2003).
+30.	Zhou, Y. et al. Activation of p53 by MEG3 non-coding RNA. J. Biol. Chem. 282, 24731–24742 (2007).
+31.	Wang, K.C. & Chang, H.Y. Molecular mechanisms of long noncoding RNAs. Mol. Cell 43, 904–914 (2011).
+
+Nature Genetics  ADVANCE ONLINE PUBLICATION	
+
+
+
+© 2016 Nature America, Inc. All rights reserved.
+
+ONLINE METHODS Cell culture and treatments. Human cells were obtained from ATCC free of mycoplasma and maintained under standard growth conditions with growth medium formulated according to ATCC recommendations for each cell line. Unless otherwise specified, doxorubicin was used at a concentration of 0.2 µg/mL. Unless specifically noted, the duration of doxorubicin treatment was 12 h for ChIP experiments, 16–26 h for gene expression experiments, and 26 h for cell cycle analyses. For in vitro thymocyte apoptosis analysis, freshly isolated thymocytes were treated with indicated dose of radiation from a 137Cs source and cultured for 6 h before AnnexinV/PI staining. In cycloheximide chase experiments, growth medium was supplemented with 25 µg/mL cycloheximide (Sigma) for the indicated times. RNA interference. Human fetal lung fibroblasts were transfected with three independent 50 nM ON-TARGETPlus siRNAs (Dharmacon) targeting DINO using Lipofectamine 2000 or three independent 100 nM antisense oligonucleotides targeting DINO (Isis Pharmaceuticals). Large-scale transfections were performed using the Amaxa Nucleofector NHDF kit. The siRNA and ASO sequences are provided in Supplementary Table 3. Gene expression analyses. Total RNA was extracted using TRIzol (Invitrogen) and the RNeasy Mini Kit (Qiagen), and genomic DNA was eliminated using TURBO DNA-free (Ambion). RT-PCR using 50 ng of total RNA was performed using the One-Step RT-PCR Master Mix (Applied Biosystems) or TaqMan Gene Expression Assays and normalized to either GAPDH (human) or Actb (β-actin) (mouse). Strand-specific RT-qPCR for DINO was performed using One-Step RT-PCR MasterMix SYBR Green (Stratagene).
+For microarray analysis, total RNA was profiled using the Illumina Expression BeadChip Kit. Using SAM analysis, the human DNA damage gene set (n = 417) was defined as the set of genes that were at least twofold induced or repressed upon DNA damage in multiple biological replicates each of fibroblasts and TP53+/+ HCT116.
+3-seq libraries were generated from 50 ng of total RNA using the TruSeq RNA Access Library Prep kit (Illumina) according to the manufacturer’s instructions. The p53-dependent DNA-damage-responsive gene signature was previously described32.
+The KEGG pathway analysis was performed using DAVID and significant enrichments (P < 0.05, false discovery rate < 0.1, Benjamini-Hochberg test to correct for multiple hypothesis testing) are reported.
+nCounter assays using the p53 Virtual Pathway Gene Set (Nanostring) were performed using isolated RNA according to the manufacturer’s instructions. Data was normalized to the geometric mean of the six internal references. Crosslinking immunoprecipitation (CLIP) and RNA immunoprecipitation (RIP). The CLIP procedure was performed as previously described33 with the following modifications: human fetal lung fibroblasts or MEFs were treated with doxorubicin for 16 h, and either UV cross-linked (254 nm) once at 4,000 mJ/cm2 or not cross-linked (no-UV control). Lysates were prepared as previously indicated, but sonication was used to fragment the RNA to 200–400 nt and RNases were not used. RIP was performed in H1299 cells transiently transfected with the indicated plasmids using Fugene6. RIP was performed using RNA ChIP-IT (Active Motif). DO-1 (Sigma) was used for endogenous p53 immunoprecipitation. ChIRP and ATAC-seq. ChIRP was performed using biotinylated probes according to previously described methods21 except that cells were crosslinked in 3% formaldehyde + 1 mM EGS (ThermoFisher). See Supplementary Table 3 for probe sequences and qPCR primer pairs. Independent even and odd probe pools were used to ensure DINO-specific retrieval, and RNase pretreated chromatin served as negative controls. ATAC-seq libraries were generated using 50,000 primary human fibroblasts according to a previously published protocol19 with two technical replicates and two biological replicates per condition. Animal models. All experiments were performed in accordance with the Stanford Institutional Animal Care and Use Committee. Dinogfp and Dinolox mice were generated by the Howard Hughes Medical Institute. C57BL/6 ES
+
+cells were selected with neomycin after introduction of the targeting construct. Following confirmation of anticipated recombination, the neomycin selection cassette was removed using Flp recombinase before blastocyst injection. E13.5 MEFs were isolated from timed pregnant mice according to standard protocols and genotypes confirmed by PCR.
+Total body irradiation (TBI) experiments were performed using a Kimtron model #IC-224 small animal X-ray irradiator. Littermate mice were treated with a single fraction of 5 Gy TBI at 6–8 weeks of age for in vivo thymocyte apoptosis analysis. For survival studies, 9-week-old littermates were treated with a single fraction of 12 Gy TBI and observed twice daily until death. No animals treated with TBI were removed from analysis. Littermate offspring of two heterozygous parents were genotyped and assigned in roughly equal proportions to treatment groups in order to achieve cohorts that were nearly 50% male, 50% female for each group. Investigators were not blinded to the genotype. Drugs and treatments. Doxorubicin, etoposide, methane methanylsulfonate (MMS) and hydrogen peroxide (H2O2) were purchased from Sigma. Treatment conditions, unless otherwise specified, were doxorubicin (0.2 µg/mL), etoposide (10 µM), MMS (1 mM) and H2O2 (500 µM). Unless specifically noted, the duration of doxorubicin was 12 h for ChIP experiments, 16–26 h for gene expression experiments, and 26 h for cell cycle analyses. For MMS and H2O2, cells were washed after 1 h of treatment and the medium replaced with fresh medium. RNA chromatography. RNA chromatography was performed as previously described10. Recombinant RNA chromatography was performed with the following modifications: bead-conjugated RNAs were incubated with 1 µg of recombinant p53 (Active Motif) in binding buffer (50 mM Tris-Cl 7.9, 10% glycerol, 100 mM KCl, 5 mM MgCl2, 10 mM β-mercaptoethanol, 0.1% NP-40) for 1 h at 25 °C, then washed five times with binding buffer. RT-qPCR. Total RNA was extracted using TRIzol (Invitrogen) and the RNeasy Mini Kit (Qiagen), and genomic DNA was eliminated using TURBO DNA-free (Ambion). RT-PCR using 50 ng of total RNA was performed using the One-Step RT-PCR Master Mix (Applied Biosystems) or TaqMan Gene Expression Assays and normalized to GAPDH (human) or Actb (β-actin) (mouse). The following assays were used: CDKN1A assay (Hs00355782_m1), DDB2 (Hs03044953_m1), TP53 (Hs99999147_m1), GADD45A (Hs00169255_m1), GADD45B (Hs00169587_m1), and GAPDH (Hs99999905_m1). Strand-specific RT-qPCR for DINO was performed using the One-Step RT-PCR Master Mix SYBR Green (Stratagene) using the indicated primer pairs (Supplementary Table 3).
+For zebrafish studies, 50 embryos were treated with 1,500 mJ UV at 24 hpf and collected at 30 hpf in TRIzol. RT-qPCR was performed using custom (Supplementary Table 3) and previously described primers34. ATAC-seq data analysis. For ATAC-seq data preprocessing, paired end reads were trimmed for Illumina adaptor sequences and transposase sequences using an in-house script and mapped to hg19 using Bowtie (v0.12.9)35 with parameters –S –X2000 –m1. Duplicate reads were discarded with Samtools (v0.1.18)36. Peak calling using ZINBA was as described37. Chromosomal regions with a posterior probability of >0.99 were identified as peaks. For analysis of the ATAC-seq signal intensity around p53 binding sites, we used p53 ChIP-seq data downloaded from GEO accession code GSE46641 and CTCF ChIP-seq from human lung fibroblasts was downloaded from GEO accession code GSE41048. Peak calling of the p53 and CTCF binding sites were performed by MACS2 (ref. 38). MEME39 was used to identify p53 motif sites within the p53 binding sites. A 2-kb window centered on the first base of the motif was divided into 40 equal-sized bins of 50 bp. The number of uniquely mapped and properly paired ATAC-seq tags overlapping each bin was counted. The ATACseq signal around CTCF binding sites is affected by neither DINO knockout nor doxorubicin treatment; therefore, the ATAC-seq signal should have similar distributions around CTCF binding sites among all of the cell lines tested when accounting for sequencing depth. To normalize the ATAC-seq signal intensity around p53 binding sites for all cell lines, the average fragment count plotted in each bin was first normalized to the ATAC-seq signals surrounding CTCF binding sites, and then normalized to the total 10 million reads. The number
+
+Nature Genetics
+
+doi:10.1038/ng.3673
+
+© 2016 Nature America, Inc. All rights reserved.
+
+of ATAC-seq tags in the peak summit was compared in four different cell lines by t-test. The heat maps of ATAC-seq at all the p53 motifs were generated using Java TreeView 3.0. nCounter assay. nCounter assays using the p53 Virtual Pathway Gene Set (Nanostring) were performed using isolated RNAs according to manufacturer’s instructions. Data were normalized using the geometric mean of the six internal references. Statistical analyses. A two-tailed Student’s t-test was used for analysis of statistical significance, with a P < 0.05 considered significant. For mouse survival studies, the log-rank test was used. We determined that a sample size of at least 7 animals per genotype was required to observe a 2-d increase in time to event (death) between genotypes following lethal irradiation with a power of 0.9.
+
+ASOs40 targeting DINO using the Lipofectamine 2000 reagent. Large scale transfections were performed using the Amaxa Nucleofector NHDF kit. siRNAs for mRNAs (Ambion) were used as a pool of two. U2OS cells were infected with shRNAs targeting DINO using the pGIPZ shRNAmir lentiviral system. Cycloheximide chase. Cells were reverse transfected (Lipofectamine 2000, Invitrogen) for 24 h, then medium was supplemented with 25 µg/ml cycloheximide (Sigma). At the indicated times after cycloheximide addition, cells were collected for immunoblot analysis, snap frozen overnight, lysed 30 min on ice in NET buffer (50 mM Tris-HCl pH 7.4, 150 mM NaCl, 5 mM EDTA, 0.1% Nonidet P40, freshly added 1 mM phenylmethylsulfonyl fluoride, protease inhibitors), sonicated with a Bioruptor (Diagenode) for 5 min (30-s ‘on’ and 30-s ‘off ’), then centrifuged for 15 min at 16,000g. Lysates were normalized by BCA and resolved by SDS–PAGE.
+
+DINO cloning and sequence analysis. DINO was initially identified using 5-bp-resolution high density tiling arrays covering the promoters of CDKN1A and multiple other genes10. 3′ and 5′ RACE was performed using the FirstChoice RLM-RACE Kit (Ambion) for human DINO and GeneRacer (Life Technologies) for mouse Dino. RNA was extracted from 0.2 µg/ml doxorubicin (Sigma)-treated human fetal lung fibroblasts or MEFs, poly(A)selected using the Poly(A)Purist MAG kit (Ambion), and RACE was performed according to the standard manufacturer’s protocol. DINO evolutionary conservation analyses and statistics. DINO syntenic sites and regions of microhomology were identified as previously described18. Briefly, the iterative process was as follows: (i) begin with empirically defined, strand-specific sequences for human, mouse, and zebrafish DINO, followed by (ii) a search for putative DINO orthologs in marmoset, rat, rabbit, elephant, and horse using synteny and conserved motifs identified by MEME39, then (iii) trim and reorient putative DINO orthologs based on the strand of conserved motifs and rerun MEME.
+MEME reports an estimate of the statistical significance of each motif it finds, the “motif E-value,” as well as an estimate of how well each occurrence, “site P-value,” matches the motif. The motif E-value is an estimate of how likely it is that the motif is not just a statistical artifact. The site P-values should only be used as relative indications of how well each site matches the motif. MEME uses an algorithm called expectation maximization to find short patterns of nucleic acids or amino acids that occur more frequently in the input sequences than would be expected by chance. Because these patterns need not be exact matches, they are described using a matrix, the position-specific scoring matrix (PSSM). Once MEME has generated the PSSM, it uses a second algorithm, MAST, to find the best matches to that PSSM in the input data. The P-value tells how well a particular site matches the PSSM found by MEME. The smaller the P-value, the more significant the match. DINO overexpression. For overexpression assays, the Lipofectamine 2000 (Invitrogen), Fugene 6 reagent (Roche) or Cell Line Nucleofector Kit V Kit (Amaxa) was used according to the manufacturer’s protocol. The following plasmids were used: pcDNA-human DINO, pcDNA-human DINO∆320–450, pcDNA-human DINO∆323–405, pcDNA-mouse DINO, pcDNA, pcDNAFlag-p53 (Addgene #10838), pcDNA-Flag-p53 R273H, and C terminus truncation pcDNA-Flag-p53 1–362 (∆C31). Antibodies. The following antibodies were used for p53 analysis: DO-1 (Sigma, catalog #P6874), 1C12 (Cell Signaling Technologies, catalog #2524). Other antibodies for immunoblot analysis: anti-β-tubulin (Abcam, catalog #ab6046), anti-H3 (catalog #ab1791), anti-LSD1 (Abcam, catalog #ab17721), anti-SUZ12 (Abcam, catalog #ab12073), anti-p21 (Santa Cruz Biotech C-19, catalog #sc-397), and β-actin (Abcam, catalog #ab8227). RNA interference. Human fetal lung fibroblasts were transfected with three independent 50 nM ON-TARGETPlus siRNAs (Dharmacon) or 100 nM
+
+SHAPE. SHAPE analysis was performed as described41. NMIA (13 mM final concentration) or DMSO was used for modification or mock modification reactions, respectively. ddGTP and ddTTP were used in two separate sequencing reactions. cDNA extensions were visualized by phosphorimaging (STORM, Molecular Dynamics). cDNA bands were integrated with SAFA42. SHAPE reactivities were normalized to a scale spanning 0 to 1.5, where 1.0 is defined as the mean intensity of highly reactive nucleotides43. RNA secondary structures were predicted using RNA structure software44. SHAPE data and RNA structure data were reconciled using SeqFOLD45.
+RNA blotting. RNA blotting was performed using the NorthernMax kit (Ambion) with 2.5–5 µg of poly(A) selected RNA for each sample. Antisense RNA probes to human DINO nucleotides 203–716 and mouse Dino nucleotides 291–842 were synthesized using T7 MegaScript (Ambion) with incorporation of [α-32P]UTP.
+32.	Kenzelmann Broz, D. et al. Global genomic profiling reveals an extensive p53-regulated autophagy program contributing to key p53 responses. Genes Dev. 27, 1016–1031 (2013).
+33.	Zhang, C. & Darnell, R.B. Mapping in vivo protein-RNA interactions at singlenucleotide resolution from HITS-CLIP data. Nat. Biotechnol. 29, 607–614 (2011).
+34.	Liu, T.X. et al. Knockdown of zebrafish Fancd2 causes developmental abnormalities via p53-dependent apoptosis. Dev. Cell 5, 903–914 (2003).
+35.	Langmead, B., Trapnell, C., Pop, M. & Salzberg, S.L. Ultrafast and memory-efficient alignment of short DNA sequences to the human genome. Genome Biol. 10, R25 (2009).
+36.	Li, H. et al. The Sequence Alignment/Map format and SAMtools. Bioinformatics 25, 2078–2079 (2009).
+37.	Rashid, N.U., Giresi, P.G., Ibrahim, J.G., Sun, W. & Lieb, J.D. ZINBA integrates local covariates with DNA-seq data to identify broad and narrow regions of enrichment, even within amplified genomic regions. Genome Biol. 12, R67 (2011).
+38.	Zhang, Y. et al. Model-based analysis of ChIP-Seq (MACS). Genome Biol. 9, R137 (2008).
+39.	Bailey, T.L. et al. MEME SUITE: tools for motif discovery and searching. Nucleic Acids Res. 37, W202–W208 (2009).
+40.	Ideue, T., Hino, K., Kitao, S., Yokoi, T. & Hirose, T. Efficient oligonucleotidemediated degradation of nuclear noncoding RNAs in mammalian cultured cells. RNA 15, 1578–1587 (2009).
+41.	Wilkinson, K.A., Merino, E.J. & Weeks, K.M. Selective 2′-hydroxyl acylation analyzed by primer extension (SHAPE): quantitative RNA structure analysis at single nucleotide resolution. Nat. Protoc. 1, 1610–1616 (2006).
+42.	Das, R., Laederach, A., Pearlman, S.M., Herschlag, D. & Altman, R.B. SAFA: semiautomated footprinting analysis software for high-throughput quantification of nucleic acid footprinting experiments. RNA 11, 344–354 (2005).
+43.	Gherghe, C. et al. Definition of a high-affinity Gag recognition structure mediating packaging of a retroviral RNA genome. Proc. Natl. Acad. Sci. USA 107, 19248–19253 (2010).
+44.	Reuter, J.S. & Mathews, D.H. RNAstructure: software for RNA secondary structure prediction and analysis. BMC Bioinformatics 11, 129 (2010).
+45.	Ouyang, Z., Snyder, M.P. & Chang, H.Y. SeqFold: genome-scale reconstruction of RNA secondary structure integrating high-throughput sequencing data. Genome Res. 23, 377–387 (2013).
+
+doi:10.1038/ng.3673
+
+Nature Genetics
+

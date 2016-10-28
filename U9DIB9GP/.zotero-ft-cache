@@ -1,0 +1,608 @@
+protocol
+The ribosome profiling strategy for monitoring translation in vivo by deep sequencing of ribosome-protected mRNA fragments
+Nicholas T Ingolia1–3, Gloria A Brar1,2, Silvia Rouskin1,2, Anna M McGeachy3,4 & Jonathan S Weissman1,2
+1Howard Hughes Medical Institute, Department of Cellular and Molecular Pharmacology, University of California, San Francisco, California, USA. 2California Institute for Quantitative Biosciences, San Francisco, California, USA. 3Department of Embryology, Carnegie Institution for Science, Baltimore, Maryland, USA. 4Department of Biology, The Johns Hopkins University, Baltimore, Maryland, USA. Correspondence should be addressed to N.T.I. (ingolia@ciwemb.edu) or J.S.W. (weissman@cmp.ucsf.edu).
+Published online 26 July 2012; corrected after print 17 August 2012; doi:10.1038/nprot.2012.086
+Recent studies highlight the importance of translational control in determining protein abundance, underscoring the value of measuring gene expression at the level of translation. We present a protocol for genome-wide, quantitative analysis of in vivo translation by deep sequencing. This ribosome profiling approach maps the exact positions of ribosomes on transcripts by nuclease footprinting. The nuclease-protected mRNA fragments are converted into a DNA library suitable for deep sequencing using a strategy that minimizes bias. The abundance of different footprint fragments in deep sequencing data reports on the amount of translation of a gene. In addition, footprints reveal the exact regions of the transcriptome that are translated. To better define translated reading frames, we describe an adaptation that reveals the sites of translation initiation by pretreating cells with harringtonine to immobilize initiating ribosomes. The protocol we describe requires 5–7 days to generate a completed ribosome profiling sequencing library. Sequencing and data analysis require a further 4–5 days.
+
+© 2012 Nature America, Inc. All rights reserved.
+
+INTRODUCTION Gene expression profiling is a central tool for understanding cellular physiology and regulation. Historically, studies of gene expression have typically measured mRNA abundances rather than rates of protein synthesis, in large part because such data are much easier to obtain. The focus on overall mRNA levels increased with the emergence of microarrays1 and, more recently, RNA-seq2,3 as comprehensive and quantitative expression profiling techniques. These measurement techniques have revolutionized our ability to monitor the internal state of cells, but they have naturally led to a focus on transcriptional regulatory networks. However, mRNA and protein levels are imperfectly correlated in yeast and mammalian cells4–7, and translational control can have a crucial role in modulating gene expression7,8.
+
+been applied to studying developmental changes in mouse embryonic stem (ES) cells13 and to monitoring the effects of drug therapies in human cancer cell models14, and it should be applicable to many other biological questions. It begins with cell lysis and harvesting under conditions that should maintain in vivo ribosome positions on mRNAs. These lysates are treated by nuclease digestion to perform ribosome footprinting, and ribosomes are recovered by ultracentrifugation. Ribosome footprints are purified and ligated to a single-stranded linker that serves as a priming site for reverse transcription. The first-strand reverse transcription products are circularized, providing a second priming site flanking the captured footprint sequence, which is used for PCR amplification of a deepsequencing library.
+
+Overview of ribosome profiling We recently developed an approach, termed ribosome profiling, based on deep sequencing of ribosome-protected mRNA fragments, which now makes it possible to monitor translation directly9. The protein being synthesized by a ribosome is,of course,determined by the mRNA sequence it is decoding. A translating ribosome encloses an ~30-nt portion of this mRNA template and protects it from nuclease digestion. These ribosome-protected mRNA fragments have previously been used to map the positions of ribosomes in homogeneous in vitro translation reactions10,11. Major advances in sequencing technology12 now make it possible to characterize the complex pool of fragments produced by nuclease footprinting of ribosomes from living cells. Each ribosome produces a footprint fragment whose sequence indicates which mRNA it was translating, as well as its precise position on the transcript. Deep sequencing of ribosome footprints thus provides information about ribosome positions as well as measuring expression quantitatively; positional information is inaccessible to existing polysome-profiling approaches for measuring translation.
+Here we present a detailed experimental protocol for ribosome profiling in cultured mammalian cells (Fig. 1). This technique has
+
+Applications of ribosome profiling Ribosome footprint sequences indicate which portions of the genome are actually being translated into protein. These translated sequences include conventional protein-coding genes, as well as reading frames that encode short peptides. A few short open reading frames (ORFs) have been identified genetically15, and ribosome profiling data have revealed many more13,16,17. Thus, it is likely that the number of small peptides is much larger than currently known. To be translated, a sequence must first be transcribed. Recent studies have revealed great diversity in the mammalian transcriptome18, although many of these transcripts lack long open reading frames. Short ORFs on traditional and noncanonical messages can be difficult to identify reliably by computational approaches19, but ribo­ some profiling has proven to be a highly useful tool for exploring the peptide-coding potential of these RNAs13.
+In addition to discovering these novel ORFs, ribosome profiling data can lead to revisions in the annotation of known genes. In many cases, footprinting data indicate the translation of extended or truncated forms of proteins. These alternate protein isoforms can have functions that are distinct from or antagonistic to the
+
+1534 | VOL.7 NO.8 | 2012 | nature protocols
+
+Steps 1–17: cell lysis, nuclease footprinting and ribosome recovery
+OPO3-3′
+OH-3′ Steps 18–29: footprint fragment purification
+OH-3′ App
+
+5′-O3PO
+
+5′-O3PO
+
+5′-O3PO 3′-HO
+Steps 36–44: reverse transcription
+
+3′-HO
+
+5′-O3PO
+
+Steps 45 and 46: circularization
+
+Bio Bio
+
+Bio
+
+protocol
+Steps 55–64: PCR amplification GATG...
+Steps 65 and 66: sequencing and analysis
+
+© 2012 Nature America, Inc. All rights reserved. BiSotrept Bio
+
+Steps 30–35: linker ligation
+Figure 1 | Overview of the ribosome profiling protocol.
+
+Steps 47–54: rRNA depletion
+
+annotated form. They can arise from the translation of different mRNA isoforms or from the use of alternative initiation sites on the same transcript. When alternate isoforms are coexpressed, translation from upstream initiation sites can obscure the presence of downstream initiation. These internal initiation sites are revealed by ribosome profiling after treatment with harringtonine, a drug that immobilizes ribosomes immediately after translation initiation and results in footprint accumulation at all initiation sites20,21. Thus, the presence or absence of ribosome footprints at downstream AUG codons in harringtonine-treated samples marks sites of potential internal initiation leading to shorter protein isoforms. More generally, initiation site profiling with harringtonine can be combined with ribosome profiling to detect elongating ribosomes over the entire reading frame to produce an experimentally based annotation of the translated products from a genome13.
+Nevertheless, the broadest application of ribosome profiling may be measurements of gene expression at the level of actual protein synthesis. Each ribosome footprint corresponds to a translating ribosome, and thus the number of footprints produced from a transcript should correspond to the number of ribosomes engaged in
+
+synthesizing the encoded protein. This is proportional to the amount of the protein being produced and to the time required to produce it. We have shown that the speed of protein synthesis is broadly consistent across different groups of genes13. Thus, under a given condition, the translation time of an ORF is simply proportional to its length. One can therefore determine the rate at which a protein is being produced by measuring the density of ribosome footprints on its transcript. Ribosome footprint density can thus be used in place of mRNA abundance measurements to quantify gene expression. It can also be combined with mRNA abundance measurements in order to identify translational regulation as changes in protein expression that cannot be explained by transcript levels9,17. RNA-seq measurements of transcript abundance measurements can be made by analysis of randomly fragmented complete mRNA in parallel with ribosome footprints9,16 or by other standard approaches22.
+Finally, ribosome profiling provides an approach to studying the mechanics of translation and cotranslational processes in vivo. Just as the overall number of ribosome footprints on a gene indicates how many ribosomes are typically translating it, the number of footprints centered on a codon should reflect how often a ribosome is found at
+
+nature protocols | VOL.7 NO.8 | 2012 | 1535
+
+protocol
+
+B  ox 1 | Harringtonine treatment ● TIMING 5 min
+The following protocol describes the procedure for harringtonine pretreatment, which immobilizes initiating ribosomes in order to profile translation start sites. 1| Add harringtonine to cell culture medium to a final concentration of 2 µg ml − 1. Mix quickly and return it to the incubator. 2| Incubate cells for 120 s with harringtonine.  CRITICAL STEP Be prepared to proceed quickly to cycloheximide treatment and cell lysis after harringtonine addition. 3| Add cycloheximide to cell culture dish to a final concentration of 100 µg ml − 1. 4| Mix well and proceed immediately to cell lysis (Step 1, main PROCEDURE).
+
+© 2012 Nature America, Inc. All rights reserved.
+
+that particular spot. If ribosomes stall at a specific point when translating a gene, then ribosomes will spend more time there than elsewhere, thus producing a corresponding excess of footprints. We have used this excess of ribosome footprints to detect peptide-mediated translational stalling in mammalian cells13 and RNA-mediated stalling in bacteria23. Ribosome footprint density has also been applied to determine codon-specific elongation rates in bacteria23 and yeast24, as well as Caenorhabditis elegans and human cultured cells25. It has also been applied to monitor co-translational processes in protein biogenesis, including chaperone association and protein secretion26,27.
+Convergence of expression profiling techniques Ribosome profiling bridges the gap between global measurements of steady-state mRNA and protein levels. As such, it will be particularly valuable to compare ribosome profiling and mass spectrometry measurements of protein expression levels. At present, sequencing technologies provide deeper measurement than mass spectrometry measurements in most circumstances. However, steady-state measurements by mass spectrometry are sensitive to protein degradation and synthesis. In fact, high-quality ribosome profiling and proteomic measurements may offer a new approach to determining the turnover rate of native proteins in unperturbed cells. Similar interpolation between RNA-seq and mass spectro­ metry measurements recently quantified the large contribution of translation to steady-state protein levels6.
+Until now, the translational status of mRNAs typically has been assessed by separating intact ribosome-mRNA complexes based on the total number of ribosomes bound to a transcript. A genomic adaptation of this assay, called polysome profiling, measures the mRNA constituents of different ribosome number fractions using microarrays28,29. Ribosome profiling has technical advantages over polysome profiling for taking routine expression measurements, but polysome profiling can complement ribosome footprinting experiments, particularly for performing mechanistic studies of translational control. Ribosome profiling provides more precise expression measurement, because it avoids the difficulty in resolving the exact number of ribosomes bound to highly ribosomeloaded transcripts. Failure to separate these transcripts can obscure changes in the exact number of ribosomes bound to them and thereby compress the dynamic range of polysome profiling experiments. Ribosome profiling also avoids certain technical hurdles that arise in polysome profiling. Although many skilled investigators reliably obtain high-quality, intact polysomes, RNA degradation remains a challenge. Ribosome profiling requires only the nuclease footprint from single ribosomes, and thus it is less sensitive to compromised RNA integrity. Finally, ribosome profiling can distinguish between ribosomes translating protein-coding genes and those translating regulatory upstream ORFs.
+
+Polysome profiling monitors the translational status of entire transcripts, which provides data that cannot be determined from footprint-sequencing measurements that focus on the activities of individual ribosomes. Thus, polysome profiling can distinguish between a uniform decrease in the number of ribosomes on all copies of a transcript and a complete repression of a subpopulation of mRNAs, a phenomenon that was revealed by polysome profiling of mouse ES cells29. By contrast, ribosome profiling would simply detect a quantitative decrease in the ensemble-averaged rate of protein synthesis in either case. Similarly, polysome profiling may have a greater ability to measure differences in the translation of alternate transcript isoforms, particularly when they differ in their 5′ or 3′ untranslated regions. These measurements could complement ribosome profiling data to provide insight into the molecular mechanism of translational regulation.
+Experimental design Cell lysis. Ribosome profiling begins with the preparation of cell lysates where ribosome-mRNA complexes accurately reflect in vivo translation. The best approach for lysate preparation will vary on the basis of the sample being analyzed. Traditionally, polysomes have been stabilized by treating cells with translation elongation inhibitors before cell lysis. We found that in mammalian cells, brief treatment with such drugs causes an accumulation of ribosomes in the first five to ten codons of all genes. This may well reflect an artifactual accumulation of ribosomes that initiate during drug treatment and stall translation shortly thereafter. We therefore favor the in situ detergent lysis of adherent, cultured cells because it seems to produce the least opportunity for perturbation between normal growth and ribosome extraction. However, this approach is not suitable for all samples. In Saccharomyces cerevisiae, we found that elongation inhibitors suppressed changes in translation that occurred during cell collection9, and similar polysome stabilization may be necessary in other situations as well. Drug pretreatment may provide other valuable information. For instance, brief pretreatment of cells with harringtonine (Box 1) enriches ribosomes specifically on initiation sites, enhancing the detection and annotation of translated sequences.
+We also found that cryogenic pulverization of frozen yeast produced effective lysis and homogenization under conditions that blocked biological responses. This technique is also applicable in mammalian cells and tissues that require physical disruption for ribosome extraction. Indeed, flash-freezing of tissues followed by cryogenic pulverization and thawing in the presence of translation inhibitors provides a particularly robust and simple approach to the analysis of animal-derived samples30.
+Nuclease footprinting. Nuclease footprinting converts ribosome positions into RNA sequence tags that can be analyzed by deep
+
+1536 | VOL.7 NO.8 | 2012 | nature protocols
+
+protocol
+
+Frame info (bits)
+
+Fraction of 28 mers
+
+ab
+
+Low
+
+150 mM Na 5 mM Mg
+
+10,000
+
+Medium
+
+200 mM Na 10 mM Mg
+
+High
+
+250 mM Na 15 mM Mg
+
+1,000
+
+100
+
+c
+1
+2/3
+1/3
+
+d 0.5 –1 +1
++0
+
+Frequency
+
+Medium buffer reads
+
+Low Med High
+
+22 25 28 31 34 Footprint length (nt)
+
+10 1
+
+0.5 1.0 2.0 log2 ratio
+
+Low Med High Frame
+
+Buffer
+
+0 Buffer
+
+1 10 100 1,000 10,000 Low buffer reads
+
+Figure 2 | Buffer conditions affect footprint precision but not expression measurements. (a) Length distribution of ribosome footprints obtained from nuclease digestion in different buffer conditions, as indicated. (b) Expression measurements (average footprint density across each message) by ribosome
+profiling in different buffer conditions. Each point on the scatter plot represents a human gene, and the expression shown on the two axes is the total number
+of ribosome footprints in each sample that aligned to the canonical isoform of the gene, excluding those mapping to the first 15 or last 5 codons, where drug
+treatment distorts ribosome occupancy. The histogram shows the distribution of log2 ratios between medium and low salt/magnesium buffer conditions for genes with at least 200 total footprints in the two measurements. This criterion avoids low-expression genes where statistical sampling error dominates interreplicate differences. (c) Subcodon position of ribosome footprint 5′ termini, obtained by nuclease digestion in different buffer conditions, as indicated. Reads that aligned with the annotated coding sequence of canonical transcripts in the UCSC Known Genes data set were used, and the position of their 5′ terminus was determined relative to codon boundaries in this coding sequence. (d) Conditional entropy of the ribosome footprint length and reading-frame position
+distribution in different samples.
+
+© 2012 Nature America, Inc. All rights reserved.
+
+sequencing. We have found that similar digestion conditions can be used to footprint ribosomes in yeast, HeLa and mouse ES cell lysates, suggesting that extensive optimization is not needed for profiling in various eukaryotic systems. However, we have identified an effect of lysis buffer conditions on the size and reading frame precision of ribosome footprints. Ribosome footprinting in mammalian cells resulted in longer ribosome footprints whose termini showed less specific positioning relative to the reading frame being decoded13. We noted that the polysome buffer used in our initial analysis of mammalian cells had higher ionic strength and higher magnesium concentration than the yeast polysome buffer. Subsequently, we observed that reducing salt and magnesium improved the resolution of our ribosome footprints without substantially altering overall measurements of gene expression (Fig. 2 and Supplementary Figs. 1 and 2). High magnesium concentration inhibits spontaneous conformational changes in bacterial ribosomes31. If a similar effect occurs in eukaryotic ribosomes, then the increased interconversion in low-magnesium conditions could permit more complete and uniform nuclease digestion. Alternately, buffer conditions could affect the interactions between the mRNA and the ribosome. In either case, although these differences do not affect gene expression measurements (Fig. 2 and Supplementary Fig. 1), we favor the higher-precision footprinting seen in the buffer conditions presented here.
+Ribosome recovery. After nuclease digestion, we separate intact ribosome-footprint complexes from cell lysates before RNA extraction. We originally performed sucrose density gradient purification of 80S ribosome particles. However, sucrose density-gradient fractionation is challenging, and in fact represents a substantial barrier to analyzing translation through traditional polysome approaches. More recently, we purified ribosomes by sedimenting them through a 1 M sucrose cushion, which provides a more accessible densitybased separation. We did not observe increased contamination with untranslated but protein-bound RNA sequences, such as 3′ UTRs, in samples purified by a sucrose cushion, although this approach
+
+is in principle less specific than sucrose gradient purification, and it may be more important to verify that RNA fragments show the characteristic size and reading frame distribution of true ribosome footprints. Other approaches are possible as well; ribosomes can be purified by gel filtration32, and in certain systems genetic manipulation can be used to add epitope tags to ribosomes, thereby enabling affinity purification33,34.
+Linker ligation. Deep-sequencing analysis typically requires libraries containing specific linker sequences; in the case of the Illumina sequencer used here, the library is double-stranded DNA with defined sequences flanking the target fragment. In our previous work9,16, we identified and worked to minimize significant biases in the conversion of RNA footprints into a sequencing library. These biases are present in all RNA-seq libraries, but they cause particular difficulties in analyzing ribosome footprinting data. Although our approach achieved notably good uniformity, it involved the addition of a poly-(A) tail to each sequence. This degenerate sequence complicated bioinformatic analyses. We have subsequently shown that an optimized RNA ligation of a preadenylylated linker35 can achieve comparable results, and both the genetically modified RNA ligase and the chemically modified linker required for this approach are now commercially available. We have also altered the sequences of reverse-transcription and PCR primers used in the protocol to allow sequencing with the standard Illumina primers. This includes the option of adding a 6-nt index that can be read in the same manner as the indices added to standard Illumina libraries.
+rRNA depletion. Ribosomal RNA contamination substantially decreases the amount of informative sequence data obtained in a ribosome profiling experiment. This is unsurprising, as there are several kilobases of rRNA in each ribosome-footprint complex, but only ~28 bases of footprint mRNA. We observed that a few specific rRNA fragments represented a large fraction of the overall contamination present in the 26- to 34-nt window that we purified, presumably because nuclease digestion of intact ribosomes results in reproducible
+
+nature protocols | VOL.7 NO.8 | 2012 | 1537
+
+protocol
+TATCAATGGC ... ATTGCGCTGTAGGCACCATCAAT
+
+Step 66A(i): clipping and trimming
+(FastX-Toolkit)
+
+Unaligned reads
+
+Step 66A(ii): rRNA alignment
+(Bowtie)
+
+rRNA sequence
+
+Figure 3 | Overview of ribosome footprint sequence preprocessing and alignment.
+
+Step 66A(iii)-(iv): genome alignment
+(Tophat) Genomic sequence
+Transcript annotation
+
+cleavage at a limited number of positions. We therefore depleted first-strand cDNAs derived from these high-abundance contaminants by hybridization to biotinylated sense-strand oligonucleotides followed by removal of the duplexes through streptavidin affinity.
+Analysis and interpretation. Ribosome footprint sequencing data can be preprocessed and then aligned to the genome using tools available for RNA-seq analysis (Fig. 3). Most of the bioinformatics challenges, such as the alignment of reads across splice junctions and the possibility of multiple distinct genomic alignments, are similar in these data. Considerable specific rRNA contamination can remain even after depletion by subtractive hybridization. Thus, we also implement a bioinformatics filter to remove these sequences first. Examination of the positive alignments from this filter should point to specific contaminating rRNA sequences that can be targeted with additional biotinylated subtraction oligos. We also identify some contaminating sequences derived from other abundant noncoding RNAs (ncRNAs), such as tRNAs and small nuclear RNAs. These contaminants typically derive from a single specific position, whereas ribosome footprints will cover many positions along a reading frame, and ncRNA fragments will show an atypical length distribution. The extent of rRNA and ncRNA contamination can vary, particularly when global changes in protein synthesis alter the fraction of active ribosomes, and thus the number of ribosome-protected footprints relative to other RNAs.
+
+Many applications of ribosome profiling, including expression measurements, depend on comparing the numbers of aligned sequencing reads between genes, samples or specific codons. Quantitative analysis of ribosome profiling data, such as RNA-seq data2, is powerful, but this analysis must account for limitations that arise in this sort of data. Two major concerns that have been studied in RNA-seq data are systematic sequencedependent biases and stochastic sampling errors22,36–41. RNAs will be captured during library generation with differing efficiencies, perhaps because of sequence or structural preferences of the enzymes used in library generation42–44. Although we strove to minimize these biases, they are present in all sequencing samples22, and it is important to avoid confusing library generation biases with differences in the underlying abundance of different footprints. These sequence biases are minimized in expression measurements because of averaging across the entire sequence of the mRNA; comparison of the same gene across different samples, one of the most frequent uses of profiling data, provides further protection from these effects. Stochastic error also arises, and is most serious when comparing small absolute numbers of reads. Several statistical approaches have been developed to estimate and model this error in RNA-Seq data, which can exceed the expectation derived from Poisson statistics37,38,41,45. Many of these techniques and tools should be directly applicable to ribosome profiling expression measurements.
+
+© 2012 Nature America, Inc. All rights reserved.
+
+MATERIALS
+REAGENTS • HEK293 cells (ATCC, cat. no. CRL-1573) or other cultured mammalian
+cells including HeLa cells, mouse neutrophils46 and PC3 cells14 • Cycloheximide (100 mg ml − 1; Sigma-Aldrich, cat. no. C4859-1ML)
+! CAUTION Cycloheximide is very toxic and harmful to the environment. Handle solutions containing cycloheximide with care and decontaminate and dispose of waste in accordance with institutional regulations. • Harringtonine (LKT Laboratories, cat. no. H0169) for optional harringtonine treatment (Box 1) ! CAUTION Harringtonine is very toxic. Handle solutions containing harringtonine with care and decontaminate and dispose of waste in accordance with institutional regulations. • DMSO, cell culture grade (Sigma-Aldrich, cat. no. D2650) for optional harringtonine treatment • PBS (pH 7.2; Invitrogen, cat. no. 20012-027) • RNase-free water (Invitrogen, cat. no. AM9930) • Tris·Cl (1 M, pH 8, RNase free; Invitrogen, cat. no. AM9855G) • Tris·Cl (1 M, pH 7, RNase free; Invitrogen, cat. no. AM9850G)
+1538 | VOL.7 NO.8 | 2012 | nature protocols
+
+• NaCl (5 M, RNase free; Invitrogen, cat. no. AM9760G) • MgCl2 (1 M, RNase free; Invitrogen, cat. no. AM9530G) • DTT (1 M, BioUltra; Sigma-Aldrich, cat. no. 43816-10ML) • Turbo DNase (2 U µl − 1; Invitrogen, cat. no. AM2238) • Triton X-100, molecular biology grade (Calbiochem, cat. no. 648466) • SUPERase·In (20 U µl − 1; Invitrogen, cat. no. AM2694) • Sucrose, molecular biology grade (VWR, cat. no. IB37160) • 3 M sodium acetate, pH 5.5, RNase free (Invitrogen, cat. no. AM9740) • RNase I (100 U µl − 1; Invitrogen, cat. no. AM2294)  CRITICAL Substantial
+changes in the RNase activity during nuclease footprinting could compromise the experiment. • miRNeasy RNA isolation kit (Qiagen, cat. no. 217004) • Chloroform, molecular biology grade (VWR, cat. no. IB05040) ! CAUTION Chloroform is harmful and volatile. Use proper protection when using chloroform and dispose of waste in accordance with institutional regulations. • Ethanol, molecular biology grade (Sigma-Aldrich, cat. no. E7023-500ML) ! CAUTION Ethanol is highly flammable and volatile.
+
+protocol
+
+• Isopropanol, molecular biology grade (VWR, cat. no. 87000-048) ! CAUTION Isopropanol is highly flammable and volatile and is an irritant.
+• GlycoBlue (15 mg ml − 1; Invitrogen, cat. no. AM9515) • EDTA (0.5 M), RNase free (Invitrogen, cat. no. AM9260G) • Bromophenol blue (Bio-Rad, cat. no. 161-0404) • Formamide, molecular biology grade (Promega, cat. no. H5051)
+! CAUTION Formamide is a reproductive toxin. • Denaturing 15% (wt/vol) polyacrylamide TBE-urea gel, 12 wells
+(Invitrogen, cat. no. EC68852BOX) ! CAUTION Acrylamide is a neurotoxin. Use proper protection when handling polyacrylamide gels. • 10-bp DNA ladder (1 µg µl − 1; Invitrogen, cat. no. 10821015) • Upper size marker oligoribonucleotide NI-NI-19, 5′-AUGUACACG GAGUCGAGCUCAACCCGCAACGCGA-(Phos)-3′. The designation (Phos) indicates 3′ phosphorylation (note that all residues are ribonucleotides) • Lower size marker oligoribonucleotide NI-NI-20, 5′-AUGUACACG GAGUCGACCCAACGCGA-(Phos)-3′. The designation (Phos) indicates 3′ phosphorylation (note that all residues are ribonucleotides) • TBE (10×), RNase free (Promega, cat. no. V4251) • SYBR Gold (10,000×; Invitrogen, cat. no. S11494) ! CAUTION Nucleic acid stains are typically mutagenic. Use personal protection when handling gel staining solution and dispose of waste in accordance with regulations. • SDS (10%; wt/vol), molecular biology grade (Promega, cat. no. V6551) ! CAUTION SDS is an irritant. • Nondenaturing 8% (wt/vol) polyacrylamide TBE gel, 12 wells (Invitrogen, cat. no. EC62162BOX) ! CAUTION Acrylamide is a neurotoxin. Use proper protection when handling polyacrylamide gels. • T4 polynucleotide kinase (T4 PNK; New England Biolabs, cat. no. M0201S). Supplied with 10× T4 PNK buffer (cat. no. M0236S)  CRITICAL Avoid the 3′ phosphatase minus mutant. • T4 RNA ligase 2, truncated (New England Biolabs, cat. no. M0242S), supplied with PEG 8000 50% (wt/vol) and 10× T4 Rnl2 buffer • Preadenylylated and 3′-blocked linker: any of miRNA Cloning Linker 1/5rApp/CTGTAGGCACCATCAAT/3ddC/(IDT), Universal miRNA Cloning Linker 5′-rAppCTGTAGGCACCATCAAT–NH2-3′ (New England Biolabs, cat. no. S1315S) or AIR adenylated linker A (BIOO, cat. no. 510205) • dNTP mix (10 mM; Invitrogen, cat. no. 18427-013) • SuperScript III (Invitrogen, cat. no. 18080-093). Supplied with 5× firststrand buffer and 0.1 M DTT
+
+• Reverse transcription primer, 5′-(Phos)-AGATCGGAAGAGCG TCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGC-(SpC18)-CAC TCA-(SpC18)-TTCAGACGTGTGCTCTTCCGATCTATTGATGG TGCCTACAG-3′. The designation (Phos) indicates 5′ phosphorylation and -(SpC18)- indicates a hexa-ethyleneglycol spacer
+• Sodium hydroxide (NaOH; EMD Chemicals, cat. no. SX0590-1) ! CAUTION NaOH is highly corrosive.
+• CircLigase (Epicentre, cat. no. CL4111K). Supplied with 10× CircLigase buffer, 1 mM ATP and 50 mM MnCl2  CRITICAL CircLigase II cannot be substituted.
+• Biotinylated subtraction oligonucleotides. A set of 14 sequences suitable for subtractive hybridization in mouse and human samples is given in Table 1. Oligonucleotides should be modified by the addition of the 5′-biotin-TEG and purified by HPLC to eliminate unbiotinylated products that could compete with effective, biotinylated molecules during subtraction.
+• SSC (20×), RNase free (Invitrogen, cat. no. AM9763) • MyOne streptavidin C1 DynaBeads (Invitrogen, cat. no. 65001) • Forward library PCR primer, 5′-AATGATACGGCGACCACCGAG
+ATCTACAC-3′ • Indexed reverse library PCR primers, 5′-CAAGCAGAAGACGGCATAC
+GAGATNNNNNNGTGACTGGAGTTCAGACGTGTGCTCTTCCG-3′ (The underlined NNNNNN indicates the reverse complement of the index sequence discovered during Illumina sequencing. The six forward-strand barcode sequences in Table 2 are separated by at least three mismatches from each other and from the index sequence on the multiplexed PhiX control used on Illumina sequencers (e.g., HiSeq 2000).) • Phusion polymerase (New England Biolabs, cat. no. M0530S). Supplied with 5× HF buffer • Ficoll 400, BioXtra for molecular biology (Sigma-Aldrich, cat. no. F2637) • High-sensitivity DNA kit (Agilent Technologies, cat. no. 5067-4626) • TruSeq SBS v3 kit, 50 cycles (Illumina, cat. no. FC-401-3002) • TruSeq SR Cluster Kit v3, cBot, HS (Illumina, cat. no. GD-401-3001)
+EQUIPMENT • Cell lifter (VWR, cat. no. 29442-200) • Nonstick RNase-free Microfuge tubes (Invitrogen, cat. no. AM12450) • Needle (26 G; VWR, cat. no. BD305111) • Syringe (1 ml; VWR, cat. no. BD309659)
+
+© 2012 Nature America, Inc. All rights reserved.
+
+Table 1 | Biotinylated rRNA depletion oligos.
+
+Reference NR_003278.1 NR_003278.1 NR_003278.1 NR_003279.1 NR_003287.1 NR_003279.1 NR_003287.1 NR_003279.1 NR_003279.1 NR_003279.1 NR_003279.1 NR_003287.1 NR_003287.1 NR_003280.1
+
+Start 204 286 836 183 919 921 1,053 1,012 1,257 3,754 4,395 4,711 4,990 125
+
+End 230 320 871 216 950 948 1,080 1,052 1,289 3,781 4,429 4,745 5,024 157
+
+Sequence (5′→3′) GGGGGGATGCGTGCATTTATCAGATCA TTGGTGACTCTAGATAACCTCGGGCCGATCGCACG GAGCCGCCTGGATACCGCAGCTAGGAATAATGGAAT TCGTGGGGGGCCCAAGTCCTTCTGATCGAGGCCC GCACTCGCCGAATCCCGGGGCCGAGGGAGCGA GGGGCCGGGCCGCCCCTCCCACGGCGCG GGGGCCGGGCCACCCCTCCCACGGCGCG CCCAGTGCGCCCCGGGCGTCGTCGCGCCGTCGGGTCCCGGG TCCGCCGAGGGCGCACCACCGGCCCGTCTCGCC AGGGGCTCTCGCTTCTGGCGCCAAGCGT GAGCCTCGGTTGGCCCCGGATAGCCGGGTCCCCGT GAGCCTCGGTTGGCCTCGGATAGCCGGTCCCCCGC TCGCTGCGATCTATTGAAAGTCAGCCCTCGACACA TCCTCCCGGGGCTACGCCTGTCTGAGCGTCGCT
+nature protocols | VOL.7 NO.8 | 2012 | 1539
+
+protocol
+
+Table 2 | Indexed library PCR primers.
+
+Forward index (5′→3′) ACGACT ATCAGT CAGCAT CGACGT GCAGCT TACGAT CTGACG GCTACG
+
+Indexed reverse library PCR primer (5′→3′) CAAGCAGAAGACGGCATACGAGATAGTCGTGTGACTGGAGTTCAGACGTGTGCTCTTCCG CAAGCAGAAGACGGCATACGAGATACTGATGTGACTGGAGTTCAGACGTGTGCTCTTCCG CAAGCAGAAGACGGCATACGAGATATGCTGGTGACTGGAGTTCAGACGTGTGCTCTTCCG CAAGCAGAAGACGGCATACGAGATACGTCGGTGACTGGAGTTCAGACGTGTGCTCTTCCG CAAGCAGAAGACGGCATACGAGATAGCTGCGTGACTGGAGTTCAGACGTGTGCTCTTCCG CAAGCAGAAGACGGCATACGAGATATCGTAGTGACTGGAGTTCAGACGTGTGCTCTTCCG CAAGCAGAAGACGGCATACGAGATCGTCAGGTGACTGGAGTTCAGACGTGTGCTCTTCCG CAAGCAGAAGACGGCATACGAGATCGTAGCGTGACTGGAGTTCAGACGTGTGCTCTTCCG
+
+© 2012 Nature America, Inc. All rights reserved.
+
+• Polycarbonate ultracentrifuge tube (13 mm × 51 mm; Beckman, cat. no. 349622)
+• Presterilized, RNase-free filter pipette tips (Rainin, cat. nos. RT-10F, RT-20F, RT-200F, and RT-1000F)
+• Presterilized, RNase-free gel-loading pipette tips (National Scientific, cat. no. MN520R-LRS)
+• Refrigerated microcentrifuge 5430R (VWR, cat. no. 97027-866) • Optima TLX ultracentrifuge (Beckman, cat. no. 361545) • TLA 100.3 rotor (Beckman, cat. no. 349481) • Dry block heater (VWR, cat. no. 12621-104) • Dry block for microcentrifuge tubes (VWR, cat. no. 13259-002) • Mini-Cell polyacrylamide gel box (Invitrogen, cat. no. EI0001) • Electrophoresis power supply (VWR, cat. no. 27370-265) • DarkReader (Clare Chemical Research, cat. no. DR46B; alternatively,
+a standard UV transilluminator can be used instead) • Razors (VWR, cat. no. 55411-050) • Needle (21 G; VWR, cat. no. BD 305165) for optional rapid gel extraction • Nonstick RNase-free 0.5-ml Microfuge tubes (Invitrogen, cat. no. AM12350)
+for optional rapid gel extraction • Microfuge tube spin filter (VWR, cat. no. 29442-752) for optional rapid
+gel extraction • Thermal cycler (Bio-Rad, cat. no. 170-9713) • DynaMag-2 separation rack (Invitrogen, cat. no. 12321D) • ThermoMixer (VWR, cat. no. 21516-170) • 2100 BioAnalyzer (Agilent Technologies, cat. no. G2940CA) • Genome Analyzer II or HiSeq 2000 (Illumina) • Computer hardware (a 64-bit computer running Linux with at least 4 GB of
+RAM47 for the manual analysis options) • Access to an instance of the Galaxy platform (http://galaxyproject.org/) for
+the Galaxy analysis option48 • FastX-toolkit (http://hannonlab.cshl.edu/fastx_toolkit/index.html) and
+Illumina quality filter software (http://cancan.cshl.edu/labmembers/gordon/ fastq_illumina_filter/) installed locally for the manual analysis options, or through Galaxy for the Galaxy analysis option • Bowtie software (http://bowtie-bio.sourceforge.net/index.shtml) installed locally for the manual analysis options or through Galaxy for the Galaxy analysis option49 • TopHat software (http://tophat.cbcb.umd.edu/) installed locally for the manual analysis options or through Galaxy for the Galaxy analysis option41,47 • SAMtools software (http://samtools.sourceforge.net/) installed locally for the manual analysis options or through Galaxy for the Galaxy analysis option50
+REAGENT SETUP
+Harringtonine  For optional harringtonine treatment see Box 1. Dissolve
+5 mg of harringtonine in 5 ml of DMSO to produce a 1 mg ml − 1 solution.
+Prepare in advance, dispense into 0.5-ml aliquots and store indefinitely at  − 20 °C in the dark. ! CAUTION Harringtonine is highly toxic.
+Polysome buffer  Mix 20 mM Tris·Cl (pH 7.4), 150 mM NaCl, 5 mM MgCl2, 1 mM DTT and 100 µg ml − 1 cycloheximide. Freshly prepare this solution
+
+with RNase-free reagents and keep on ice. ! CAUTION Cycloheximide is highly toxic and harmful to the environment. Lysis buffer  Mix polysome buffer plus 1% (vol/vol) Triton X-100 and 25 U ml − 1 Turbo DNase I. Prepare fresh with RNase-free reagents, from a 20% (vol/vol) Triton X-100 dilution in RNase-free water. Sucrose cushion  Mix polysome buffer plus 1 M sucrose (~34% (wt/vol) sucrose; 10 ml is 3.4 g of sucrose dissolved in 7.8 ml of polysome buffer) and 20 U ml − 1 SUPERase·In. Prepare fresh with RNase-free reagents. Tris (10 mM, pH 8)  Prepare in advance with RNase-free reagents and store indefinitely at room temperature (22–25 °C). Denaturing loading buffer (2×)  This buffer is 98% (vol/vol) formamide with 10 mM EDTA and 300 µg ml − 1 bromophenol blue. Prepare in advance by dissolving 15 mg of bromophenol blue in 1.0 ml of 0.5 M EDTA and adding 200 µl to 9.8 ml of formamide; store indefinitely at room temperature. Other denaturing nucleic acid loading buffers can be substituted, but avoid the dye xylene cyanol, which interferes with visualizing the ligation product band. ! CAUTION Formamide is a reproductive toxin. RNA gel extraction buffer  Mix 300 mM sodium acetate ( pH 5.5), 1.0 mM EDTA and 0.25% (wt/vol) SDS. Prepare in advance and store indefinitely at room temperature. DNA gel extraction buffer  Mix 300 mM NaCl, 10 mM Tris (pH 8) and 1 mM EDTA. Prepare in advance and store indefinitely at room temperature. NaOH (1 N)  Prepare in advance and store indefinitely at room temperature. ! CAUTION NaOH is highly corrosive. Subtraction oligo mix  Mix oligos at a concentration of 10 µM each, up to a total oligo concentration of 200 µM, prepared in 10 mM Tris, pH 8. Prepare in advance and store at  − 20 °C indefinitely. Bind/wash buffer (2×)  Mix 2 M NaCl, 1 mM EDTA, 5 mM Tris (pH 7.5) and 0.2% (vol/vol) Triton X-100. Prepare in advance and store at room temperature indefinitely. Nondenaturing loading buffer, 6×  Mix 10 mM Tris (pH 8), 1 mM EDTA, 15% (wt/vol) Ficoll 400 and 0.25% bromophenol blue. Prepare in advance and store at room temperature. Other standard DNA nondenaturing electrophoresis loading buffers can be substituted. EQUIPMENT SETUP rRNA sequence index  Start with a Fasta-format sequence file called rrna_seqs. fa. containing rRNA sequences (e.g., NR_003285.2, NR_003286.1, NR_003287.1 and NR_023363.1 for human cells). Index this sequence file using bowtie-build. Enter the following in a command prompt after installing Bowtie:
+bowtie-build rrna_seqs.fa rrna_seqs
+Genomic sequence  Download the genome reference as a Fasta file. The current human genome reference, GRCh37, is available at ftp://ftp. ncbi.nlm.nih.gov/genbank/genomes/Eukaryotes/vertebrates_mammals/ Homo_sapiens/GRCh37/Primary_Assembly/assembled_chromosomes/ FASTA/ with a single compressed Fasta-format file per chromosome.
+
+1540 | VOL.7 NO.8 | 2012 | nature protocols
+
+The download can be automated using the following command: for CHR in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+17 18 19 20 21 22 X Y do curl -O ftp://ftp.ncbi.nlm.nih.gov/genbank/
+genomes/Eukaryotes/vertebrates_mammals/Homo_ sapiens/GRCh37/Primary_Assembly/assembled_ chromosomes/FASTA/chr${CHR}.fa.gz
+done Genomic sequence index  Index the genomic reference Fasta files using bowtie-build. The GRCh37 genome downloaded as a collection of Fasta files, described above, can be indexed with the following command:
+bowtie-build
+
+protocol
+chr1.fa.gz,chr2.fa.gz,chr3.fa.gz,chr4.fa.gz,chr5. fa.gz,chr6.fa.gz,chr7.fa.gz,chr8.fa.gz,chr9. fa.gz,chr10.fa.gz,chr11.fa.gz,chr12.fa.gz,chr13. fa.gz,chr14.fa.gz,chr15.fa.gz,chr16.fa.gz,chr17. fa.gz,chr18.fa.gz,chr19.fa.gz,chr20.fa.gz,chr21. fa.gz,chr22.fa.gz,chrX.fa.gz,chrY.fa.gz hg19 Genomic annotation  Obtain a GTF-format annotation for the exact genome reference sequence downloaded and indexed above. For the GRCh37 human genome sequence, the UCSC genome browser annotations can be downloaded from their table browser (http://genome.ucsc.edu/cgi-bin/hgT ables?org=Human&db=hg19). Select the group ‘Genes and Gene Prediction Tracks’, track ‘UCSC Genes’, table ‘knownGene’, output format ‘GTF’ and use ‘get output’ to retrieve the file. Rename it as hg19.gtf.
+
+© 2012 Nature America, Inc. All rights reserved.
+
+PROCEDURE Cell lysis ● TIMING 30 min  CRITICAL To carry out initiation site profiling, harringtonine treatment must be performed immediately before lysis as described in Box 1.
+1|	 Aspirate medium from one 10-cm dish of adherent cells. Place the dish on ice, gently wash it with 5 ml of ice-cold PBS and aspirate the PBS thoroughly.
+2|	 Perform in-dish lysis either without freezing (option A) or with flash-freezing (option B). Flash-freezing may help maintain in vivo ribosome positions if cell physiology might otherwise change during cell harvesting, but it does not affect expression measurements or ribosome density profiles in standard cultured mammalian cells. (A) Lysis without freezing 	 (i) Drip 400 µl of ice-cold lysis buffer onto cells, taking care to cover the entire surface of the dish. (B) Lysis with flash-freezing 	 (i) Quickly immerse the plate in a shallow reservoir of liquid nitrogen. 	 (ii) Move the dish rapidly to dry ice. 	 (iii) Drip 400 µl of ice-cold lysis buffer onto the frozen dish. 	 (iv) Transfer the dish to wet ice and thaw it in the presence of lysis buffer.
+3|	 Tip the dish and scrape cells down the slope into the lysis buffer pooled in the lower portion of the dish. Pipette the lysis buffer from this pool back toward the top of the dish and scrape again down the slope of the dish.
+4|	 Pipette the cells in lysis buffer and withdraw the entire contents of the dish to a Microfuge tube on ice. Pipette several times to disperse cell clumps and incubate for 10 min on ice.
+5|	 Triturate the cells ten times through a 26-G needle.
+6|	 Clarify the lysate by centrifugation for 10 min at 20,000g at 4 °C and recover the soluble supernatant.
+Nuclease footprinting and ribosome recovery ● TIMING 6 h 7|	 Take 300 µl of lysate from Step 6 and add 7.5 µl of RNase I (100 U µl − 1). Incubate for 45 min at room temperature with gentle mixing, e.g., on a Nutator.
+8|	 Add 10.0 µl of SUPERase·In RNase inhibitor to stop nuclease digestion.
+9|	 Transfer digestion to a 13 mm × 51 mm polycarbonate ultracentrifuge tube and underlay 0.90 ml of 1 M sucrose cushion by carefully positioning a pipette tip (or a cannula or similar tool) at the very bottom of the tube and slowly dispensing the sucrose solution. The lysate should float on top of the sucrose, leaving a visible interface between the layers.
+10| Pellet ribosomes by centrifugation in a TLA100.3 rotor at 70,000 r.p.m. at 4 °C for 4 h.
+11| Mark the outside edge of the ultracentrifuge tube, where the ribosome pellet will be found, before removing the tube from the rotor. Gently pipette the supernatant out of the tube. The ribosomal pellet is glassy and translucent, and may not be visible until the supernatant is removed.
+
+nature protocols | VOL.7 NO.8 | 2012 | 1541
+
+© 2012 Nature America, Inc. All rights reserved.
+
+protocol
+12| Resuspend the ribosomal pellet in 700 µl of Qiazol reagent from the miRNeasy kit.
+13| Purify RNA from the resuspended ribosomal pellet using the miRNeasy kit according to the manufacturer’s instructions for purifying total RNA including small RNA. Collect the eluate in a nonstick RNase-free tube.  CRITICAL STEP From this point through the end of the reverse-transcription reaction in Step 39, proper techniques must be used to avoid RNase contamination. This includes the rigorous use of gloves and RNase-free reagents and consumables.
+14| Precipitate RNA from the elution by adding 38.5 µl of water, 1.5 µl of GlycoBlue and 10.0 µl of 3 M sodium acetate (pH 5.5), followed by 150 µl of isopropanol.
+15| Carry out precipitation for at least 30 min on dry ice.  PAUSE POINT The precipitation may be left overnight on dry ice or at  − 80 °C.
+16| Pellet the RNA by centrifugation for 30 min at 20,000g at 4 °C in a tabletop microcentrifuge. Carefully pipette all liquid from the tube, place it in a sideways Microfuge tube rack and allow it to air-dry for 10 min.
+17| Resuspend the RNA in 5.0 µl of 10 mM Tris (pH 8).  PAUSE POINT RNA may be stored overnight at  − 20 °C or for months at  − 80 °C.
+Footprint fragment purification ● TIMING 2.5 h (plus overnight and ~4 h the next day) 18| Prerun a 15% (wt/vol) polyacrylamide TBE-urea gel at 200 V for 15 min in 1× TBE.  CRITICAL STEP The electrophoresis apparatus used for this and subsequent preparative RNA gels must be maintained free of RNase contamination. Decontaminate the tank and electrodes if the equipment has been used for other purposes. Molecular biology–grade water obtained directly from the purifier can be tested for nuclease contamination and used to prepare running buffer because of the large volume of nuclease-free water needed for this purpose.
+19| Add 5.0 µl of 2× denaturing sample buffer to each RNA sample. Prepare a control oligo sample for two lanes with 1.0 µl of 10 µM lower marker oligo, 1.0 µl of 10 µM upper marker oligo, 8.0 µl of 10 mM Tris (pH 8) and 10.0 µl of 2× denaturing sample buffer. Prepare a ladder sample with 0.5 µl of 10-bp ladder 1 µg µl − 1, 4.5 µl of 10 mM Tris (pH 8) and 5.0 µl of 2× denaturing sample buffer.
+20| Denature the samples for 90 s at 80 °C.
+21| Load the samples on the polyacrylamide gel with control oligo sample (mixed upper and lower markers) on either side of the RNA samples.
+22| Separate by electrophoresis for 65 min at 200 V.
+23| Stain the gel for 3 min with 1× SYBR Gold in 1× TBE running buffer on a gentle shaker.
+24| Visualize the gel and excise the 26-nt to 34-nt region demarcated by the marker oligos NI-NI-19 and NI-NI-20 from each footprinting sample. Place each excised gel slice in a clean nonstick RNase-free Microfuge tube. Similarly, excise the marker oligo bands from the gel and place them all in a Microfuge tube as well. These oligos will be processed the same way as the samples for the remainder of the PROCEDURE, as an internal control.
+25| Extract RNA from the polyacrylamide gel slices using either of the gel extraction protocols described in option A or option B. Rapid gel extraction (option A) is faster, although overnight gel extraction (option B) may provide more reproducibly high yields. (A) Rapid gel extraction 	 (i) Pierce the bottom of an 0.5-ml RNase-free Microfuge tube with a 21-G needle and cut off the cap. 	 (ii) Nest the pierced small tube inside a 1.5-ml RNase-free Microfuge tube and place the gel slice in the inner tube. 	 (iii) Spin the tube for 2 min at full speed in a tabletop microcentrifuge to force the gel slice through the needle hole. 	 (iv) Transfer any remaining gel debris from the pierced 0.5-ml Microfuge tube and discard the pierced tube. 	 (v) Add 360 µl of RNase-free water to the gel debris. 	 (vi) Incubate for 10 min at 70 °C. 	 (vii) Cut the tip off of a 1,000-µl pipette tip.
+1542 | VOL.7 NO.8 | 2012 | nature protocols
+
+© 2012 Nature America, Inc. All rights reserved.
+
+protocol
+
+	(viii) Transfer all liquid and gel slurry into a Microfuge tube spin filter. 	 (ix) Spin for 2 min at full speed in a tabletop microcentrifuge to recover all liquid from the gel slurry. 	 (x) Transfer the filtrate to a fresh RNase-free nonstick Microfuge tube and add 40 µl of 3 M sodium acetate. (B) Overnight gel extraction 	 (i) Add 400 µl of RNA gel extraction buffer and freeze the samples for 30 min on dry ice. 	 (ii) Leave the samples overnight at room temperature with gentle mixing, e.g., on a Nutator. 	 (iii) Briefly centrifuge the gel extractions to collect the liquid at the bottom of the tube. Transfer 400 µl of eluate into a
+clean nonstick RNase-free Microfuge tube.
+26| Precipitate RNA by adding 1.5 µl of GlycoBlue, mixing it well and then adding 500 µl of isopropanol. Recover RNA as described in Steps 15 and 16.  PAUSE POINT Precipitations may be left on dry ice or at  − 80 °C overnight as described in Step 15.
+27| Resuspend size-selected RNA in 10.0 µl of 10 mM Tris (pH 8) and transfer to a clean nonstick RNase-free Microfuge tube.  PAUSE POINT RNA may be stored overnight at  − 20 °C or indefinitely at  − 80 °C.
+28| Prepare the dephosphorylation reaction by adding 33 µl of RNase-free water to the samples from Step 27 and denaturing for 90 s at 80 °C. Equilibrate to 37 °C, set up the reaction tabulated below and incubate for 1 h at 37 °C. Thereafter, heat-inactivate the enzyme for 10 min at 70 °C.
+
+Component
+
+Amount per reaction (l)
+
+RNA sample
+
+43.0
+
+T4 PNK buffer (10×)
+
+5.0
+
+SUPERase·In (20 U µl − 1)
+
+1.0
+
+T4 PNK (10 U µl − 1)
+
+1.0
+
+Final
+1× 20 U 10 U
+
+29| Precipitate the RNA by adding 39 µl of water, 1.0 µl of GlycoBlue and 10.0 µl of 3 M sodium acetate, mixing them together and then adding 150 µl isopropanol. Recover RNA as described in Steps 15 and 16.  PAUSE POINT Precipitations may be left on dry ice or at  − 80 °C overnight as described in Step 15. Linker ligation ● TIMING ~6 h (plus overnight and ~6 h the next day) 30| Resuspend the dephosphorylated RNA in 8.5 µl of 10 mM Tris (pH 8) and transfer it to a clean nonstick RNase-free Microfuge tube.  PAUSE POINT RNA may be stored overnight at  − 20 °C or indefinitely at  − 80 °C. 31| Add 1.5 µl of preadenylylated linker (0.5 µg µl − 1), denature it for 90 s at 80 °C, and then cool it to room temperature. 32| Set up the ligation reaction below and incubate for 2.5 h at room temperature:
+
+Component RNA and linker T4 Rnl2 buffer (10×) PEG 8000 (50%, wt/vol) SUPERase·In (20 U µl − 1) T4 Rnl2(tr) (200 U µl − 1)
+
+Amount per reaction (l) 10.0 2.0 6.0 1.0 1.0
+
+Final
+1× 15% (wt/vol)
+20 U 200 U
+
+33| Add 338 µl of water, 40 µl of 3 M sodium acetate (pH 5.5) and 1.5 µl of GlycoBlue to each reaction, followed by 500 µl of isopropanol. Recover the RNA as described in Steps 15 and 16.
+
+nature protocols | VOL.7 NO.8 | 2012 | 1543
+
+© 2012 Nature America, Inc. All rights reserved.
+
+protocol
+
+34| Separate the ligation reactions by polyacrylamide gel electrophoresis as described in Steps 18–23. ? TROUBLESHOOTING
+35| Excise the ligation product bands, including the marker oligo ligation, and place each gel slice in a clean nonstick RNase-free Microfuge tube. Recover RNA from these samples as described in Steps 25 and 26.  PAUSE POINT Precipitations may be left on dry ice or at  − 80 °C overnight.
+Reverse transcription ● TIMING ~5 h (plus overnight and ~1.5 h the next day) 36| Resuspend the ligation product in 10.0 µl of 10 mM Tris (pH 8) and transfer to a clean PCR tube.  PAUSE POINT RNA may be stored at  − 20 °C overnight or indefinitely at  − 80 °C.
+37| Add 2.0 µl of reverse transcription primer at 1.25 µM. Denature for 2 min at 80 °C in a thermal cycler and then place on ice. Cool the thermal cycler to 48 °C.
+38| Set up the reverse transcription reaction as tabulated below and incubate it for 30 min at 48 °C in the thermal cycler:
+
+Component Ligation and primer First-strand buffer (5×) dNTPs (10 mM) DTT (0.1 M) SUPERase·In (20 U µl − 1) SuperScript III (200 U µl − 1)
+
+Amount per reaction (l) 12.0 4.0 1.0 1.0 1.0 1.0
+
+Final
+1× 0.5 mM 5 mM
+20 U 200 U
+
+39| Hydrolyze the RNA by adding 2.2 µl of 1 N NaOH to each reaction; incubate for 20 min at 98 °C. The GlycoBlue dye will turn pink.
+40| Add 20 µl of 3 M sodium acetate (pH 5.5), 2.0 µl of GlycoBlue and 156 µl of water to each reverse-transcription reaction, followed by 300 µl of isopropanol. Recover the RNA from the precipitation as described in Steps 15 and 16.
+41| Separate the reverse-transcription products from the unextended primer by polyacrylamide gel electrophoresis as described in Steps 18–23. Omit the preparation of marker oligo samples, and instead prepare one sample with 2.0 µl of reverse-transcription primer (1.25 µM), 3.0 µl of 10 mM Tris (pH 8) and 5.0 µl of 2× denaturing sample buffer.
+42| Excise the reverse-transcription product bands from the gel and place each in a clean nonstick RNase-free Microfuge tube.
+43| Extract DNA from the polyacrylamide gel using either of the gel extraction protocols described in Step 25. Note that it is no longer necessary to use RNase-free reagents, although nonstick tubes are still required, and overnight extraction should be performed in the DNA gel extraction buffer rather than the RNA gel extraction buffer.
+44| Precipitate DNA by adding 1.5 µl of GlycoBlue, mixing it well and then adding 500 µl of isopropanol. Recover DNA as described in Steps 15 and 16.  PAUSE POINT Precipitations may be left on dry ice or at  − 80 °C indefinitely.
+Circularization ● TIMING 1.5 h 45| Resuspend reverse-transcription products in 15.0 µl of 10 mM Tris (pH 8) and transfer to a PCR tube.  PAUSE POINT DNA may be stored indefinitely at  − 20 °C.
+
+1544 | VOL.7 NO.8 | 2012 | nature protocols
+
+© 2012 Nature America, Inc. All rights reserved.
+
+protocol
+
+46| Prepare the circularization reaction tabulated below and incubate for 1 h at 60 °C and then heat-inactivate for 10 min at 80 °C in a thermal cycler:
+
+Component First-strand cDNA CircLigase buffer (10×) ATP (1 mM) MnCl2 (50 mM) CircLigase
+
+Amount per reaction (l) 15.0 2.0 1.0 1.0 1.0
+
+Final
+1× 50 mM 2.5 mM 100 U
+
+ PAUSE POINT Circularized DNA may be stored in the circularization reaction buffer indefinitely at  − 20 °C.
+
+rRNA depletion ● TIMING 2.5 h 47| Combine 5.0 µl of circularization reaction with 1.0 µl of subtraction oligo pool, 1.0 µl of 20× SSC and 3.0 µl water in a PCR tube.
+
+48| Place the PCR tube in a thermal cycler and denature for 90 s at 100 °C, and then anneal at 0.1 °C s − 1 to 37 °C. Incubate for 15 min at 37 °C. Warm a ThermoMixer to 37 °C.
+
+49| Vortex MyOne Streptavidin C1 DynaBeads (10 mg ml − 1) vigorously to resuspend beads. Use 25.0 µl of beads per subtraction reaction, plus an additional 12.5 µl. Transfer beads to a clean nonstick Microfuge tube and place the tube on a magnetic rack for 1 min to isolate beads. Gently withdraw all liquid from the tube, remove the tube from the rack and resuspend in 1 volume (i.e., 25.0 µl per subtraction reaction, plus an additional 12.5 µl) 1× bind/wash buffer. Repeat this procedure two more times.
+
+50| Place the beads on a magnetic rack for 1 min to isolate beads, withdraw the final wash and resuspend in 0.4 volumes (i.e., 10.0 µl per subtraction reaction, plus an additional 5.0 µl) of 2× bind/wash buffer. Take one 10.0-µl aliquot of beads per subtraction reaction into a clean nonstick Microfuge tube. Place bead aliquots in the ThermoMixer at 37 °C and equilibrate.
+
+51| Transfer 10.0 µl of subtraction reaction directly from the PCR tube in the thermal cycler (from Step 46) to a bead aliquot in the ThermoMixer. Incubate for 15 min at 37 °C with mixing at 1,000 r.p.m.
+
+52| Transfer tubes directly from the ThermoMixer to a magnetic rack and isolate beads for 1 min. Recover 17.5 µl of eluate from the depletion and transfer it to a new nonstick Microfuge tube.
+
+53| Add 2.0 µl of GlycoBlue, 6.0 µl of 5 M NaCl and 74 µl of water to each depletion, followed by 150 µl of isopropanol. Recover DNA as described in Steps 15 and 16.  PAUSE POINT Precipitations may be left indefinitely on dry ice or at  − 80 °C.
+
+54| Resuspend depleted DNA in 5.0 µl of 10 mM Tris (pH 8).  PAUSE POINT DNA may be stored indefinitely at  − 20 °C.
+
+PCR amplification and barcode addition ● TIMING ~2 h (plus overnight and ~2 h the next day) 55| Prepare a 100-µl PCR mixture for each sample, according to the table below. Use a different indexing primer for each sample.
+
+Component Phusion HF buffer (5×) dNTPs (10 mM) Forward library primer (100 µM) Reverse indexed primer (100 µM) Circularized DNA template (from Step 54) Nuclease-free water Phusion polymerase (2 U µl − 1)
+
+Amount per reaction (l) 20 2.0 0.5 0.5 5.0 71.0 1.0
+
+Final 1×
+0.2 mM 0.5 µM 0.5 µM
+2U
+
+nature protocols | VOL.7 NO.8 | 2012 | 1545
+
+protocol
+
+56| Set up five PCR tube strips and transfer a 16.7-µl aliquot of the PCR mixture into one tube in each strip.
+57| Perform PCR amplification with varying numbers of cycles by placing all strip tubes in the thermal cycler and starting a program with the conditions given below. Remove strips successively at the very end of the extension step after 6, 8, 10 and 12 extension cycles, leaving the last strip in the thermal cycler until the end of cycle 14.
+
+Cycle number 1 2–15
+
+Denature 98 °C, 30 s 98 °C, 10 s
+
+Anneal 65 °C, 10 s
+
+Extend 72 °C, 5 s
+
+58| Add 3.3 µl of 6× nondenaturing loading dye to each reaction. Prepare a ladder sample with 1.0 µl of 10-bp ladder, 15.7 µl of 10 mM Tris (pH 8) and 3.3 µl of 6× nondenaturing loading dye.
+
+59| Set up one or two 8% (wt/vol) polyacrylamide nondenaturing gels. Load amplification reactions for the same sample in adjacent wells to facilitate direct comparison.
+
+60| Separate by electrophoresis for 40 min at 180 V. Stain the gel for 3 min in 1× SYBR Gold in 1× TBE gel-running buffer.
+
+61| Visualize the gel and excise the amplified PCR product. Select one or two reactions for each cycle with a prominent product band but little accumulation of reannealed partial duplex library products (Fig. 4). Avoid any lower product band derived from unextended reverse transcription primer. Place excised gel slices in clean, nonstick Microfuge tubes. ? TROUBLESHOOTING
+
+62| Recover DNA from the gel slices as described in Steps 42–44, using the overnight gel extraction option.
+
+abc
+
+d
+
+PCR 8 10 8 10 8 10 8 10 8 10 cycles (no.)
+
+© 2012 Nature America, Inc. All rights reserved. Ladder Markers Footprinting samples Markers Ladder Markers Footprinting samples Marker ligation Markers Ladder Footprinting samples Marker RT RT primer Ladder Footprinting samples
+
+*
+
+Fluorescence (a.u.) (35)
+176 Fluorescence (a.u.)
+(35) 116414
+182
+
+ef
+
+Figure 4 | Representative gels from intermediate product purification. (a) Size selection of ribosome
+footprint fragments. The footprinting samples are
+
+100
+
+100
+
+derived from HeLa lysates with 5–15 µg of input RNA.
+
+The blue bracket indicates the gel region
+
+that should be excised. (b) Purification of ligation products. Two marker samples are shown, one which
+
+0
+
+0
+
+contains only the lower and upper marker
+
+35 50 100 150 200
+
+300
+
+35 50 100 150 200
+
+300
+
+oligonucleotides and the other which is produced by
+
+Size (bp)
+
+Size (bp)
+
+carrying forward the markers from the size selection gel
+
+through dephosphorylation and ligation. The blue bracket indicates the gel region that should be excised. The blue arrowhead indicates the unreacted linker.
+
+(c) Purification of reverse transcription products. The blue bracket indicates the gel band that should be excised. The blue arrowhead indicates the unextended
+
+RT primer, which should be avoided. (d) Purification of PCR products. The blue bracket indicates the ~175-nt product band that should be purified. The blue
+
+arrowhead indicates the ~145-nt background band derived from unextended RT primer that should be avoided. The blue asterisk indicates the partial duplexes
+
+resulting from reannealing as the PCR amplification approaches saturation. (e) BioAnalyzer profile of a high-quality sequencing library. A single 176-nt peak is
+
+present (the peak at 35 is the vendor’s internal standard, present in all profiles). (f) BioAnalyzer profile of a sequencing library with significant background from
+
+unextended RT primer. The background manifests as smaller DNA fragments that comprise 5–10% of the total DNA present in the sample; completely unextended
+
+RT primer yields a 144-bp PCR product. The DNA in this peak will produce sequencing data, but the sequence will consist of the linker sequence with no footprint.
+
+1546 | VOL.7 NO.8 | 2012 | nature protocols
+
+© 2012 Nature America, Inc. All rights reserved.
+
+protocol
+ CRITICAL STEP It is particularly important that the gel extractions remain at 25 °C or below to avoid the formation of reannealed partial duplexes. Such duplexes will complicate the quantification of the library.  PAUSE POINT Precipitations may be stored overnight on dry ice or indefinitely at  − 80 °C.
+63| Resuspend library DNA in 15.0 µl of 10 mM Tris (pH 8).  PAUSE POINT Double-stranded DNA may be stored indefinitely at 4 °C or at  − 20 °C.
+64| Quantify and characterize the library by preparing a 1.5-µl library with 6.0 µl of water and using the high-sensitivity DNA chip on the Agilent BioAnalyzer according to the manufacturer’s protocol.
+Sequencing and analysis ● TIMING ~4 h (plus ~ 48 h) 65| Sequence the library according on the Illumina GAII or HiSeq system according to the manufacturer’s protocol. The sequencing libraries use the standard Illumina genomic first-read sequencing primer for footprint sequencing and the standard Illumina indexing primer for index sequencing.
+66| Preprocess and align the sequencing data (Fig. 3) produced by the CASAVA 1.8 pipeline using one of Options A–C, based on availability and familiarity of a local Linux computer for manual analysis or a suitable Galaxy server. Note that a history containing a sample analysis of one million footprints is available from the public Galaxy server (https://main.g2.bx.psu.edu/ u/ingolia/h/ribosome-footprint-alignment). (A) Manual analysis 	 (i) Preprocess the sequencing data produced by the CASAVA 1.8 pipeline by discarding low-quality reads, trimming the
+linker sequence from the 3′ end of each sequencing read and removing the first nucleotide from the 5′ end of each read, as it frequently represents an untemplated addition during reverse transcription. The standard CASAVA 1.8 output is a collection of gzip-compressed FastQ files in a directory named Project_YYY/Sample_XXX. To perform all preprocessing steps in series, use the following command:
+	 zcat /path/to/Project_YYY/Sample_XXX/*.fastq.gz|\ 	fastq_illumina_filter --keep N –v|\ 	 fastx_clipper -Q33 -a CTGTAGGCACCATCAAT -l 25 -c -n –v|\ 	 fastx_trimmer -Q33 -f 2>XXX_trimmed.fq
+	 (ii) Align trimmed sequencing reads to an rRNA reference using the Bowtie short-read alignment program, discard the rRNA alignments and collect unaligned reads.
+	 bowtie --seedlen = 23 --un = XXX_norrna.fq rrna_seqs>/dev/null
+	 (iii) Align non-rRNA sequencing reads to a genomic reference using the TopHat splicing-aware short-read alignment program. 	 tophat --no-novel-juncs --output-dir XXX_vs_genome\ 	 --GTF hg19.gtf hg19 XXX_norrna.fq
+	 (iv) Extract perfect-match alignments from TopHat output. 	 samtools view -h XXX_vs_genome/accepted_hits.bam|\ 	 grep –E ′(NM:i:0)|(^@)′|\ 	 samtools view –S –b ->XXX_vs_genome.bam (B) Semi-automated local analysis 	 (i) Download the preprocessing and alignment script, supplied as a Supplementary Note, and rename it Makefile. 	 (ii) Edit the four variables at the top of the script to contain filenames for the rRNA sequence index (RRNA_EBWT), the
+genome sequence index (GENOME_EBWT), the genome annotation (GENOME_GTF) and the project directories generated by CASAVA 1.8 that contain sequencing data (PROJECT_DIRS). 	 (iii) Run the analysis by typing ‘make’. (C) Galaxy analysis 	 (i) Upload the FastQ file containing footprint sequences with ‘Get Data/Upload File’ as fastqsanger format. 	 (ii) Upload the Fasta file of rRNA sequences with ‘Get Data/Upload File’. 	 (iii) Obtain genome annotations with ‘Get Data/UCSC Main’, selecting the GTF output format and sending output to Galaxy.
+nature protocols | VOL.7 NO.8 | 2012 | 1547
+
+© 2012 Nature America, Inc. All rights reserved.
+
+protocol
+	 (iv) Clip the adapter sequence using ‘NGS: QC and Manipulation/Clip’ specifying a minimum length of 25 nt, and enter a custom adapter sequence 5′-CTGTAGGCACCATCAAT-3′; do not discard sequences with unknown bases, and output only clipped sequences.
+	 (v) Trim the adapter sequence using ‘NGS: QC and Manipulation/Trim sequences’ specifying the first base to keep as 2 and the last base to keep as 50.
+	 (vi) Map preprocessed reads to the rRNA database using ‘NGS: Mapping/Bowtie’ selecting a reference genome from the history and then choosing the uploaded rRNA file. Select the full parameter list and select the option to write all reads that could not be aligned.
+	 (vii) Map the unaligned reads to the genome using ‘NGS: RNA Analysis/Tophat for Illumina’ using the appropriate built-in index (e.g., hg19 for human cultured cells). Select the full parameter list and specify a FR First-Strand library, choose to ‘Use Own Junctions’, then ‘Use Gene Annotation Model’ and select the GTF format genome annotation from Step 66C(iii). Also choose to ‘Only look for supplied junctions’.
+? TROUBLESHOOTING Step 34 Low yield in linker ligation will result in more unligated RNA at ~30 nt and less ligated RNA product at ~50 nt (Fig. 4b). One common cause is failure of the dephosphorylation reaction, which is sensitive to residual salt from precipitated RNA, as well as to other contaminants. Note that the lower and upper size marker RNAs are chemically phosphorylated and serve as an internal control for both dephosphorylation and subsequent linker ligation. Take care to remove all liquid from the RNA pellet, dry it thoroughly and resuspend the pellet in a small volume while avoiding residual salt on other parts of the precipitation tube before transferring it to a new, clean tube.
+Step 61 A lower ~145-nt band from the PCR represents background derived from an unextended RT primer. When the amount of RT product is unusually low, this background will compose a greater fraction of the total DNA. To decrease this background, excise the RT product band precisely and avoid the background haze. In some cases, reducing the amount of RT primer may help as well.
+Step 61 A broad, slower-migrating smear indicates excessive PCR amplification. When the PCR amplification consumes a large fraction of the total oligonucleotides present in the reaction mixture, reannealing of library strands becomes kinetically competitive with primer annealing. Reannealed library duplexes have long complementary sequences on each end, but they typically contain noncomplementary inserts, causing slow and heterogeneous migration relative to the fully complementary library duplex. Use product bands from reactions with fewer PCR cycles.
+● TIMING Steps 1–6, cell lysis: ~30 min Steps 7–17, nuclease footprinting and ribosome recovery: ~6 h Steps 18–29, footprint fragment purification: ~2.5 h, overnight gel extraction, ~4 h the following day Steps 30–35, linker ligation: ~6 h, overnight gel extraction, ~1.5 h the following day Steps 36–44, reverse transcription: ~5 h, overnight gel extraction, ~1.5 h the following day Steps 45 and 46, circularization: ~1.5 h Steps 47–54, rRNA depletion: ~2.5 h Steps 55–64, PCR amplification and barcode addition: ~2 h, overnight gel extraction, ~2 h the following day Steps 65 and 66, sequencing and analysis: ~4 h, followed by ~48 h of sequencing and indefinite analysis. Box 1 (optional), harringtonine treatment: 5 min
+ANTICIPATED RESULTS The protocol typically produces 550–600 µl of lysate. RNA extraction from an aliquot of this lysate indicates a yield of 25–50 µg of total RNA from one 10-cm dish of 50–80% confluent HEK293 cells. The RNA yield from the footprinting pellet is typically 40–50% of the total RNA input, resulting in 6–15 µg of RNA from 300 µl of lysate. The lost RNA includes ncRNAs that do not enter the sucrose cushion, such as tRNAs, as well as mRNA and rRNA that are degraded during the footprinting digest. We have successfully prepared libraries from as little as 2 µg of ribosomal pellet RNA.
+1548 | VOL.7 NO.8 | 2012 | nature protocols
+
+protocol
+Gel electrophoresis of the footprinting RNA will reveal a broad array of specific and fairly reproducible bands (Fig. 4a), most presumably derived from the rRNA. The marker oligos will guide the excision of the gel region that contains the footprint fragments, which may not be visible as a discrete band (Fig. 4a). They also provide a positive control through subsequent PAGE purification steps. The ligated control oligos indicate a specific region that should be excised in the linker ligation reaction (Fig. 4b). Although the marker reverse-transcription products do still produce a discernible doublet (Fig. 4c), the reverse-transcription product in general forms a much tighter band because the relative length variation is lower, and it is not necessary to excise a broad region. The PCR products should produce a discrete band that is ~175 nt long (Fig. 4d).
+
+© 2012 Nature America, Inc. All rights reserved.
+
+Note: Supplementary information is available in the online version of the paper.
+ACCESSION CODES Deep sequencing data from the HEK293 cell ribosome footprinting presented here are available for download from NCBI’s Gene Expression Omnibus (GEO, http://www.ncbi.nlm.nih.gov/geo/) under accession number GSE37744.
+Acknowledgments We thank members of the Weissman and Ingolia labs, as well as H. Guo, D. Bartel, S. Luo and G. Schroth for advice in developing this protocol. This work was supported by the US National Institutes of Health (NIH) through an NIH P01 grant (AG10770; to J.S.W.) and a Ruth L. Kirschstein National Research Service Award (GM080853; to N.T.I.), an American Cancer Society postdoctoral fellowship (117945-PF-09-136-01-RMC; to G.A.B.) and the Searle Scholars Program (N.T.I.)
+AUTHOR CONTRIBUTIONS N.T.I. and J.S.W. designed the study. G.A.B. and J.S.W. developed the rRNA depletion protocol. S.R. and J.S.W. adapted the protocol to use preadenylylated linker ligation. N.T.I., S.R., G.A.B. and A.M.M. performed experiments. N.T.I. and A.M.M. analyzed the data. N.T.I. and J.S.W. wrote the manuscript.
+COMPETING FINANCIAL INTERESTS The authors declare competing financial interests: details are available in the online version of the paper.
+Published online at http://www.nature.com/doifinder/10.1038/nprot.2012.086.	 Reprints and permissions information is available online at http://www.nature. com/reprints/index.html.
+1.	 Brown, P.O. & Botstein, D. Exploring the new world of the genome with DNA microarrays. Nat. Genet. 21, 33–37 (1999).
+2.	 Mortazavi, A., Williams, B.A., McCue, K., Schaeffer, L. & Wold, B. Mapping and quantifying mammalian transcriptomes by RNA-Seq. Nat. Methods 5, 621–628 (2008).
+3.	 Nagalakshmi, U. et al. The transcriptional landscape of the yeast genome defined by RNA sequencing. Science 320, 1344–1349 (2008).
+4.	 Ghaemmaghami, S. et al. Global analysis of protein expression in yeast. Nature 425, 737–741 (2003).
+5.	 Lu, P., Vogel, C., Wang, R., Yao, X. & Marcotte, E.M. Absolute protein expression profiling estimates the relative contributions of transcriptional and translational regulation. Nat. Biotechnol. 25, 117–124 (2007).
+6.	 Schwanhausser, B. et al. Global quantification of mammalian gene expression control. Nature 473, 337–342 (2011).
+7.	 Vogel, C. Translation’s coming of age. Mol. Syst. Biol. 7, 498 (2011). 8.	 Sonenberg, N. & Hinnebusch, A.G. Regulation of translation initiation in
+eukaryotes: mechanisms and biological targets. Cell 136, 731–745 (2009). 9.	 Ingolia, N.T., Ghaemmaghami, S., Newman, J.R. & Weissman, J.S. Genome-
+wide analysis in vivo of translation with nucleotide resolution using ribosome profiling. Science 324, 218–223 (2009). 10.	 Steitz, J.A. Polypeptide chain initiation: nucleotide sequences of the three ribosomal binding sites in bacteriophage R17 RNA. Nature 224, 957–964 (1969). 11.	 Wolin, S.L. & Walter, P. Ribosome pausing and stacking during translation of a eukaryotic mRNA. EMBO J. 7, 3559–3569 (1988). 12.	 Bentley, D.R. et al. Accurate whole human genome sequencing using reversible terminator chemistry. Nature 456, 53–59 (2008). 13.	 Ingolia, N.T., Lareau, L.F. & Weissman, J.S. Ribosome profiling of mouse embryonic stem cells reveals the complexity and dynamics of mammalian proteomes. Cell 147, 789–802 (2011). 14.	 Hsieh, A.C. et al. The translational landscape of mTOR signalling steers cancer initiation and metastasis. Nature 485, 55–61 (2012).
+
+15.	 Kondo, T. et al. Small peptides switch the transcriptional activity of Shavenbaby during Drosophila embryogenesis. Science 329, 336–339 (2010).
+16.	 Ingolia, N.T. Genome-wide translational profiling by ribosome footprinting. Methods Enzymol. 470, 119–142 (2010).
+17.	 Brar, G.A. et al. High-resolution view of the yeast meiotic program revealed by ribosome profiling. Science 335, 552–557 (2011).
+18.	 Trapnell, C. et al. Transcript assembly and quantification by RNA-Seq
+reveals unannotated transcripts and isoform switching during cell differentiation. Nat. Biotechnol. 28, 511–515 (2010). 19.	 Dinger, M.E., Pang, K.C., Mercer, T.R. & Mattick, J.S. Differentiating
+protein-coding and noncoding RNA: challenges and ambiguities. PLoS Comput. Biol. 4, e1000176 (2008). 20.	 Robert, F. et al. Altering chemosensitivity by modulating translation elongation. PloS ONE 4, e5428 (2009). 21.	 Fresno, M., Jimenez, A. & Vazquez, D. Inhibition of translation in eukaryotic systems by harringtonine. Eur. J. Biochem. 72, 323–330 (1977).
+22.	 Levin, J.Z. et al. Comprehensive comparative analysis of strand-specific RNA sequencing methods. Nat. Methods 7, 709–715 (2010).
+23.	 Li, G.W., Oh, E. & Weissman, J.S. The anti-Shine-Dalgarno sequence drives translational pausing and codon choice in bacteria. Nature 484, 538–541 (2012).
+24.	 Qian, W., Yang, J.-R., Pearson, N.M., Maclean, C. & Zhang, J. Balanced codon usage optimizes eukaryotic translational efficiency. PLoS Genet. 8, e1002603 (2012).
+25.	 Stadler, M. & Fire, A. Wobble base-pairing slows in vivo translation elongation in metazoans. RNA 17, 2063–2073 (2011).
+26.	 Oh, E. et al. Selective ribosome profiling reveals the cotranslational chaperone action of trigger factor in vivo. Cell 147, 1295–1308 (2011).
+27.	 Reid, D.W. & Nicchitta, C.V. Primary role for endoplasmic reticulum-bound
+ribosomes in cellular translation identified by ribosome profiling. J. Biol. Chem. 287, 5518–5527 (2012). 28.	 Arava, Y. et al. Genome-wide analysis of mRNA translation profiles in Saccharomyces cerevisiae. Proc. Natl. Acad. Sci. USA 100, 3889–3894 (2003).
+29.	 Sampath, P. et al. A hierarchical network controls protein translation
+during murine embryonic stem cell self-renewal and differentiation. Cell Stem Cell 2, 448–460 (2008). 30.	 del Prete, M.J., Vernal, R., Dolznig, H., Mullner, E.W. & Garcia-Sanz, J.A.
+Isolation of polysome-bound mRNA from solid tissues amenable for RT-PCR and profiling experiments. RNA 13, 414–421 (2007). 31.	 Blanchard, S.C., Kim, H.D., Gonzalez, R.L. Jr, Puglisi, J.D. & Chu, S. tRNA dynamics on the ribosome during translation. Proc. Natl. Acad. Sci. USA 101, 12893–12898 (2004).
+32.	 Jelenc, P.C. Rapid purification of highly active ribosomes from Escherichia coli. Anal. Biochem. 105, 369–374 (1980).
+33.	 Heiman, M. et al. A translational profiling approach for the molecular characterization of CNS cell types. Cell 135, 738–748 (2008).
+34.	 Sanz, E. et al. Cell-type-specific isolation of ribosome-associated mRNA from complex tissues. Proc. Natl. Acad. Sci. USA 106, 13939–13944 (2009).
+35.	 Lau, N.C., Lim, L.P., Weinstein, E.G. & Bartel, D.P. An abundant class
+of tiny RNAs with probable regulatory roles in Caenorhabditis elegans. Science 294, 858–862 (2001). 36.	 Hansen, K.D., Brenner, S.E. & Dudoit, S. Biases in Illumina transcriptome sequencing caused by random hexamer priming. Nucleic Acids Res. 38, e131 (2010).
+37.	 Anders, S. & Huber, W. Differential expression analysis for sequence count data. Genome Biol. 11, R106 (2010).
+
+nature protocols | VOL.7 NO.8 | 2012 | 1549
+
+protocol
+
+38.	 Bullard, J.H., Purdom, E., Hansen, K.D. & Dudoit, S. Evaluation of
+statistical methods for normalization and differential expression in mRNASeq experiments. BMC Bioinformatics 11, 94 (2010). 39.	 Li, J., Jiang, H. & Wong, W.H. Modeling non-uniformity in short-read rates in RNA-Seq data. Genome Biol. 11, R50 (2010). 40.	 Roberts, A., Trapnell, C., Donaghey, J., Rinn, J.L. & Pachter, L. Improving
+RNA-Seq expression estimates by correcting for fragment bias. Genome Biol. 12, R22 (2011). 41.	 Trapnell, C. et al. Transcript assembly and quantification by RNA-Seq
+reveals unannotated transcripts and isoform switching during cell differentiation. Nat. Biotechnol. 28, 511–515 (2010). 42.	 Hafner, M. et al. RNA-ligase-dependent biases in miRNA representation in deep-sequenced small RNA cDNA libraries. RNA 17, 1697–1712 (2011). 43.	 Linsen, S.E. et al. Limitations and possibilities of small RNA digital gene expression profiling. Nat. Methods 6, 474–476 (2009). 44.	 Zhuang, F., Fuchs, R.T., Sun, Z., Zheng, Y. & Robb, G.B. Structural bias in T4 RNA ligase-mediated 3′-adapter ligation. Nucleic Acids Res. 40, e54 (2012).
+
+45.	 Garber, M., Grabherr, M.G., Guttman, M. & Trapnell, C. Computational
+methods for transcriptome annotation and quantification using RNA-seq. Nat. Methods 8, 469–477 (2011). 46.	 Guo, H., Ingolia, N.T., Weissman, J.S. & Bartel, D.P. Mammalian microRNAs predominantly act to decrease target mRNA levels. Nature 466, 835–840 (2010).
+47.	 Trapnell, C. et al. Differential gene and transcript expression analysis of RNA-seq experiments with TopHat and Cufflinks. Nat. Protoc. 7, 562–578 (2012).
+48.	 Goecks, J., Nekrutenko, A. & Taylor, J. Galaxy: a comprehensive approach
+for supporting accessible, reproducible, and transparent computational research in the life sciences. Genome Biol. 11, R86 (2010). 49.	 Langmead, B., Trapnell, C., Pop, M. & Salzberg, S.L. Ultrafast and memory-
+efficient alignment of short DNA sequences to the human genome. Genome Biol. 10, R25 (2009). 50.	 Li, H. et al. The Sequence Alignment/Map format and SAMtools. Bioinformatics 25, 2078–2079 (2009).
+
+© 2012 Nature America, Inc. All rights reserved.
+
+1550 | VOL.7 NO.8 | 2012 | nature protocols
+
+© 2012 Nature America, Inc. All rights reserved.
+
+CORRIGENDA
+Corrigendum: The ribosome profiling strategy for monitoring translation in vivo by deep sequencing of ribosome-protected mRNA fragments
+Nicholas T Ingolia, Gloria A Brar, Silvia Rouskin, Anna M McGeachy & Jonathan S Weissman
+Nat. Protoc. 7, 1534–1550 (2012); published online 26 July 2012; corrected after print 17 August 2012 In the version of this article initially published, the table in Step 32 of the protocol lists “T4 PNK (10 U µl–1)”, “1.0 µl” and “10 U” in the last row. This entry should read “T4 Rnl2(tr) (200 U µl–1)”, “1.0 µl” and “200 U”. The error has been corrected in the HTML and PDF versions of the article.
+nature protocols
+
+npg
+

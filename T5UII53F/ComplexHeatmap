@@ -1,0 +1,430 @@
+# 标准做图
+library(ComplexHeatmap)
+
+mat = matrix(rnorm(80, 2), 8, 10)
+mat = rbind(mat, matrix(rnorm(40, -2), 4, 10))
+rownames(mat) = paste0("R", 1:12)
+colnames(mat) = paste0("C", 1:10)
+
+mat_letters = matrix(sample(letters[1:4], 100, replace = TRUE), 10)
+ht_global_opt(heatmap_row_names_gp = gpar(fontface = "italic"), 
+              heatmap_column_names_gp = gpar(fontsize = 14))
+ht1 = Heatmap(mat, name = "ht1", row_title = "Heatmap 1", column_title = "Heatmap 1", 
+    column_title_gp = gpar(fontsize = 20, fontface = "bold"), row_dend_side = "right",
+    column_dend_height = unit(2, "cm"), clustering_distance_rows = "pearson")
+ht2 = Heatmap(mat, name = "ht2", row_title = "Heatmap 2", column_title = "Heatmap 2", width = unit(5, "cm"), cluster_rows = FALSE,
+    clustering_distance_rows = function(m) dist(m), cell_fun = function(j, i, x, y, w, h, col) {
+        grid.text(mat_letters[i, j], x, y)
+    }, column_names_side = "top", column_dend_side = "bottom", show_row_names = FALSE)
+ht3 = Heatmap(mat, name = "ht3", row_title = "Heatmap 3", column_title = "Heatmap 3", show_column_dend = FALSE，
+    row_names_gp = gpar(fontsize = 20))
+ht_list = ht1 + ht2 + ht3
+
+draw(ht_list, row_title = "Two heatmaps, row title", row_title_gp = gpar(col = "red"),
+    column_title = "Two heatmaps, column title", column_title_side = "bottom", 
+    gap = unit(c(3, 6, 0), "mm"), main_heatmap = "ht1")
+# gpar 设置字体字号
+# width 图的宽度
+# row_dend_side 在哪边显示聚类树
+# column_names_side 在哪边显示列名
+# show_row_names 是否显示行名
+# column_dend_height 聚类树的长度单位
+# clustering_distance_rows 聚类树的计算方法
+# clustering_distance_rows = function(m) dist(m) 自定义的聚类树计算方法
+# cluster_rows 行是否聚类
+# show_column_dend 是否显示列聚类
+# grid.text 在单元格上写字
+# gap 各个图之间的距离
+# main_heatmap 以哪个图为主图
+
+# 获得热图聚类顺序
+row_order(ht_list)
+column_order(ht_list)
+
+# 获得热图聚类树
+row_dend(ht_list)
+column_dend(ht_list)
+
+
+
+# 各种分组
+# k-mean 划分
+# 按行分两组
+Heatmap(mat, name = "foo", km = 2)
+# 从上到下，6行A组，6行B组
+Heatmap(mat, name = "foo", split = rep(c("A", "B"), 6))
+# 分为A/C，A/D，B/C，B/D四组，每组3行
+Heatmap(mat, name = "foo", split = data.frame(rep(c("A", "B"), 6), rep(c("C", "D"), each = 6)))
+# 分组名字的间隔将/换成\n
+Heatmap(mat, name = "foo", split = data.frame(rep(c("A", "B"), 6), rep(c("C", "D"), each = 6)), 
+    combined_name_fun = function(x) paste(x, collapse = "\n"))
+# 
+Heatmap(mat, name = "foo", km = 2, split = factor(rep(c("A", "B"), 6), levels = c("B", "A")), 
+    combined_name_fun = function(x) paste(x, collapse = "\n"))
+# 分组，但不显示分组名称
+Heatmap(mat, name = "foo", km = 2, split = rep(c("A", "B"), 6), combined_name_fun = NULL)
+
+# 按照非 k-mean 方法聚类
+pa = pam(mat, k = 3)
+Heatmap(mat, name = "foo", split = paste0("pam", pa$clustering))
+
+# 各分组的组间距
+Heatmap(mat, name = "foo", split = paste0("pam", pa$clustering), gap = unit(5, "mm"))
+
+# 给分组名加颜色
+Heatmap(mat, name = "foo", km = 2, row_title_gp = gpar(col = c("red", "blue"), font = 1:2),
+    row_names_gp = gpar(col = c("green", "orange"), fontsize = c(10, 14)))
+# 按照已聚类的方式聚类
+dend = hclust(dist(mat))
+dend = color_branches(dend, k = 2)
+Heatmap(mat, name = "foo", cluster_rows = dend, split = 2)
+
+
+
+# 自定义热图类型
+# 相关气泡图
+cor_mat = cor(mat)
+od = hclust(dist(cor_mat))$order
+cor_mat = cor_mat[od, od]
+nm = rownames(cor_mat)
+col_fun = circlize::colorRamp2(c(-1, 0, 1), c("green", "white", "red"))
+# `col = col_fun` here is used to generate the legend
+Heatmap(cor_mat, name = "correlation", col = col_fun, rect_gp = gpar(type = "none"), 
+    cell_fun = function(j, i, x, y, width, height, fill) {
+        grid.rect(x = x, y = y, width = width, height = height, gp = gpar(col = "grey", fill = NA))
+        if(i == j) {
+            grid.text(nm[i], x = x, y = y)
+        } else if(i > j) {
+            grid.circle(x = x, y = y, r = abs(cor_mat[i, j])/2 * min(unit.c(width, height)), 
+                gp = gpar(fill = col_fun(cor_mat[i, j]), col = NA))
+        } else {
+            grid.text(sprintf("%.1f", cor_mat[i, j]), x, y, gp = gpar(fontsize = 8))
+        }
+    }, cluster_rows = FALSE, cluster_columns = FALSE,
+    show_row_names = FALSE, show_column_names = FALSE)
+
+
+
+# 注释行（逐列注释）
+# 单行注释
+df = data.frame(type = c(rep("a", 5), rep("b", 5)))
+ha = HeatmapAnnotation(df = df, col = list(type = c("a" =  "red", "b" = "blue"))) # 按 lavel 分配颜色
+
+ha = HeatmapAnnotation(df = data.frame(age = sample(1:20, 10)),
+    col = list(age = colorRamp2(c(0, 20), c("white", "red")))) # 分配渐变色
+
+# 多行注释
+df2 = data.frame(type = c(rep("a", 5), rep("b", 5)),
+                age = sample(1:20, 10))  # 多行注释用 dataframe 表示
+df2$type[5] = NA
+df2$age[5] = NA
+ha = HeatmapAnnotation(df = df2, 
+  col = list(type = c("a" =  "red", "b" = "blue"),
+             age = colorRamp2(c(0, 20), c("white", "red"))),
+  na_col = "grey") # Na 的颜色
+
+# 加注释的热图
+ha1 = HeatmapAnnotation(df = df,
+    col = list(type = c("a" = "red", "b" = "blue"),
+               age = colorRamp2(c(0, 20), c("white", "red")))
+)
+ha2 = HeatmapAnnotation(df = data.frame(age = sample(1:20, 10)),
+    col = list(age = colorRamp2(c(0, 20), c("white", "red"))))
+
+set.seed(123)
+mat = matrix(rnorm(80, 2), 8, 10)
+mat = rbind(mat, matrix(rnorm(40, -2), 4, 10))
+rownames(mat) = paste0("R", 1:12)
+colnames(mat) = paste0("C", 1:10)
+
+Heatmap(mat, top_annotation = ha1, bottom_annotation = ha2)
+
+
+
+# 复杂的注释
+value = rnorm(10)
+# 点图
+ha = HeatmapAnnotation(points = anno_points(value))
+# 条形图
+ha = HeatmapAnnotation(barplot = anno_barplot(value))
+# 箱型图
+ha = HeatmapAnnotation(boxplot = anno_boxplot(mat))
+# 文本注释
+long_cn = do.call("paste0", rep(list(colnames(mat)), 3))  # just to construct long text
+ha_rot_cn = HeatmapAnnotation(text = anno_text(long_cn, rot = 45, just = "left", offset = unit(2, "mm")))
+# 每列精细注释
+# 条形图
+histogram = anno_histogram(mat, gp = gpar(fill = rep(2:3, each = 5)))
+# 概率密度分布图
+density_line = anno_density(mat, type = "line", gp = gpar(col = rep(2:3, each = 5)))
+# 叶子状的概率密度分布图
+violin = anno_density(mat, type = "violin", gp = gpar(fill = rep(2:3, each = 5)))
+# 热图状的概率密度分布图
+# heatmap = anno_density(mat, type = "heatmap")
+
+# 多种图放在一起
+ha = HeatmapAnnotation(df = df, points = anno_points(value), boxplot = anno_boxplot(mat),
+    col = list(type = c("a" = "red", "b" = "blue"),
+               age = colorRamp2(c(0, 20), c("white", "red"))),
+    annotation_height = c(1, 2, 3, 4), gap = unit(c(2, 4), "mm")) # annotation_height 每个注释行的相对高度, gap 注释之间的距离
+
+ha = HeatmapAnnotation(df = df, points = anno_points(value), boxplot = anno_boxplot(mat),
+    col = list(type = c("a" = "red", "b" = "blue"),
+               age = colorRamp2(c(0, 20), c("white", "red"))),
+    annotation_height = unit.c((unit(1, "npc") - unit(4, "cm"))*0.5, (unit(1, "npc") - unit(4, "cm"))*0.5, 
+        unit(2, "cm"), unit(2, "cm"))) # 每个注释行的绝对高度
+
+# 加复杂注释的热图
+ha = HeatmapAnnotation(df = df, points = anno_points(value),
+    col = list(type = c("a" = "red", "b" = "blue"),
+               age = colorRamp2(c(0, 20), c("white", "red"))))
+ha_boxplot = HeatmapAnnotation(boxplot = anno_boxplot(mat, axis = TRUE))
+Heatmap(mat, name = "foo", top_annotation = ha, bottom_annotation = ha_boxplot, 
+    bottom_annotation_height = unit(3, "cm")) # top_annotation 上面的注释， bottom_annotation 下面的注释
+
+
+
+# 注释列
+ha = rowAnnotation(df = df, col = list(type = c("a" = "red", "b" = "blue")), width = unit(1, "cm"))
+
+
+
+# 热图与列注释的混合
+ha = rowAnnotation(df = df, col = list(type = c("a" = "red", "b" = "blue")),
+    width = unit(1, "cm"))
+ht1 = Heatmap(mat, name = "ht1")
+ht1 = Heatmap(mat, name = "ht2")
+ht1 + ha + ht2
+
+# 注释列在热图聚类树的外面
+ha = rowAnnotation(boxplot = row_anno_boxplot(mat, gp = gpar(fill = c("red", "blue"))), 
+    width = unit(2, "cm"))
+ha + ht1
+# 注释列在热图聚类树的里面
+draw(ha + ht1, row_dend_side = "left", row_sub_title_side = "right")
+# 注释行在热图列名的外面
+df = data.frame(type = c(rep("a", 5), rep("b", 5)))
+ha = HeatmapAnnotation(df = df, col = list(type = c("a" =  "red", "b" = "blue")))
+Heatmap(mat, bottom_annotation = ha)
+# 注释行在热图列名的里面
+ha = HeatmapAnnotation(type = df$type, 
+    colname = anno_text(colnames(mat), rot = 90, just = "right", offset = unit(1, "npc") - unit(2, "mm")),
+    col = list(type = c("a" = "red", "b" = "blue")),
+    annotation_height = unit.c(unit(5, "mm"), max_text_width(colnames(mat)) + unit(2, "mm")))
+Heatmap(mat, show_column_names = FALSE, bottom_annotation = ha)
+
+# 只用注释做图
+ha = HeatmapAnnotation(df = data.frame(value = runif(10), type = rep(letters[1:2], 5)),
+    barplot = anno_barplot(runif(10), axis = TRUE),
+    points = anno_points(runif(10), axis = TRUE),
+    annotation_height = unit(c(0.5, 0.5, 4, 4), "cm"))
+zero_row_mat = matrix(nrow = 0, ncol = 10)
+colnames(zero_row_mat) = letters[1:10]
+ht = Heatmap(zero_row_mat, top_annotation = ha, column_title = "only annotations")
+draw(ht, padding = unit(c(2, 20, 2, 2), "mm"))
+decorate_annotation("value", {grid.text("value", unit(-2, "mm"), just = "right")}) # 在 value 注释行的左边加文本
+decorate_annotation("type", {grid.text("type", unit(-2, "mm"), just = "right")})
+decorate_annotation("barplot", {
+    grid.text("barplot", unit(-10, "mm"), just = "bottom", rot = 90) # # 在 barplot 注释行加文本，旋转90度
+    grid.lines(c(0, 1), unit(c(0.2, 0.2), "native"), gp = gpar(lty = 2, col = "blue")) # 在 barplot 注释行加虚线
+})
+decorate_annotation("points", {
+    grid.text("points", unit(-10, "mm"), just = "bottom", rot = 90)
+})
+
+
+
+# 注释加坐标
+ha1 = HeatmapAnnotation(b1 = anno_boxplot(mat, axis = TRUE),
+    p1 = anno_points(colMeans(mat), axis = TRUE))
+ha2 = rowAnnotation(b2 = row_anno_boxplot(mat, axis = TRUE),
+    p2 = row_anno_points(rowMeans(mat), axis = TRUE), width = unit(2, "cm"))
+Heatmap(mat, top_annotation = ha1, top_annotation_height = unit(2, "cm")) + ha2
+
+# 反转的坐标
+pushViewport(viewport(layout = grid.layout(nr = 1, nc = 2)))
+pushViewport(viewport(layout.pos.row = 1, layout.pos.col = 1))
+ha = rowAnnotation(boxplot = row_anno_boxplot(mat, axis = TRUE), width = unit(3, "cm"))
+ht_list = ha + Heatmap(mat)
+draw(ht_list, column_title = "normal axis direction", newpage = FALSE)
+upViewport()
+
+pushViewport(viewport(layout.pos.row = 1, layout.pos.col = 2))
+ha = rowAnnotation(boxplot = row_anno_boxplot(mat, axis = TRUE, axis_direction = "reverse"), 
+    width = unit(3, "cm"))
+ht_list = ha + Heatmap(mat)
+draw(ht_list, column_title = "reverse axis direction", newpage = FALSE)
+upViewport(2)
+
+
+
+# 通过连线注释指定行的信息
+mat = matrix(rnorm(10000), nr = 1000)
+rownames(mat) = sprintf("%.2f", rowMeans(mat))
+subset = sample(1000, 20)
+labels = rownames(mat)[subset]
+Heatmap(mat, show_row_names = FALSE, show_row_dend = FALSE, show_column_dend = FALSE) + 
+rowAnnotation(link = row_anno_link(at = subset, labels = labels),
+  width = unit(1, "cm") + max_text_width(labels))
+
+
+# 注释信息的legend
+library(ComplexHeatmap)
+library(circlize)
+
+set.seed(123)
+mat = matrix(rnorm(80, 2), 8, 10)
+mat = rbind(mat, matrix(rnorm(40, -2), 4, 10))
+rownames(mat) = paste0("R", 1:12)
+colnames(mat) = paste0("C", 1:10)
+
+ha_column = HeatmapAnnotation(df = data.frame(type1 = c(rep("a", 5), rep("b", 5))), 
+    col = list(type1 = c("a" =  "red", "b" = "blue")))
+ha_row = rowAnnotation(df = data.frame(type2 = c(rep("A", 6), rep("B", 6))), 
+    col = list(type2 = c("A" =  "green", "B" = "orange")), width = unit(1, "cm"))
+
+ht1 = Heatmap(mat, name = "ht1", column_title = "Heatmap 1", top_annotation = ha_column)
+ht2 = Heatmap(mat, name = "ht2", column_title = "Heatmap 2")
+ht_list = ht1 + ht2 + ha_row
+
+draw(ht_list)
+# legend 位置
+draw(ht_list, heatmap_legend_side = "left", annotation_legend_side = "bottom")
+# 是否显示 legend
+draw(ht_list, show_heatmap_legend = FALSE, show_annotation_legend = FALSE)
+# 单独设置 legend
+ha_column = HeatmapAnnotation(df = data.frame(type1 = c(rep("a", 5), rep("b", 5))), 
+    col = list(type1 = c("a" =  "red", "b" = "blue")), show_legend = FALSE)
+ha_row = rowAnnotation(df = data.frame(type2 = c(rep("A", 6), rep("B", 6))), 
+    col = list(type2 = c("A" =  "green", "B" = "orange")), show_legend = FALSE, width = unit(1, "cm"))
+
+ht1 = Heatmap(mat, name = "ht1", column_title = "Heatmap 1", top_annotation = ha_column)
+ht2 = Heatmap(mat, name = "ht2", column_title = "Heatmap 2", show_heatmap_legend = FALSE)
+ht1 + ht2 + ha_row
+# 通过 heatmap_legend_param 和 annotation_legend_param 自定义 legend
+# 定义字号
+df = data.frame(type = c(rep("a", 5), rep("b", 5)))
+ha = HeatmapAnnotation(df = df, col = list(type = c("a" =  "red", "b" = "blue")),
+    annotation_legend_param = list(type = list(title = "TYPE", title_gp = gpar(fontsize = 14), 
+                                               labels_gp = gpar(fontsize = 8))))
+ht1 = Heatmap(mat, name = "ht1", column_title = "Heatmap 1", top_annotation = ha)
+ht2 = Heatmap(mat, name = "ht2", column_title = "Heatmap 2", 
+    heatmap_legend_param = list(title = "Heatmap2", title_gp = gpar(fontsize = 8), labels_gp = gpar(fontsize = 14)))
+ht1 + ht2
+
+# 定义排列
+ha_chr = rowAnnotation(chr = sample(paste0("chr", 1:20), nrow(mat), replace = TRUE),
+    annotation_legend_param = list(chr = list(ncol = 2, title = "chromosome", title_position = "topcenter")),
+    width = unit(5, "mm"))
+ht1 = Heatmap(mat, name = "ht1")
+ht1 + ha_chr
+
+# 使用渐变色
+ha = HeatmapAnnotation(df = data.frame(value = runif(10)), 
+    col = list(value = colorRamp2(c(0, 1), c("white", "blue"))), 
+    annotation_legend_param = list(color_bar = "continuous", at = c(0, 0.5, 1), 
+        labels = c("low", "median", "high"), legend_height = unit(4, "cm")))
+Heatmap(mat, name = "ht1", top_annotation = ha, heatmap_legend_param = list(color_bar = "continuous"))
+
+# 在下面
+ht = Heatmap(mat, name = "ht1", heatmap_legend_param = list(color_bar = "continuous", legend_direction = "horizontal",
+    legend_width = unit(5, "cm"), title_position = "lefttop"))
+draw(ht, heatmap_legend_side = "bottom")
+
+# 给自定义的注释加 legend
+ha = HeatmapAnnotation(points = anno_points(rnorm(10), gp = gpar(col = rep(2:3, each = 5))))
+ht = Heatmap(mat, name = "ht2", column_title = "Heatmap 2", top_annotation = ha)
+lgd = Legend(at = c("class1", "class2"), title = "points", type = "points", legend_gp = gpar(col = 2:3))
+draw(ht, annotation_legend_list = list(lgd))
+
+# 参数说明
+    title: title of the legend
+    title_gp: graphic parameters for the legend title
+    title_position: position of title relative to the legend, possible values are topcenter, topleft, leftcenter, lefttop.
+    color_bar: style of the color bar, i.e. continuous or discrete
+    grid_height: height of the small grid in the color bar, only works for discrete color bar
+    grid_width: width of the color bar
+    grid_border: border of the color bar
+    at: break values shown on the legend
+    labels: labels which correspond to the breaks values
+    labels_gp: graphic parameters for legend labels
+    nrow and ncol: if there are too many legends, they can be put into an array. These two parameters controls number of rows or columns
+    legend_direction: when color_bar is set to continuous, it controls the direction of the legend, possible values are vertical and horizontal
+    legend_width and legend_height: when color_bar is continuous, the width or height of the legend
+
+
+
+# 热图的装饰
+# 做图
+library(ComplexHeatmap)
+mat = matrix(rnorm(80, 2), 8, 10)
+mat = rbind(mat, matrix(rnorm(40, -2), 4, 10))
+rownames(mat) = paste0("R", 1:12)
+colnames(mat) = paste0("C", 1:10)
+ha_column1 = HeatmapAnnotation(points = anno_points(rnorm(10)))
+ht1 = Heatmap(mat, name = "ht1", km = 2, row_title = "Heatmap 1", column_title = "Heatmap 1", 
+    top_annotation = ha_column1)
+ha_column2 = HeatmapAnnotation(df = data.frame(type = c(rep("a", 5), rep("b", 5))),
+    col = list(type = c("a" = "red", "b" = "blue")))
+ht2 = Heatmap(mat, name = "ht2", row_title = "Heatmap 2", column_title = "Heatmap 2",
+    bottom_annotation = ha_column2)
+ht_list = draw(ht1 + ht2, row_title = "Heatmap list", column_title = "Heatmap list", 
+    heatmap_legend_side = "right", annotation_legend_side = "left")
+#装饰
+# 在 points annotation 加入装饰，添加文本注释
+decorate_annotation("points", {
+    grid.text("points", unit(0, "npc") - unit(2, "mm"), 0.5, 
+        default.units = "npc", just = "right")
+})
+# 在 ht1 heatmap_body 加入注释
+decorate_heatmap_body("ht1", {
+    grid.text("outlier", 1.5/10, 2.5/4, default.units = "npc") # 引入文本注释
+    grid.lines(c(0.5, 0.5), c(0, 1), gp = gpar(lty = 2, lwd = 2)) 
+}, slice = 2) # 在 cluster2 加入虚线
+# 给 ht1 column_dend 分块上色
+decorate_column_dend("ht1", {
+    tree = column_dend(ht_list)$ht1
+    ind = cutree(as.hclust(tree), k = 2)[order.dendrogram(tree)] # 分成两组
+
+    first_index = function(l) which(l)[1] # 某组第一个的序号
+    last_index = function(l) { x = which(l); x[length(x)] } # 某组最后一个的序号
+    x1 = c(first_index(ind == 1), first_index(ind == 2)) - 1 # 从第一组第一个-1，第二组第一个-1
+    x2 = c(last_index(ind == 1), last_index(ind == 2)) # 第一组最后一个，最后一组最后一个
+    grid.rect(x = x1/length(ind), width = (x2 - x1)/length(ind), just = "left",
+        default.units = "npc", gp = gpar(fill = c("#FF000040", "#00FF0040"), col = NA)) # 上色
+})
+# 给 ht2 上色
+decorate_row_names("ht2", {
+    grid.rect(gp = gpar(fill = "#FF000040"))
+}, slice = 2)
+# 给 ht1 row_title 上色
+decorate_row_title("ht1", {
+    grid.rect(gp = gpar(fill = "#00FF0040"))
+}, slice = 1)
+# 给 points 加入辅助线
+decorate_annotation("points", {
+    grid.lines(c(0, 1), unit(c(0, 0), "native"), gp = gpar(col = "red"))
+})
+
+# 可作用对象
+    global: the viewport which contains the whole figure.
+    global_column_title: the viewport which contains column title for the heatmap list.
+    global_row_title: the viewport which contains row title for the heatmap list.
+    main_heatmap_list: the viewport which contains a list of heatmaps and row annotations.
+    heatmap_@{heatmap_name}: the viewport which contains a single heatmap
+    annotation_@{annotation_name}: the viewport which contains an annotation on columns.
+    annotation_@{annotation_name}_@{i}: for row annotations
+    @{heatmap_name}_heatmap_body_@{i}: the heatmap body.
+    @{heatmap_name}_column_title: column title for a single heatmap.
+    @{heatmap_name}_row_title_@{i}: since a heatmap body may be splitted into several parts. @{i} is the index of the row slice.
+    @{heatmap_name}_dend_row_@{i}: dendrogram for ith row slice.
+    @{heatmap_name}_dend_column: dendrogram on columns
+    @{heatmap_name}_row_names_@{i}: the viewport which contains row names.
+    @{heatmap_name}_column_names: the viewport which contains column names.
+    heatmap_legend: the viewport which contains all heatmap legends.
+    legend_@{heatmap_name}: the viewport which contains a single heatmap legend.
+    annotation_legend: the viewport which contains all annotation legends.
+    legend_@{annotation_name}: the viewport which contains a single annotation legend.
+
+
+

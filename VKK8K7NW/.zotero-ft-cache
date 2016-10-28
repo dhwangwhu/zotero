@@ -1,0 +1,327 @@
+Leading Edge
+Primer
+
+Ribosome Footprint Proﬁling of Translation throughout the Genome
+Nicholas T. Ingolia1,* 1Department of Molecular and Cell Biology, Center for RNA Systems Biology, California Institute for Quantitative Biomedical Science, Glenn Center for Aging Research, University of California, Berkeley, Berkeley, CA 94720, USA *Correspondence: ingolia@berkeley.edu http://dx.doi.org/10.1016/j.cell.2016.02.066
+Ribosome proﬁling has emerged as a technique for measuring translation comprehensively and quantitatively by deep sequencing of ribosome-protected mRNA fragments. By identifying the precise positions of ribosomes, footprinting experiments have unveiled key insights into the composition and regulation of the expressed proteome, including delineating potentially functional micropeptides, revealing pervasive translation on cytosolic RNAs, and identifying differences in elongation rates driven by codon usage or other factors. This Primer looks at important experimental and analytical concerns for executing ribosome proﬁling experiments and surveys recent examples where the approach was developed to explore protein biogenesis and homeostasis.
+
+Introduction Translation is the fundamental biological process that decodes genetic information into functional proteins. These proteins comprise over half the dry weight of the cell, and so translation is a major biosynthetic activity, consuming roughly half of the energy expended during rapid growth. The mechanics of the translational apparatus thus attract broad interest, and even subtle defects in this machinery can affect human health. The protein landscape of the cell shapes nearly every aspect of its physiology, and protein production is tightly controlled. Cells rapidly induce the production of speciﬁc proteins to mount protective responses against stress and more slowly but thoroughly remodel their proteome to adopt different fates during differentiation. Comprehensive proﬁles of the proteins expressed by a cell provide insights into its overall physiology and the roles of individual genes. Ribosome proﬁling, a technique that measures ribosome occupancy and translation genome-wide, addresses the need for global expression measurements that integrate translational regulation, as well as mRNA abundance, and precisely delineate translated regions in order to reveal the full coding potential of the genome.
+Gene expression proﬁling has often focused on measuring mRNA abundance and understanding its regulation by transcriptional control. This focus was driven in part by the development of powerful techniques to analyze nucleic acids, beginning with microarrays (Brown and Botstein, 1999) and more recently by high-throughput sequencing (Wang et al., 2009). Transcriptional control greatly impacts the repertoire of proteins produced by the cell, and mRNA proﬁling has provided insights into a wide array of biological systems. Nonetheless, there are important biological questions that cannot be addressed by mRNA measurements alone. Proteomic mass spectrometry has emerged as an approach to assess the protein content of the cell directly (Aebersold and Mann, 2003; Vogel and Marcotte, 2012). Nucleic acid sequencing remains more accessible and comprehensive
+
+than mass spectrometry, however, and beneﬁts from dramatic technological advances over the last decade (Reuter et al., 2015). Furthermore, proteomics reports directly on the accumulated abundance of a protein; the instantaneous production rate is a distinct question. Translational Control and Expression Proﬁling Translational control of gene expression plays a prominent and essential role throughout biology (Sonenberg and Hinnebusch, 2009). Regulated translation in early embryogenesis drives gene expression changes in the absence of new transcription (Curtis et al., 1995). Translational control of pre-existing mRNAs changes protein production more quickly than the regulated synthesis of new mRNAs, and this capacity for rapid response may explain the prominence of translational regulation in stress responses (Spriggs et al., 2010). Translational control can also limit protein production to speciﬁc locations within the cell, as seen in neurons, where synaptic translation is required for long-term potentiation and thus for memory formation (Bufﬁngton et al., 2014).
+Translation is the last stage of gene expression involving nucleic acids, and so it is amenable to analysis by high-throughput sequencing. Changes in the translation of an mRNA manifest as differences in ribosome occupancy, which can be assessed by fractionating polysome (i.e., poly-ribosome) structures according to the number of ribosomes they contain. RNA proﬁling of polysome fractions can determine the translational status of all mRNAs in the cell (Arava et al., 2003), though polysome fractionation provides limited quantitative resolution and cannot identify the speciﬁc reading frames translated.
+Ribosome proﬁling takes a ribosome-centric perspective in order to provide a high-resolution, quantitative proﬁle of translation across the transcriptome (Brar and Weissman, 2015; Ingolia, 2014; Ingolia et al., 2009). These proﬁles contain a variety of information about translation in vivo; this Primer will describe how they are generated and how this information can be
+
+22 Cell 165, March 24, 2016 ª2016 Elsevier Inc.
+
+extracted. At the most basic level, the presence of footprints on a region of RNA strongly suggests that it is translated, and ribosome proﬁling reveals translation outside of well-annotated protein-coding genes. The level of translation on these reading frames can be inferred from the density of footprints, and so ribosome proﬁling measures gene expression at the level of translation and reveals translational regulation that is invisible to normal mRNA measurements. Variations in the density of ribosomes within a reading frame reﬂect differences in the speed of ribosomes, which can provide insights into the mechanisms of translation as well. While ribosome occupancy proﬁles are rich datasets, care must be taken not to over-interpret them. This Primer will highlight best practices for conducting proﬁling experiments and analyzing data in order to reach robust and biologically relevant conclusions.
+
+Figure 1. Schematic of Ribosome Footprint Proﬁling of Translation The workﬂow for ribosome proﬁling in different cell types follows the same basic steps: isolation of mRNAs on polysomes, nuclease digestion of the mRNA sequences unprotected by bound ribosomes, and puriﬁcation of the remaining mRNA fragments followed by library generation, deep sequencing, and computational analysis.
+
+Proﬁling Translation by Deep Sequencing of RibosomeProtected mRNA Fragments In ribosome proﬁling, the position of an elongating ribosome on its template transcript is inferred from the sequence of the mRNA fragment it occupies (Ingolia et al., 2009). The ribosome is a large and robust macromolecular structure that remains bound to an mRNA after lysis and shields 20 to 30 bases from nuclease digestion (Ingolia et al., 2009; Lareau et al., 2014; Wolin and Walter, 1988). In order to analyze ribosome positions by highthroughput sequencing, the ribosome-protected mRNA fragments must be converted into DNA libraries, ﬂanked with constant priming sites required by these sequencing technologies (Figure 1) (Ingolia et al., 2012).
+Ribosome proﬁling emerged from the adaptation of a classic biochemical approach to allow analysis by deep sequencing. Well before the advent of DNA sequencing, ribosome footprints from arrested initiation complexes revealed speciﬁc translation start sites for the ﬁrst time in bacteriophage R17 (Steitz, 1969). Later studies proﬁled the footprints of elongating ribosomes in a deﬁned, in vitro translation system (Wolin and Walter, 1988). Analysis of the complex pool of footprints from translation in living cells awaited the development of high-throughput sequencing of the protected RNA fragments. Preparing the Footprint Fragment Libraries One key technical concern in ribosome footprinting is the choice of the nuclease used to degrade unprotected mRNA. The majority of the ribosome itself is composed of RNA, and so there is a trade-off between mRNA and rRNA degradation. RNase I from E. coli provides robust footprinting in many eukaryotic systems and lacks strong sequence speciﬁcity (Ingolia et al., 2012). Bacterial proﬁling has relied largely on micrococcal nuclease (MNase), which shows strong nucleotide preferences that limit footprint resolution (Oh et al., 2011), although analysis strategies can mitigate this limitation (Woolstenhulme et al., 2015). MNase has also been employed in some eukaryotic studies, and it appears to spare rRNA better than RNase I (Dunn et al., 2013). Human ribosome footprinting with a cocktail of RNases A and T1 has also been reported (Cenik et al., 2015).
+The composition of ribosome proﬁling sequencing libraries must faithfully represent the RNA footprint fragments. Footprints are short RNAs more similar to microRNAs than mRNAs, and so library generation approaches were adapted from
+
+Cell 165, March 24, 2016 ª2016 Elsevier Inc. 23
+
+microRNA-seq (Pfeffer et al., 2005) and optimized to streamline them while reducing input RNA requirements (Ingolia et al., 2012) (Figure 1). Current studies typically ligate a preadenylylated oligonucleotide at the 30 terminus of the footprint fragment, reverse transcribe, and then circularize ﬁrst-strand cDNA prior to ampliﬁcation across the footprint. Ligation and circularization seem to reduce, but not eliminate, sequence-dependent biases in capturing RNA footprints (Levin et al., 2010).
+Measuring in vivo translation also relies on preparing lysates that give a representative snapshot of ribosome positions in cells. Translation and ribosome occupancy can change in a matter of seconds following stress, whereas synthesis of new mRNA occurs over many minutes (Andreev et al., 2015; Gerashchenko et al., 2012; Liu et al., 2013; Reid et al., 2014; Shalgi et al., 2013; Sidrauski et al., 2015). In cultured mammalian cells, rapid detergent lysis sufﬁces to stop translation. For other samples ranging from microbes to mammalian tissue, rapid freezing in liquid nitrogen followed by cryogenic grinding captures physiologically relevant states of translation.
+Historically, polysomes were often stabilized by treating cells with elongation inhibitors such as cycloheximide shortly before lysis. The single-nucleotide precision offered by ribosome proﬁling has revealed that these drugs are double-edged swords, however. Ribosomes will accumulate at transcript positions that are more sensitive to drug inhibition. If the drug does not block initiation, ribosomes will accumulate particularly at start codons (Ingolia et al., 2011). Reversible inhibitors, such as cycloheximide, seem to allow slow, concentration-dependent elongation prior to lysis (Gerashchenko and Gladyshev, 2014; Hussmann et al., 2015). Collectively, these effects can distort codon-level ribosome proﬁles substantially.
+Certain experiments may require cycloheximide pre-treatment in order to capture the translational status of unperturbed cells. Fortunately, these drug effects do not impact expression measurements, which rely only on transcript-level ribosome occupancy (Ingolia et al., 2011; Weinberg et al., 2016). Cycloheximide does not create or destroy ribosome footprints in the middle of a reading frame—it merely redistributes them (Hussmann et al., 2015). Many studies employ inhibitor-free lysis to avoid this redistribution (Lareau et al., 2014; Weinberg et al., 2016). As discussed below, drug-free samples contain a wider range of footprint sizes, at least in yeast, and this full range of footprints must be sequenced (Lareau et al., 2014). Measuring Expression Regulation Most proﬁling experiments are designed to detect relative expression changes, with experimental design and analysis similar to mRNA-seq proﬁling. In both cases, expression changes are inferred from sequencing read counts on transcripts (for mRNA-seq) or coding sequences (for ribosome proﬁling), which are subject to statistical, technical, and biological variation (Anders et al., 2013; Wang et al., 2009). Replicate measurements are essential to assess the magnitude of variation through comparisons within replicates of a single condition and to infer expression changes when differences between conditions exceed this variation. Like all genome-wide expression proﬁling, these data include comparisons between thousands of genes with only a few replicate measurements for each gene, and so it is impossible to ﬁt per-gene error models. Fortunately, it is
+
+theoretically and empirically justiﬁable to ﬁt a single error model across all genes and use it to identify expression differences between conditions, place conﬁdence intervals on the magnitude of the change, and exclude genes showing aberrantly high variability.
+Read count measurements in deep sequencing data require normalization between samples. Trivially, greater sequencing depth for one sample relative to another will yield more reads counted for each gene. Statistical frameworks for read count analysis typically account for this library size factor but rely on the assumption that most genes show similar expression between different samples (Bullard et al., 2010). While this approach is more robust than normalization against a few selected ‘‘housekeeping’’ genes, it may fail in the case of broad expression reprogramming (Love´ n et al., 2012). The global translational status of cells can change quickly, through the inactivation or the reactivation of ribosomes. Because inactive ribosomes produce no footprints, these global translational shifts affect the denominator in the library size normalization. Transcripts with unchanged translation during a global shift may appear to increase or decrease translation, while the global shift itself cannot be detected. In effect, normalized ribosome proﬁling read counts indicate the fraction of all active ribosomes that are translating a gene (Figure 3B).
+Internal or exogenous standards may circumvent this limitation and allow measurement of changes in overall translation. While no universal strategy has emerged for tackling this problem, we have found that mitochondrial ribosome footprints provide an excellent internal standard for experiments that involve short-term perturbations targeting cytosolic translation specifically. This normalization is inapplicable when mitochondrial abundance or activity changes, however, and bulk translational changes remain a point of concern in. Synthetic oligonucleotides can serve as internal standards that, when combined with careful quantitation of RNA inputs, can likewise account for changes in overall ribosome activity (Andreev et al., 2015).
+Identifying Translated Regions of the Genome In the textbook view of eukaryotic translation, ribosomes initiate at the ﬁrst AUG on an mRNA and translate a single, long open reading frame (Hinnebusch, 2014). Biologists appreciate many individual exceptions, where translation may skip an AUG, initiate at a non-AUG codon, shift the reading frame in the middle of translation, or read through the stop codon (Gesteland and Atkins, 1996; Hinnebusch, 2014). The global view of translation provided by ribosome proﬁling further complicates this picture, revealing widespread and pervasive translation on cytosolic RNAs, protein isoform variants of annotated genes, and speciﬁc micropeptides overlooked by genome annotation (Bazzini et al., 2014; Calviello et al., 2016; Chew et al., 2013; Crappe´ et al., 2015; Dunn et al., 2013; Fields et al., 2015; Ingolia et al., 2011; Ji et al., 2015; Michel et al., 2012). The functional impact of much of this translation remains to be explored, and ribosome proﬁling data provide a map to guide this exploration. Redeﬁning Translated Sequences Eukaryotic ribosome proﬁling data have consistently revealed unexpected ribosome occupancy outside of known protein-coding genes in patterns that ﬁt accepted models of translation
+
+24 Cell 165, March 24, 2016 ª2016 Elsevier Inc.
+
+Figure 2. Annotating Translated Sequences with Ribosome Proﬁling Data (A) Detecting translated sequences from elongating ribosome footprint proﬁling on model transcripts. Differences in footprint density and triplet periodicity indicate translated regions. Truncated protein products cause subtle changes in ribosome density. (B) Initiation proﬁling highlights alternative initiation sites clearly. (C) Alternate translation products can be identiﬁed relative to the annotated ORF on a transcript.
+
+initiation (Ingolia et al., 2009). The 50 leaders on many mRNAs show substantial translation that suggests low efﬁciency initiation at non-AUG codons during the process of scanning for the start codon. Likewise, translation on presumptive non-coding RNAs tends to initiate at AUG codons near the 50 ends and occurs on transcripts localized to the cytosol rather than the nucleus. By contrast, the 30 sequences downstream of protein coding genes typically show very low ribosome occupancy (Ingolia et al., 2011).
+Many studies now support the interpretation of footprint sequences on non-coding transcripts as evidence for ribosome occupancy and, thus, translation. The footprints on non-coding RNAs co-puriﬁed with afﬁnity-tagged ribosomes under conditions that recovered footprints from protein-coding mRNAs but depleted many other ribonucleoprotein complexes, including the untagged mitochondrial ribosomes (Ingolia et al., 2014). Recovery of non-coding transcript footprints mirrored the co-puriﬁcation of ribosomes with non-coding RNAs (Zhou et al., 2013), and the distinctive size and reading frame periodicity of ribosome footprints provided further evidence that the ribosome was translating the RNA. Importantly, while the organization of ribosome footprints on noncoding RNAs shows hallmarks of eukaryotic translation, it differs from the patterns of ribosome occupancy on mRNAs. Non-coding transcripts are more likely to show translation of multiple, overlapping reading frames (Chew et al., 2013; Guttman et al., 2013) and resemble 50 transcript leaders more than conventional mRNAs. This translation may reﬂect the default fate of any capped and polyadenylated RNA in the cytosol, whereas protein-coding reading frames experience selection for correct translation.
+Ribosome occupancy outside of conventional coding sequences nonetheless reﬂects productive translation. Mass spectrometry has conﬁrmed the accumulation of peptides encoded by some of these regions, including speciﬁc translation
+
+events ﬁrst detected by ribosome proﬁling (Fields et al., 2015; Slavoff et al., 2013; Stern-Ginossar et al., 2012). The resulting short and unstructured peptides are probably unstable in the cell, which may explain their low detection rate. Even transient and unstable peptides can exert a biological effect, however. In vertebrates, proteolytic degradation products are displayed on the cell surface for immune surveillance, and Stern-Ginossar et al. (2012) observed cellular immune responses to non-canonical translation products identiﬁed by ribosome proﬁling. Likewise, short unstable peptides from regulatory upstream translation may provide a further, useful molecular function as presented antigens (Starck et al., 2016). Translation of non-coding sequences may thus expand the range of antigens available for the detection of viral infection, cancer-associated mutations, or autoimmune reactivity. Expanding the mRNA-Encoded Proteome The distinctive patterns of ribosome footprint occupancy seen on mRNAs allow the annotation of functional protein-coding sequences. Peptides as short as 11 amino acids can perform speciﬁc molecular functions in the cell (Saghatelian and Couso, 2015), yet many genome annotation pipelines will overlook the short reading frames encoding these micropeptides. Translation of these sequences stands out in ribosome proﬁling data (Figure 2A). Several groups have cataloged new translated reading frames (Table 1), identifying examples such as the 50 amino acid protein Apela/Toddler (Pauli et al., 2014). Initiation Site Proﬁling Translation is highly processive and generally continues in the reading frame deﬁned by the start codon until reaching an inframe stop. Identifying sites of translation initiation is therefore a powerful approach for annotating translated reading frames. Ribosome proﬁling has been adapted to ﬁnd translation start sites by trapping and footprinting initiating ribosomes with the specialized translation inhibitors that preferentially block the ﬁrst
+
+Cell 165, March 24, 2016 ª2016 Elsevier Inc. 25
+
+Table 1. Algorithms and Tools for Reading Frame Annotation and Discovery
+
+Algorithm or Metric
+
+Input Data
+
+Output Classiﬁcation
+
+Reference
+
+Periodicity transition score elongating ribosome frame
+
+Dual-coding regions
+
+Michel et al. (2012)
+
+Translated ORF classiﬁer
+
+elongating ribosome density
+
+CDS ORF/50 UTR ORF/30 UTR ORF
+
+Chew et al. (2013)
+
+Ribosome release score
+
+elongating ribosome density
+
+CDS-like
+
+Guttman et al. (2013)
+
+Change point analysis
+
+elongating ribosome occupancy
+
+novel isoforms; alternate frames; drop-off Zupanic et al. (2014)
+
+FLOSS
+
+footprint length
+
+true ribosome occupancy
+
+Ingolia et al. (2014)
+
+ORF score
+
+elongating ribosome frame
+
+short ORFs
+
+Bazzini et al. (2014)
+
+PROTEOFORMER
+
+elongating ribosome density; mass spectrometry
+
+short ORFs; novel isoforms
+
+Crappe´ et al. (2015)
+
+N/A
+
+elongating ribosome density
+
+stop read-through
+
+Dunn et al. (2013)
+
+RiboTaper
+
+elongating ribosome frame
+
+short ORFs; novel isoforms
+
+Calviello et al. (2016)
+
+ORF-RATER
+
+elongating ribosome frame; footprint length; Harr/LTM initiation
+
+short ORFs; novel isoforms
+
+Fields et al. (2015)
+
+RibORF
+
+elongating ribosome frame; elongating ribosome evenness
+
+Ji et al. (2015)
+
+A variety of algorithms and metrics can use ribosome proﬁling data to annotate translated regions of the genome. These algorithms are listed, along with the proﬁling data features they use (input data) and the output classiﬁcation they provide.
+
+step of elongation. Harringtonine almost immediately captures initiating ribosomes, while depleting other ribosomes by run-off elongation (Ingolia et al., 2011), and so ribosome proﬁling performed after brief harringtonine treatment results in isolated footprint peaks at initiation codons (Figure 2B). Lactimidomycin acts more gradually to trap initiating ribosomes (Lee et al., 2012). Initiation sites can also be deﬁned by depleting most elongating ribosomes using the drug puromycin (Fritsch et al., 2012) or by sequential treatment with lactimidomycin, to stabilize initiating ribosomes, followed by puromycin, to destabilize other ribosomes (Gao et al., 2015).
+Initiation site proﬁling conﬁrms that the unexpected ribosome occupancy seen in many parts of the transcriptome reﬂects substantial levels of non-AUG initiation. Translation of a few speciﬁc genes, including the oncogene c-Myc, has long been known to initiate at certain ‘‘near-cognate’’ non-AUG codons that differ from AUG by one nucleotide (Hann et al., 1988), but the prevalence of these alternative start sites was not previously appreciated. Evidence for shorter and potentially less stable protein products from non-AUG initiation has emerged in parallel with ribosome proﬁling analysis of these initiation sites (Slavoff et al., 2013; Starck et al., 2016). Alternative Protein Isoforms Initiation site detection synergizes with bioinformatic analysis of elongating ribosome proﬁling data to robustly annotate translated sequences (Figure 2C). For example, integrative analysis of proﬁling data in primary mouse cells revealed translation of over a thousand upstream reading frames, along with hundreds of translated reading frames on transcripts with no previous protein-coding annotation (Fields et al., 2015). Protein isoform variants of known genes were even more prevalent in the dataset, resulting from alternative translation initiation or pre-mRNA splicing. Initiation site footprinting is particularly important for discovering these isoform variants because internal start sites stand out dramatically after harringtonine treatment but cause only a subtle increase in downstream elongating ribosome density (Figure 2B).
+
+Distinct protein isoform variants can display different and even opposing functions, just as protein truncation mutations often create dominant-negative alleles. Internal translation initiation in C/EBP transcription factors creates truncated protein isoforms that lack the trans-activation domain but retain the DNAbinding domains, and so they compete with full-length activator protein at the same binding sites (Descombes and Schibler, 1991). In another example, ribosome proﬁling has conﬁrmed that internal initiation creates an analogous inhibitory truncation in the innate immune signaling protein Mavs (Brubaker et al., 2014), which oligomerizes with full-length protein but lacks signaling domains and thus blocks interferon induction. The wealth of truncations seen in ribosome proﬁling data suggests that inhibitory isoforms may be quite widespread.
+Amino-terminal extensions may cause more diverse and less predictable changes to protein function. For example, the extension on the long isoform of the tumor suppressor PTEN may lead to its secretion, or change its localization and activity within the cell (Pulido et al., 2014). Such extensions generally result from non-AUG initiation, which is inefﬁcient and thus allows a large proportion of scanning pre-initiation complexes to bypass the ﬁrst start site and initiate downstream to produce the canonical protein.
+Proﬁling Gene Expression at the Level of Translation Gene expression proﬁling is a powerful discovery tool for connecting cellular physiology and gene function (Brown and Botstein, 1999). Cells tightly control gene expression in response to their physiological state, so the expression changes of wellcharacterized genes reveal the molecular situation inside the cell while co-regulation of uncharacterized genes links them back to known pathways. Cells control gene expression in order to modulate protein synthesis and ultimately protein abundance, and so regulated translation can play a central role in determining expression patterns. Quantitative Translational Proﬁling The density of ribosomes translating a reading frame reﬂects the amount of the encoded protein produced. Each footprint
+
+26 Cell 165, March 24, 2016 ª2016 Elsevier Inc.
+
+Figure 3. Quantifying Expression from Ribosome Proﬁling and mRNA-Seq (A) Ribosome density indicates protein production. Ribosomes initiate and elongate at the same speed, yielding a correspondence between the number of protein molecules produced and the ribosome density. (B) Deep sequencing quantiﬁes the fraction of all ribosome footprints derived from a transcript because absolute read count does not reﬂect input RNA quantity and inactive ribosomes produce no footprints. (C) Ribosome footprint density encompasses mRNA abundance and translation. Higher mRNA abundance or increased translation will yield more ribosome footprints. (D) Regulatory effects illustrated on a plot of ribosome footprint and mRNA abundance changes.
+
+indicates a single ribosome synthesizing the protein, but longer proteins require more time to synthesize—roughly in proportion to their length, provided that the speed of translation is broadly consistent. The production rate for ﬁnished proteins is thus given by the number of ribosomes engaged in synthesis divided by the time required to ﬁnish a protein, which corresponds to the density of ribosome footprints (Figure 3A). Substantial differences in the speed of translational elongation, either between mRNAs or between different conditions, distort this measurement. It is challenging to measure this rate precisely, but it does seem to be generally similar between different genes (Ingolia et al., 2011).
+In practice, ribosome footprint density can provide clear, quantitative measurements of absolute protein synthesis. Ribosome proﬁling data show improved correlation with proteomewide abundance measurements made by mass spectrometry relative to mRNA-seq, and so ribosome proﬁling captures additional information, beyond mRNA abundance, about protein levels in the cell (Ingolia et al., 2009; Weinberg et al., 2016). Li et al. (2014) further showed that the relative translation levels of genes in multi-protein complexes matched their protein stoichiometries remarkably well, meaning that the cell has tuned translation to avoid wasteful mismatches in synthesizing these
+
+complexes. They addressed this question in bacteria, where some complexes with unequal stoichiometric ratios as high as 10:1 are encoded on a single poly-cistronic transcript, and so substantial translational differences must underlie these measurements. Distinguishing Transcriptional and Translational Control Ribosome proﬁling data provide measurements of protein synthesis that reﬂect both the translational status of an mRNA, as well as its underlying abundance. Distinguishing transcriptional and translational regulation, however, requires matched analysis of mRNA-seq and ribosome proﬁling data (Figure 3C), where translational regulation will manifest as signiﬁcant differences between these measurements (Figure 3D). Systematic technical differences between these two datasets can also create such discrepancies, however, and it is important to control these carefully. Early ribosome proﬁling studies matched library generation strategies between these samples, using chemical degradation to produce footprint-sized fragments of mRNA (Ingolia et al., 2009). However, it appears that averaging across whole genes can address technical variation in library generation, and conventional mRNA-seq library generation can be paired with ribosome proﬁling data (Weinberg et al., 2016). It seems prudent to
+
+Cell 165, March 24, 2016 ª2016 Elsevier Inc. 27
+
+understanding of how protein abundances are determined by coordinated regulation of all stages of expression. While mRNA-seq and ribosome proﬁling data share many technical similarities, mass spectrometry differs greatly. It can be challenging simply to establish a clear correspondence between proteins quantiﬁed by mass spectrometry and genes proﬁled by deep sequencing. Despite these technical challenges, such integrative analyses show broad agreement between increased translation and increased protein abundance (Ori et al., 2015). For example, integrative analysis of Drosophila egg activation exposes a trend where protein abundance decreases tend to reﬂect degradation, and translational induction can act to oppose increased degradation to maintain constant protein levels (Kronja et al., 2014).
+
+Figure 4. Monitoring the Speed of Translation Elongation with Ribosome Proﬁling (A–C) (A) Individual ribosomes spend more time where elongation is slowest and so in (B) a snapshot of the full ensemble ribosomes in the cell, (C) footprint density is higher where translation elongation is slower.
+quantify mRNA-seq speciﬁcally over the coding sequences used to quantify ribosome density, in order to avoid any artifacts arising from transcript isoform differences.
+Transcriptional and translational changes can be analyzed together in the framework of a generalized linear model (GLM). These models are available in statistical packages for analyzing sequencing count data, where they are used to infer the effects of individual factors (such as genotype, drug treatment, etc.) in multi-factor experimental designs, as well as potential interactions between these factors (Love et al., 2015; McCarthy et al., 2012). When library type is included as a factor, the translational efﬁciency of an mRNA will emerge as the effect of the ‘‘ribosome proﬁling’’ library type against the ‘‘mRNA-seq’’ baseline, and signiﬁcant interactions with experimental variables will indicate translational control. Any simultaneous analysis of transcriptional and translational control must account for certain potential statistical artifacts. First, mRNA abundance measurements provide estimates of transcriptional control but also contribute to the denominator in estimates of translational control, so noise in mRNA-seq data creates apparent negative correlation between transcriptional and translational regulation (Albert et al., 2014; Larsson et al., 2011). Another important concern arises in the choice of biological material, as using the same physical sample for ribosome footprinting and total RNA isolation pairs samples more closely but introduces correlated biological variation. More broadly, confounding variation can be reduced by blocked experimental designs that group experimental and control samples together for library preparation and sequencing. Integrating Ribosome Proﬁling and Proteomics The combination of proteomics with ribosome proﬁling and mRNA sequencing offers the possibility of truly comprehensive
+
+Mechanistic Insights into Protein Biogenesis The ribosome synthesizes very diverse proteins through a multistep elongation cycle and coordinates their synthesis with cotranslational maturation, including secretion and protein folding. Ribosome proﬁling offers new insights into protein biogenesis as it occurs in living cells, although these applications place particularly stringent demands on experimental design and analysis. Such experiments may depend on the capture and proﬁling of speciﬁc ribosome sub-populations, where conclusions may depend on the quality of the puriﬁcation. More broadly, answering these questions relies on interpreting codon- and nucleotide-level details of ribosome occupancy proﬁles, which are particularly sensitive to perturbations during harvesting (Gerashchenko and Gladyshev, 2014; Hussmann et al., 2015) and sequence-dependent biases in library generation (Artieri and Fraser, 2014). Analyses can be hampered by the small absolute number of footprints at individual positions and confounded by correlations such as the link between codon usage bias and expression. Experimental and analytical difﬁculties may explain the persistent controversy about these effects, and a deepening understanding of ribosome proﬁling should offer a path forward.
+The snapshot of in vivo translation offered by ribosome proﬁling should capture ribosomes more often on speciﬁc codons where they spend more time (Figure 4). Changes in ribosome occupancy have already revealed elongation defects resulting from molecular (Nedialkova and Leidel, 2015; Zinshteyn and Gilbert, 2013) and physiological (Loayza-Puch et al., 2016) disruptions of translation. Many groups have sought to infer what mRNA features correlate with local variations in ribosome occupancy across a gene in order to learn what factors control the rate of translation elongation (Artieri and Fraser, 2014; Gritsenko et al., 2015; Pop et al., 2014; Reuveni et al., 2011; Shah et al., 2013). These diverse analytical approaches have reached differing conclusions about the impact of codon and amino acid usage on translation speed. Estimates of per-codon elongation are particularly sensitive to the impact of cycloheximide and presumably to other perturbations (Hussmann et al., 2015). Actual differences in ribosome occupancy proﬁles driven by such artifacts may underlie much of the disagreement between studies, and resolving these disagreements requires some undisputable signature of slow elongation. Amino acid depletion should slow the recruitment of charged tRNAs speciﬁcally at codons for the limiting amino acid. This amino acid depletion
+
+28 Cell 165, March 24, 2016 ª2016 Elsevier Inc.
+
+Figure 5. Ribosome Footprint Proﬁling of Co-translational Protein Maturation (A) Factors such as chaperones associate with nascent proteins on the ribosome. (B) Selective co-puriﬁcation of ribosome nascent chain complexes with a cotranslational chaperone. (C) Ribosome footprints enriched by the puriﬁcation indicate the regions of the protein where the chaperone binds.
+signature is clearest in samples prepared without elongation inhibitors, suggesting that these drug-free conditions best capture in vivo elongation (Guydosh and Green, 2014; Lareau et al., 2014).
+It is often assumed that codon usage bias reﬂects a preference for faster elongation at favored codons (Plotkin and Kudla, 2011). Such a correlation has proven hard to detect in ribosome proﬁling experiments performed with cycloheximide but emerges in samples prepared without elongation inhibitors. Meta-analysis of a large corpus of proﬁling studies points to cycloheximide pretreatment as the major factor determining per-codon occupancies (Hussmann et al., 2015), and cycloheximide treatment subtly redistributes ribosomes slightly downstream from their in vivo positions, which preserves overall ribosome occupancy and gene expression measurements while distorting the link between occupancy and elongation speed. Conformation-Sensitive Ribosome Footprinting The translation elongation cycle entails large rearrangements of the ribosome (Behrmann et al., 2015), including the relative rotation of the ribosomal subunits, and cycloheximide captures one
+
+speciﬁc conformation within this cycle (Schneider-Poetsch et al., 2010). As different ribosome conformations protect mRNA footprints of differing length, ribosome proﬁling can actually dissect the in vivo elongation cycle into at least two different phases (Lareau et al., 2014). Cycloheximide pre-treatment traps ribosomes in a ‘‘long footprint’’ state, whereas the drug anisomycin captures ribosomes in a ‘‘short footprint’’ state. Both footprints are observed in samples prepared without elongation inhibitors, and they should reﬂect the abundance and thus the dwell time in different phases of elongation. Only long, cycloheximide-stabilized footprints respond to amino acid starvation, as expected for tRNA recruitment (Lareau et al., 2014; Schneider-Poetsch et al., 2010). In contrast, short footprint abundance, reﬂecting later phases of elongation, depends on the physical properties of amino acids and is impacted by wobble decoding.
+Distinguishing these ribosome conformations by proﬁling short (20 nt) and long (28 nt) ribosome footprints is another signiﬁcant advantage of omitting elongation inhibitors. With this power comes a responsibility, however: libraries generated from drug-free proﬁling samples must include both of these footprint sizes, even when the distinction between these two conformations is irrelevant to the biological question and the two populations are simply combined and counted together for expression estimates. Cycloheximide pre-treatment might offer an advantage here by collapsing footprints into a single, narrower size range (Lareau et al., 2014).
+Ribosome proﬁling also illuminates the links between translation and mRNA decay. Ribosomes stall indeﬁnitely at the end of cleaved mRNAs lacking a stop codon, unless they are released by speciﬁc ribosome rescue factors (Tsuboi et al., 2012). These stalled ribosomes will produce a distinctive, very short (15 nt) footprint, with the broken 30 end of the RNA in their A site (Guydosh and Green, 2014). Loss of rescue factors also permits the accumulation of post-termination, un-recycled ribosomes that have released their protein product, but remain bound to the mRNA in the 30 UTR, where they still protect a long, 28 nt footprint (Guydosh and Green, 2014). Depletion of recycling factors themselves, which split the ribosomal subunits after termination, also drives this accumulation of post-termination ribosomes and permits re-initiation in the 30 UTR (Young et al., 2015). Ribosomes also block 50 to 30 decay, which can begin on mRNAs that are being actively translated (Hu et al., 2009), and positions of these decay intermediates provide a sort of endogenous footprinting of the ﬁnal ribosome translating the mRNA (Pelechano et al., 2015). Ribosomal Proﬁling of Co-translational Processes Protein synthesis is coupled to co-translational protein maturation, including spontaneous and chaperone-aided folding, as well as secretion. Ribosome proﬁling offers a new window onto these processes as they occur in vivo by revealing the position in the nascent chain where they occur. This general strategy relies on puriﬁcation and footprinting of speciﬁc ribosome subpopulations reﬂecting these maturation processes (Figure 5). In order to determine when the bacterial chaperone trigger factor bound to its substrates, Oh et al. (2011) crosslinked it to nascent peptide substrates, puriﬁed ribosome-nascent chain complexes, and analyzed their footprints. This selective ribosome proﬁling strategy can be generalized to other co-translational
+
+Cell 165, March 24, 2016 ª2016 Elsevier Inc. 29
+
+Table 2. Databases for Ribosome Proﬁling Data
+
+Database
+
+Data Collected
+
+Reference
+
+TISdb
+
+translation initiation sites Wan and Qian, 2014
+
+GWIPS-viz
+
+footprint genome browser; mRNA-seq genome browser
+
+Michel et al., 2014
+
+RPFdb
+
+footprint genome browser; Xie et al., 2016 expression measurements
+
+http://sORFs.org short ORF annotations
+
+Olexiouk et al., 2016
+
+Several databases now collect ribosome proﬁling data and genome annotations derived from this data.
+
+factors in bacteria and in eukaryotes (Becker et al., 2013) and applied to monitor spontaneous protein folding by conformation-speciﬁc nascent chain puriﬁcation (Han et al., 2012).
+Selective ribosome proﬁling is limited by its dependence on the biochemical puriﬁcation of targeted ribosome populations. Important features of translation, such as sub-cellular localization, are generally disrupted during lysis. In certain cases, ribosomes can be fractionated by differential extraction, allowing comparison of footprints from ribosomes released by limited permeabilization to those retained until membranes are fully solubilized (Reid and Nicchitta, 2012). Such fractionation is technically challenging and cannot resolve, e.g., different membranebound organelles or different cytosolic locations within polarized cells. To circumvent this limitation, Jan and colleagues tagged ribosome sub-populations in vivo for subsequent puriﬁcation using proximity-dependent biotinylation (Jan et al., 2014; Williams et al., 2014). They expressed a bacterial biotin ligase on the membranes of organelles within the cell and fused the cognate biotin acceptor peptide to a ribosomal protein. Ribosome biotinylation was spatially restricted to the region of the membrane and temporally controlled by the addition and removal of exogenous biotin. Such precise selection of ribosomes provided new insights into protein targeting and offers similar possibilities for other biological systems where suitable biotin ligase fusions can be encoded genetically.
+The Next Steps for Footprinting Ribosome proﬁling offers precise and quantitative measurements of translation and coupled processes in vivo. It can already be applied to the wide array of biological questions that can be addressed by gene expression proﬁling and offers particular insights when translational control is important. Ongoing technical advances will simplify library construction and decrease input material requirements, which are already compatible with simple cell culture experiments and small tissue samples. Ultimately, ribosome proﬁling may reach the single-cell resolution that has recently been achieved for mRNA sequencing and chromatin immunoprecipitation (Gru¨ n and van Oudenaarden, 2015), though technical challenges remain for single-cell translational measurements. Proﬁling speciﬁc lineages within heterogeneous tissues seems more immediately accessible. Cell-type-speciﬁc proﬁling can be accomplished by tagging ribosomes in a lineage of interest and purifying these tagged ribosomes from a whole-tissue lysate containing untagged ribo-
+
+somes from other cells (Heiman et al., 2008). This translating ribosome afﬁnity puriﬁcation (TRAP), and the related RiboTag approach (Sanz et al., 2009), have already enabled whole transcript proﬁling from very speciﬁc neuronal sub-types, and they seem compatible with ribosome footprinting. Ribosome biotinylation in speciﬁc lineages by regulated expression of the bacterial ligase could likewise allow recovery of ribosomes from speciﬁc cell types. Innovative strategies for selective ribosome puriﬁcation, combined with a continuing push for higher quality data from fewer cells, will underlie many emerging applications of ribosome proﬁling.
+New tools tailored speciﬁcally for analyzing proﬁling data, implementing more sophisticated statistical approaches, should complement these experimental developments. Computational advances will particularly impact our understanding of the variation in ribosome density across single transcripts and its connection to elongation speed (Artieri and Fraser, 2014; Gardin et al., 2014; Gritsenko et al., 2015; Lareau et al., 2014; Pop et al., 2014; Reuveni et al., 2011; Shah et al., 2013). Occupancy patterns are particularly sensitive to statistical ﬂuctuation and technical biases because they rely on counting small absolute numbers of reads and do not allow averaging over many different positions. However, as in the case of analyzing mRNA-seq data, better handling of confounding factors can improve expression estimates and detect changes more reliably (Roberts et al., 2011). The variety of alternative translation products detected by ribosome proﬁling also raises new challenges for genome annotation (Table 2). Databases and analysis workﬂows now account for transcript variants produced by alternative mRNA processing. Protein-level variants resulting from alternative translation on a single transcript now further complicate our catalog of functional elements in the genome.
+REFERENCES
+Aebersold, R., and Mann, M. (2003). Mass spectrometry-based proteomics. Nature 422, 198–207.
+Albert, F.W., Muzzey, D., Weissman, J.S., and Kruglyak, L. (2014). Genetic inﬂuences on translation in yeast. PLoS Genet. 10, e1004692.
+Anders, S., McCarthy, D.J., Chen, Y., Okoniewski, M., Smyth, G.K., Huber, W., and Robinson, M.D. (2013). Count-based differential expression analysis of RNA sequencing data using R and Bioconductor. Nat. Protoc. 8, 1765–1786.
+Andreev, D.E., O’Connor, P.B., Fahey, C., Kenny, E.M., Terenin, I.M., Dmitriev, S.E., Cormican, P., Morris, D.W., Shatsky, I.N., and Baranov, P.V. (2015). Translation of 50 leaders is pervasive in genes resistant to eIF2 repression. eLife 4, e03971.
+Arava, Y., Wang, Y., Storey, J.D., Liu, C.L., Brown, P.O., and Herschlag, D. (2003). Genome-wide analysis of mRNA translation proﬁles in Saccharomyces cerevisiae. Proc. Natl. Acad. Sci. USA 100, 3889–3894.
+Artieri, C.G., and Fraser, H.B. (2014). Accounting for biases in riboproﬁling data indicates a major role for proline in stalling translation. Genome Res. 24, 2011– 2021.
+Bazzini, A.A., Johnstone, T.G., Christiano, R., Mackowiak, S.D., Obermayer, B., Fleming, E.S., Vejnar, C.E., Lee, M.T., Rajewsky, N., Walther, T.C., and Giraldez, A.J. (2014). Identiﬁcation of small ORFs in vertebrates using ribosome footprinting and evolutionary conservation. EMBO J. 33, 981–993.
+Becker, A.H., Oh, E., Weissman, J.S., Kramer, G., and Bukau, B. (2013). Selective ribosome proﬁling as a tool for studying the interaction of chaperones and targeting factors with nascent polypeptide chains and ribosomes. Nat. Protoc. 8, 2212–2239.
+
+30 Cell 165, March 24, 2016 ª2016 Elsevier Inc.
+
+Behrmann, E., Loerke, J., Budkevich, T.V., Yamamoto, K., Schmidt, A., Penczek, P.A., Vos, M.R., Bu¨ rger, J., Mielke, T., Scheerer, P., and Spahn, C.M. (2015). Structural snapshots of actively translating human ribosomes. Cell 161, 845–857.
+Brar, G.A., and Weissman, J.S. (2015). Ribosome proﬁling reveals the what, when, where and how of protein synthesis. Nat. Rev. Mol. Cell Biol. 16, 651–664.
+Brown, P.O., and Botstein, D. (1999). Exploring the new world of the genome with DNA microarrays. Nat. Genet. 21 (1, Suppl), 33–37.
+Brubaker, S.W., Gauthier, A.E., Mills, E.W., Ingolia, N.T., and Kagan, J.C. (2014). A bicistronic MAVS transcript highlights a class of truncated variants in antiviral immunity. Cell 156, 800–811.
+Bufﬁngton, S.A., Huang, W., and Costa-Mattioli, M. (2014). Translational control in synaptic plasticity and cognitive dysfunction. Annu. Rev. Neurosci. 37, 17–38.
+Bullard, J.H., Purdom, E., Hansen, K.D., and Dudoit, S. (2010). Evaluation of statistical methods for normalization and differential expression in mRNASeq experiments. BMC Bioinformatics 11, 94.
+Calviello, L., Mukherjee, N., Wyler, E., Zauber, H., Hirsekorn, A., Selbach, M., Landthaler, M., Obermayer, B., and Ohler, U. (2016). Detecting actively translated open reading frames in ribosome proﬁling data. Nat. Methods 13, 165–170.
+Cenik, C., Cenik, E.S., Byeon, G.W., Grubert, F., Candille, S.I., Spacek, D., Alsallakh, B., Tilgner, H., Araya, C.L., Tang, H., et al. (2015). Integrative analysis of RNA, translation, and protein levels reveals distinct regulatory variation across humans. Genome Res. 25, 1610–1621.
+Chew, G.L., Pauli, A., Rinn, J.L., Regev, A., Schier, A.F., and Valen, E. (2013). Ribosome proﬁling reveals resemblance between long non-coding RNAs and 50 leaders of coding RNAs. Development 140, 2828–2834.
+Crappe´ , J., Ndah, E., Koch, A., Steyaert, S., Gawron, D., De Keulenaer, S., De Meester, E., De Meyer, T., Van Criekinge, W., Van Damme, P., and Menschaert, G. (2015). PROTEOFORMER: deep proteome coverage through ribosome proﬁling and MS integration. Nucleic Acids Res. 43, e29.
+Curtis, D., Lehmann, R., and Zamore, P.D. (1995). Translational regulation in development. Cell 81, 171–178.
+Descombes, P., and Schibler, U. (1991). A liver-enriched transcriptional activator protein, LAP, and a transcriptional inhibitory protein, LIP, are translated from the same mRNA. Cell 67, 569–579.
+Dunn, J.G., Foo, C.K., Belletier, N.G., Gavis, E.R., and Weissman, J.S. (2013). Ribosome proﬁling reveals pervasive and regulated stop codon readthrough in Drosophila melanogaster. eLife 2, e01179.
+Fields, A.P., Rodriguez, E.H., Jovanovic, M., Stern-Ginossar, N., Haas, B.J., Mertins, P., Raychowdhury, R., Hacohen, N., Carr, S.A., Ingolia, N.T., et al. (2015). A Regression-Based Analysis of Ribosome-Proﬁling Data Reveals a Conserved Complexity to Mammalian Translation. Mol. Cell 60, 816–827.
+Fritsch, C., Herrmann, A., Nothnagel, M., Szafranski, K., Huse, K., Schumann, F., Schreiber, S., Platzer, M., Krawczak, M., Hampe, J., and Brosch, M. (2012). Genome-wide search for novel human uORFs and N-terminal protein extensions using ribosomal footprinting. Genome Res. 22, 2208–2218.
+Gao, X., Wan, J., Liu, B., Ma, M., Shen, B., and Qian, S.B. (2015). Quantitative proﬁling of initiating ribosomes in vivo. Nat. Methods 12, 147–153.
+Gardin, J., Yeasmin, R., Yurovsky, A., Cai, Y., Skiena, S., and Futcher, B. (2014). Measurement of average decoding rates of the 61 sense codons in vivo. eLife 3, e03735.
+Gerashchenko, M.V., and Gladyshev, V.N. (2014). Translation inhibitors cause abnormalities in ribosome proﬁling experiments. Nucleic Acids Res. 42, e134.
+Gerashchenko, M.V., Lobanov, A.V., and Gladyshev, V.N. (2012). Genomewide ribosome proﬁling reveals complex translational regulation in response to oxidative stress. Proc. Natl. Acad. Sci. USA 109, 17394–17399.
+Gesteland, R.F., and Atkins, J.F. (1996). Recoding: dynamic reprogramming of translation. Annu. Rev. Biochem. 65, 741–768.
+
+Gritsenko, A.A., Hulsman, M., Reinders, M.J., and de Ridder, D. (2015). Unbiased Quantitative Models of Protein Translation Derived from Ribosome Proﬁling Data. PLoS Comput. Biol. 11, e1004336.
+Gru¨ n, D., and van Oudenaarden, A. (2015). Design and Analysis of Single-Cell Sequencing Experiments. Cell 163, 799–810.
+Guttman, M., Russell, P., Ingolia, N.T., Weissman, J.S., and Lander, E.S. (2013). Ribosome proﬁling provides evidence that large noncoding RNAs do not encode proteins. Cell 154, 240–251. Guydosh, N.R., and Green, R. (2014). Dom34 rescues ribosomes in 30 untranslated regions. Cell 156, 950–962.
+Han, Y., David, A., Liu, B., Magada´ n, J.G., Bennink, J.R., Yewdell, J.W., and Qian, S.B. (2012). Monitoring cotranslational protein folding in mammalian cells at codon resolution. Proc. Natl. Acad. Sci. USA 109, 12467–12472.
+Hann, S.R., King, M.W., Bentley, D.L., Anderson, C.W., and Eisenman, R.N. (1988). A non-AUG translational initiation in c-myc exon 1 generates an N-terminally distinct protein whose synthesis is disrupted in Burkitt’s lymphomas. Cell 52, 185–195.
+Heiman, M., Schaefer, A., Gong, S., Peterson, J.D., Day, M., Ramsey, K.E., Sua´ rez-Farin˜ as, M., Schwarz, C., Stephan, D.A., Surmeier, D.J., et al. (2008). A translational proﬁling approach for the molecular characterization of CNS cell types. Cell 135, 738–748.
+Hinnebusch, A.G. (2014). The scanning mechanism of eukaryotic translation initiation. Annu. Rev. Biochem. 83, 779–812.
+Hu, W., Sweet, T.J., Chamnongpol, S., Baker, K.E., and Coller, J. (2009). Co-translational mRNA decay in Saccharomyces cerevisiae. Nature 461, 225–229.
+Hussmann, J.A., Patchett, S., Johnson, A., Sawyer, S., and Press, W.H. (2015). Understanding Biases in Ribosome Proﬁling Experiments Reveals Signatures of Translation Dynamics in Yeast. PLoS Genet. 11, e1005732.
+Ingolia, N.T. (2014). Ribosome proﬁling: new views of translation, from single codons to genome scale. Nat. Rev. Genet. 15, 205–213.
+Ingolia, N.T., Ghaemmaghami, S., Newman, J.R., and Weissman, J.S. (2009). Genome-wide analysis in vivo of translation with nucleotide resolution using ribosome proﬁling. Science 324, 218–223.
+Ingolia, N.T., Lareau, L.F., and Weissman, J.S. (2011). Ribosome proﬁling of mouse embryonic stem cells reveals the complexity and dynamics of mammalian proteomes. Cell 147, 789–802.
+Ingolia, N.T., Brar, G.A., Rouskin, S., McGeachy, A.M., and Weissman, J.S. (2012). The ribosome proﬁling strategy for monitoring translation in vivo by deep sequencing of ribosome-protected mRNA fragments. Nat. Protoc. 7, 1534–1550.
+Ingolia, N.T., Brar, G.A., Stern-Ginossar, N., Harris, M.S., Talhouarne, G.J., Jackson, S.E., Wills, M.R., and Weissman, J.S. (2014). Ribosome proﬁling reveals pervasive translation outside of annotated protein-coding genes. Cell Rep. 8, 1365–1379.
+Jan, C.H., Williams, C.C., and Weissman, J.S. (2014). Principles of ER cotranslational translocation revealed by proximity-speciﬁc ribosome proﬁling. Science 346, 1257521. Ji, Z., Song, R., Regev, A., and Struhl, K. (2015). Many lncRNAs, 50UTRs, and pseudogenes are translated and some are likely to express functional proteins. Elife 4, e08890.
+Kronja, I., Yuan, B., Eichhorn, S.W., Dzeyk, K., Krijgsveld, J., Bartel, D.P., and Orr-Weaver, T.L. (2014). Widespread changes in the posttranscriptional landscape at the Drosophila oocyte-to-embryo transition. Cell Rep. 7, 1495–1508.
+Lareau, L.F., Hite, D.H., Hogan, G.J., and Brown, P.O. (2014). Distinct stages of the translation elongation cycle revealed by sequencing ribosome-protected mRNA fragments. eLife 3, e01257.
+Larsson, O., Sonenberg, N., and Nadon, R. (2011). anota: Analysis of differential translation in genome-wide studies. Bioinformatics 27, 1440–1441.
+Lee, S., Liu, B., Lee, S., Huang, S.X., Shen, B., and Qian, S.B. (2012). Global mapping of translation initiation sites in mammalian cells at single-nucleotide resolution. Proc. Natl. Acad. Sci. USA 109, E2424–E2432.
+
+Cell 165, March 24, 2016 ª2016 Elsevier Inc. 31
+
+Levin, J.Z., Yassour, M., Adiconis, X., Nusbaum, C., Thompson, D.A., Friedman, N., Gnirke, A., and Regev, A. (2010). Comprehensive comparative analysis of strand-speciﬁc RNA sequencing methods. Nat. Methods 7, 709–715.
+Li, G.W., Burkhardt, D., Gross, C., and Weissman, J.S. (2014). Quantifying absolute protein synthesis rates reveals principles underlying allocation of cellular resources. Cell 157, 624–635.
+Liu, B., Han, Y., and Qian, S.B. (2013). Cotranslational response to proteotoxic stress by elongation pausing of ribosomes. Mol. Cell 49, 453–463.
+Loayza-Puch, F., Rooijers, K., Buil, L.C., Zijlstra, J., Oude Vrielink, J.F., Lopes, R., Ugalde, A.P., van Breugel, P., Hoﬂand, I., Wesseling, J., et al. (2016). Tumour-speciﬁc proline vulnerability uncovered by differential ribosome codon reading. Nature 530, 490–494.
+Love, M.I., Anders, S., Kim, V., and Huber, W. (2015). RNA-Seq workﬂow: gene-level exploratory analysis and differential expression. F1000Res. 4, 1070.
+Love´ n, J., Orlando, D.A., Sigova, A.A., Lin, C.Y., Rahl, P.B., Burge, C.B., Levens, D.L., Lee, T.I., and Young, R.A. (2012). Revisiting global gene expression analysis. Cell 151, 476–482.
+McCarthy, D.J., Chen, Y., and Smyth, G.K. (2012). Differential expression analysis of multifactor RNA-Seq experiments with respect to biological variation. Nucleic Acids Res. 40, 4288–4297.
+Michel, A.M., Fox, G., M Kiran, A., De Bo, C., O’Connor, P.B., Heaphy, S.M., Mullan, J.P., Donohue, C.A., Higgins, D.G., and Baranov, P.V. (2014). GWIPS-viz: development of a ribo-seq genome browser. Nucleic Acids Res. 42, D859–D864.
+Michel, A.M., Choudhury, K.R., Firth, A.E., Ingolia, N.T., Atkins, J.F., and Baranov, P.V. (2012). Observation of dually decoded regions of the human genome using ribosome proﬁling data. Genome Res. 22, 2219–2229.
+Nedialkova, D.D., and Leidel, S.A. (2015). Optimization of Codon Translation Rates via tRNA Modiﬁcations Maintains Proteome Integrity. Cell 161, 1606– 1618.
+Oh, E., Becker, A.H., Sandikci, A., Huber, D., Chaba, R., Gloge, F., Nichols, R.J., Typas, A., Gross, C.A., Kramer, G., et al. (2011). Selective ribosome proﬁling reveals the cotranslational chaperone action of trigger factor in vivo. Cell 147, 1295–1308.
+Olexiouk, V., Crappe´ , J., Verbruggen, S., Verhegen, K., Martens, L., and Menschaert, G. (2016). sORFs.org: a repository of small ORFs identiﬁed by ribosome proﬁling. Nucleic Acids Res. 44 (D1), D324–D329.
+Ori, A., Toyama, B.H., Harris, M.S., Bock, T., Iskar, M., Bork, P., Ingolia, N.T., Hetzer, M.W., and Beck, M. (2015). Integrated transcriptome and proteome analyses reveal organ-speciﬁc proteome deterioration in old rats. Cell Syst. 1, 224–237.
+Pauli, A., Norris, M.L., Valen, E., Chew, G.L., Gagnon, J.A., Zimmerman, S., Mitchell, A., Ma, J., Dubrulle, J., Reyon, D., et al. (2014). Toddler: an embryonic signal that promotes cell movement via Apelin receptors. Science 343, 1248636.
+Pelechano, V., Wei, W., and Steinmetz, L.M. (2015). Widespread co-translational RNA decay reveals ribosome dynamics. Cell 161, 1400–1412.
+Pfeffer, S., Lagos-Quintana, M., and Tuschl, T. (2005). Cloning of small RNA molecules. Curr. Protoc. Mol. Biol. Chapter 26, Unit 26.24.
+Plotkin, J.B., and Kudla, G. (2011). Synonymous but not the same: the causes and consequences of codon bias. Nat. Rev. Genet. 12, 32–42.
+Pop, C., Rouskin, S., Ingolia, N.T., Han, L., Phizicky, E.M., Weissman, J.S., and Koller, D. (2014). Causal signals between codon bias, mRNA structure, and the efﬁciency of translation and elongation. Mol. Syst. Biol. 10, 770.
+Pulido, R., Baker, S.J., Barata, J.T., Carracedo, A., Cid, V.J., Chin-Sang, I.D., Dave´ , V., den Hertog, J., Devreotes, P., Eickholt, B.J., et al. (2014). A uniﬁed nomenclature and amino acid numbering for human PTEN. Sci. Signal. 7, pe15.
+Reid, D.W., and Nicchitta, C.V. (2012). Primary role for endoplasmic reticulumbound ribosomes in cellular translation identiﬁed by ribosome proﬁling. J. Biol. Chem. 287, 5518–5527.
+
+Reid, D.W., Chen, Q., Tay, A.S., Shenolikar, S., and Nicchitta, C.V. (2014). The unfolded protein response triggers selective mRNA release from the endoplasmic reticulum. Cell 158, 1362–1374.
+Reuter, J.A., Spacek, D.V., and Snyder, M.P. (2015). High-throughput sequencing technologies. Mol. Cell 58, 586–597.
+Reuveni, S., Meilijson, I., Kupiec, M., Ruppin, E., and Tuller, T. (2011). Genomescale analysis of translation elongation with a ribosome ﬂow model. PLoS Comput. Biol. 7, e1002127.
+Roberts, A., Trapnell, C., Donaghey, J., Rinn, J.L., and Pachter, L. (2011). Improving RNA-Seq expression estimates by correcting for fragment bias. Genome Biol. 12, R22.
+Saghatelian, A., and Couso, J.P. (2015). Discovery and characterization of smORF-encoded bioactive polypeptides. Nat. Chem. Biol. 11, 909–916.
+Sanz, E., Yang, L., Su, T., Morris, D.R., McKnight, G.S., and Amieux, P.S. (2009). Cell-type-speciﬁc isolation of ribosome-associated mRNA from complex tissues. Proc. Natl. Acad. Sci. USA 106, 13939–13944.
+Schneider-Poetsch, T., Ju, J., Eyler, D.E., Dang, Y., Bhat, S., Merrick, W.C., Green, R., Shen, B., and Liu, J.O. (2010). Inhibition of eukaryotic translation elongation by cycloheximide and lactimidomycin. Nat. Chem. Biol. 6, 209–217.
+Shah, P., Ding, Y., Niemczyk, M., Kudla, G., and Plotkin, J.B. (2013). Ratelimiting steps in yeast protein translation. Cell 153, 1589–1601.
+Shalgi, R., Hurt, J.A., Krykbaeva, I., Taipale, M., Lindquist, S., and Burge, C.B. (2013). Widespread regulation of translation by elongation pausing in heat shock. Mol. Cell 49, 439–452.
+Sidrauski, C., McGeachy, A.M., Ingolia, N.T., and Walter, P. (2015). The small molecule ISRIB reverses the effects of eIF2a phosphorylation on translation and stress granule assembly. eLife 4, e05033.
+Slavoff, S.A., Mitchell, A.J., Schwaid, A.G., Cabili, M.N., Ma, J., Levin, J.Z., Karger, A.D., Budnik, B.A., Rinn, J.L., and Saghatelian, A. (2013). Peptidomic discovery of short open reading frame-encoded peptides in human cells. Nat. Chem. Biol. 9, 59–64.
+Sonenberg, N., and Hinnebusch, A.G. (2009). Regulation of translation initiation in eukaryotes: mechanisms and biological targets. Cell 136, 731–745.
+Spriggs, K.A., Bushell, M., and Willis, A.E. (2010). Translational regulation of gene expression during conditions of cell stress. Mol. Cell 40, 228–237.
+Starck, S.R., Tsai, J.C., Chen, K., Shodiya, M., Wang, L., Yahiro, K., MartinsGreen, M., Shastri, N., and Walter, P. (2016). Translation from the 50 untranslated region shapes the integrated stress response. Science 351, aad3867.
+Steitz, J.A. (1969). Polypeptide chain initiation: nucleotide sequences of the three ribosomal binding sites in bacteriophage R17 RNA. Nature 224, 957–964.
+Stern-Ginossar, N., Weisburd, B., Michalski, A., Le, V.T., Hein, M.Y., Huang, S.X., Ma, M., Shen, B., Qian, S.B., Hengel, H., et al. (2012). Decoding human cytomegalovirus. Science 338, 1088–1093.
+Tsuboi, T., Kuroha, K., Kudo, K., Makino, S., Inoue, E., Kashima, I., and Inada, T. (2012). Dom34:hbs1 plays a general role in quality-control systems by dissociation of a stalled ribosome at the 30 end of aberrant mRNA. Mol. Cell 46, 518–529.
+Vogel, C., and Marcotte, E.M. (2012). Insights into the regulation of protein abundance from proteomic and transcriptomic analyses. Nat. Rev. Genet. 13, 227–232.
+Wan, J., and Qian, S.B. (2014). TISdb: a database for alternative translation initiation in mammalian cells. Nucleic Acids Res. 42, D845–D850.
+Wang, Z., Gerstein, M., and Snyder, M. (2009). RNA-Seq: a revolutionary tool for transcriptomics. Nat. Rev. Genet. 10, 57–63.
+Weinberg, D.E.S., Shah, P., Eichhorn, S.W., Hussmann, J.A., Plotkin, J.B., and Bartel, D.P. (2016). Improved Ribosome-Footprint and mRNA Measurements Provide Insights into Dynamics and Regulation of Yeast Translation. Cell Rep. 14, 1787–1799.
+
+32 Cell 165, March 24, 2016 ª2016 Elsevier Inc.
+
+Williams, C.C., Jan, C.H., and Weissman, J.S. (2014). Targeting and plasticity of mitochondrial proteins revealed by proximity-speciﬁc ribosome proﬁling. Science 346, 748–751.
+Wolin, S.L., and Walter, P. (1988). Ribosome pausing and stacking during translation of a eukaryotic mRNA. EMBO J. 7, 3559–3569.
+Woolstenhulme, C.J., Guydosh, N.R., Green, R., and Buskirk, A.R. (2015). High-precision analysis of translational pausing by ribosome proﬁling in bacteria lacking EFP. Cell Rep. 11, 13–21.
+Xie, S.Q., Nie, P., Wang, Y., Wang, H., Li, H., Yang, Z., Liu, Y., Ren, J., and Xie, Z. (2016). RPFdb: a database for genome wide information of translated mRNA generated from ribosome proﬁling. Nucleic Acids Res. 44 (D1), D254– D258.
+
+Young, D.J., Guydosh, N.R., Zhang, F., Hinnebusch, A.G., and Green, R. (2015). Rli1/ABCE1 recycles terminating ribosomes and controls translation reinitiation in 3’UTRs in vivo. Cell 162, 872–884.
+Zhou, P., Zhang, Y., Ma, Q., Gu, F., Day, D.S., He, A., Zhou, B., Li, J., Stevens, S.M., Romo, D., and Pu, W.T. (2013). Interrogating translational efﬁciency and lineage-speciﬁc transcriptomes using ribosome afﬁnity puriﬁcation. Proc. Natl. Acad. Sci. USA 110, 15395–15400.
+Zinshteyn, B., and Gilbert, W.V. (2013). Loss of a conserved tRNA anticodon modiﬁcation perturbs cellular signaling. PLoS Genet. 9, e1003675.
+Zupanic, A., Meplan, C., Grellscheid, S.N., Mathers, J.C., Kirkwood, T.B., Hesketh, J.E., and Shanley, D.P. (2014). Detecting translational regulation by change point analysis of ribosome proﬁling data sets. RNA 20, 1507–1518.
+
+Cell 165, March 24, 2016 ª2016 Elsevier Inc. 33
+

@@ -1,0 +1,25 @@
+ å¯¼å…¥å…¬é’¥
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 8D5A09DC9B929006
+
+bowtie2 mappingå·¥å…·
+nohup å‘½ä»¤ & åŽå°
+zcat chr1.fa.gz | head æŸ¥çœ‹åŽ‹ç¼©åŒ…å†…ä¿¡æ¯
+åœ¨æ™®é€šç”¨æˆ·é‡Œå»ºç«‹PATH
+vi ~/.bashrc
+export PATH=$HOME/bin:$PATH
+source .bashrc
+
+è¯»å‰å‡ è¡Œ head -n 100 filename
+è¯»åŽå‡ è¡Œ tail -n 100 filename
+æŸ¥æ‰¾æ–‡ä»¶ä¸­çš„å†…å®¹ grep -n æ­£åˆ™è¡¨è¾¾å¼ æ–‡ä»¶å
+è¯»æ–‡ä»¶ä¸­é—´å‡ è¡Œ sed -n 'fome,top' æ–‡ä»¶å
+
+åˆå¹¶æ–‡ä»¶ï¼š
+æ–‡ä»¶1åŠ åœ¨æ–‡ä»¶2åŽé¢ cat -n textfile1 > textfile2
+å‡ ä¸ªæ–‡ä»¶åˆæˆä¸€ä¸ª cat textfile1 textfile2 >> textfile3
+
+ç»Ÿè®¡è¡Œæ•°ï¼šwc -l æ–‡ä»¶å
+
+æ‰¹é‡è§£åŽ‹ç¼©
+ls *.tar.gz | xargs -n1 tar xzvf
+

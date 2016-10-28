@@ -1,0 +1,81 @@
+ # creat repository
+git init 
+
+# config
+git config --local user.name 'xx'
+git config --local user.email 'xx@xx.com'
+git config --global user.name 'xx'
+git config --global user.email 'xx@xx.com'
+git config --global color.ui true
+
+# file operation
+git add filename
+git commit -m 'xxx'
+git status
+# show the difference: git diff
+# history: git log
+git log --pretty=oneline # output in one line
+git reset --hard HEAD^ # reset to last version
+git reset --hard ID # reset to the specified version
+# log for every command : git reflog
+# replace the working directory file by the repository one: git checkout -- filename
+git rm
+
+# remote repository
+# assocflod to GitHub
+1. copy the public key : ~/.ssh/id_rsa.pub
+2. log in to the GitHub -> Account setting -> SSH Keys -> Add SSH Key -> copy id_rsa.pub
+# creat and assocflod a new github branch: git remote add origin git@github.com:UserName/folders.git
+# upload in first time: git push -u origin BranchName
+# upload: git push origin BranchName
+# download: git clone git@github.com:UserName/folders.git
+# assocflod a new github branch:  git branch --set-upstream-to= branch-name origin/branch-name
+# resolving conflict:
+1. git pull
+2. resolving conflict
+3. git push origin BranchName
+
+# branch
+# creat a branch: git checkout -b BranchName
+# view branches: git branch
+# combime branch: git merge BranchName -m'xx'
+# combime branch and retain both branchs:git merge --no-ff -m 'xx'
+# delete a branch:git branch -d BranchName
+# view the branch tree: git log --graph
+# goto the specified branch: git checkout BranchName
+
+# branch name
+master - release version
+dev - develpoer version
+user
+bug
+
+# working directory
+# save workspace: git stash
+# view the saved workspace mirror: git stash list
+# load workspace: git stash apply stash@{0}
+# delate workspace mirror: git stash drop stash@{0}
+# load workspace and delate the mirror: git stash pop stash@{0}
+
+# tag
+# creat a tag: git tag -a v0.1 -m "version 0.1 released" ID
+# view all tags: git tag
+# view specifited tag: git show <tagname>
+# delate a tag: git tag -d v0.1
+# upload a tag: git push origin <tagname>
+# upload all tags: git push origin --tags
+# delate a remote tag:
+1. delate local tag
+2. git push origin :refs/tags/<tagname>
+
+# alias
+git config --global alias.st status
+
+# git server
+http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000
+
+# å¿½ç•¥ç‰¹æ®Šæ–‡ä»¶
+æ–°å»ºæ–‡ä»¶ .gitignore
+å°†è¦å¿½ç•¥çš„æ­£åˆ™è¡¨è¾¾å¼å†™åœ¨é‡Œé¢ï¼Œä¸€ä¸ªä¸€è¡Œ
+add åˆ° git ä¸­
+

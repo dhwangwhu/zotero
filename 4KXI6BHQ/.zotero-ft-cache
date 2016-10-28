@@ -1,0 +1,509 @@
+ æ•°æ®åº“åå’Œè¡¨å•åä¸€èˆ¬ä¸å¤§å†™
+
+åˆ›å»ºä¸€ä¸ªå«åš gregs_list çš„æ•°æ®åº“
+CREATE DATABASE gregs_list;
+
+è¿›å…¥ gregs_list æ•°æ®åº“
+USE gregs_list;
+
+åˆ›å»ºä¸€ä¸ªå«åš doughnut_list çš„è¡¨å•
+CREATE TABLE doughnut_list
+(doughnut_name VARCHAR(10), #ç¬¬ä¸€åˆ—çš„åç§° æ•°æ®ç±»åž‹
+doughnut_type VARCHAR(6));
+
+ä¸å…è®¸ç¼ºé¡¹+ç¼ºçœå€¼
+CREATE TABLE doughnut_list
+(doughnut_name VARCHAR(10) NOT NULL,
+doughnut_type VARCHAR(6) NOT NULL DEFAULT 'something');
+
+å¸¸ç”¨æ•°æ®ç±»åž‹ # å¹¶éžæ‰€æœ‰æ•°æ®ç±»åž‹é€‚ç”¨äºŽæ²¡ä¸€ä¸ªRDBMS
+CHAR		CHAR(1)			å°äºŽ255å­—ç¬¦çš„å®šé•¿æ–‡æœ¬
+VARCHAR		VARCHAR(5)		å°äºŽ255å­—ç¬¦çš„å˜é•¿æ–‡æœ¬
+TEXT		TEXT			é•¿æ–‡æœ¬
+BLOB		BLOB			äºŒè¿›åˆ¶é•¿æ–‡æœ¬
+INT			INT				æ•´æ•°
+DECIMAL		DECIMAL(6,2)	å°æ•°
+DATETIME	DATETIME		æ—¶é—´+æ—¥æœŸ
+DATE		DATE			æ—¥æœŸ
+TIME		TIME			æ—¶é—´
+YEAR		YEAR			å¹´ä»½
+ENUM		????			é™å®šåˆæ³•è¾“å…¥ï¼Œåªèƒ½å­˜ä¸€ä¸ªé¢„å®šå€¼
+SET			????			é™å®šåˆæ³•è¾“å…¥ï¼Œå¯ä»¥å­˜å¤šä¸ªé¢„å®šå€¼
+
+æŸ¥çœ‹è¡¨å•çš„ç»“æž„
+DESC doughnut_list;
+æˆ–è€…
+DESCRIBE doughnut_list;
+
+ä¸èƒ½é€šè¿‡è¦†ç›–é‡æ–°å»ºç«‹ä¸€ä¸ªè¡¨å•æˆ–æ•°æ®åº“
+
+åˆ é™¤è¡¨å•
+# åˆ é™¤è¡¨å•å’Œé‡Œé¢çš„å†…å®¹
+DROP TABLE doughnut_list;
+
+æ·»åŠ æ•°æ®
+# æ•°æ®è¦ä¸Žåˆ—ä¸€ä¸€å¯¹åº”
+INSERT INTO my_table
+(colname1,colname2,...)
+VALUES
+('value1','value2',...);
+ä¸€æ¬¡é”®å…¥å¤šæ¡è®°å½•
+INSERT INTO a(cost,name,data) VALUES(2,'a1','da1'),(3,'a2','da2'),(4,'a3','da3');
+
+---***---
+æå–å…¨éƒ¨æ•°æ®
+SELECT * FROM my_table;
+
+ç­›é€‰æŒ‡å®šè®°å½•
+SELECT table_name1.colunm_name1,table_name2.colunm_name2 FROM table_name1, table_name2
+SELECT * FROM my_table WHERE col_name = value;
+SELECT col_name1, col_name2, col_name3 FROM my_table WHERE col_name  value;
+SELECT * FROM my_table WHERE col_name1 = value1 AND col_name2 > value2;
+SELECT * FROM my_table WHERE col_name1 = value1 OR col_name2 > value2;
+SELECT * FROM my_table WHERE col_name IS NULL;
+SELECT * FROM my_table WHERE col_name IS NOT NULL; #æ³¨æ„NOT çš„ä½ç½®
+SELECT * FROM my_table WHERE col_name LIKE '%CA'; # æŸ¥æ‰¾æ‰€æœ‰ä»¥CAç»“å°¾çš„è®°å½•ï¼Œ%è¡¨ç¤ºä»»æ„æ•°é‡çš„å­—ç¬¦
+SELECT * FROM my_table WHERE NOT col_name LIKE '%CA'; #æ³¨æ„NOT çš„ä½ç½®
+SELECT * FROM my_table WHERE col_name LIKE '_CA';  # æŸ¥æ‰¾XACå½¢å¼çš„è®°å½•ï¼Œ_è¡¨ç¤ºä»»æ„ä¸€ä¸ªå­—ç¬¦
+SELECT * FROM my_table WHERE col_name BETWEEN value1 and value2;
+SELECT * FROM my_table WHERE NOT col_name BETWEEN value1 and value2; #æ³¨æ„NOT çš„ä½ç½®
+SELECT * FROM my_table WHERE col_name IN (value1, value2, ...);
+SELECT * FROM my_table WHERE col_name NOT IN (value1, value2, ...); #æ³¨æ„NOT çš„ä½ç½®
+
+---***---
+åˆ é™¤æŒ‡å®šè®°å½•ï¼ˆç”¨æ³•ä¸ŽSELECTç›¸åŒï¼Œåªèƒ½åˆ é™¤å®Œæ•´çš„è¡Œï¼‰
+DELETE  FROM my_table;
+DELETE FROM my_table WHERE col_name  value;
+
+æ›´æ–°æ•°æ® (æ›´æ”¹ä¸ªåˆ«è®°å½•çš„ä¸ªåˆ«åˆ—)
+UPDATE my_table SET col_name1 = value1, col_name2 = value2,... WHERE ...;
+UPDATE my_table SET col_name = col_name + 1,... WHERE ...;
+
+æ“ä½œç¬¦ï¼š
+æ•°å­—ï¼š +-*/
+å­—ç¬¦ï¼š UPPER() LOWER()
+
+åœ¨æ–‡æœ¬ä¸­çš„å¼•å·ä¼šå¯¼è‡´å‡ºé”™ï¼Œä½¿ç”¨\æ¥è½¬ä¹‰
+
+æ¯”è¾ƒç¬¦å·
+ç­‰å·		=
+ä¸ç­‰å·		<>
+å°äºŽå·		<
+å¤§äºŽå·		>
+å°äºŽç­‰äºŽå·	<=
+å¤§äºŽç­‰äºŽå·	>=
+
+---***---
+FRIST NORMAL FORMS
+è®¾è®¡ä¸€ä¸ªè¡¨å•
+1.ç¡®å®šæƒ³è¦æè¿°ä»€ä¹ˆ
+2.ç¡®å®šåœ¨ä½¿ç”¨ä¸­éœ€è¦ç”¨åˆ°å“ªäº›ä¿¡æ¯
+3.å°†å·²æœ‰ä¿¡æ¯åˆ†æˆå­—æ®µç»„ç»‡æˆè¡¨å•
+
+è§„åˆ™
+1.ä¸€åˆ—çš„æ•°æ®ä¸è¦å«æœ‰å¤šä¸ªæœå¯»å€¼
+2.ä¸€ä¸ªè¡¨å•ä¸è¦æœ‰å¤šä¸ªåˆ—è¡¨è¿°åŒä¸€ä¸ªå±žæ€§
+
+æ ‡å‡†åŒ–è¡¨å•ï¼š
+1.ä¸åº”è¯¥æœ‰é‡å¤çš„æ•°æ®
+2.æœ€å°‘çš„æ•°æ®ç”¨äºŽæœç´¢
+
+æ ‡å‡†åŒ–è¿‡ç¨‹ï¼š
+1.æ¯ä¸€è¡Œå¿…é¡»åŒ…å«åŽŸå­å€¼
+2.æ¯ä¸€è¡Œå¿…é¡»æ‹¥æœ‰å”¯ä¸€ç‰¹å¾ï¼ˆPrimary Keyï¼‰
+
+Primary Key è§„åˆ™
+1.ä¸èƒ½æœ‰NULL
+2.åœ¨æ–°å»ºæ—¶å¿…é¡»è¾“å…¥
+3.åªåŒ…å«ä½¿å®ƒå”¯ä¸€çš„æœ€å°‘ä¿¡æ¯
+4.ä¸èƒ½æ”¹å˜
+
+æŸ¥çœ‹ä¿¡æ¯
+SHOW CREATE TABLE my_table;
+SHOW CREATE DATABASE my_database;
+SHOW INDEX FROM my_table;
+SHOw COLUMNS FROM my_table;
+SHOW WARNINGS;
+
+æ–°å»ºå«æœ‰ Primary Key çš„è¡¨å•
+CREATE TABLE doughnut_list
+(contact_id INT NOT NULL AUTO_INCREMENT,
+doughnut_name VARCHAR(10),
+doughnut_type VARCHAR(6),
+PRIMARY KEY (contact_id));
+
+INSERT INTO doughnut_list(doughnut_name,doughnut_type) VALUES ('val1','val2'); 
+
+---***---
+ALTER TABLE my_table
+ADD COLUMN contact_id INT NOT NULL AUTO_INCREMENT FIRST, # FIRSTè¡¨ç¤ºæ”¾åœ¨ç¬¬ä¸€åˆ—
+ADD PRIMARY KEY(contact_id);
+
+ALTER TABLE my_table
+ADD COLUMN my_col VARCHAR(10)
+AFTER col_name; # è¡¨ç¤ºåœ¨col_nameä¹‹åŽæ’å…¥
+
+å…¶ä»–å…³é”®è¯
+SECOND
+LAST
+BEFORE
+
+ALTER TABLE my_table
+RENAME TO new_table_name;
+
+ALTER TABLE my_table
+CHANGE COLUMN col_name new_col_name VARCHAR(10);
+
+ALTER TABLE my_table
+MODIFY COLUMN col_name new_type;
+
+ALTER TABLE my_table
+DROP COLUMN col_name;
+
+ALTER TABLE my_table
+DROP PRIMARY KEY;
+
+å­—ç¬¦ä¸²å‡½æ•°
+SELECT RIGHT(col_name,3) FROM my_table; # é€‰æ‹©æœ€å³è¾¹3ä¸ªå­—ç¬¦
+SELECT LEFT(col_name,2) FROM my_table; # é€‰æ‹©æœ€å·¦è¾¹2ä¸ªå­—ç¬¦
+SELECT SUBSTRING_INDEX(col_name,',',1) FROM my_table; # é€‰æ‹©ç¬¬ä¸€ä¸ª','å·¦è¾¹çš„å·¦å³å­—ç¬¦
+å…¶ä»–å‡½æ•°
+REVERSE(string) # å­—ç¬¦ä¸²å–å
+LTRIM(string) # åˆ æŽ‰å·¦è¾¹çš„ç©ºæ ¼
+RTRIM(string) # åˆ æŽ‰å³è¾¹çš„ç©ºæ ¼
+LENGTH(string) # è¿”å›žå­—ç¬¦ä¸²é•¿åº¦
+UPPER(string) # è¿”å›žå¤§å†™
+LOWER(string) # è¿”å›žå°å†™
+SUBSRT(string,nun) # è¿”å›ž string åˆ æŽ‰å‰ num ä¸ªå­—ç¬¦çš„å­—ç¬¦ä¸²
+
+---***---
+åˆ†æ”¯ç»“æž„,å¯ä»¥ç”¨åœ¨SELECT INSERT DELETE UPDATE
+UPDATE my_table
+SET new_column =
+CASE
+WHEN col_name1 = value1 THEN new_value1
+WHEN col_name2 = value2 THEN new_value2
+ELSE new_value3
+END;
+
+è¾“å‡ºæŽ’åº
+SELECT * FROM my_table WHERE col_name = value ORDER by col_name1, col_name2 DESC; #å…ˆæŒ‰ç…§col_name1å‡åºæŽ’åˆ—ï¼Œå†æŒ‰ç…§col_name2é™åºæŽ’åˆ—
+
+æ•°å­—å‡½æ•°/åˆ†ç»„
+SELECT first_name SUM(sales) FROM my_table GROUP BY first_name ORDER BY SUM(sales) DESC;
+å…¶ä»–å‡½æ•°
+AVE(NUM)
+MAX(NUM)
+MIN(NUM)
+
+æŸ¥çœ‹è¡Œæ•°
+SELECT COUNT(sale_data) FROM my_table;
+
+æŸ¥çœ‹å”¯ä¸€å€¼
+SELECT DISTINCT sale_date FROM my_table;
+
+è¾“å‡ºéƒ¨åˆ†è®°å½•
+SELECT * FROM my_table LIMIT 2;	#è¾“å‡ºå‰ä¸¤æ¡è®°å½•
+SELECT * FROM my_table LIMIT 19, 10; #è¾“å‡ºç¬¬20-30æ¡è®°å½•
+
+---***---
+åˆ›å»ºå­è¡¨
+CREATE TABLE interests(
+int_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+interest VARCHAR(50) NOT NULL,
+contact_id INT NOT NULL,
+CONSTRAINT my_contacts_contact_id_fk FOREIGN KEY (contact_id) REFERENCES my_contacts (contact_id) 
+);
+å½“æœ‰CONSTRAINTæ—¶
+1.å­è¡¨contact_idåªèƒ½å¡«å…¥æ¯è¡¨contact_idçš„å€¼
+2.å¦‚æžœå­è¡¨ä¸­å­˜åœ¨ä¸€ä¸ªFOREIGN KEYè®°å½•ï¼Œæ¯è¡¨ä¸èƒ½åˆ é™¤å¯¹åº”è®°å½•
+
+å…³ç³»æ¨¡å¼ï¼š
+one-to-one
+ä¼˜ç‚¹
+1.å½“åªè¿›è¡Œå­è¡¨PRIMARY KEYæ£€ç´¢çš„æ—¶å€™å¯ä»¥è®©æœç´¢é€Ÿåº¦æ›´å¿«
+2.å¦‚æžœæœ‰ä¸€è¡Œæ•°æ®æš‚æ—¶ä¸çŸ¥é“ï¼Œå¯ä»¥ä¸æŠŠå®ƒæ”¾åˆ°å­è¡¨åŽ»è€Œä¸ç”¨å†™NULL
+3.å¯ä»¥é™åˆ¶éƒ¨åˆ†æ•°æ®çš„è¯»å–æƒé™
+4.å°†BLOBç­‰å·¨å¤§çš„æ•°æ®å’Œä¸»è¡¨åˆ†å¼€
+
+one-to-many
+
+many-to-many
+éœ€è¦ä¸€ä¸ªjunction table
+å¤šå¯¹å¤šå…³ç³»çš„ä¸¤ä¸ªè¡¨ä¸Žjunction tableå½¢æˆä¸¤ä¸ªä¸€å¯¹å¤šå…³ç³»
+
+Second Nomal Form
+1.Be in 1NF
+2.Have no partial functional dependency(a non-key column is dependent on some, but not all, of the columns in a composite primary key)
+æ–¹æ³•
+å°†partial functional dependencyçš„åˆ—æ”¾åˆ°æ–°çš„tableä¸­
+
+Third Nomal Form
+1.Be in 2NF
+3.Have no transitive dependencies(any non-key columns is related to any non-key columns)
+
+---***---
+ç”¨å·²æœ‰ä¿¡æ¯æ–°å»ºå¡«å……æ–°è¡¨çš„ä¸‰ç§æ–¹æ³•
+æ–¹æ³•ä¸€: CREATE TABLE then INSERT with SELECT
+CREAT TABLE profession
+(
+id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY;
+profession VARCHAR(20)
+);
+INSERT INTO profession (profession)
+SELECT profession FROM my_contacts
+GROUP BY profession
+ORDER BY profession;
+
+æ–¹æ³•äºŒ: CREATE TABLE with SELECT, then ALTER to ADD PRIMARY KEY
+CREATE TABLE profession AS
+SELECT profession FROM my_contacts
+GROUP BY profession
+ORDER BY profession;
+ALTER TABLE profession
+ADD COLUMN id INT NOT NULL AUTO_INCREMENT FIRST,
+ADD PRIMARY KEY (id);
+
+æ–¹æ³•ä¸‰: CREAT TABLE with PRIMARY KAY and with SELECT all in time
+CREATE TABLE profession
+(
+id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+profession VARCHAR(20)
+)AS
+SELECT profession FROM my_contacts
+GROUP BY profession
+ORDER BY profession;
+è‹¥åˆ—åä¸åŒ
+CREATE TABLE profession
+(
+id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+profession VARCHAR(20)
+)AS
+SELECT profession AS mc_prof FROM my_contacts
+GROUP BY mc_prof
+ORDER BY mc_prof;
+
+å½“åˆ«åä¸ŽåŽŸåç›¸è¿žæ—¶å¯ä»¥çœç•¥AS
+SELECT profession AS mc_prof
+FROM my_contacts AS mc
+GROUP BY mc_prof
+ORDER BY mc_prof;
+ç­‰ä»·äºŽ
+SELECT profession mc_prof
+FROM my_contacts mc
+GROUP BY mc_prof
+ORDER BY mc_prof;
+
+å°†ä¸¤ä¸ªè¡¨çš„æ•°æ®è¿›è¡Œå…¨éƒ¨ç»„åˆç”Ÿæˆä¸€ä¸ªæ–°çš„è¡¨
+SECLCT t.toy, b.boy FROM toys AS t
+CROSS JOIN
+boys AS b;
+
+An INNER JOIN is a CROSS JOIN with some result rows removed by a condition in the query.
+An INNER JOIN combines the records from two tables using comparision operators in a condition.
+SELECT somecolumns
+FROM table1
+INNER JOIN
+table2
+ON somecondition;
+
+EQUIJOIN
+SELECT mc.last_name,
+mc.first_name,
+p.profession
+FROM my_contacts AS mc
+INNER JOIN
+profession AS p
+ON mc.prof_id = p.prof_id; # è¿”å›žä¸¤ä¸ªtableé€‰ä¸­ä¸¤åˆ—åŒ¹é…çš„å…¨éƒ¨ç»„åˆ
+
+NON-EQUIJOIN
+SECLCT t.toy, b.boy
+FROM toys AS t
+INNER JOIN
+boys AS b;
+ON b.toy_id <> t.toy_id; # è¿”å›žä¸¤ä¸ªtableé€‰ä¸­ä¸¤åˆ—ä¸åŒ¹é…çš„å…¨éƒ¨ç»„åˆ
+ORDER BY b.boy
+
+NATURAL JOIN (with same column name)
+SECLCT toys.toy, boys.boy
+FROM toys
+NATURAL JOIN
+boys;
+
+---***---
+åµŒå¥—æ£€ç´¢
+æ–¹æ³•ä¸€ï¼šåªè¿”å›žä¸¤ä¸ªåˆ—è¡¨åŒæ—¶åŒ¹é…çš„é¡¹
+SELECT mc.first_name AS firstname, mc.last_name AS lastname, mc.phone AS phone, jc.title AS title #æ”¹å˜ç”Ÿæˆè¡¨çš„åˆ—å
+FROM job_current AS jc
+NATURAL JOIN
+my_contacts AS mc
+WHERE
+jc.tittle IN (SELECT title FROM job_listings);
+
+æ–¹æ³•äºŒï¼šè¿”å›žæ‰€æœ‰å¤–å±‚åˆ—è¡¨ä¸­çš„é¡¹ï¼Œæ¯é¡¹åªè¿”å›žä¸€ä¸ªå…§å±‚åˆ—è¡¨çš„å€¼ï¼Œæœªæ‰¾åˆ°è¿”å›žNULL
+SELECT mc.first_name AS firstname,mc.last_name AS lastname,
+(SELECT state FROM zip_code WHERE mc.zhi_code = zip_code) AS state
+FROM my_contacts mc;
+
+SELECT mc.first_name, mc.last_name,jc.salary
+FROM my_contacts AS mc
+NATURAL JOIN
+job_current jc
+WHERE jc.salary > (SELECT js.salary
+FROM my_contacts mc NATURAL JOIN job_current jc
+WHERE email = 'andy@xxx.com');
+
+SELECT mc.first_name, mc.last_name,jc.salary,
+jc.salary-(SELECT AVG(salary) FROM job_current WHERE title = 'Web Developer')
+FROM my_contacts mc
+NATURAL JOIN job_current jc
+WHERE jc.title = 'Web Developer';
+
+SELECT mc.first_name, mc.last_name, mc.phone, jc.title
+FROM job_current AS jc NATURAL JOIN my_contacts AS mc
+WHERE jc.title IN (SELECT title FROM job_listings);
+
+SELECT mc.first_name, mc.last_name, mc.phone, jc.title
+FROM job_current AS jc NATURAL JOIN my_contacts AS mc
+WHERE jc.title NOT IN (SELECT title FROM job_listings);
+
+å…ˆç”Ÿæˆå¤–å±‚æ£€ç´¢çš„æŒ‡å®šè¡Œï¼Œåœ¨å°†æŒ‡å®šè¡Œçš„æ•°æ®å¸¦å…¥å†…å±‚æ£€ç´¢
+SELECT mc.first_name, mc.last_name
+FROM my_contacts AS mc
+WHERE
+3 = (SELECT COUNT(*) FROM contact_interest
+WHERE contact_id = mc.contact_id);
+
+EXISTS/NOT EXISTS
+SE:ECT mc.first_name firstname, mc.last_name lastname, mc.email email
+FROM my_contacts mc
+WHERE EXISTS
+(SELECT * FROM contact_interest ci WHERE mc.contact_id = ci.contact_id);
+
+---***---
+The LEFT OUTER JOIN matches every row in the left table with a row from the right table.
+A NULL value in the results of a LEFT OUTER JOIN means that the right table has no values that correspond to the left table.
+SELECT g.girl, t.toy
+FROM toys t
+LEFT OUTER JOIN
+girls g
+ON g.toy_id = t.toy_id
+
+The RIGHT JOIN
+ç»“æžœåŒä¸Šï¼Œåªä¸è¿‡tableé¡ºåºåè¿‡æ¥
+SELECT g.girl, t.toy
+FROM girls g
+LEFT OUTER JOIN
+toys t
+ON g.toy_id = t.toy_id
+
+self-join
+SELECT c1.name, c2.name AS boss
+FROM
+clown_info c1
+INNER JOIN 
+clown_info c2
+ON c1.boss_id = c2.id
+
+UNION(è¿”å›žå‡ ä¸ªSELECTçš„äº¤é›†ï¼Œä¸é‡å¤)
+è¦æ±‚ï¼šã€
+1.æ¯ä¸ªSELECTçš„åˆ—æ•°å¿…é¡»ä¸€æ ·ï¼Œæ•°æ®ç±»åž‹åº”è¯¥å¯¹åº”ä¸€è‡´
+2.åœ¨ä»»æ„ä¸€ä¸ªSELECTä¸­ä½¿ç”¨ORDERéƒ½ä¸èƒ½æ”¹å˜ç»“æžœçš„é¡ºåº,ORDARåº”æ”¾åœ¨æœ€åŽ
+3.æ¯ä¸ªSELECTçš„ç»“æž„åº”è¯¥ä¸€è‡´
+
+SELECT title FROM job_current
+UNION
+SELECT title FROM job_desired
+UNION
+SELECT title FROM job_listings
+ORDAR BY tittle;
+
+CREATE TABLE my_union AS
+SELECT title FROM job_current
+UNION
+SELECT title FROM job_desired
+UNION
+SELECT title FROM job_listings
+ORDAR BY tittle;
+
+UNION ALL(è¿”å›žå‡ ä¸ªSELECTçš„äº¤é›†ï¼Œä¸åˆ é‡)
+SELECT title FROM job_current
+UNION ALL
+SELECT title FROM job_desired
+UNION ALL
+SELECT title FROM job_listings
+ORDAR BY tittle;
+
+å…¶ä»–é›†åˆå…³é”®è¯
+INTERSECT	äº¤é›†
+EXCEPT		å·®é›†
+
+JOIN ä¸Ž subquery å¯ä»¥äº’ç›¸è½¬åŒ–ï¼ï¼ï¼
+
+---***---
+CHECK Bool
+CREATE TABLE piggy_bank(
+id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+coin CHAR(1) CHECK (coin IN ('P','N','D','Q'))
+);
+
+ALTER TABLE my_contacts
+ADD CONSTRAINT CHEAK gender IN ('M','F');
+
+VIEW
+å‚¨å­˜æŸ¥è¯¢è¿‡ç¨‹ï¼ˆSELECT,UPDATE,INSERT,DELETEï¼‰
+CREATE VIEW web_designers AS
+SELECT mc.firstname, mc.last_name, mc.phone, mc.email
+FROM my_contacts mc
+NATUEAL JOIN job_desired jd
+WHERE jd.title = 'Web Designer';
+æŸ¥çœ‹VIEW
+SELECT * FROM web_designers;
+åˆ é™¤VIEW
+DROP VIEW web_designers;
+ä¼˜ç‚¹
+1.å¯ä»¥æ–°å»ºä¸€ä¸ªæ•°æ®ç»“æž„è€Œä¸æ”¹å˜åŽŸæœ‰ç»“æž„
+2.å°†å¸¸ç”¨çš„æ£€ç´¢è¿‡ç¨‹è¿›è¡Œå‚¨å­˜å¯ä»¥ç®€åŒ–æ£€ç´¢å‘½ä»¤
+3.å¯ä»¥æ–°å»ºä¸€ä¸ªVIEWä»Žè€Œå¯¹ä½¿ç”¨è€…è¿›è¡Œè®¿é—®é™åˆ¶
+
+TRANSACTION
+If all the steps can't be completed without interference, none of then should be completed.
+æ­¥éª¤
+1.ç¡®ä¿è‡ªå·±çš„tableç±»åž‹ä¸ºBDBæˆ–è€…InnoDB
+ALTER TABLE my_table TYPE = InnoDB;
+2.
+START TRANSACTION;
+some commands;
+ROLLBACK; #è¿”å›žSTART TRANSACTIONçš„çŠ¶æ€
+
+START TRANSACTION;
+some commands;
+COMMIT; #ä¿å­˜çŠ¶æ€
+
+---***---
+è®¾ç½®å¯†ç 
+SET PASSWORD FOR 'root'@'localhost' = PASSWARD('dgw24s2d');
+æ·»åŠ ç”¨æˆ·
+create user elise IDENTIFIED BY 'af3rffs';
+èµ‹äºˆæƒé™
+GRAND SELECT, INSERT ON my_table TO user1, user2 WITH GRANT OPTION;
+GRAND SELECT(col_name), DELEATE ON my_table TO user1, user2;
+GRAND ALL ON my_table TO user;
+GRANT SELECT ON *.* TO user; # ç¬¬ä¸€ä¸ª*è¡¨ç¤ºæ‰€æœ‰databaseï¼Œç¬¬äºŒä¸ª*è¡¨ç¤ºæ‰€æœ‰table
+è§£é™¤æƒé™
+REVOKE SELECT ON my_table FROM elise;
+REVOKE GRANT OPTION ON DELETE ON my_table FROM user;
+å½“Aèµ‹äºˆB SELECT æƒé™åŽï¼Œç›´æŽ¥è§£é™¤Açš„ GRANT OPTION ON SELECT æƒé™ï¼ŒBå°†åŒæ—¶å¤±åŽ»SELECTæƒé™
+REVOKE SELECT ON my_table FROM A CASADE; # è§£é™¤Açš„SELECTæƒé™ï¼ŒåŒæ—¶è§£é™¤Açš„ GRANT OPTION ON SELECT æƒé™å’ŒBçš„SELECTæƒé™
+REVOKE SELECT ON my_table FROM A RESTRICT; # å› ä¸ºAèµ‹äºˆäº†BSELECTæƒé™ï¼Œæ‰€ä»¥è¿”å›žé”™è¯¯
+å»ºç«‹æƒé™ç»„ç¾¤
+CREATE ROLE data_entry;
+CRANT SELECT, INSERT ON my_table TO data_entry;
+GRANT data_entry TO user1, user2;
+GRANT data_entry TO user1, user2 WITH ADMIN OPTION; # èµ‹äºˆuser1, user2 data_entryçš„æƒé™ä»¥åŠå°†data_entryèµ‹äºˆå…¶ä»–äººçš„æƒé™
+DROP ROLE data_entry;
+REVOKE data_entry FROM user CASCADE;
+REVOKE data_entry FROM user RESTRICT;
+æ–°å»ºç”¨æˆ·å¹¶èµ‹äºˆæƒé™
+GRANT SELECT ON database.table TO user IDENTIFIED BY 'passward';
+

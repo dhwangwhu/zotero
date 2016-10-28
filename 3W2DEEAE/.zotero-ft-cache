@@ -1,0 +1,1045 @@
+Handling	  genomic	  data	  using	   Bioconductor	  II:
+GenomicRanges	 a  nd	  GenomicFeatures
+
+Motivating	 e  xamples
+• Genomic	 “  Features” (e.g.,	  genes,	  exons,	 C  pG	  islands)	 o  n	 t  he	   genome	 a  re	  often	 r  epresented	 a  s	  intervals,	 e  .g.,	  chromosome,	   start,	  end,	 s  trand.	  
+– A	  common	 t  ask	 i  s	 t  o	 e  xplore	 t  he	 o  verlaps	 o  f	 t  wo	 t  ypes	 o  f	 f  eatures,	 f  or	   example,	 H  ow	 C  pG	 i  slands	 o  verlap	 p  romoters.	  
+– Sometimes	 o  ne	 w  ants	 t  o	 o  btain	 t  he	 i  ntersect/union	 o  f	 t  wo	 s  ets	 o  f	   intervals.	  
+• To	 o  btain	 a  	  list	 o  f	  genes/exons	 f  or	  an	  organism.
+Without	 B  ioconductor	 y  ou	 h  ave	 t  o	 r  ely	 o  n	 y  our	 o  wn	 s  cripts	  for	   these	  operations.	  
+
+Today’s	 t  opics
+• GenomicRanges:	  	  package	  dealing	  with	  genomic	   intervals	  (genes,	  CpG	  islands,	  binding	  sites,	  etc.)
+– Built	 o  n	  more	 g  eneral	 p  ackage	 I  Ranges for	 r  ange	  data.	  	   – Provide	 a  	  rich	 c  ollection	  of	 f  unctions	 f  or	 g  enomic	 i  nterval	  
+operations.	  
+• GenomicFeatures:	  	  package	 f  or	  transcript	  centric	   genomic	  annotations.	 	   
+
+IRanges package
+• “The	  IRanges	  package	  is	  designed	  to	  represent	   sequences,	  ranges	  representing	  indices	  along	  those	   sequences,	  and	  data	  related	  to	  those	  ranges”.
+– sequence:	 o  rdered	 f  inite	 c  ollection	  of	 e  lements,	 s  uch	 a  s	  a	   vector	 o  f	  integers.	 N  ot	  necessarily	 D  NA	  sequence.	  
+– Consecutive	 i  ndices	 c  an	 b  e	  represented	 a  s	  a	  range	 t  o	  save	   memory	 a  nd	  computation,	 f  or	 e  xample,	 i  nstead	 o  f	  saving	   c(1,2,3,4,5),	  just	 s  ave	  1	  and	  5.	  
+
+Construct	  an	  object	  of	  IRanges
+
+• Provide	 s  tart	  and	  end	  indices:
+
+> r <- IRanges(start=c(1,3,12, 10), end=c(4, 5, 25, 19))
+>r IRanges of length 4
+start end width [1] 1 4 4 [2] 3 5 3 [3] 12 25 14 [4] 10 19 10
+• Or	  provide	 s  tart	  and	  width	  of	  each	  range:
+
+> r <- IRanges(start=c(1,3,12,
+>r IRanges of length 4
+start end width [1] 1 4 4 [2] 3 5 3 [3] 12 25 14 [4] 10 19 10
+
+10), width=c(4,
+
+3, 14, 10))
+
+Simple	  operations	  of	  an	  IRanges object
+> length(r) [1] 4 > start(r) [1] 1 3 12 10 > end(r) [1] 4 5 25 19 > width(r) [1] 4 3 14 10 > r[1:2] IRanges of length 2
+start end width [1] 1 4 4 [2] 3 5 3 > range(r) IRanges of length 1
+start end width [1] 1 25 25
+
+reduce
+• Merge	 r  edundant	 r  anges,	  and	  return	 t  he	  minimum	   non-­‐overlapping	 r  anges	  covering	 a  ll	  the	  input	  ranges.	  
+> reduce(r) IRanges of length 2
+start end width [1] 1 5 5 [2] 10 25 16
+r
+0 5 10 15 20 25
+reduce(r)
+0 5 10 15 20 25
+
+disjoin
+• Return	 a  	  set	  of	  non-­‐overlapping	 r  anges	  satisfying:
+– the	 u  nion	 o  f	  results	 i  s	  the	  same	  as	  the	  union	 o  f	 t  he	  inputs.	   – for	  every	 r  ange	  in	 t  he	  result,	 i  t	 o  verlapping	 p  attern	 w  ith	  
+the	 i  nput	 i  s	  constant.
+r
+0 5 10 15 20 25
+disjoin(r)
+0 5 10 15 20 25
+
+coverage
+• Compute	 t  he	  coverage	 d  epth	  by	  the	  input	  ranges	  of	   each	  position.	  
+r
+0 5 10 15 20 25
+
+flank
+• Create	 f  lanking	  ranges	  for	  each	  input	  range.
+r
+0 5 10 15 20 25
+flank(r, 1, both = TRUE, start = TRUE)
+0 5 10 15 20 25
+flank(r, 1, both = TRUE, start = FALSE)
+0 5 10 15 20 25
+
+Operations	  on	  two	  IRanges objects
+• Functions	 f  or	  different	 s  et	  operations	 o  f	  two	  lists	  of	   ranges:
+– union/intersect/setdiff. – countOverlaps:	 f  or	  a	  “query”	 a  nd	 a  	  “reference”,	 c  ount	 t  he	  
+number	 o  f	  ranges	 i  n	  reference	 o  verlapping	 e  ach	 r  ange	  in	   query.	   – findOverlaps:	 l  ocating	 t  he	 o  verlapping	 r  anges	 i  n	 r  eference	   for	  each	  range	 i  n	  query.	 	   
+
+Set	  operations
+r
+0 5 10 15 20 25
+r2
+0 5 10 15 20 25
+union(r, r2)
+0 5 10 15 20 25
+intersect(r, r2)
+0 5 10 15 20 25
+setdiff(r, r2)
+0 5 10 15 20 25
+
+overlaps
+
+r
+0 5 10 15 20 25
+r2
+0 5 10 15 20 25
+
+> countOverlaps(r, r2) [1] 0 0 2 3 > r %over% r2 [1] FALSE FALSE TRUE TRUE
+
+> findOverlaps(r, r2)
+
+Hits of length 5
+
+queryLength: 4
+
+subjectLength: 3
+
+queryHits subjectHits
+
+<integer> <integer>
+
+13
+
+2
+
+23
+
+3
+
+34
+
+1
+
+44
+
+2
+
+54
+
+3
+
+Rle:	  Run	  length	  encoding
+• A	  simple	  data	  compression	 m  ethod	 t  o	  represent	 a  	   long	  sequence	 i  n	  which	  consecutive	 e  lements	   often	 t  ake	  the	  same	  value.
+• Instead	  of	  saving	  the	  whole	  sequence,	 i  t	  stores	 t  he	   consecutive	 e  lements	 w  ith	  the	  same	  value	  as	  a	   single	  value	  and	  count.
+
+Create	  Rle object
+> x <- Rle(c(1,1,2,2,2)) >x 'numeric' Rle of length 5 with 2 runs
+Lengths: 2 3 Values : 1 2 > x <- Rle(values=c(1,2), lengths=c(2,3)) >x 'numeric' Rle of length 5 with 2 runs Lengths: 2 3 Values : 1 2 > as.numeric(x) [1] 1 1 2 2 2
+> x <- Rle(values=c("a","b","c"), lengths=c(2,3,4)) >x 'character' Rle of length 9 with 3 runs
+Lengths: 2 3 4 Values : "a" "b" "c" > as.character(x) [1] "a" "a" "b" "b" "b" "c" "c" "c" "c"
+
+Simple	  operations	 o  f	  Rle object	  
+> x <- Rle(c(1,1,2,2,2)) > length(x) [1] 5 > start(x) [1] 1 3 > end(x) [1] 2 5 > width(x) [1] 2 3 > nrun(x) [1] 2 > runLength(x) [1] 2 3
+
+GenomicRanges package
+• Designed	 t  o	  represent	 g  enomic	 i  ntervals	 (  genes,	 C  pG	  islands,	   binding	 s  ites,	 e  tc.)
+• Based	  on	 I  Ranges package	 a  nd	  provide	 s  upport	 f  or	   BSgenome, GenomicFeatures,	   etc.
+• Contain	 t  hree	 m  ajor	  classes:
+– GRanges:	 s  ingle	 i  nterval	 r  ange	 f  eatures:	 a  	 s  et	 o  f	  genomic	 f  eatures	 t  hat	   each	  has	 a  	  single	 s  tart	 a  nd	 e  nd	 l  ocations.
+– GRangesList:	 m  ultiple	 i  nterval	 r  ange	 f  eatures:	 e  ach	 f  eature	 h  as	   multiple	 s  tart/end	 l  ocations.	 E  x:	 a  	 t  ranscript	 h  as	 m  ultiple	 e  xons.
+– GappedAlignments:	 g  apped	 a  lignments.
+
+Create	 a  	  GRanges object
+
+Required	 f  ields:	   • seqnames:	  Rle	 o  bject	  for	  sequence	  name,	  e.g.,	  the	  chromosome	  number. • ranges:	  IRanges	 o  bject	  for	  locations. Other	  fields:	 s  trand,	  elementMetadata for	 o  ther	  information.
+
+> gr <- GRanges(seqnames = Rle(c("chr1", "chr2"), c(2, 3)),
+
++ ranges = IRanges(1:5, end = 6:10),
+
++ strand = Rle(strand(c("-", "+", "+","-")), c(1,1,2,1)),
+
++ score = 1:5, GC = seq(1, 0, length = 5))
+
+> gr
+
+GRanges with 5 ranges and 2 elementMetadata values
+
+seqnames ranges strand |
+
+score
+
+GC
+
+<Rle> <IRanges> <Rle> | <integer> <numeric>
+
+[1] chr1 [1, 6]
+
+-|
+
+1 1.00
+
+[2] chr1 [2, 7]
+
++|
+
+2 0.75
+
+[3] chr2 [3, 8]
+
++|
+
+3 0.50
+
+[4] chr2 [4, 9]
+
++|
+
+4 0.25
+
+[5] chr2 [5, 10]
+
+-|
+
+5 0.00
+
+seqlengths chr1 chr2 NA NA
+
+Operate	  on	  a	  GRanges object
+> length(gr) [1] 5 > seqnames(gr) 'factor' Rle of length 5 with 2 runs
+Lengths: 2 3 Values : chr1 chr2 Levels(2): chr1 chr2 > start(gr) [1] 1 2 3 4 5 > end(gr) [1] 6 7 8 9 10 > ranges(gr) IRanges of length 5
+start end width [1] 1 6 6 [2] 2 7 6 [3] 3 8 6 [4] 4 9 6 [5] 5 10 6
+
+> strand(gr)
+
+'factor' Rle of length 5 with 3 runs
+
+Lengths: 1 3 1
+
+Values : - + -
+
+Levels(3): + - *
+
+> elementMetadata(gr)
+
+DataFrame with 5 rows and 2 columns
+
+score
+
+GC
+
+<integer> <numeric>
+
+1 1 1.00
+
+2 2 0.75
+
+3 3 0.50
+
+4 4 0.25
+
+5 5 0.00
+
+All	 o  ther	 f  ields	 (  besides	 s  eqnames,	 r  ange	  and	  strands)	 n  eed	 t  o	   be	  accessed	  by	 e  lementMetadata	 f  unction,	 w  hich	 r  eturns	 o  ther	   fields	 a  s	  a	  data	  frame.
+
+Subsetting and	  combining
+
+> gr[1:2]
+
+GRanges with 2 ranges and 2 elementMetadata values
+
+seqnames ranges strand |
+
+score
+
+GC
+
+<Rle> <IRanges> <Rle> | <integer> <numeric>
+
+[1] chr1 [1, 6]
+
+-|
+
+1 1.00
+
+[2] chr1 [2, 7]
+
++|
+
+2 0.75
+
+seqlengths
+
+chr1 chr2
+
+NA NA
+
+> c(gr[1], gr[3])
+
+GRanges with 2 ranges and 2 elementMetadata values
+
+seqnames ranges strand |
+
+score
+
+GC
+
+<Rle> <IRanges> <Rle> | <integer> <numeric>
+
+[1] chr1 [1, 6]
+
+-|
+
+1 1.0
+
+[2] chr2 [3, 8]
+
++|
+
+3 0.5
+
+seqlengths chr1 chr2 NA NA
+
+Other	  utility	 f  unctions
+• Inherited	 f  rom	  IRanges package.	 M  ost	  of	  the	   functions	 w  orking	 f  or	  IRanges	  also	  works	 f  or	   GRanges:
+– single	 r  ange	 f  unctions:	 r  educe/disjoin/flank/coverage/etc. – set	  operation:	 i  ntersect/union/setdiff/gap.	   – overlap	 f  unctions:	 f  indOverlap,	 c  ountOverlap,	 m  atch,	 e  tc.	 	   
+• The	  results	  take	  into	  account	 t  he	  chromosome	   number	 a  nd	  strand	  directions.	  
+
+> coverage(gr)
+SimpleRleList of length 2 $chr1 'integer' Rle of length 7 with 3 runs
+Lengths: 1 5 1 Values : 1 2 1
+
+$chr2
+
+'integer' Rle of length 10 with 6 runs
+
+Lengths: 2 1 1 4 1 1
+
+Values : 0 1 2 3 2 1
+
+> reduce(gr)
+
+GRanges with 4 ranges and 0 elementMetadata values
+
+seqnames ranges strand |
+
+<Rle> <IRanges> <Rle> |
+
+[1] chr1 [2, 7]
+
++|
+
+[2] chr1 [1, 6]
+
+-|
+
+[3] chr2 [3, 9]
+
++|
+
+[4] chr2 [5, 10]
+
+-|
+
+> disjoin(gr)
+
+GRanges with 6 ranges and 0 elementMetadata values
+
+seqnames ranges strand |
+
+<Rle> <IRanges> <Rle> |
+
+[1] chr1 [2, 7]
+
++|
+
+[2] chr1 [1, 6]
+
+-|
+
+[3] chr2 [3, 3]
+
++|
+
+[4] chr2 [4, 8]
+
++|
+
+[5] chr2 [9, 9]
+
++|
+
+[6] chr2 [5, 10]
+
+-|
+
+> flank(gr, 2)
+
+GRanges with 5 ranges and 2 elementMetadata values
+
+seqnames ranges strand |
+
+score
+
+GC
+
+<Rle> <IRanges> <Rle> | <integer> <numeric>
+
+[1] chr1 [ 7, 8]
+
+-|
+
+1 1.00
+
+[2] chr1 [ 0, 1]
+
++|
+
+2 0.75
+
+[3] chr2 [ 1, 2]
+
++|
+
+3 0.50
+
+[4] chr2 [ 2, 3]
+
++|
+
+4 0.25
+
+[5] chr2 [11, 12]
+
+-|
+
+5 0.00
+
+> gr1 <- GRanges(seqnames = Rle("chr1", 2),
+
++ ranges=IRanges(start=c(1,10), end = c(5,15)))
+
+> gr2 <- GRanges(seqnames = Rle("chr1", 1),
+
++ ranges = IRanges(start=3, end = 12))
+
+> union(gr1, gr2)
+
+GRanges with 1 range and 0 elementMetadata values
+
+seqnames ranges strand |
+
+<Rle> <IRanges> <Rle> |
+
+[1] chr1 [1, 15]
+
+*|
+
+> intersect(gr1, gr2)
+
+GRanges with 2 ranges and 0 elementMetadata values
+
+seqnames ranges strand |
+
+<Rle> <IRanges> <Rle> |
+
+[1] chr1 [ 3, 5]
+
+*|
+
+[2] chr1 [10, 12]
+
+*|
+
+> setdiff(gr1, gr2)
+
+GRanges with 2 ranges and 0 elementMetadata values
+
+seqnames ranges strand |
+
+<Rle> <IRanges> <Rle> |
+
+[1] chr1 [ 1, 2]
+
+*|
+
+[2] chr1 [13, 15]
+
+*|
+
+Overlapping	 b  etween	  two	  GRanges object
+
+• findOverlaps:	 o  verlap	 q  ueries.	  
+
+> findOverlaps(gr1, gr2)
+
+An object of class "RangesMatching"
+
+Slot "matchMatrix":
+
+query subject
+
+[1,]
+
+1
+
+1
+
+[2,]
+
+2
+
+1
+
+Slot "DIM": [1] 2 1
+• %over%:	 r  eturn	 T  RUE/FALSE	 t  o	 i  ndicate	 i  f	 e  ach	  interval	 i  n	   object	 1  	  overlaps	 a  ny	  interval	 i  n	 o  bject	 2  .
+
+> gr1 %over% gr2 [1] TRUE TRUE
+
+GRangesList:	  multiple	 i  nterval	 r  ange	  features
+
+• Basically	 a  	  list	 o  f	  GRanges	 o  bjects:	  
+
+> GRangesList(gr1, gr2)
+
+GRangesList of length 2
+
+[[1]]
+
+GRanges with 2 ranges and 0 elementMetadata values
+
+seqnames ranges strand |
+
+<Rle> <IRanges> <Rle> |
+
+[1] chr1 [ 1, 5]
+
+*|
+
+[2] chr1 [10, 15]
+
+*|
+
+[[2]]
+
+GRanges with 1 range and 0 elementMetadata values
+
+seqnames ranges strand |
+
+<Rle> <IRanges> <Rle> |
+
+[1] chr1 [3, 12]
+
+*|
+
+• Subsetting by	 [  []].
+
+• Support	 s  apply/lapply.	 	   
+
+Summary	 o  f	  GenomicRanges
+• Provides	 f  lexible	  and	  efficient	 f  unctions	 t  o	  operate	   on	  the	  intervals.
+• Genomic	 i  nterval	  are	  represented	  as	 G  Ranges object,	   which	  contains	 c  hromosome	 n  ame	  in	  Rle,	  start/end	   positions	  as	  IRanges object.	  
+• For	  second	 g  eneration	 s  equencing	 d  ata	  (will	  be	   taught	  later),	  each	  sequence	 r  ead	 c  an	  be	   represented	  as	 a  n	  interval,	  which	  makes	  many	   operations	  easier.	  
+
+GenomicFeatures
+• Retrieves	  and	  manages	 d  ifferent	 g  enomic	   features	 f  rom	  public	  databases	 (  UCSC	 g  enome	   browse	 a  nd	  BioMart).
+• Provides	  convenient	 a  ccess	 f  or	  genomic	   features,	 c  ompared	 t  o	  manually	  download	   and	  read	  in	  text	 f  iles.
+
+TranscriptDb object
+• Stores	 t  ranscript	  metadata. • Backed	  by	  a	  SQLite	  database. • Three	 m  ethods	  to	  create	  a	  new	  TranscriptDb
+object:
+– makeTranscriptDbFromUCSC to	 d  ownload	 f  rom	 U  CSC	 G  enome	   browser.
+– makeTranscriptDbFromBiomartto	 d  ownload	 f  rom	 B  ioMart. – Use	  a	  data.frame	 c  ontaining	 t  ranscript	 m  etadata	 w  ith	  
+makeTranscriptDb to	 m  ake	 a  	  custom	 d  atabase.
+
+makeTranscriptDbFromUCSC
+
+> supportedUCSCtables()
+knownGene knownGeneOld3 wgEncodeGencodeManualV3 wgEncodeGencodeAutoV3 wgEncodeGencodePolyaV3 ccdsGene refGene xenoRefGene vegaGene vegaPseudoGene ensGene ...
+
+track
+
+subtrack
+
+UCSC Genes
+
+<NA>
+
+Old UCSC Genes
+
+<NA>
+
+Gencode Genes Genecode Manual
+
+Gencode Genes
+
+Genecode Auto
+
+Gencode Genes
+
+Genecode PolyA
+
+CCDS
+
+<NA>
+
+RefSeq Genes
+
+<NA>
+
+Other RefSeq
+
+<NA>
+
+Vega Genes Vega Protein Genes
+
+Vega Genes Vega Pseudogenes
+
+Ensembl Genes
+
+<NA>
+
+Creating,	  saving	 a  nd	  loading
+
+> txdb=makeTranscriptDbFromUCSC(genom="ce2",tablename="refGene") > txdb
+TxDb object: # Db type: TxDb # Supporting package: GenomicFeatures # Data source: UCSC # Genome: ce2 # Organism: Caenorhabditis elegans # UCSC Table: refGene # Resource URL: http://genome.ucsc.edu/ # Type of Gene ID: Entrez Gene ID # Full dataset: yes # miRBase build ID: NA # transcript_nrow: 50398 # exon_nrow: 153879 # cds_nrow: 131537 # Db created by: GenomicFeatures package from Bioconductor # Creation time: 2015-09-21 08:56:40 -0400 (Mon, 21 Sep 2015) # GenomicFeatures version at creation time: 1.20.3 # RSQLite version at creation time: 1.0.0 # DBSCHEMAVERSION: 1.1
+
+## slow!!!
+
+> saveDb(txdb, file="ce2_refgenes.sqlite") > txdb=loadDb("ce2_refgenes.sqlite")
+
+Retrieving	  features
+
+• Retrieve	  basic	  features:	 t  ranscripts, exons.
+
+> transcripts(txdb)
+
+GRanges object with 50398 ranges and 2 metadata columns:
+
+seqnames
+
+ranges strand |
+
+tx_id
+
+tx_name
+
+<Rle>
+
+<IRanges> <Rle> | <integer> <character>
+
+[1] chrI
+
+[11641, 16585]
+
++|
+
+1 NM_058259
+
+[2] chrI [3] chrI
+
+[15103, 16585] [32415, 32435]
+
++| +|
+
+2 NM_001306277 3 NR_049898
+
+[4] chrI
+
+[43733, 44676]
+
++|
+
+4 NM_058264
+
+[5] chrI
+
+[47472, 49414]
+
++|
+
+5 NM_001026606
+
+... [50394]
+
+... ... chrX [17623724, 17627893]
+
+... ... -|
+
+... ... 50394 NM_001029567
+
+[50395] [50396]
+
+chrX [17623724, 17628154] chrX [17670503, 17670645]
+
+-| -|
+
+50395 50396
+
+NM_171822 NR_072973
+
+[50397]
+
+chrX [17673384, 17673404]
+
+-|
+
+50397 NR_072974
+
+[50398]
+
+chrX [17680821, 17682202]
+
+-|
+
+50398 NM_001047827
+
+-------
+
+seqinfo: 7 sequences (1 circular) from ce2 genome
+
+> transcripts(txdb, vals=list(tx_chrom="chrI"))
+
+GRanges object with 5258 ranges and 2 metadata columns:
+
+seqnames
+
+ranges strand |
+
+tx_id
+
+tx_name
+
+<Rle>
+
+<IRanges> <Rle> | <integer> <character>
+
+[1] chrI
+
+[11641, 16585]
+
++|
+
+1 NM_058259
+
+[2] chrI
+
+[15103, 16585]
+
++|
+
+2 NM_001306277
+
+[3] chrI
+
+[32415, 32435]
+
++|
+
+3 NR_049898
+
+[4] chrI
+
+[43733, 44676]
+
++|
+
+4 NM_058264
+
+[5] chrI
+
+[47472, 49414]
+
++|
+
+5 NM_001026606
+
+... ...
+
+... ... ...
+
+...
+
+...
+
+[5254]
+
+chrI [15071283, 15071432]
+
+-|
+
+5254 NR_050771
+
+[5255]
+
+chrI [15075717, 15076404]
+
+-|
+
+5255 NR_050770
+
+[5256]
+
+chrI [15076106, 15076404]
+
+-|
+
+5256 NR_050768
+
+[5257]
+
+chrI [15078296, 15078629]
+
+-|
+
+5257 NR_050769
+
+[5258]
+
+chrI [15078480, 15078629]
+
+-|
+
+5258 NR_050771
+
+-------
+
+seqinfo: 7 sequences (1 circular) from ce2 genome
+
+Retrieve	 b  y	  group
+• Grouped	  features	 f  unctions	 r  etrieve	 f  eatures	   grouped	  by	  other	 f  eatures	 (  e.g.,	  genes):
+– transcriptsBy, exonsBy, cdsBy, intronsByTranscript, fiveUTRsByTranscript, threeUTRsByTranscript.
+
+> exonsBy(txdb, by=“tx”)
+
+GRangesList object of length 50398:
+
+$1
+
+GRanges object with 3 ranges and 3 metadata columns:
+
+seqnames
+
+ranges strand | exon_id exon_name exon_rank
+
+<Rle>
+
+<IRanges> <Rle> | <integer> <character> <integer>
+
+[1] chrI [11641, 11689]
+
++|
+
+1 <NA>
+
+1
+
+[2] chrI [14951, 15160]
+
++|
+
+2 <NA>
+
+2
+
+[3] chrI [16473, 16585]
+
++|
+
+4 <NA>
+
+3
+
+$2
+
+GRanges object with 2 ranges and 3 metadata columns:
+
+seqnames
+
+ranges strand | exon_id exon_name exon_rank
+
+[1] chrI [15103, 15160]
+
++|
+
+3 <NA>
+
+1
+
+[2] chrI [16473, 16585]
+
++|
+
+4 <NA>
+
+2
+
+$3
+
+GRanges object with 1 range and 3 metadata columns:
+
+seqnames
+
+ranges strand | exon_id exon_name exon_rank
+
+[1] chrI [32415, 32435]
+
++|
+
+5 <NA>
+
+1
+
+... <50395 more elements> ------seqinfo: 7 sequences (1 circular) from ce2 genome
+
+> intronsByTranscript(txdb)
+
+GRangesList object of length 50398:
+
+$1
+
+GRanges object with 2 ranges and 0 metadata columns:
+
+seqnames
+
+ranges strand
+
+<Rle>
+
+<IRanges> <Rle>
+
+[1] chrI [11690, 14950]
+
++
+
+[2] chrI [15161, 16472]
+
++
+
+$2
+
+GRanges object with 1 range and 0 metadata columns:
+
+seqnames
+
+ranges strand
+
+[1] chrI [15161, 16472]
+
++
+
+$3 GRanges object with 0 ranges and 0 metadata columns:
+seqnames ranges strand
+
+... <50395 more elements> ------seqinfo: 7 sequences (1 circular) from ce2 genome
+
+Retriving	 b  y	  overlaps
+• transcriptsByOverlaps,
+exonsByOverlaps, cdsByOverlaps:
+– return	  a	  GRangesList	 o  bject	 c  ontaining	 d  ata	 a  bout	   transcripts,	 e  xons,	 o  r	  coding	 s  equences	  that	  overlap	   genomic	 c  oordinates	 s  pecified	 b  y	  a	  GRanges	 o  bject.
+– Useful	 f  or,	 f  or	  example,	 o  btain	  a	  list	  of	  genes	   overlapping	 t  he	  binding	 s  ites	  of	  a	  TF.	  
+
+> gr=GRanges(seqnames = Rle("chrI", 2), + ranges=IRanges(start=c(10000,50000), end = c(20000,60000))) > transcriptsByOverlaps(txdb, gr)
+
+GRanges object with 10 ranges and 2 metadata columns:
+
+seqnames
+
+ranges strand |
+
+tx_id
+
+tx_name
+
+<Rle>
+
+<IRanges> <Rle> | <integer> <character>
+
+[1] chrI [11641, 16585]
+
++|
+
+1 NM_058259
+
+[2] chrI [15103, 16585]
+
++|
+
+2 NM_001306277
+
+[3] chrI [49921, 54360]
+
++|
+
+6 NM_058265
+
+[4] chrI [52370, 54360]
+
++|
+
+7 NM_001306235
+
+[5] chrI [ 4221, 10148]
+
+-|
+
+2652 NM_058260
+
+[6] chrI [17911, 21127]
+
+-|
+
+2653 NM_001306279
+
+[7] chrI [17911, 26643]
+
+-|
+
+2654 NM_001306278
+
+[8] chrI [17911, 26778]
+
+-|
+
+2655 NM_058261
+
+[9] chrI [17911, 26778]
+
+-|
+
+2656 NM_058262
+
+[10]
+
+chrI [55337, 63972]
+
+-|
+
+2658 NM_058267
+
+-------
+
+seqinfo: 7 sequences (1 circular) from ce2 genome
+
+A	  practical	 e  xample
+• Assume	  I	  have	 a  	  list	 o  f	  TF	 b  inding	 s  ites	 i  n	 h  uman	 g  enome	   hg19,	  How	 t  o	 o  btain:	  
+– GC	 c  ontent	 (  %G+%C)	 o  f	 e  ach	 s  ite. – percentage	 o  f	 g  ene	 p  romoters	 c  overed	 b  y	 t  he	 b  inding	 s  ites.	  
+• Steps:
+1. Load	 i  n	 B  Sgenome.Hsapiens.UCSC.hg19. 2. For	  each	 s  ite,	 r  etrieve	 i  ts	 D  NA	  sequence	 (  use	 V  iews	 t  o	 s  peed	 u  p). 3. Use	  alphabetFrequency to	 c  ompute	 G  C	 c  ontent.	   4. Create	 G  Ranges	 o  bject	 t  o	 r  epresent	 t  he	 b  inding	 s  ites. 5. Retrieve	 g  ene	 l  ocations	 u  sing	 G  enomicFeatures. 6. Create	 G  Ranges	 t  o	 r  epresent	 a  ll	 t  he	 g  ene	 p  romoters. 7. Use	  countOverlaps to	 a  nalyze	 t  he	 o  verlap.	  
+
+biomaRt
+• R	  interface	  to	  the	  BioMart	  databases	  (http://	   www.biomart.org).	  
+• Examples	  of	  BioMart	  databases	  are	  Ensembl,	  Uniprot	   and	  HapMap.
+• Works	 s  imilarly	  to	  GenomicFeatues,	 b  ut	  slower	 s  ince	   everything	 h  as	  to	  be	  retrieved	 f  rom	 i  nternet.	  
+• More	 f  lexible:	  have	 c  onnections	 w  ith	  affy	 I  D	  and	  GO	   annotation,	 e  tc.
+
+Review
+• We	  have	 i  ntroduced	 f  ollowing	 u  seful	 B  ioconductor	   package: GenomicRanges,	   GenomicFeatures.
+• Use	  a	  combination	 o  f	  these	  and	   Biostrings/BSgenome,	   you	 c  an	  easily	  achieve	 m  ost	   routine	 a  nalysis	  works	 f  or	  bioinformatician.
+• After	  class:
+– Review	 s  lides	 a  nd	  rerun	 t  he	 R  	  codes	 (  on	 t  he	 c  lass	   webpage).
+– Install	 G  enomicRanges and GenomicFeatures.
+

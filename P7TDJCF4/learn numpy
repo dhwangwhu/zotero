@@ -1,0 +1,22 @@
+learn numpy
+import numpy as np
+
+新建array
+np.arange(2,13,3) # start,end,step
+np.arange(15).reshape(3, 5)
+np.array( [ [1,2], [3,4] ], dtype=complex )
+
+
+新建特殊矩阵
+np.zeros( (3,4) )
+np.ones( (2,3,4), dtype=np.int16 )
+np.empty( (2,3) ) # the function empty creates an array whose initial content is random and depends on the state of the memory.
+
+特殊常数
+np.pi
+np.e
+np.nan/np.NAN
+np.Inf/np.Infinity/np.PINF
+np.NINF
+np.PZERO
+np.NZERO

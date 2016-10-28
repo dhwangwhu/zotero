@@ -1,0 +1,602 @@
+Handling	 g  enomic	 d  ata	 u  sing	   Bioconductor	 I  :
+Biostrings	 a  nd	  BSgenome
+
+Outline
+• In	  next	 t  wo	  classes,	 w  e	  will	  introduce	   functionalities	 o  f	  several	  Bioconductor	   packages	 f  or	  handling	  some	 g  enomic	 d  ata:
+– DNA	  sequences. – Genomic	 i  ntervals. – Genome	 a  nnotations,	  e.g.,	  genes,	 e  xons.
+
+Motivating	 e  xamples
+• After	  “peak”	 (  e.g.,	  TFBS)	 d  etection	 f  rom	 C  hIP-­‐seq:
+– locational	 d  istribution	 o  f	 b  inding	 s  ites,	 e  .g.,	 w  hether	 t  hey	 a  re	 c  lose	 t  o	   promoters,	 e  xons,	 i  ntrons,	 e  tc.
+– DNA	  sequence	 f  eatures	 (  GC	 c  ontents,	 C  pG	 c  ounts,	 e  tc.)	 o  f	 t  he	  binding	   sites.	  
+– motif	 e  nrichment	 o  f	 p  eaks.	  
+• Comparative	 a  nalyses:
+– overlaps	 o  f	 t  wo	 l  ists	 o  f	 p  eaks. – relationships	 o  f	 T  F	 b  inding	 a  nd	 g  ene	 e  xpressions.
+• Obtaining	 r  ead	 c  ounts	 i  n	  specified	 g  enomic	 r  egions	 f  rom	   second	 g  eneration	 s  equencing	 d  ata.	  
+These	 a  re	  routine	 w  orks	 f  or	  a	  bioinformatician!
+
+After	  these	  two	  classes
+• You	  will	  be	  able	  to:
+– Quickly	  obtain	  sequences	 a  nd	  genomic	   annotations	 f  or	  many	  species.	  
+– Explore	 t  he	  patterns	 f  or	  DNA	  sequences:	   sequence	 c  ompositions,	 m  otif	  searches,	 e  tc.
+– Compare	 m  ultiple	  lists	  of	  genomic	  intervals.
+
+How	  to	  do	  these	  without	   Bioconductor
+• For	  DNA	  sequence	 a  nalysis:
+– Download	 t  he	 s  equence	 f  ile	 (  fasta,	  a	  big	  plain	 t  ext	  file)	 a  nd	   write	 y  our	 o  wn	 p  rogram	 t  o	  analyze	  it.
+• For	  genome	 a  nnotations:
+– Obtain	 t  he	  annotation	  file	  (like	 w  e	 d  id	 i  n	  lab	 1  	  to	  download	   human	 g  enes)	  and	 a  nalyze.
+• Handling	  genomic	  intervals:	  
+– Some	 o  ther	 s  oftware	  like	 B  EDtools.	  
+
+With	  Bioconductor
+• Bioconductor	  provide	 m  any	 u  seful	 p  ackages	  for	   efficiently	 h  andling	  genome	 d  ata:
+– Biostrings defines	 c  ontainers	 a  nd	 p  rovides	 f  unctions	 f  or	 g  enome	   sequence	 d  ata.
+– BSgenome and	 o  ther	 g  enome	 d  ata	 p  ackages	 p  rovide	 f  ull	 g  enome	   sequences	 f  or	 m  any	 s  pecies.
+– GenomicRanges handles	 g  enomic	 i  nterval	 s  ets. – GenomicFeatures provide	 f  unctions	 t  o	 r  etrieve	 a  nd	 m  anage	  
+genomic	 f  eatures	 f  rom	 p  ublic	 d  atabases.	  
+These	 m  ake	  our	 w  ork	 (  and	  life)	  a	  lot	 e  asier!
+
+Biostrings
+• Containers	 f  or	  representing	 (  large)	  biological	   sequences.	  
+• Provide	 a  	  rich	  collection	  of	  utility	  functions	 f  or	  basic	   operations:
+– Storing,	 s  ubsetting,	 m  atching	 a  nd	 a  lignment.
+• Computationally	 e  fficient:	  
+– Using	  bit	 p  attern	 t  o	  encode	 t  he	 s  equence	 d  ata.
+
+Operations	  on	  Single	  strings:	   XString class	  and	  subclasses
+• XString is	  a	  “virtual	 c  lass”	  and	 c  annot	 b  e	 “  instantiated”	   (cannot	 c  reate	  a	  XString object).
+• Four	 s  ubclasses:	  
+– BString:	  for	 s  toring	 a  	 g  eneral	 s  tring. – DNAString:	 f  or	 s  toring	 a  	 D  NA	  (nucleotide)	 s  equence. – RNAString:	 f  or	 s  toring	 a  	 R  NA	 s  equence.	   – AAString:	 f  or	 s  toring	 p  rotein	 (  amino	 a  cid)	 s  equence.
+• Objects	 f  rom	  all	 f  our	  subclasses	 o  perate	 s  imilarly.
+
+Basic	  operations	  of	  BString
+
+• Create	 a  n	  object	 o  f	  Biostrings:
+> library(Biostrings)
+> a=BString("I am a string!") >a
+14-letter "BString" instance seq: I am a string! > length(a) [1] 14
+
+• Subsetting:
+
+> a[1:4]
+4-letter "BString" instance seq: I am > subseq(a,1,4)
+4-letter "BString" instance seq: I am
+
+The	  subseq	  function	  is	  more	  efficient	  than	   []	 a  ccording	  to	  the	  manual.
+
+• Revert
+> rev(a) 14-letter "BString" instance
+seq: !gnirts a ma I
+• Comparison	 a  nd	 d  ump	 t  o	 a  	  (real)	  string
+> a=="I am" [1] FALSE > a[1:4]=="I am" [1] TRUE > toString(a) [1] "I am a string!" > class(a) [1] "BString" attr(,"package") [1] "Biostrings" > class(toString(a)) [1] "character"
+
+DNAString/RNAString
+Only	  difference	 i  s	  that	  they	  only	  take	 “  valid”	   characters	 t  o	  represent	 n  ucleotides:	  
+> IUPAC_CODE_MAP A C G T MR W S Y KV
+"A" "C" "G" "T" "AC" "AG" "AT" "CG" "CT" "GT" "ACG" HDBN
+"ACT" "AGT" "CGT" "ACGT" > DNA_ALPHABET
+[1] "A" "C" "G" "T" "M" "R" "W" "S" "Y" "K" "V" "H" "D" "B" "N" "-" "+" > DNA_BASES [1] "A" "C" "G" "T" > RNA_ALPHABET
+[1] "A" "C" "G" "U" "M" "R" "W" "S" "Y" "K" "V" "H" "D" "B" "N" "-" "+" > RNA_BASES [1] "A" "C" "G" "U"
+
+Creating	  DNA/RNA	  strings
+> a=DNAString("I am a string")
+Error in .charToXString(basetype, x, start, end, width) : key 73 not in lookup table
+> a=DNAString("ATTGCC") >a
+6-letter "DNAString" instance seq: ATTGCC > b=RNAString("ATTGCC") Error in .charToXString(basetype, x, start, end, width) :
+key 84 not in lookup table > b=RNAString("AUUGCC") >b
+6-letter "RNAString" instance seq: AUUGCC
+
+Simple	  frequency	  counting
+> alphabetFrequency(a) ACGTMRWSYKVHDBN-+ 12120000000000000
+> alphabetFrequency(a, baseOnly=TRUE) A C G T other 12120
+> letterFrequency(a,"C") C 2
+> letterFrequency(a,"CG") C|G
+3
+
+Complements
+>a 6-letter "DNAString" instance
+seq: ATTGCC
+> complement(a) 6-letter "DNAString" instance
+seq: TAACGG
+> reverseComplement(a) 6-letter "DNAString" instance
+seq: GGCAAT
+
+Single	  string	  matching	  and	  alignment
+• Functions	 a  re	  divided	  into	  four	  groups:
+– Finding	 o  ccurrences	 o  f	  a	  given	 p  attern:	 m  atchPattern,	   countPattern,	  vmatchPattern,	  vcountPattern
+– Matching	 a  	  dictionary	 o  f	  patterns	 a  gainst	 a  	  reference:	   matchPDict,	 c  ountPDict
+– Matching/counting	 w  ith	 p  osition	 W  eight	 M  atrix	 (  PWM):	   matchPWM,	 c  ountPWM,	  PWMscoreStartingAt.
+– Global/local	 a  lignment:	 p  airwiseAlignment,	 s  tringDist
+
+matchPattern	  
+
+• Finds	 o  ccurrences	 o  f	  a	  given	 p  attern	 i  n	  a	  sequence,	 a  llowing	   mismatch	 a  nd	 i  nsertion/deletions	 (  indels):
+
+> a=DNAString("ACGTACGTACGC")
+
+> matchPattern("CGT", a)
+
+Views on a 12-letter DNAString subject
+
+subject: ACGTACGTACGC
+
+views:
+
+start end width
+
+[1] 2 4 3 [CGT]
+
+[2] 6 8 3 [CGT]
+
+> matchPattern("CGT", a, max.mismatch=1)
+
+Views on a 12-letter DNAString subject
+
+subject: ACGTACGTACGC
+
+views:
+
+start end width
+
+[1] 2 4 3 [CGT]
+
+[2] 6 8 3 [CGT]
+
+[3] 10 12
+
+3 [CGC]
+
+> m=matchPattern("CGT", a, max.mismatch=1) > start(m) [1] 2 6 10 > end(m) [1] 4 8 12 > length(m) [1] 3 > countPattern("CGT", a, max.mismatch=1) [1] 3
+• These	 f  unctions	 c  an	 b  e	  used	 t  o	  compute	 n  -­‐mer occurrence	 i  n	 a  	  large	  genome	 e  fficiently.	 F  or	 e  xample:
+– GC	  content:	 o  ccurrence	 o  f	  “C”	  +	  occurrence	 o  f	  “G”	   (alternatively	 t  his	 c  an	  be	 o  btained	 u  sing	 f  requency	   functions	 w  hich	 i  s	  more	  efficient).	  
+– CpG content:	 o  ccurrence	 o  f	  “CG”.
+
+matchPDict
+• Finding	  occurrence	 f  or	  a	  set	  of	  patterns.
+– Alternatively	  you	 c  an	 w  rite	 a  	  loop	 b  ut	 t  his	  is	  much	 m  ore	   efficient	 (  R	  loops	 a  re	  notoriously	 s  low).
+> a=DNAString("ACGTACGTACGC") > dict0=PDict(c("CGT","ACG")) > mm=matchPDict(dict0, a) > mm[[1]] IRanges of length 2
+start end width [1] 2 4 3 [2] 6 8 3 > mm[[2]] IRanges of length 3
+start end width [1] 1 3 3 [2] 5 7 3 [3] 9 11 3
+
+Working	 w  ith	  PWM
+PWM:	  Position	 W  eight	  Matrix,	 u  sed	  to	 r  epresent	 D  NA	 m  otifs.
+> a=DNAString("ACGTACGTACTC") > motif=matrix(c(0.97,0.01,0.01,0.01,0.1,0.5,0.39,0.01,0.01,0.05,0.5,0.44),
+nrow=4) > rownames(motif)=c("A","C","G","T") > motif
+[,1] [,2] [,3] A 0.97 0.10 0.01 C 0.01 0.50 0.05 G 0.01 0.39 0.50 T 0.01 0.01 0.44 > matchPWM(motif, a)
+Views on a 12-letter DNAString subject subject: ACGTACGTACTC views:
+start end width [1] 1 3 3 [ACG] [2] 5 7 3 [ACG] [3] 9 11 3 [ACT] > countPWM(motif, a) [1] 3 > PWMscoreStartingAt(motif, a, 1:10)
+[1] 1.97 0.84 0.03 0.16 1.97 0.84 0.03 0.16 1.91 0.07
+
+Operations	  on	  multiple	  strings:	   String	  views	  and	  set
+• Operations	 o  n	  multiple	 s  trings	 c  an	  be	  achieved	 i  n	 a  	  loop,	   but	 v  ery	  inefficient.	  
+• Multiple	 s  trings	 a  re	  derived	 f  rom	 a  	  “mother”	 s  tring,	  and	   put	 i  nto	 a  	  string	  “view”	 o  r	  a	  “set”.
+• XStringViews:	 c  ontains multiple	 “  views”	 (  start/end	   locations)	 o  f	 t  he	  same	  string.	 	   
+• DNAStringSet/RNAStringSet:	 s  imilar	 b  ut	 c  reated	 a  ctual	   DNA/RNAString	 i  nstances.	  
+• StringSet	 a  llows	 m  ore	 o  perations	 t  han	  StringViews.	  
+
+Basic	  operations	  on	  XStringViews
+> a=DNAString("ACGTACGTACTC") > a2=Views(a, start=c(1,5,8), end=c(3,8,12)) > a2
+Views on a 12-letter DNAString subject subject: ACGTACGTACTC views:
+start end width [1] 1 3 3 [ACG] [2] 5 8 4 [ACGT] [3] 8 12 5 [TACTC] > subject(a2)
+12-letter "DNAString" instance seq: ACGTACGTACTC > length(a2) [1] 3 > start(a2) [1] 1 5 8 > end(a2) [1] 3 8 12
+
+> alphabetFrequency(a2, baseOnly=TRUE)
+
+A C G T other
+
+[1,] 1 1 1 0
+
+0
+
+[2,] 1 1 1 1
+
+0
+
+[3,] 1 2 0 2
+
+0
+
+> a2==DNAString("ACGT") [1] TRUE TRUE FALSE
+
+> toString(a2) [1] "ACGT, ACGT, ACTC”
+
+Basic	  operations	  on	  DNAStringSet
+
+> a=DNAString("ACGTACGTACTC")
+
+> a2=DNAStringSet(a, start=c(1,5,9), end=c(4,8,12))
+
+> a2
+
+A DNAStringSet instance of length 3
+
+width seq
+
+[1] 4 ACGT
+
+[2] 4 ACGT
+
+[3] 4 ACTC
+
+> a2[[1]]
+
+4-letter "DNAString" instance
+
+seq: ACGT
+
+> alphabetFrequency(a2, baseOnly=TRUE)
+
+A C G T other
+
+[1,] 1 1 1 1
+
+0
+
+[2,] 1 1 1 1
+
+0
+
+[3,] 1 2 0 1
+
+0
+
+Some	  Operations	 o  nly	  allowed	 f  or	  StringSet	  not	   Views,	 s  uch	  as	  set	  operations
+> a1=DNAStringSet(a, start=c(1,5,9), end=c(4,8,12)) > a1
+A DNAStringSet instance of length 3 width seq
+[1] 4 ACGT [2] 4 ACGT [3] 4 ACTC > unique(a1)
+A DNAStringSet instance of length 2 width seq
+[1] 4 ACGT [2] 4 ACTC > a2=Views(a, start=c(1,5,9), end=c(4,8,12)) > unique(a2) Error in duplicated.default(x, incomparables = incomparables, ...) :
+duplicated() applies only to vectors
+
+> a1=Views(a, start=c(1,9), end=c(4,12)) > a1
+Views on a 12-letter DNAString subject subject: ACGTACGTACTC views:
+start end width [1] 1 4 4 [ACGT] [2] 9 12 4 [ACTC] > a2=Views(a, start=c(1), end=c(4)) > a2
+Views on a 12-letter DNAString subject subject: ACGTACGTACTC views:
+start end width [1] 1 4 4 [ACGT] > setdiff(a1,a2) ## this will generate error Error in as.vector(x) : no method for coercing this S4 class to a vector > union(a1, a2) Error in as.vector(x) : no method for coercing this S4 class to a vector
+
+> a1=DNAStringSet(a, start=c(1,9), end=c(4,12)) > a1
+A DNAStringSet instance of length 2 width seq
+[1] 4 ACGT [2] 4 ACTC > a2=DNAStringSet(a, start=c(1), end=c(4)) > a2
+A DNAStringSet instance of length 1 width seq
+[1] 4 ACGT > setdiff(a1,a2)
+A DNAStringSet instance of length 1 width seq
+[1] 4 ACTC > union(a1,a2)
+A DNAStringSet instance of length 2 width seq
+[1] 4 ACGT [2] 4 ACTC
+
+Matching	  with	  multiple	  strings
+• Use	 v  matchPattern and	  vmatchPDict. • No	  corresponding	 f  unction	 f  or	  PWM.	  
+> a=DNAString("ACGTACGTACTC") > a2=DNAStringSet(a, start=c(1,5,9), end=c(4,8,12)) > vv=vmatchPattern("CG", a2) > vv MIndex object of length 3 > vv[[1]] IRanges of length 1
+start end width [1] 2 3 2
+
+These	  don’t	  work	  for	  Views
+> a2=Views(a, start=c(1,5,9), end=c(4,8,12)) > a2
+Views on a 12-letter DNAString subject subject: ACGTACGTACTC views:
+start end width [1] 1 4 4 [ACGT] [2] 5 8 4 [ACGT] [3] 9 12 4 [ACTC]
+> vv=vmatchPattern("CG", a2) Error in .local(pattern, subject, max.mismatch, min.mismatch, with.indels, :
+XStringViews objects are not supported yet, sorry
+
+BSgenome and	  genome	  data	 p  ackages
+• BSgenome:	  provides	 t  he	  infrastructure	  and	 h  igher	   level	  functions.
+• Genome	 d  ata	  packages:	  
+– Provide	 w  hole	 g  enome	 s  equences	 f  or	  many	 g  enomes	 (  77	   so	  far).
+– Naming	  rule:	 B  Sgenome.species.provider.build. – Data	  stored	 i  n	 b  asic	 c  ontainers	 d  efined	 i  n	 B  iostrings,	 e  .g.,	  
+DNAString. – Need	  to	 b  e	  installed	 i  ndividually	 u  sing	 b  iocLite(),	 L  ike	  
+other	 b  ioconductor packages.
+
+Available	  genomes	 d  ata
+> available.genomes() [1] "BSgenome.Alyrata.JGI.v1" [2] "BSgenome.Amellifera.BeeBase.assembly4" [3] "BSgenome.Amellifera.UCSC.apiMel2" [4] "BSgenome.Amellifera.UCSC.apiMel2.masked" [5] "BSgenome.Athaliana.TAIR.04232008" [6] "BSgenome.Athaliana.TAIR.TAIR9" [7] "BSgenome.Btaurus.UCSC.bosTau3" [8] "BSgenome.Btaurus.UCSC.bosTau3.masked" [9] "BSgenome.Btaurus.UCSC.bosTau4" [10] "BSgenome.Btaurus.UCSC.bosTau4.masked" ... [67] "BSgenome.Rnorvegicus.UCSC.rn5" [68] "BSgenome.Rnorvegicus.UCSC.rn5.masked" [69] "BSgenome.Rnorvegicus.UCSC.rn6" [70] "BSgenome.Scerevisiae.UCSC.sacCer1" [71] "BSgenome.Scerevisiae.UCSC.sacCer2" [72] "BSgenome.Scerevisiae.UCSC.sacCer3" [73] "BSgenome.Sscrofa.UCSC.susScr3" [74] "BSgenome.Sscrofa.UCSC.susScr3.masked" [75] "BSgenome.Tgondii.ToxoDB.7.0" [76] "BSgenome.Tguttata.UCSC.taeGut1" [77] "BSgenome.Tguttata.UCSC.taeGut1.masked”
+
+Load	  the	  genome	  data	  package
+
+> library(BSgenome.Hsapiens.UCSC.hg18)
+
+> ls("package:BSgenome.Hsapiens.UCSC.hg18")
+
+[1] "BSgenome.Hsapiens.UCSC.hg18" "Hsapiens"
+
+> Hsapiens
+
+Human genome:
+
+# organism: Homo sapiens (Human)
+
+# provider: UCSC# provider version: hg18
+
+# release date: Mar. 2006# release name: NCBI Build 36.1
+
+# 49 sequences:
+
+# chr1
+
+chr2
+
+chr3
+
+chr4
+
+chr5
+
+# chr6
+
+chr7
+
+chr8
+
+chr9
+
+chr10
+
+# chr11
+
+chr12
+
+chr13
+
+chr14
+
+chr15
+
+# chr16
+
+chr17
+
+chr18
+
+chr19
+
+chr20
+
+# chr21
+
+chr22
+
+chrX
+
+chrY
+
+chrM
+
+# chr5_h2_hap1 chr6_cox_hap1 chr6_qbl_hap2 chr22_h2_hap1 chr1_random
+
+# chr2_random chr3_random chr4_random chr5_random chr6_random
+
+# chr7_random chr8_random chr9_random chr10_random chr11_random
+
+# chr13_random chr15_random chr16_random chr17_random chr18_random
+
+# chr19_random chr21_random chr22_random chrX_random
+
+# (use 'seqnames()' to see all the sequence names, use the '$' or '[[' operator
+
+# to access a given sequence)
+
+Basic	  operations
+• Access	  the	  sequence:
+> Hsapiens$chr1 247249719-letter "DNAString" instance seq: TAACCCTAACCCTAACCCTAACCCTAACCCTAACCC...NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+• Data	  are	  not	  loaded	  until	  accessed.	   • Some	  simple	  information	  can	  be	  obtained	 w  ithout	  
+loading	  in	  the	  data:
+
+> seqnames(Hsapiens)
+
+[1] "chr1"
+
+"chr2"
+
+[5] "chr5"
+
+"chr6"
+
+[9] "chr9"
+
+"chr10"
+
+[13] "chr13"
+
+"chr14"
+
+[17] "chr17"
+
+"chr18"
+
+[21] "chr21"
+
+"chr22"
+
+...
+
+> seqlengths(Hsapiens)
+
+chr1
+
+chr2
+
+247249719
+
+242951149
+
+chr6
+
+chr7
+
+170899992
+
+158821424
+
+chr11
+
+chr12
+
+134452384
+
+132349534
+
+chr16
+
+chr17
+
+88827254
+
+78774742
+
+chr21
+
+chr22
+
+46944323
+
+49691432
+
+...
+
+"chr3" "chr7" "chr11" "chr15" "chr19" "chrX"
+
+"chr4" "chr8" "chr12" "chr16" "chr20" "chrY"
+
+chr3 199501827
+chr8 146274826
+chr13 114142980
+chr18 76117153
+chrX 154913754
+
+chr4 191273063
+chr9 140273252
+chr14 106368585
+chr19 63811651
+chrY 57772954
+
+chr5 180857866
+chr10 135374737
+chr15 100338915
+chr20 62435964
+chrM 16571
+
+Counting	  and	  matching
+> alphabetFrequency(Hsapiens$chr1, baseOnly=TRUE) A C G T other
+65491918 46964756 46956489 65586556 22250000
+> alphabetFrequency(Hsapiens$chr1, baseOnly=TRUE) / length(Hsapiens$chr1) A C G T other
+0.26488167 0.18994867 0.18991524 0.26526443 0.08998999
+> mm=matchPattern("CG", Hsapiens$chr1) > length(mm) [1] 2281713
+
+> mm
+
+Views on a 247249719-letter DNAString subject
+
+subject: TAACCCTAACCCTAACCCTAACCCTAACCCTAAC...NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+
+views:
+
+start
+
+end width
+
+[1] 469 470 2 [CG]
+
+[2] 471 472 2 [CG]
+
+[3] 484 485 2 [CG]
+
+[4] 489 490 2 [CG]
+
+[5] 493 494 2 [CG]
+
+... ... ... ... ...
+
+[2281709] 247199441 247199442
+
+2 [CG]
+
+[2281710] 247199447 247199448
+
+2 [CG]
+
+[2281711] 247199491 247199492
+
+2 [CG]
+
+[2281712] 247199632 247199633
+
+2 [CG]
+
+[2281713] 247199679 247199680
+
+2 [CG]
+
+SNPs
+
+• SNP	  information	 f  rom	 d  bSNP are	  available:	  
+
+> available.SNPs() [1] "SNPlocs.Hsapiens.dbSNP.20090506" [3] "SNPlocs.Hsapiens.dbSNP.20101109" [5] "SNPlocs.Hsapiens.dbSNP.20111119”
+
+"SNPlocs.Hsapiens.dbSNP.20100427" "SNPlocs.Hsapiens.dbSNP.20110815" "SNPlocs.Hsapiens.dbSNP.20120608"
+
+• SNP	  data	 c  an	  be	  installed	 a  s	  other	 B  ioconductor	 p  ackages:
+
+> source("http://bioconductor.org/biocLite.R") > biocLite("SNPlocs.Hsapiens.dbSNP.20120608”)
+> installed.SNPs() [1] "SNPlocs.Hsapiens.dbSNP.20120608"
+
+SNP	  injection
+• SNPs	  can	  be	  “injected”	 i  nto	  the	  reference	  genome	 t  o	   create	  a	  reference	 w  ith	  the	  SNPs.	  
+> library(BSgenome.Hsapiens.UCSC.hg19) > SnpHsapiens <- injectSNPs(Hsapiens,
+"SNPlocs.Hsapiens.dbSNP.20120608") > SnpHsapiens Human genome | | organism: Homo sapiens (Human) | provider: UCSC | provider version: hg19 | release date: Feb. 2009 | release name: Genome Reference Consortium GRCh37 | with SNPs injected from package:SNPlocs.Hsapiens.dbSNP.20120608
+
+More	  on	  SNPs
+
+> snpcount(SnpHsapiens) chr1 chr2 chr3 chr4 chr5 chr6 chr7 chr8 chr9 chr10 3517088 3751808 3130073 3091112 2827921 2752803 2557048 2455150 1944002 2168513
+chr11 chr12 chr13 chr14 chr15 chr16 chr17 chr18 chr19 chr20 2196807 2104180 1534404 1421772 1299703 1452916 1247508 1224385 997260 1052332
+chr21 chr22 chrX chrY 632005 609352 1644601 84028
+
+> head(snplocs(SnpHsapiens, "chr1"))
+
+RefSNP_id alleles_as_ambig loc
+
+1 201752861
+
+M 10177
+
+2 201694901
+
+Y 10180
+
+3 200279319
+
+M 10231
+
+4 145599635
+
+Y 10234
+
+5 148908337
+
+W 10248
+
+6 199706086
+
+M 10250
+
+> IUPAC_CODE_MAP ACGT
+"A" "C" "G" "T" HDBN
+"ACT" "AGT" "CGT" "ACGT"
+
+M "AC"
+
+R "AG"
+
+W "AT"
+
+S "CG"
+
+Y "CT"
+
+KV "GT" "ACG"
+
+Review
+• We	  have	 i  ntroduced	 f  ollowing	 u  seful	 B  ioconductor	   package:	  	  Biostrings,BSgenome.
+• To	  do	  after	  this	  class:
+– Install	 f  ollowing	 B  ioconductor	 p  ackages	  on	 y  our	 c  omputer:	  
+Biostrings, BSgenome, BSgenome.Celegans.UCSC.ce2,
+BSgenome.Hsapiens.UCSC.hg19.
+– Review	 s  lides	 a  nd	  rerun	 t  he	 R  	  codes	 (  on	 t  he	 c  lass	   webpage).
+– Start	  to	  think	 a  bout	 f  inal	 p  roject	 t  opic.
+

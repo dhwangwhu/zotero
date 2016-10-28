@@ -1,0 +1,430 @@
+ # æ ‡å‡†åšå›¾
+library(ComplexHeatmap)
+
+mat = matrix(rnorm(80, 2), 8, 10)
+mat = rbind(mat, matrix(rnorm(40, -2), 4, 10))
+rownames(mat) = paste0("R", 1:12)
+colnames(mat) = paste0("C", 1:10)
+
+mat_letters = matrix(sample(letters[1:4], 100, replace = TRUE), 10)
+ht_global_opt(heatmap_row_names_gp = gpar(fontface = "italic"), 
+              heatmap_column_names_gp = gpar(fontsize = 14))
+ht1 = Heatmap(mat, name = "ht1", row_title = "Heatmap 1", column_title = "Heatmap 1", 
+    column_title_gp = gpar(fontsize = 20, fontface = "bold"), row_dend_side = "right",
+    column_dend_height = unit(2, "cm"), clustering_distance_rows = "pearson")
+ht2 = Heatmap(mat, name = "ht2", row_title = "Heatmap 2", column_title = "Heatmap 2", width = unit(5, "cm"), cluster_rows = FALSE,
+    clustering_distance_rows = function(m) dist(m), cell_fun = function(j, i, x, y, w, h, col) {
+        grid.text(mat_letters[i, j], x, y)
+    }, column_names_side = "top", column_dend_side = "bottom", show_row_names = FALSE)
+ht3 = Heatmap(mat, name = "ht3", row_title = "Heatmap 3", column_title = "Heatmap 3", show_column_dend = FALSEï¼Œ
+    row_names_gp = gpar(fontsize = 20))
+ht_list = ht1 + ht2 + ht3
+
+draw(ht_list, row_title = "Two heatmaps, row title", row_title_gp = gpar(col = "red"),
+    column_title = "Two heatmaps, column title", column_title_side = "bottom", 
+    gap = unit(c(3, 6, 0), "mm"), main_heatmap = "ht1")
+# gpar è®¾ç½®å­—ä½“å­—å·
+# width å›¾çš„å®½åº¦
+# row_dend_side åœ¨å“ªè¾¹æ˜¾ç¤ºèšç±»æ ‘
+# column_names_side åœ¨å“ªè¾¹æ˜¾ç¤ºåˆ—å
+# show_row_names æ˜¯å¦æ˜¾ç¤ºè¡Œå
+# column_dend_height èšç±»æ ‘çš„é•¿åº¦å•ä½
+# clustering_distance_rows èšç±»æ ‘çš„è®¡ç®—æ–¹æ³•
+# clustering_distance_rows = function(m) dist(m) è‡ªå®šä¹‰çš„èšç±»æ ‘è®¡ç®—æ–¹æ³•
+# cluster_rows è¡Œæ˜¯å¦èšç±»
+# show_column_dend æ˜¯å¦æ˜¾ç¤ºåˆ—èšç±»
+# grid.text åœ¨å•å…ƒæ ¼ä¸Šå†™å­—
+# gap å„ä¸ªå›¾ä¹‹é—´çš„è·ç¦»
+# main_heatmap ä»¥å“ªä¸ªå›¾ä¸ºä¸»å›¾
+
+# èŽ·å¾—çƒ­å›¾èšç±»é¡ºåº
+row_order(ht_list)
+column_order(ht_list)
+
+# èŽ·å¾—çƒ­å›¾èšç±»æ ‘
+row_dend(ht_list)
+column_dend(ht_list)
+
+
+
+# å„ç§åˆ†ç»„
+# k-mean åˆ’åˆ†
+# æŒ‰è¡Œåˆ†ä¸¤ç»„
+Heatmap(mat, name = "foo", km = 2)
+# ä»Žä¸Šåˆ°ä¸‹ï¼Œ6è¡ŒAç»„ï¼Œ6è¡ŒBç»„
+Heatmap(mat, name = "foo", split = rep(c("A", "B"), 6))
+# åˆ†ä¸ºA/Cï¼ŒA/Dï¼ŒB/Cï¼ŒB/Då››ç»„ï¼Œæ¯ç»„3è¡Œ
+Heatmap(mat, name = "foo", split = data.frame(rep(c("A", "B"), 6), rep(c("C", "D"), each = 6)))
+# åˆ†ç»„åå­—çš„é—´éš”å°†/æ¢æˆ\n
+Heatmap(mat, name = "foo", split = data.frame(rep(c("A", "B"), 6), rep(c("C", "D"), each = 6)), 
+    combined_name_fun = function(x) paste(x, collapse = "\n"))
+# 
+Heatmap(mat, name = "foo", km = 2, split = factor(rep(c("A", "B"), 6), levels = c("B", "A")), 
+    combined_name_fun = function(x) paste(x, collapse = "\n"))
+# åˆ†ç»„ï¼Œä½†ä¸æ˜¾ç¤ºåˆ†ç»„åç§°
+Heatmap(mat, name = "foo", km = 2, split = rep(c("A", "B"), 6), combined_name_fun = NULL)
+
+# æŒ‰ç…§éž k-mean æ–¹æ³•èšç±»
+pa = pam(mat, k = 3)
+Heatmap(mat, name = "foo", split = paste0("pam", pa$clustering))
+
+# å„åˆ†ç»„çš„ç»„é—´è·
+Heatmap(mat, name = "foo", split = paste0("pam", pa$clustering), gap = unit(5, "mm"))
+
+# ç»™åˆ†ç»„ååŠ é¢œè‰²
+Heatmap(mat, name = "foo", km = 2, row_title_gp = gpar(col = c("red", "blue"), font = 1:2),
+    row_names_gp = gpar(col = c("green", "orange"), fontsize = c(10, 14)))
+# æŒ‰ç…§å·²èšç±»çš„æ–¹å¼èšç±»
+dend = hclust(dist(mat))
+dend = color_branches(dend, k = 2)
+Heatmap(mat, name = "foo", cluster_rows = dend, split = 2)
+
+
+
+# è‡ªå®šä¹‰çƒ­å›¾ç±»åž‹
+# ç›¸å…³æ°”æ³¡å›¾
+cor_mat = cor(mat)
+od = hclust(dist(cor_mat))$order
+cor_mat = cor_mat[od, od]
+nm = rownames(cor_mat)
+col_fun = circlize::colorRamp2(c(-1, 0, 1), c("green", "white", "red"))
+# `col = col_fun` here is used to generate the legend
+Heatmap(cor_mat, name = "correlation", col = col_fun, rect_gp = gpar(type = "none"), 
+    cell_fun = function(j, i, x, y, width, height, fill) {
+        grid.rect(x = x, y = y, width = width, height = height, gp = gpar(col = "grey", fill = NA))
+        if(i == j) {
+            grid.text(nm[i], x = x, y = y)
+        } else if(i > j) {
+            grid.circle(x = x, y = y, r = abs(cor_mat[i, j])/2 * min(unit.c(width, height)), 
+                gp = gpar(fill = col_fun(cor_mat[i, j]), col = NA))
+        } else {
+            grid.text(sprintf("%.1f", cor_mat[i, j]), x, y, gp = gpar(fontsize = 8))
+        }
+    }, cluster_rows = FALSE, cluster_columns = FALSE,
+    show_row_names = FALSE, show_column_names = FALSE)
+
+
+
+# æ³¨é‡Šè¡Œï¼ˆé€åˆ—æ³¨é‡Šï¼‰
+# å•è¡Œæ³¨é‡Š
+df = data.frame(type = c(rep("a", 5), rep("b", 5)))
+ha = HeatmapAnnotation(df = df, col = list(type = c("a" =  "red", "b" = "blue"))) # æŒ‰ lavel åˆ†é…é¢œè‰²
+
+ha = HeatmapAnnotation(df = data.frame(age = sample(1:20, 10)),
+    col = list(age = colorRamp2(c(0, 20), c("white", "red")))) # åˆ†é…æ¸å˜è‰²
+
+# å¤šè¡Œæ³¨é‡Š
+df2 = data.frame(type = c(rep("a", 5), rep("b", 5)),
+                age = sample(1:20, 10))  # å¤šè¡Œæ³¨é‡Šç”¨ dataframe è¡¨ç¤º
+df2$type[5] = NA
+df2$age[5] = NA
+ha = HeatmapAnnotation(df = df2, 
+  col = list(type = c("a" =  "red", "b" = "blue"),
+             age = colorRamp2(c(0, 20), c("white", "red"))),
+  na_col = "grey") # Na çš„é¢œè‰²
+
+# åŠ æ³¨é‡Šçš„çƒ­å›¾
+ha1 = HeatmapAnnotation(df = df,
+    col = list(type = c("a" = "red", "b" = "blue"),
+               age = colorRamp2(c(0, 20), c("white", "red")))
+)
+ha2 = HeatmapAnnotation(df = data.frame(age = sample(1:20, 10)),
+    col = list(age = colorRamp2(c(0, 20), c("white", "red"))))
+
+set.seed(123)
+mat = matrix(rnorm(80, 2), 8, 10)
+mat = rbind(mat, matrix(rnorm(40, -2), 4, 10))
+rownames(mat) = paste0("R", 1:12)
+colnames(mat) = paste0("C", 1:10)
+
+Heatmap(mat, top_annotation = ha1, bottom_annotation = ha2)
+
+
+
+# å¤æ‚çš„æ³¨é‡Š
+value = rnorm(10)
+# ç‚¹å›¾
+ha = HeatmapAnnotation(points = anno_points(value))
+# æ¡å½¢å›¾
+ha = HeatmapAnnotation(barplot = anno_barplot(value))
+# ç®±åž‹å›¾
+ha = HeatmapAnnotation(boxplot = anno_boxplot(mat))
+# æ–‡æœ¬æ³¨é‡Š
+long_cn = do.call("paste0", rep(list(colnames(mat)), 3))  # just to construct long text
+ha_rot_cn = HeatmapAnnotation(text = anno_text(long_cn, rot = 45, just = "left", offset = unit(2, "mm")))
+# æ¯åˆ—ç²¾ç»†æ³¨é‡Š
+# æ¡å½¢å›¾
+histogram = anno_histogram(mat, gp = gpar(fill = rep(2:3, each = 5)))
+# æ¦‚çŽ‡å¯†åº¦åˆ†å¸ƒå›¾
+density_line = anno_density(mat, type = "line", gp = gpar(col = rep(2:3, each = 5)))
+# å¶å­çŠ¶çš„æ¦‚çŽ‡å¯†åº¦åˆ†å¸ƒå›¾
+violin = anno_density(mat, type = "violin", gp = gpar(fill = rep(2:3, each = 5)))
+# çƒ­å›¾çŠ¶çš„æ¦‚çŽ‡å¯†åº¦åˆ†å¸ƒå›¾
+# heatmap = anno_density(mat, type = "heatmap")
+
+# å¤šç§å›¾æ”¾åœ¨ä¸€èµ·
+ha = HeatmapAnnotation(df = df, points = anno_points(value), boxplot = anno_boxplot(mat),
+    col = list(type = c("a" = "red", "b" = "blue"),
+               age = colorRamp2(c(0, 20), c("white", "red"))),
+    annotation_height = c(1, 2, 3, 4), gap = unit(c(2, 4), "mm")) # annotation_height æ¯ä¸ªæ³¨é‡Šè¡Œçš„ç›¸å¯¹é«˜åº¦, gap æ³¨é‡Šä¹‹é—´çš„è·ç¦»
+
+ha = HeatmapAnnotation(df = df, points = anno_points(value), boxplot = anno_boxplot(mat),
+    col = list(type = c("a" = "red", "b" = "blue"),
+               age = colorRamp2(c(0, 20), c("white", "red"))),
+    annotation_height = unit.c((unit(1, "npc") - unit(4, "cm"))*0.5, (unit(1, "npc") - unit(4, "cm"))*0.5, 
+        unit(2, "cm"), unit(2, "cm"))) # æ¯ä¸ªæ³¨é‡Šè¡Œçš„ç»å¯¹é«˜åº¦
+
+# åŠ å¤æ‚æ³¨é‡Šçš„çƒ­å›¾
+ha = HeatmapAnnotation(df = df, points = anno_points(value),
+    col = list(type = c("a" = "red", "b" = "blue"),
+               age = colorRamp2(c(0, 20), c("white", "red"))))
+ha_boxplot = HeatmapAnnotation(boxplot = anno_boxplot(mat, axis = TRUE))
+Heatmap(mat, name = "foo", top_annotation = ha, bottom_annotation = ha_boxplot, 
+    bottom_annotation_height = unit(3, "cm")) # top_annotation ä¸Šé¢çš„æ³¨é‡Šï¼Œ bottom_annotation ä¸‹é¢çš„æ³¨é‡Š
+
+
+
+# æ³¨é‡Šåˆ—
+ha = rowAnnotation(df = df, col = list(type = c("a" = "red", "b" = "blue")), width = unit(1, "cm"))
+
+
+
+# çƒ­å›¾ä¸Žåˆ—æ³¨é‡Šçš„æ··åˆ
+ha = rowAnnotation(df = df, col = list(type = c("a" = "red", "b" = "blue")),
+    width = unit(1, "cm"))
+ht1 = Heatmap(mat, name = "ht1")
+ht1 = Heatmap(mat, name = "ht2")
+ht1 + ha + ht2
+
+# æ³¨é‡Šåˆ—åœ¨çƒ­å›¾èšç±»æ ‘çš„å¤–é¢
+ha = rowAnnotation(boxplot = row_anno_boxplot(mat, gp = gpar(fill = c("red", "blue"))), 
+    width = unit(2, "cm"))
+ha + ht1
+# æ³¨é‡Šåˆ—åœ¨çƒ­å›¾èšç±»æ ‘çš„é‡Œé¢
+draw(ha + ht1, row_dend_side = "left", row_sub_title_side = "right")
+# æ³¨é‡Šè¡Œåœ¨çƒ­å›¾åˆ—åçš„å¤–é¢
+df = data.frame(type = c(rep("a", 5), rep("b", 5)))
+ha = HeatmapAnnotation(df = df, col = list(type = c("a" =  "red", "b" = "blue")))
+Heatmap(mat, bottom_annotation = ha)
+# æ³¨é‡Šè¡Œåœ¨çƒ­å›¾åˆ—åçš„é‡Œé¢
+ha = HeatmapAnnotation(type = df$type, 
+    colname = anno_text(colnames(mat), rot = 90, just = "right", offset = unit(1, "npc") - unit(2, "mm")),
+    col = list(type = c("a" = "red", "b" = "blue")),
+    annotation_height = unit.c(unit(5, "mm"), max_text_width(colnames(mat)) + unit(2, "mm")))
+Heatmap(mat, show_column_names = FALSE, bottom_annotation = ha)
+
+# åªç”¨æ³¨é‡Šåšå›¾
+ha = HeatmapAnnotation(df = data.frame(value = runif(10), type = rep(letters[1:2], 5)),
+    barplot = anno_barplot(runif(10), axis = TRUE),
+    points = anno_points(runif(10), axis = TRUE),
+    annotation_height = unit(c(0.5, 0.5, 4, 4), "cm"))
+zero_row_mat = matrix(nrow = 0, ncol = 10)
+colnames(zero_row_mat) = letters[1:10]
+ht = Heatmap(zero_row_mat, top_annotation = ha, column_title = "only annotations")
+draw(ht, padding = unit(c(2, 20, 2, 2), "mm"))
+decorate_annotation("value", {grid.text("value", unit(-2, "mm"), just = "right")}) # åœ¨ value æ³¨é‡Šè¡Œçš„å·¦è¾¹åŠ æ–‡æœ¬
+decorate_annotation("type", {grid.text("type", unit(-2, "mm"), just = "right")})
+decorate_annotation("barplot", {
+    grid.text("barplot", unit(-10, "mm"), just = "bottom", rot = 90) # # åœ¨ barplot æ³¨é‡Šè¡ŒåŠ æ–‡æœ¬ï¼Œæ—‹è½¬90åº¦
+    grid.lines(c(0, 1), unit(c(0.2, 0.2), "native"), gp = gpar(lty = 2, col = "blue")) # åœ¨ barplot æ³¨é‡Šè¡ŒåŠ è™šçº¿
+})
+decorate_annotation("points", {
+    grid.text("points", unit(-10, "mm"), just = "bottom", rot = 90)
+})
+
+
+
+# æ³¨é‡ŠåŠ åæ ‡
+ha1 = HeatmapAnnotation(b1 = anno_boxplot(mat, axis = TRUE),
+    p1 = anno_points(colMeans(mat), axis = TRUE))
+ha2 = rowAnnotation(b2 = row_anno_boxplot(mat, axis = TRUE),
+    p2 = row_anno_points(rowMeans(mat), axis = TRUE), width = unit(2, "cm"))
+Heatmap(mat, top_annotation = ha1, top_annotation_height = unit(2, "cm")) + ha2
+
+# åè½¬çš„åæ ‡
+pushViewport(viewport(layout = grid.layout(nr = 1, nc = 2)))
+pushViewport(viewport(layout.pos.row = 1, layout.pos.col = 1))
+ha = rowAnnotation(boxplot = row_anno_boxplot(mat, axis = TRUE), width = unit(3, "cm"))
+ht_list = ha + Heatmap(mat)
+draw(ht_list, column_title = "normal axis direction", newpage = FALSE)
+upViewport()
+
+pushViewport(viewport(layout.pos.row = 1, layout.pos.col = 2))
+ha = rowAnnotation(boxplot = row_anno_boxplot(mat, axis = TRUE, axis_direction = "reverse"), 
+    width = unit(3, "cm"))
+ht_list = ha + Heatmap(mat)
+draw(ht_list, column_title = "reverse axis direction", newpage = FALSE)
+upViewport(2)
+
+
+
+# é€šè¿‡è¿žçº¿æ³¨é‡ŠæŒ‡å®šè¡Œçš„ä¿¡æ¯
+mat = matrix(rnorm(10000), nr = 1000)
+rownames(mat) = sprintf("%.2f", rowMeans(mat))
+subset = sample(1000, 20)
+labels = rownames(mat)[subset]
+Heatmap(mat, show_row_names = FALSE, show_row_dend = FALSE, show_column_dend = FALSE) + 
+rowAnnotation(link = row_anno_link(at = subset, labels = labels),
+  width = unit(1, "cm") + max_text_width(labels))
+
+
+# æ³¨é‡Šä¿¡æ¯çš„legend
+library(ComplexHeatmap)
+library(circlize)
+
+set.seed(123)
+mat = matrix(rnorm(80, 2), 8, 10)
+mat = rbind(mat, matrix(rnorm(40, -2), 4, 10))
+rownames(mat) = paste0("R", 1:12)
+colnames(mat) = paste0("C", 1:10)
+
+ha_column = HeatmapAnnotation(df = data.frame(type1 = c(rep("a", 5), rep("b", 5))), 
+    col = list(type1 = c("a" =  "red", "b" = "blue")))
+ha_row = rowAnnotation(df = data.frame(type2 = c(rep("A", 6), rep("B", 6))), 
+    col = list(type2 = c("A" =  "green", "B" = "orange")), width = unit(1, "cm"))
+
+ht1 = Heatmap(mat, name = "ht1", column_title = "Heatmap 1", top_annotation = ha_column)
+ht2 = Heatmap(mat, name = "ht2", column_title = "Heatmap 2")
+ht_list = ht1 + ht2 + ha_row
+
+draw(ht_list)
+# legend ä½ç½®
+draw(ht_list, heatmap_legend_side = "left", annotation_legend_side = "bottom")
+# æ˜¯å¦æ˜¾ç¤º legend
+draw(ht_list, show_heatmap_legend = FALSE, show_annotation_legend = FALSE)
+# å•ç‹¬è®¾ç½® legend
+ha_column = HeatmapAnnotation(df = data.frame(type1 = c(rep("a", 5), rep("b", 5))), 
+    col = list(type1 = c("a" =  "red", "b" = "blue")), show_legend = FALSE)
+ha_row = rowAnnotation(df = data.frame(type2 = c(rep("A", 6), rep("B", 6))), 
+    col = list(type2 = c("A" =  "green", "B" = "orange")), show_legend = FALSE, width = unit(1, "cm"))
+
+ht1 = Heatmap(mat, name = "ht1", column_title = "Heatmap 1", top_annotation = ha_column)
+ht2 = Heatmap(mat, name = "ht2", column_title = "Heatmap 2", show_heatmap_legend = FALSE)
+ht1 + ht2 + ha_row
+# é€šè¿‡ heatmap_legend_param å’Œ annotation_legend_param è‡ªå®šä¹‰ legend
+# å®šä¹‰å­—å·
+df = data.frame(type = c(rep("a", 5), rep("b", 5)))
+ha = HeatmapAnnotation(df = df, col = list(type = c("a" =  "red", "b" = "blue")),
+    annotation_legend_param = list(type = list(title = "TYPE", title_gp = gpar(fontsize = 14), 
+                                               labels_gp = gpar(fontsize = 8))))
+ht1 = Heatmap(mat, name = "ht1", column_title = "Heatmap 1", top_annotation = ha)
+ht2 = Heatmap(mat, name = "ht2", column_title = "Heatmap 2", 
+    heatmap_legend_param = list(title = "Heatmap2", title_gp = gpar(fontsize = 8), labels_gp = gpar(fontsize = 14)))
+ht1 + ht2
+
+# å®šä¹‰æŽ’åˆ—
+ha_chr = rowAnnotation(chr = sample(paste0("chr", 1:20), nrow(mat), replace = TRUE),
+    annotation_legend_param = list(chr = list(ncol = 2, title = "chromosome", title_position = "topcenter")),
+    width = unit(5, "mm"))
+ht1 = Heatmap(mat, name = "ht1")
+ht1 + ha_chr
+
+# ä½¿ç”¨æ¸å˜è‰²
+ha = HeatmapAnnotation(df = data.frame(value = runif(10)), 
+    col = list(value = colorRamp2(c(0, 1), c("white", "blue"))), 
+    annotation_legend_param = list(color_bar = "continuous", at = c(0, 0.5, 1), 
+        labels = c("low", "median", "high"), legend_height = unit(4, "cm")))
+Heatmap(mat, name = "ht1", top_annotation = ha, heatmap_legend_param = list(color_bar = "continuous"))
+
+# åœ¨ä¸‹é¢
+ht = Heatmap(mat, name = "ht1", heatmap_legend_param = list(color_bar = "continuous", legend_direction = "horizontal",
+    legend_width = unit(5, "cm"), title_position = "lefttop"))
+draw(ht, heatmap_legend_side = "bottom")
+
+# ç»™è‡ªå®šä¹‰çš„æ³¨é‡ŠåŠ  legend
+ha = HeatmapAnnotation(points = anno_points(rnorm(10), gp = gpar(col = rep(2:3, each = 5))))
+ht = Heatmap(mat, name = "ht2", column_title = "Heatmap 2", top_annotation = ha)
+lgd = Legend(at = c("class1", "class2"), title = "points", type = "points", legend_gp = gpar(col = 2:3))
+draw(ht, annotation_legend_list = list(lgd))
+
+# å‚æ•°è¯´æ˜Ž
+    title: title of the legend
+    title_gp: graphic parameters for the legend title
+    title_position: position of title relative to the legend, possible values are topcenter, topleft, leftcenter, lefttop.
+    color_bar: style of the color bar, i.e. continuous or discrete
+    grid_height: height of the small grid in the color bar, only works for discrete color bar
+    grid_width: width of the color bar
+    grid_border: border of the color bar
+    at: break values shown on the legend
+    labels: labels which correspond to the breaks values
+    labels_gp: graphic parameters for legend labels
+    nrow and ncol: if there are too many legends, they can be put into an array. These two parameters controls number of rows or columns
+    legend_direction: when color_bar is set to continuous, it controls the direction of the legend, possible values are vertical and horizontal
+    legend_width and legend_height: when color_bar is continuous, the width or height of the legend
+
+
+
+# çƒ­å›¾çš„è£…é¥°
+# åšå›¾
+library(ComplexHeatmap)
+mat = matrix(rnorm(80, 2), 8, 10)
+mat = rbind(mat, matrix(rnorm(40, -2), 4, 10))
+rownames(mat) = paste0("R", 1:12)
+colnames(mat) = paste0("C", 1:10)
+ha_column1 = HeatmapAnnotation(points = anno_points(rnorm(10)))
+ht1 = Heatmap(mat, name = "ht1", km = 2, row_title = "Heatmap 1", column_title = "Heatmap 1", 
+    top_annotation = ha_column1)
+ha_column2 = HeatmapAnnotation(df = data.frame(type = c(rep("a", 5), rep("b", 5))),
+    col = list(type = c("a" = "red", "b" = "blue")))
+ht2 = Heatmap(mat, name = "ht2", row_title = "Heatmap 2", column_title = "Heatmap 2",
+    bottom_annotation = ha_column2)
+ht_list = draw(ht1 + ht2, row_title = "Heatmap list", column_title = "Heatmap list", 
+    heatmap_legend_side = "right", annotation_legend_side = "left")
+#è£…é¥°
+# åœ¨ points annotation åŠ å…¥è£…é¥°ï¼Œæ·»åŠ æ–‡æœ¬æ³¨é‡Š
+decorate_annotation("points", {
+    grid.text("points", unit(0, "npc") - unit(2, "mm"), 0.5, 
+        default.units = "npc", just = "right")
+})
+# åœ¨ ht1 heatmap_body åŠ å…¥æ³¨é‡Š
+decorate_heatmap_body("ht1", {
+    grid.text("outlier", 1.5/10, 2.5/4, default.units = "npc") # å¼•å…¥æ–‡æœ¬æ³¨é‡Š
+    grid.lines(c(0.5, 0.5), c(0, 1), gp = gpar(lty = 2, lwd = 2)) 
+}, slice = 2) # åœ¨ cluster2 åŠ å…¥è™šçº¿
+# ç»™ ht1 column_dend åˆ†å—ä¸Šè‰²
+decorate_column_dend("ht1", {
+    tree = column_dend(ht_list)$ht1
+    ind = cutree(as.hclust(tree), k = 2)[order.dendrogram(tree)] # åˆ†æˆä¸¤ç»„
+
+    first_index = function(l) which(l)[1] # æŸç»„ç¬¬ä¸€ä¸ªçš„åºå·
+    last_index = function(l) { x = which(l); x[length(x)] } # æŸç»„æœ€åŽä¸€ä¸ªçš„åºå·
+    x1 = c(first_index(ind == 1), first_index(ind == 2)) - 1 # ä»Žç¬¬ä¸€ç»„ç¬¬ä¸€ä¸ª-1ï¼Œç¬¬äºŒç»„ç¬¬ä¸€ä¸ª-1
+    x2 = c(last_index(ind == 1), last_index(ind == 2)) # ç¬¬ä¸€ç»„æœ€åŽä¸€ä¸ªï¼Œæœ€åŽä¸€ç»„æœ€åŽä¸€ä¸ª
+    grid.rect(x = x1/length(ind), width = (x2 - x1)/length(ind), just = "left",
+        default.units = "npc", gp = gpar(fill = c("#FF000040", "#00FF0040"), col = NA)) # ä¸Šè‰²
+})
+# ç»™ ht2 ä¸Šè‰²
+decorate_row_names("ht2", {
+    grid.rect(gp = gpar(fill = "#FF000040"))
+}, slice = 2)
+# ç»™ ht1 row_title ä¸Šè‰²
+decorate_row_title("ht1", {
+    grid.rect(gp = gpar(fill = "#00FF0040"))
+}, slice = 1)
+# ç»™ points åŠ å…¥è¾…åŠ©çº¿
+decorate_annotation("points", {
+    grid.lines(c(0, 1), unit(c(0, 0), "native"), gp = gpar(col = "red"))
+})
+
+# å¯ä½œç”¨å¯¹è±¡
+    global: the viewport which contains the whole figure.
+    global_column_title: the viewport which contains column title for the heatmap list.
+    global_row_title: the viewport which contains row title for the heatmap list.
+    main_heatmap_list: the viewport which contains a list of heatmaps and row annotations.
+    heatmap_@{heatmap_name}: the viewport which contains a single heatmap
+    annotation_@{annotation_name}: the viewport which contains an annotation on columns.
+    annotation_@{annotation_name}_@{i}: for row annotations
+    @{heatmap_name}_heatmap_body_@{i}: the heatmap body.
+    @{heatmap_name}_column_title: column title for a single heatmap.
+    @{heatmap_name}_row_title_@{i}: since a heatmap body may be splitted into several parts. @{i} is the index of the row slice.
+    @{heatmap_name}_dend_row_@{i}: dendrogram for ith row slice.
+    @{heatmap_name}_dend_column: dendrogram on columns
+    @{heatmap_name}_row_names_@{i}: the viewport which contains row names.
+    @{heatmap_name}_column_names: the viewport which contains column names.
+    heatmap_legend: the viewport which contains all heatmap legends.
+    legend_@{heatmap_name}: the viewport which contains a single heatmap legend.
+    annotation_legend: the viewport which contains all annotation legends.
+    legend_@{annotation_name}: the viewport which contains a single annotation legend.
+
+
+

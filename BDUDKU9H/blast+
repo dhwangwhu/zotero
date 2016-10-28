@@ -1,0 +1,568 @@
+1. Create a masked BLAST database
+1.1 Create masking information
+1.1.1 by using dustmasker
+描述：基于 Symmetric DUST 算法的对低复杂度区域的遮蔽器
+用法：
+非 FASTA 文件
+$ dustmasker -in hs_chr -infmt blastdb -parse_seqids \
+  -outfmt maskinfo_asn1_bin -out hs_chr_dust.asnb
+FASTA 文件
+$ dustmasker -in hs_chr.fa -infmt fasta -parse_seqids \
+  -outfmt maskinfo_asn1_bin -out hs_chr_dust.asnb
+参数说明：
+-in <File_In> 输入的文件名
+-out <File_Out> 输出的文件名
+-window <Integer> DUST window 长度 Default = `64'
+-level <Integer> DUST level Default = `20'
+-linker <Integer> DUST linker Default = `1'
+-infmt <String> 输入格式 (fasta, blastdb)
+-outfmt <String> 输出格式
+（`acclist',`fasta',`interval',`maskinfo_asn1_bin',`maskinfo_asn1_text',
+`maskinfo_xml',`seqloc_asn1_bin',`seqloc_asn1_text',`seqloc_xml'）
+-parse_seqids 在FASTA输入文件中解析序列ID
+
+1.1.2 by using windowmasker
+描述：基于窗口的序列遮蔽器
+用法：
+step1:
+不包含 masking information
+$ windowmasker -in hs_chr -infmt blastdb -mk_counts \
+  -parse_seqids -out hs_chr_mask.counts –sformat obinary
+FASTA 文件
+$ windowmasker -in hs_chr.fa -infmt fasta -mk_counts \
+  -parse_seqids -out hs_chr_mask.counts –sformat obinary
+step2:
+包含 masking information
+$ windowmasker -in hs_chr -infmt blastdb -ustat hs_chr_mask.counts \
+  -outfmt maskinfo_asn1_bin -parse_seqids -out hs_chr_mask.asnb
+FASTA 文件
+$ windowmasker -in hs_chr.fa -infmt fasta -ustat hs_chr.counts \
+  -outfmt maskinfo_asn1_bin -parse_seqids -out hs_chr_mask.asnb
+参数说明：
+-ustat <String> file with unit counts
+-in <File_In> 输入的文件名
+-out <File_Out> 输出的文件名
+-checkdup <Boolean> 检查重复项 Default = `false'
+-fa_list <Boolean> 输入的是一个list Default = `false'
+-mem <Integer, greater or equal to 1> 可用的内存 Default = `1536'
+-meta <String> 添加元数据
+-unit <Integer, 1..16> 单位
+-genome_size <Integer> 基因总大小
+-window <Integer, greater or equal to 1> 窗口大小
+-parse_seqids 在FASTA输入文件中解析序列ID
+-outfmt <String> 输出格式
+（`fasta', `interval', `maskinfo_asn1_bin',`maskinfo_asn1_text', `maskinfo_xml',`seqloc_asn1_bin',`seqloc_asn1_text', `seqloc_xml'）
+-infmt <String, `blastdb', `fasta', `seqids'> 输入格式
+-exclude_ids <String> 在这个里面的ID的数据被排除
+-ids <String> 只进行这些ID里面的数据
+-sformat <String, `ascii', `binary', `oascii', `obinary'> 输出文件unit counts的类型
+-smem <Integer> 输出文件的大小
+-mk_counts 生成频率计数
+
+1.1.3 by using segmasker
+描述：基于SEG算法的对低复杂度区域的遮蔽器
+用法：
+非 FASTA 文件
+$ segmasker -in refseq_protein -infmt blastdb -parse_seqids \
+  -outfmt maskinfo_asn1_bin -out refseq_seg.asnb
+FASTA 文件
+$ segmasker -in refseq_protein.fa -infmt fasta -parse_seqids \
+  -outfmt maskinfo_asn1_bin -out refseq_seg.asnb
+参数说明：
+-in <File_In> 输入文件
+-out <File_Out> 输出文件
+-infmt <String, `blastdb', `fasta'> 输入格式
+-parse_seqids 在FASTA输入文件中解析序列ID
+-outfmt <String> 输出格式
+(`fasta', `interval', `maskinfo_asn1_bin',`maskinfo_asn1_text', `maskinfo_xml',`seqloc_asn1_bin',`seqloc_asn1_text', `seqloc_xml') 
+
+1.2 Create BLAST database with the masking information
+1.2.1 Create BLAST database with masking information using an existing BLAST database or FASTA sequence file as input
+用法：
+使用已经存在的 BLAST database
+$ makeblastdb -in hs_chr –input_type blastdb -dbtype nucl -parse_seqids \
+ -mask_data hs_chr_mask.asnb -out hs_chr -title \
+ "Human Chromosome, Ref B37.1"
+检查重新创建的数据库是否加入了新的masking information 
+$ blastdbcmd -db hs_chr -info
+参数说明：
+-dbtype <String, `nucl', `prot'> 数据库类型
+-in <File_In> 输入文件/数据库名称
+-input_type <String, `asn1_bin', `asn1_txt', `blastdb', `fasta'> 输入文件类型
+-title <String> 数据库title
+-parse_seqids 在FASTA输入文件中解析序列ID
+-hash_index Create index oblf sequence hash values
+-mask_data <String> mask文件名
+-mask_id <String> 
+-mask_desc <String>
+-gi_mask 建立 GI 索引 masking data
+-gi_mask_name <String>
+-out <String> BLAST database 名称
+-max_file_sz <String> 数据库大小上限 Default = `1GB'
+-logfile <File_Out> 日志文件
+
+1.2.2 Create a protein BLAST database with masking information
+用法：
+建库
+$ makeblastdb -in refseq_protein –input_type blastdb -dbtype prot -parse_seqids \
+ -mask_data refseq_seg.asnb -out refseq_protein -title \
+ "RefSeq Protein Database"
+检查
+$ blastdbcmd -db refseq_protein -info
+
+1.2.3 Create a nucleotide BLAST database using the masking information extracted from lower case masked FASTA file
+$ makeblastdb -in hs_chr.mfa -dbtype nucl -parse_seqids \
+  -mask_data hs_chr_mfa.asnb -out hs_chr_mfa -title "Human chromosomes (mfa)"
+
+2. Search with database masking enabled
+2.1 用法
+最短命令
+blastn –db nt –query nt.fsa –out results.out
+远程blast
+blastn –db nt –query nt.fsa –out results.out -remote
+使用 soft_mask
+使用4个进程在 hs_chr 数据库中用 megablast 算法查找 DNA 片段 以具有注释行的表格形式输出到 HTT_megablast_softmask.tab
+$ blastn -query HTT_gene -task megablast -db hs_chr -db_soft_mask 30 \
+  -outfmt 7 -out HTT_megablast_softmask.out -num_threads 4
+使用 hard_mask
+$ blastn -query HTT_gene -task megablast -db hs_chr -db_hard_mask 30 \
+  -outfmt 7 -out HTT_megablast_hardmask.out -num_threads 4
+
+2.2 blastn 参数说明：
+-query <File_In> query文件名
+-query_loc <String> 在query文件中的位置(Format: start-stop)
+-strand <String, `both', `minus', `plus'> 搜索方向 Default = `both'
+通用选项：
+-task <String, Permissible values: 'blastn' 'blastn-short' 'dc-megablast' 'megablast' 'rmblastn' > 要执行的模式 Default = `megablast'
+-db <String> blast数据库名
+-out <File_Out> 输出文件名
+-evalue <Real> E阈值 Default = `10'
+-word_size <Integer, >=4> 匹配搜索框大小
+-gapopen <Integer> 出现一个 gap 的代价分数
+-gapextend <Integer> 增大一个 gap 的代价分数
+-penalty <Integer, <=0> 一个核苷酸错配的罚分
+-reward <Integer, >=0> 一个核苷酸配对的奖励分
+-use_index <Boolean> 使用 MegaBLAST 数据库索引 Default = `false'
+BLAST-2-Sequences 选项：
+-subject <File_In> subject文件名
+-subject_loc <String> 在subject文件中的位置(Format: start-stop)
+格式选项：
+-outfmt <String> 输出格式 Default = `0'
+     0 = Pairwise
+     1 = Query-anchored showing identities, 
+     2 = Query-anchored no identities,
+     3 = Flat query-anchored showing identities,
+     4 = Flat query-anchored no identities,
+     5 = BLAST XML,
+     6 = Tabular,
+     7 = Tabular with comment lines,
+     8 = Seqalign (Text ASN.1),
+     9 = Seqalign (Binary ASN.1),
+    10 = Comma-separated values,
+    11 = BLAST archive (ASN.1),
+    12 = Seqalign (JSON),
+    13 = Multiple-file BLAST JSON,
+    14 = Multiple-file BLAST XML2,
+    15 = Single-file BLAST JSON,
+    16 = Single-file BLAST XML2,
+    17 = Sequence Alignment/Map (SAM)
+-show_gis 显示 NCBI GIs
+-num_descriptions <Integer, >=0> Number of database sequences to show one-line descriptions for Default = `500' ？
+-num_alignments <Integer, >=0> Number of database sequences to show alignments for Default = `250' ？
+-line_length <Integer, >=1> 每行残基数 Default = `60' 
+-html 生产 HTML 结果
+Query 过滤器选项：
+-dust <String> Filter query sequence with DUST (Format: 'yes', 'level window linker', or 'no' to disable) Default = `20 64 1' ？
+-filtering_db <String> BLAST database containing filtering elements (i.e.: repeats) ？
+-window_masker_taxid <Integer> 使用 Taxonomic ID 进行筛选
+-window_masker_db <String> 使用这个文件的信息进行检索
+-soft_masking <Boolean> Apply filtering locations as soft masks Default = `true' ？
+-lcase_masking Use lower case filtering in query and subject sequence(s) ？
+搜索/结果限制：
+-gilist <String> 在列出的 GI 号中搜索
+-seqidlist <String> 在列出的 SeqId 中搜索
+-negative_gilist <String> 排除这些 GI 搜索
+-entrez_query <String> Restrict search with the given Entrez query ？
+-db_soft_mask <String> Filtering algorithm ID to apply to the BLAST database as soft masking ？
+-db_hard_mask <String> Filtering algorithm ID to apply to the BLAST database as hard masking ？
+-perc_identity <Real, 0..100> Percent identity ？
+-qcov_hsp_perc <Real, 0..100> 高分配对比例
+-max_hsps <Integer, >=1> Set maximum number of HSPs per subject sequence to save for each query ？
+-culling_limit <Integer, >=0> If the query range of a hit is enveloped by that of at least this many higher-scoring hits, delete the hit ？
+-best_hit_overhang <Real, (>0 and <0.5)> Best Hit algorithm overhang value (recommended value: 0.1) ？
+-best_hit_score_edge <Real, (>0 and <0.5)> Best Hit algorithm score edge value (recommended value: 0.1) ？
+-max_target_seqs <Integer, >=1> 最大显示匹配数 Default = `500'
+不连续 MegaBLAST 选项：
+-template_type <String, `coding', `coding_and_optimal', `optimal'> 不连续 MegaBLAST 模板类型
+-template_length <Integer, Permissible values: '16' '18' '21' > 模板长度
+搜索策略选项：
+-import_search_strategy <File_In> 搜索策略的文件名
+-export_search_strategy <File_Out> 储存搜索策略的文件名
+其他选项：
+-parse_deflines 解析
+-num_threads <Integer, >=1> 多进程
+-remote 远程执行？
+
+## 在 tblastx 中要设置 -db_gencode 为所用的密码表 
+id	name
+1	Standard
+2	Vertebrate Mitochondrial
+3	Yeast Mitochondrial
+4	Mold Mitochondrial; Protozoan Mitochondrial; Coelenterate
+ Mitochondrial; Mycoplasma; Spiroplasma
+5	Invertebrate Mitochondrial
+6	Ciliate Nuclear; Dasycladacean Nuclear; Hexamita Nuclear
+9	Echinoderm Mitochondrial; Flatworm Mitochondrial
+10	Euplotid Nuclear
+11	Bacterial, Archaeal and Plant Plastid
+12	Alternative Yeast Nuclear
+13	Ascidian Mitochondrial
+14	Alternative Flatworm Mitochondrial
+15	Blepharisma Macronuclear
+16	Chlorophycean Mitochondrial
+21	Trematode Mitochondrial
+22	Scenedesmus obliquus Mitochondrial
+23	Thraustochytrium Mitochondrial
+24	Pterobranchia Mitochondrial
+25	Candidate Division SR1 and Gracilibacteria
+26	Pachysolen tannophilus Nuclear
+
+Display BLAST search results with custom output format
+
+3 双序列比对
+用法：
+$ blastn -query test_q.fa -subject test_s.fa -dust no -outfmt "6 
+qseqid sseqid btop" -parse_deflines
+结果：
+BLASTN 2.2.24+
+
+Query= query1 
+Length=47
+
+Subject=  
+Length=142
+
+ Score = 82.4 bits (44),  Expect = 9e-22
+ Identities = 46/47 (97%), Gaps = 0/47 (0%)
+ Strand=Plus/Plus
+
+Query  1   ACGTCCGAGACGCGAGCAGCGAGCAGCAGAGCGACGAGCAGCGACGA  47
+           ||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  47  ACGTCCGGGACGCGAGCAGCGAGCAGCAGAGCGACGAGCAGCGACGA  93
+
+
+ Score = 80.5 bits (43),  Expect = 3e-21
+ Identities = 46/47 (97%), Gaps = 1/47 (2%)
+ Strand=Plus/Plus
+
+Query  1   ACGTCCGAGACGCGAGCAGCGAGCAGCAGAGCGACGAGCAGCGACGA  47
+           ||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  1   ACGTCCG-GACGCGAGCAGCGAGCAGCAGAGCGACGAGCAGCGACGA  46
+
+
+ Score = 78.7 bits (42),  Expect = 1e-20
+ Identities = 47/49 (95%), Gaps = 2/49 (4%)
+ Strand=Plus/Plus
+
+Query  1    ACGTCC--GAGACGCGAGCAGCGAGCAGCAGAGCGACGAGCAGCGACGA  47
+            ||||||  |||||||||||||||||||||||||||||||||||||||||
+Sbjct  94   ACGTCCGAGAGACGCGAGCAGCGAGCAGCAGAGCGACGAGCAGCGACGA  142
+
+4. Use blastdb_aliastool to manage the BLAST databases
+4.1 将多个blast库汇总
+$ blastdb_aliastool -dblist "nematode_mrna nematode_genomic" -dbtype nucl \
+  -out nematode_all -title "Nematode RefSeq mRNA + Genomic" 
+4.2 创建子库 要求建库的时候有 -parse_seqids
+$ blastdb_aliastool -db nematode_mrna -gilist c_elegance_mrna.gi -dbtype \
+  nucl -out c_elegance_mrna -title "C. elegans refseq mRNA entries"
+4.3 参数说明
+4.3.1 GI 文件转化选项
+-gi_file_in <File_In> 输入的 GI 文件名
+-gi_file_out <File_Out> 输出的 GI 文件名
+4.3.2 创建别名文件
+-db <String> blast 数据库 名称
+-dbtype <String, `nucl', `prot'> blast 数据库类型
+-title <String> blast 数据库注释
+-gilist <File_In> GI 文件，用于限制 blast 字库
+-out <String> 新库的名字
+-dblist <String> 合并的库的名字
+-dblist_file <File_In> 含有合并库名字的文件
+-vdblist <String> A space separated list of VDB names to aggregate ？
+-vdblist_file <File_In> A file containing a list of vdb names to aggregate, one per line ？
+-num_volumes <Integer, >=1> 合并库的大小
+-logfile <File_Out> 日志文件
+
+5. Reformat BLAST reports with blast_formatter
+5.1 用法
+$ blast_formatter -archive out.1786181.asn -outfmt "7 qacc sacc evalue \
+qstart qend sstart send"
+5.2 参数说明
+输入选项：
+-rid <String> BLAST Request ID (RID)？
+-archive <File_In> blast 结果文件
+格式选项：
+-outfmt <String> 输出格式
+-show_gis 显示 NCBI GI 信息
+-num_descriptions <Integer, >=0> outfmt 0-4 输出的序列数 for Default = `500' ？
+-num_alignments <Integer, >=0> Number of database sequences to show alignments for Default = `250' ？
+-line_length <Integer, >=1> 每行残基数 Default = `60' 
+-html 生产 HTML 结果
+限制选项：
+-max_target_seqs <Integer, >=1> 最大显示匹配数 Default = `500'
+输出选项：
+-out <File_Out> 输出文件名
+其他选项：
+-parse_deflines 是否需要解析
+
+6. Extracting data from BLAST databases with blastdbcmd
+6.1 Extract lowercase masked FASTA from a BLAST database with masking information
+查看数据库信息
+$ blastdbcmd -info -db mask-data-db
+结果：
+Database: Mask data test
+        10 sequences; 12,609 total residues
+
+Date: Feb 17, 2009  5:10 PM     Longest sequence: 1,694 residues
+
+Available filtering algorithms applied to database sequences:
+
+Algorithm ID  Algorithm name      Algorithm options                       
+    20        seg                 default options used                    
+    40        repeat              -species Desmodus_rotundus              
+
+Volumes:
+        mask-data-db
+查看 GI 号为 71022837 的序列
+$ blastdbcmd -db mask-data-db -mask_sequence_with 20 -entry 71022837
+结果：
+>gi|71022837|ref|XP_761648.1| hypothetical protein UM05501.1 [Ustilago maydis 521]
+MPPSARHSAHPSHHPHAGGRDLHHAAGGPPPQGGPGMPPGPGNGPMHHPHSSYAQSMPPPPGLPPHAMNGINGPPPSTHG
+...
+6.2 Extract all human sequences from the nr database
+用法：
+$ blastdbcmd -db nr -entry all -outfmt "%g %T" | \
+   awk ' { if ($2 == 9606) { print $1 } } ' | \
+   blastdbcmd -db nr -entry_batch - -out human_sequences.txt
+第一个 blastdbcmd 对每个序列生成了两条记录（GI 和 taxonomy ID）
+awk命令选取的所有 taxonomy ID 为9606(human)的序列并输出 GI 号
+第二个 blastdbcmd 输出 nt 数据库中人类到 human_sequences.txt 文件
+6.3 Custom data extraction and formatting from a BLAST database
+从 GI 71022837 中提取 accession, sequence length, and masked locations
+$ blastdbcmd -entry 71022837 -db Test/mask-data-db  -outfmt "%a %l %m"
+6.4 Extract different sequence ranges from the BLAST databases
+提取 human chromosome Y (GI 13626247) 40-80位置的序列与human chromosome 20 (GI 14772189) 1-10 位置的序列
+$ printf "%s %s %s %s\n%s %s %s\n" 13626247 40-80 plus 30 14772189 1-10 minus \
+| blastdbcmd -db GPIPE/9606/current/all_contig -entry_batch -
+6.5 Display the locations where BLAST will search for BLAST databases
+用法：
+$ blastdbcmd -show_blastdb_search_path
+6.6 Display the available BLAST databases at a given directory
+用法：
+$ blastdbcmd -list repeat  -recursive
+6.7 参数说明
+blast 数据库选项：
+-db <String> blast 数据库名称
+-dbtype <String, `guess', `nucl', `prot'> blast 数据库类型
+检索选项：
+-entry <String> 检索内容，逗号分隔 e.g.: 555, AC147927, 'gnl|dbname|tag', or 'all' to select all sequences in the database
+-entry_batch <File_In> 批处理文件名，文件格式[range|strand|mask_algo_id]
+-pig <Integer, >=0> PIG(protein identity group) to retrieve
+-info 打印 blast 数据库信息
+序列检索配置选项：
+-range <String> 搜索范围 eg： 20-70
+-strand <String, `minus', `plus'> 搜索的链 Default = `plus'
+-mask_sequence_with <String> mask 算法ID
+输出配置选项：
+-out <File_Out> 输出的文件
+-outfmt <String> 输出格式
+   		%f means sequence in FASTA format
+   		%s means sequence data (without defline)
+   		%a means accession
+   		%g means gi
+   		%o means ordinal id (OID)
+   		%i means sequence id
+   		%t means sequence title
+   		%l means sequence length
+   		%h means sequence hash value
+   		%T means taxid
+   		%X means leaf-node taxids
+   		%e means membership integer
+   		%L means common taxonomic name
+   		%C means common taxonomic names for leaf-node taxids
+   		%S means scientific name
+   		%N means scientific names for leaf-node taxids
+   		%B means BLAST name
+   		%K means taxonomic super kingdom
+   		%P means PIG
+   		%m means sequence masking data.
+-target_only Definition line should contain target entry only
+-get_dups 检索重复
+FASTA 格式输出配置选择：
+-line_length <Integer, >=1> 每行残基数 Default = `80'
+-ctrl_a 使用 Ctrl-A 作为非冗余分隔符
+blast 数据库 配置选项：
+-show_blastdb_search_path 显示 blast 数据库的默认路径
+-list <String> 显示在制定位置的 blast 数据库的名称
+-remove_redundant_dbs 删除冗余的数据库
+-list_outfmt <String> 输出格式  Default = `%f %p'
+   		%f means the BLAST database absolute file name path
+   		%p means the BLAST database molecule type
+   		%t means the BLAST database title
+   		%d means the date of last update of the BLAST database
+   		%l means the number of bases/residues in the BLAST database
+   		%n means the number of sequences in the BLAST database
+   		%U means the number of bytes used by the BLAST database
+-exact_length 得到额外的信息 Requires:  info
+-logfile <File_Out> 日志文件
+
+7 Use Windowmasker to filter the query sequence(s) in a BLAST search
+用法：
+筛选 taxid 为9606(human)的数据
+$ blastn -query input -db database -window_masker_taxid 9606 -out results.txt
+筛选 windowmasker 文件中的筛选规则
+$ blastn –query input –db database –window_masker_db 9606/wmasker.obinary
+
+8 Building a BLAST database with local sequences
+用法：
+$ makeblastdb -in mydb.fsa -parse_seqids -dbtype nucl
+
+8 Multiple databases vs. spaces in filenames and paths
+windows路径中带空格的要使用两对引号，第一对引号括上全部字符串，第二对引号扩上所在文件夹路径
+blastdbcmd -db "\"Users\joeuser\My Documents\Downloads\mydb\"" -info
+blastdbcmd -db "\"Users\joeuser\My Documents\Downloads\mydb\" myotherdb" -info
+UNIX like 系统使用单引号+双引号的形式表示
+blastdbcmd -db ‘ "path with spaces/mydb" ’ -info
+多个数据库同时使用
+-db '"db1" "db2"'
+
+9 Specifying a sequence as the multiple sequence alignment master in psiblast ?
+用法：
+psiblast -in_msa align1 -db pataa -msa_master_idx 3
+
+10 Ignoring the consensus sequence in the multiple sequence alignment in psiblast ？
+用法：
+psiblast -in_msa align1 -db pataa -ignore_msa_master 
+
+
+outfmt结果
+---1---
+Query= <unknown id> <unknown description>
+
+Length=1692
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+AP013063.1  Serratia marcescens SM39 DNA, complete genome             193     3e-45
+CP011642.1  Serratia marcescens strain CAV1492, complete genome       193     3e-45
+...
+Query  1424     TCGGCATAGGCGCCGGCAATGCCGTTGAGGGCGCTCAGGTCGCCCACCCCGTAGGTCGTC  1483
+                ||||| |||  |||||| |  ||||| |  |||||||| || ||||| ||| |||| || 
+Sbjct  2431567  TCGGCGTAGCTGCCGGCCACCCCGTTCAACGCGCTCAGCTCCCCCACGCCGAAGGTGGTG  2431508
+
+Query  1484     AGTACCGCGCCAAAGCCCTGGGTGC-G-G-GCGTAGCCGTCGGCGGCATAGGCGGCGTTG  1540
+                || | |||| |   | || |  ||| | | || |||||||| || |||||||||||||| 
+Sbjct  2431507  AGCAGCGCGGCC--G-CCGGTTTGCAGCGCGCATAGCCGTCAGCCGCATAGGCGGCGTTC  2431451
+...
+
+---2---
+Query= <unknown id> <unknown description>
+
+Length=1692
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+AP013063.1  Serratia marcescens SM39 DNA, complete genome             193     3e-45
+CP011642.1  Serratia marcescens strain CAV1492, complete genome       193     3e-45
+CP012685.1  Serratia marcescens strain SmUNAM836, complete genome     187     1e-43
+...
+Query_1     82        CTCCGGTGCGTCCATGCGTTCCATCACCACTTCAATGAACACCAGGGTGTCAGCGCCTTC  141
+CP003422.2  4812009   CTCCGGGGCGTCCGTCCGATCCATGACGACTTCGATGAACACCAGG                4811964
+CP003235.1  4653411   CTCCGGGGCGTCCGTCCGATCCATGACGACTTCGATGAACACCAGG                4653366
+...
+
+---3---
+Query= <unknown id> <unknown description>
+
+Length=1692
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+AP013063.1  Serratia marcescens SM39 DNA, complete genome             193     3e-45
+CP011642.1  Serratia marcescens strain CAV1492, complete genome       193     3e-45
+CP012685.1  Serratia marcescens strain SmUNAM836, complete genome     187     1e-43
+...
+Query_1     82        CTCCGGTGCGTCCATGCGTTCCATCACCACTTCAATGAACACCAGGGTGTCAGCGCCTTC  141
+CP003422.2  4812009   ......G......G.C..A.....G..G.....G............                4811964
+CP003235.1  4653411   ......G......G.C..A.....G..G.....G............                4653366
+...
+
+---4---
+Query= <unknown id> <unknown description>
+
+Length=1692
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+AP013063.1  Serratia marcescens SM39 DNA, complete genome             193     3e-45
+CP011642.1  Serratia marcescens strain CAV1492, complete genome       193     3e-45
+CP012685.1  Serratia marcescens strain SmUNAM836, complete genome     187     1e-43
+...
+Query_1     82        CTCCGGTGCGTCCATGCGTTCCATCACCACTTCAATGAACACCAGGGTGTCAGCGCCTTC  141
+CP003422.2  4812009   CTCCGGGGCGTCCGTCCGATCCATGACGACTTCGATGAACACCAGG                4811964
+CP003235.1  4653411   CTCCGGGGCGTCCGTCCGATCCATGACGACTTCGATGAACACCAGG                4653366
+
+---5---
+XML
+
+---6---
+<unknown	AP013063.1	78.451	297	62	2	224	519	330466	330761	2.81e-45	193
+<unknown	AP013063.1	74.448	317	67	13	1318	1627	331557	331866	1.04e-24	124
+<unknown	AP013063.1	75.694	144	27	6	1507	1646	3099531	3099670	6.39e-07	65.8
+...
+
+---7---
+# BLASTN 2.4.0+
+# Query: <unknown id> <unknown description>
+# Database: /data/zhoulab/dhwang/blastdb/bct
+# Fields: query id, subject id, % identity, alignment length, mismatches, gap opens, q. start, q. end, s. start, s. end, evalue, bit score
+# 912 hits found
+<unknown	AP013063.1	78.451	297	62	2	224	519	330466	330761	2.81e-45	193
+<unknown	AP013063.1	74.448	317	67	13	1318	1627	331557	331866	1.04e-24	124
+<unknown	AP013063.1	75.694	144	27	6	1507	1646	3099531	3099670	6.39e-07	65.8
+...
+
+---8---
+pass
+
+---9---
+二进制
+
+---10---
+<unknown,AP013063.1,78.451,297,62,2,224,519,330466,330761,2.81e-45,193
+<unknown,AP013063.1,74.448,317,67,13,1318,1627,331557,331866,1.04e-24,124
+<unknown,AP013063.1,75.694,144,27,6,1507,1646,3099531,3099670,6.39e-07,65.8
+...
+
+---11---
+---12---
+pass
+
+---13---
+json
+
+---14---
+XML
+
+---15---
+pass
+
+---16---
+HML
+
+---17---
+@HD	VN:1.2	SO:coordinate	GO:reference
+@SQ	SN:Query_1	LN:1692
+@PG	ID:0	VN:2.4.0+	CL:blastn -db /data/zhoulab/dhwang/blastdb/bct -query orf_6.fasta -word_size 11 -max_target_seqs 10000 -show_gis -out orf_6n11_17 -outfmt 17 -num_threads 6 	PN:blastn
+CP003422.2	16	Query_1	82	255	4007191H46M4811963H	*	0	0	*	*	AS:i:25	EV:f:0.231467	NM:i:0	PI:f:84.78	BS:f:47.2865
+CP003235.1	16	Query_1	82	255	4085637H46M4653365H	*	0	0	*	*	AS:i:25	EV:f:0.231467	NM:i:0	PI:f:84.78	BS:f:47.2865
+CP002869.1	16	Query_1	82	255	3760230H46M4903545H	*	0	0	*	*	AS:i:25	EV:f:0.231467	NM:i:0	PI:f:84.78	BS:f:47.2865

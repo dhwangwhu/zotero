@@ -1,0 +1,408 @@
+High-throughout sequencing and using short-read aligners
+Simon Anders
+
+High-throughput sequencing (HTS)
+Sequencing millions of short DNA fragments in parallel. a.k.a.: next-generation sequencing (NGS)
+massively-parallel sequencing (MPS)
+Market leader: Illumina (“HiSeq” instruments)
+
+Illumina’s sequencing technology
+• Bridge PCR • Sequencing-by-
+synthesis
+
+Bridge PCR
+ML Metzker, Nat Rev Genetics (2010)
+
+Illumina’s sequencing technology
+• Bridge PCR • Sequencing-by-
+synthesis
+
+Illunia HiSeq instrument
+
+Illumina HiSeq -- typical numbers
+• 1 or 2 flow cells, each with 8 lanes • up to ~ 200 M clusters per lane • max 2x 150 bp read length • 350 GB per flow cell and run • 3 d per run (23 h in “rapid mode”)
+• price per instrument: ~ €500k • reagent costs per run: ~ €10k
+
+HTS: Application
+- de-novo sequencing - resequencing, variant calling
+(whole genome or targeted) - RNA-Seq - ChIP-Seq and other enrichment assays - barcodes (tagged mutation collections) - and many more …
+
+Short reads and longer reads
+Illumina: maximum fragment length: 1 .. 2 kb maximum read length: 150 .. 200 bp (x2)
+Not really enough for - calling structural variants - assembling genomes - phasing SNPs
+
+Short reads and longer reads
+Pacific Biosystems: SMRT sequencing
+
+Droplet-based sequencing
+
+10X Genomics
+
+Next hot topic:
+Single-cell sequencing
+Each read gets barcoded to indicate which cell it came from, by clever use of microfluidics.
+
+Practical part: Getting started with raw sequencing data
+
+CTCCTTTGTGTGCTTGGAATGTGAAGAATTTAGNAGACAATCCTAGACTGTTGCAGTGTTGGGGGATCCTTGTTTGAATTGGGGACACAATGCAGCCGGCT + CCCFFFFFHHHHHIJJJHIGIHIJJJJJJJJIJ#1?FHIJIJJJJJJJJJIJJJJJIIIGGIIJIHFFFFDEEEEEDDDEDDBDDDDDDDDDCDDCDBDD> @HWI-ST1177:156:C38WNACXX:6:1101:8567:2179 1:N:0:GAGTGG
+Raw sequencing data: FASTQ filesTGGGTAAGAAAAGTCAAAACACTAATGAGTTGTCCATGAAGCCAACTGCTAAGAACGCGCTCAACTATACGCGACATGAAGACACTATGCACGAAGCCTTA
++ BCCFDEFFHHHHHHIIJJJJJJJJJJJJJHIJJJJJJJJJJJJIJJJJIJJIJJJJJIJJJJHHHHFFFFFDDDDBBDDDDDDDDDDDDDEDBDBDDDDD> @HWI-ST1177:156:C38WNACXX:6:1101:8677:2194 1:N:0:GAGTGG TGTGGTTGTTCCTGGGGCCTCCAGCTAGCACAGCTGGCTCAGCCTGGGCAGTTCTCAGCAGGAGCGTGAGCTGCAGAGTTGCGCAGGTGAAGAGCGAGGAG + CCBFFFFFHHHHHJJJJIJJJJJJJJJJJJJJJJJJJJIJJJJJJIJJJJJHJJJJGIJJJHHHHFDDDDDDDDDACD@DDDDDDDD?CDDDDDDDDDDDD @HWI-ST1177:156:C38WNACXX:6:1101:8552:2194 1:N:0:GAGTGG CGCTCTGCTGGACCTGCTGGGCCATCATCCTGCTGATCCCCATGAGGCTCTCAGTGATGGTACTGGATGTCTGGGCCAGGCTCTCTTTGGTGGTTTTCCTT + CCCFFFFFHHHHHJJJJJJJJIJIJJJJJJJJJJJJIJJJJIJJJJJJJJJJJJIIJJJJIIJJJJGIJJHGEFHFFFFDDECDDDDDCCBDD88ABDDDD @HWI-ST1177:156:C38WNACXX:6:1101:8746:2209 1:N:0:GAGTGG CTTTGGTCAGTGAACAGACACGGGTGAATGCTGCTAAAAACAAGACTGGGGCTGCTCCCATCATTGATGTGGTGCGATCGGGCTACTATAAAGTTCTGGGA + CCCFFFFFHHHHHJJJJJJJJHJIFHGJJJJJIJJJJJJIIJIJJJJJIIJJIJJJJJHGHHF@BDDFFDEECBE>@DDDDDDDDDDCECDEDACDDCDDD @HWI-ST1177:156:C38WNACXX:6:1101:8685:2212 1:N:0:GAGTGG CAGCAGCTTCCTCTTCCTCTGTCTCTTTTCCAGGTCGATATCCCCAGCCCCTGAAGTGGGCCCTCTGGTCCGGGTGGGAGGGATGTGGGTCTGACTCAGCT + CCCFFFFFHHHHHJJJJIJIJHHIJJJJJIJJIJGGHIJJJIJJIJJIIJJJJHJIHGHHIEHGHHHHCEFFDD39?B@BDD@DDCDDD<CDDDDDDDDCD @HWI-ST1177:156:C38WNACXX:6:1101:8630:2227 1:N:0:GAGTGG GCTTTATCTTGCTAAAGACAATTTTTCAAGCAATCCTTTAGTTTTAGTTTTCTGGAATAGCTAGTATTGGGTTTTCTAGTTTTTTCACCTTTTAGTTTTTA + CCCFFFFFHHHHHJJJJJJJJJIJJJJJJJJIJJJJJJJIJIJJJIJHIJJJIJJGIJJJJJJJCGHHIIJ@FHIEHIJ?HHHHFEAEAEEDDDD@ADDD? @HWI-ST1177:156:C38WNACXX:6:1101:8792:2186 1:N:0:GAGTGG GTCTGGCATTCCATGTTTCTGCTCCTGTGGCCTCCACGGTGCAACAAGCTAGCGGTTTACTTGGACCTCTGCCTCATCTTTCTTCTTTTGCGCTTCAGCCT + CCCFFFFFHHHHHJJJIJGIIIJJJJJHJIIJJJJJJJJHGJJJJJJJGGIJJJJ@GHGIJJHECHHGFDFFFEEEEEEDDDD35;CD@::/'80&(+>3A @HWI-ST1177:156:C38WNACXX:6:1101:8932:2202 1:N:0:GAGTGG CCCGCATGTTCTCCTCACACAGTGCGCCCTCCTTGGTGGCCCACTGGAAGCCGGCCACCACACTGTCCTTGATCTCGTTGAGGTACTGCACACCCTTGGTG + CCCFFFFFHHHHHJJJJJJJIJIJJJJJJJJJJJJJDHIIJJJJGIJIJJGIJHHFFAEADDDDDDDDDDDDCDECDDDDDDCCDDDDDDDDDBDDCDCCB @HWI-ST1177:156:C38WNACXX:6:1101:8805:2221 1:N:0:GAGTGG GCCTCAAGCAGCGTGGTTCCACTGGCATTGCCATCCTTACGGGTGACTTTCCATCCCTTGAACCAAGGCATGTTAGCACTTGGCTCCAGCATGTTGTCACC + CCCFFFFFHHHHHJJJIJJJIJJJJIJJIIIJJIJJIEHIIIIGHEHGIJGIIIJDIAAGECEEF=DEFBEEEEEEDDDDDDDDCDDDDDDCDACCDCDD: @HWI-ST1177:156:C38WNACXX:6:1101:9005:2191 1:N:0:GAGTGG
+
+CTCCTTTGTGTGCTTGGAATGTGAAGAATTTAGNAGACAATCCTAGACTGTTGCAGTGTTGGGGGATCCTTGTTTGAATTGGGGACACAATGCAGCCGGCT + CCCFFFFFHHHHHIJJJHIGIHIJJJJJJJJIJ#1?FHIJIJJJJJJJJJIJJJJJIIIGGIIJIHFFFFDEEEEEDDDEDDBDDDDDDDDDCDDCDBDD> @HWI-ST1177:156:C38WNACXX:6:1101:8567:2179 1:N:0:GAGTGG TGGGTAAGAAAAGTCAAAACACTAATGAGTTGTCCATGAAGCCAACTGCTAAGAACGCGCTCAACTATACGCGACATGAAGACACTATGCACGAAGCCTTA + BCCFDEFFHHHHHHIIJJJJJJJJJJJJJHIJJJJJJJJJJJJIJJJJIJJIJJJJJIJJJJHHHHFFFFFDDDDBBDDDDDDDDDDDDDEDBDBDDDDD> @HWI-ST1177:156:C38WNACXX:6:1101:8677:2194 1:N:0:GAGTGG TGTGGTTGTTCCTGGGGCCTCCAGCTAGCACAGCTGGCTCAGCCTGGGCAGTTCTCAGCAGGAGCGTGAGCTGCAGAGTTGCGCAGGTGAAGAGCGAGGAG + CCBFFFFFHHHHHJJJJIJJJJJJJJJJJJJJJJJJJJIJJJJJJIJJJJJHJJJJGIJJJHHHHFDDDDDDDDDACD@DDDDDDDD?CDDDDDDDDDDDD @HWI-ST1177:156:C38WNACXX:6:1101:8552:2194 1:N:0:GAGTGG CGCTCTGCTGGACCTGCTGGGCCATCATCCTGCTGATCCCCATGAGGCTCTCAGTGATGGTACTGGATGTCTGGGCCAGGCTCTCTTTGGTGGTTTTCCTT + CCCFFFFFHHHHHJJJJJJJJIJIJJJJJJJJJJJJIJJJJIJJJJJJJJJJJJIIJJJJIIJJJJGIJJHGEFHFFFFDDECDDDDDCCBDD88ABDDDD @HWI-ST1177:156:C38WNACXX:6:1101:8746:2209 1:N:0:GAGTGG CTTTGGTCAGTGAACAGACACGGGTGAATGCTGCTAAAAACAAGACTGGGGCTGCTCCCATCATTGATGTGGTGCGATCGGGCTACTATAAAGTTCTGGGA + CCCFFFFFHHHHHJJJJJJJJHJIFHGJJJJJIJJJJJJIIJIJJJJJIIJJIJJJJJHGHHF@BDDFFDEECBE>@DDDDDDDDDDCECDEDACDDCDDD @HWI-ST1177:156:C38WNACXX:6:1101:8685:2212 1:N:0:GAGTGG CAGCAGCTTCCTCTTCCTCTGTCTCTTTTCCAGGTCGATATCCCCAGCCCCTGAAGTGGGCCCTCTGGTCCGGGTGGGAGGGATGTGGGTCTGACTCAGCT + CCCFFFFFHHHHHJJJJIJIJHHIJJJJJIJJIJGGHIJJJIJJIJJIIJJJJHJIHGHHIEHGHHHHCEFFDD39?B@BDD@DDCDDD<CDDDDDDDDCD @HWI-ST1177:156:C38WNACXX:6:1101:8630:2227 1:N:0:GAGTGG GCTTTATCTTGCTAAAGACAATTTTTCAAGCAATCCTTTAGTTTTAGTTTTCTGGAATAGCTAGTATTGGGTTTTCTAGTTTTTTCACCTTTTAGTTTTTA + CCCFFFFFHHHHHJJJJJJJJJIJJJJJJJJIJJJJJJJIJIJJJIJHIJJJIJJGIJJJJJJJCGHHIIJ@FHIEHIJ?HHHHFEAEAEEDDDD@ADDD? @HWI-ST1177:156:C38WNACXX:6:1101:8792:2186 1:N:0:GAGTGG GTCTGGCATTCCATGTTTCTGCTCCTGTGGCCTCCACGGTGCAACAAGCTAGCGGTTTACTTGGACCTCTGCCTCATCTTTCTTCTTTTGCGCTTCAGCCT + CCCFFFFFHHHHHJJJIJGIIIJJJJJHJIIJJJJJJJJHGJJJJJJJGGIJJJJ@GHGIJJHECHHGFDFFFEEEEEEDDDD35;CD@::/'80&(+>3A @HWI-ST1177:156:C38WNACXX:6:1101:8932:2202 1:N:0:GAGTGG CCCGCATGTTCTCCTCACACAGTGCGCCCTCCTTGGTGGCCCACTGGAAGCCGGCCACCACACTGTCCTTGATCTCGTTGAGGTACTGCACACCCTTGGTG + CCCFFFFFHHHHHJJJJJJJIJIJJJJJJJJJJJJJDHIIJJJJGIJIJJGIJHHFFAEADDDDDDDDDDDDCDECDDDDDDCCDDDDDDDDDBDDCDCCB @HWI-ST1177:156:C38WNACXX:6:1101:8805:2221 1:N:0:GAGTGG GCCTCAAGCAGCGTGGTTCCACTGGCATTGCCATCCTTACGGGTGACTTTCCATCCCTTGAACCAAGGCATGTTAGCACTTGGCTCCAGCATGTTGTCACC + CCCFFFFFHHHHHJJJIJJJIJJJJIJJIIIJJIJJIEHIIIIGHEHGIJGIIIJDIAAGECEEF=DEFBEEEEEEDDDDDDDDCDDDDDDCDACCDCDD: @HWI-ST1177:156:C38WNACXX:6:1101:9005:2191 1:N:0:GAGTGG
+
+FASTQ format
+Each read is represented by four lines: • '@', followed by read ID • sequence • '+', optionally followed by repeated read ID • quality string:
+• same length as sequence • each character encodes the base-call quality of one base
+
+FASTQ quality scores
+
+quality score Q
+0 .. 9 10 .. 19 20 .. 29 30 .. 39 40 .. 40
+
+error prob. p
+1 .. 0.13 0.1 .. 0.013 0.01 .. 0.0013 0.001 .. 0.00013 0.0001 .. 0.000013
+
+characters !”#$%&'()* +,-./01234 56789:;<=> ?@ABCDEFGH I
+
+Q = –10 log10 p
+
+FASTQ files for paired end
+Simple: two FASTQ files, • one with all first reads, one with all second reads • Read names and ordering must match.
+
+Alignment
+Given a reference genome, where did each read come from?
+
+A short-read aligner finds for each read all possible matches in the reference genome.
+
+Reference (FASTA)
+
+Index
+
+Reads (FASTQ)
+
+Aligner
+
+Alignments (SAM)
+
+Popular aligners
+For genomic DNA - Bowtie2 - BWA -…
+For RNA - Tophat2 - GSNAP - STAR …
+
+Spliced alignment
+exon intron
+
+exon
+
+read
+For RNA-Seq data, we need a splice-aware aligner.
+
+Criteria to choose an aligner
+• Reputation • Publication year • Still developed and maintained?
+• Speed and memory requirements • Sensitivity
+• Special functions (e.g., bisulfite mapping, fusion gene detection, multiple references, etc.)
+
+Example: Aligning RNA-Seq data with STAR
+
+Using STAR: Creating the index
+We need
+• a FASTA file with the human reference genome sequence
+• e.g., from Ensembl
+• a GTF file with gene models
+• e.g., from Ensembl
+• the STAR software:
+• from github.com/alexdobin/STAR
+
+Ensembl FTP download server
+
+Ensembl genome reference sequence
+
+STAR: Generate genome index
+
+STAR: Generate genome index
+STAR \ --runMode genomeGenerate \ --runThreadN 2 \ --genomeDir index_GRCh38.84 \ --genomeFastaFiles download/Homo_sapiens.GRCh38.\ dna.primary_assembly.fa \ --sjdbGTFfile download/Homo_sapiens.GRCh38.84.gtf
+
+STAR: Align the reads
+STAR \ --runThreadN 2 \ --genomeDir index_GRCh38.84 \ --readFilesIn sample1_1.fastq \ sample1_2.fastq \ --outFileNamePrefix sample1_ \ --outSAMtype BAM SortedByCoordinate
+and maybe:
+--quantMode GeneCounts
+
+STAR: output
+Created files:
+
+size
+34M 4.0K
+16K 4.0K
+20K 72K
+
+file name
+sample1_Aligned.sortedByCoord.out.bam sample1_Log.final.out sample1_Log.out sample1_Log.progress.out sample1_ReadsPerGene.out.tab sample1_SJ.out.tab
+
+Alignment output: SAM files
+Part of a SAM file: • Header
+(lines start with @) • command line • chromosome names • etc
+• Alignments • tab-separated table, at least 11 columns • one line per alignment
+
+SAM alignment section
+
+[...]
+
+HWI-EAS225_309MTAAXX:5:1:689:1485 0
+
+XIII
+
+863564
+
+25
+
+0 0 GAAATATATACGTTTTTATCTATGTTACGTTATATA
+
+CCCCCCCCCCCCCCCCCCCCCCC4CCCB4CA?AAA<
+
+NM:i:0
+
+X0:i:1
+
+HWI-EAS225_309MTAAXX:5:1:689:1485 16
+
+XIII
+
+863766
+
+25
+
+0 0 CTACAATTTTGCACATCAAAAAAGACCTCCAACTAC
+
+=8A=AA784A9AA5AAAAAAAAAAA=AAAAAAAAAA
+
+NM:i:0
+
+X0:i:1
+
+HWI-EAS225_309MTAAXX:5:1:394:1171 0
+
+XII
+
+525532
+
+25
+
+0 0 GTTTACGGCGTTGCAAGAGGCCTACACGGGCTCATT
+
+CCCCCCCCCCCCCCCCCCCCC?CCACCACA7?<???
+
+NM:i:0
+
+X0:i:1
+
+HWI-EAS225_309MTAAXX:5:1:394:1171 16
+
+XII
+
+525689
+
+25
+
+0 0 GCTGTTATTTCTCCACAGTCTGGCAAAAAAAAGAAA
+
+7AAAAAA?AA<AA?AAAAA5AAA<AAAAAAAAAAAA
+
+NM:i:0
+
+X0:i:1
+
+HWI-EAS225_309MTAAXX:5:1:393:671 0
+
+XV
+
+440012
+
+25
+
+0 0 TTTGGTGATTTTCCCGTCTTTATAATCTCGGATAAA
+
+AAAAAAAAAAAAAAA<AAAAAAAA<AAAA5<AAAA3
+
+NM:i:0
+
+X0:i:1
+
+HWI-EAS225_309MTAAXX:5:1:393:671 16
+
+XV
+
+440188
+
+25
+
+0 0 TCATAGATTCCATATGAGTATAGTTACCCCATAGCC
+
+?9A?A?CC?<ACCCCCCCCCCCCCCCCCACCCCCCC
+
+NM:i:0
+
+X0:i:1
+
+[...]
+
+36M MD:Z:36 36M MD:Z:36 36M MD:Z:36 36M MD:Z:36 36M MD:Z:36 36M MD:Z:36
+
+* * * * * *
+
+Columns in a SAM file
+
+• QNAME ID of the read (“query”)
+
+• FLAG alignment flags
+
+• RNAME ID of the reference (typically: chromosome name)
+
+• POS Position in reference (1-based, left side)
+
+• MAPQ Mapping quality (as Phred score)
+
+• CIGAR Alignment description (gaps etc.) in CIGAR format
+
+• RNEXT • PNEXT • ISIZE
+
+Mate reference sequence name Mate position inferred insert size
+
+for pairedend data
+
+• SEQ sequence of the read
+
+• QUAL quality string of the read
+
+• extra fields
+
+Reads and fragments
+
+SAM format: FLAG field
+
+bit hex decimal
+
+0 00 01
+
+1 read is a paired-end read
+
+1 00 02
+
+2 read pair is properly matched
+
+2 00 04
+
+4 read has not been mapped
+
+3 00 08
+
+8 mate has not been mapped
+
+4 00 10
+
+16 read has been mapped to “-” strand
+
+5 00 20
+
+32 mate has been mapped to “-” strand
+
+6 00 40
+
+64 read is the first read in a pair
+
+7 00 80
+
+128 read is the second read in a pair
+
+8 01 00
+
+256 alignment is secondary
+
+9 02 00
+
+512 read did had not passed quality check
+
+10 04 00
+
+1024 read is a PCR or optical duplicate
+
+SAM format: Optional fields
+• last column • triples of the format TAG : VTYPE : VALUE • some important tag types:
+• NH: number of reported aligments • NM: number of mismatches • MD: positions of mismatches
+
+SAM format: CIGAR string
+
+SAM format: Paired-end and multiple alignments
+• Each line is one alignment for one read. • Multiple alignments for a read take several lines
+• The Read ID groups them. • Paired-end alignments take two lines.
+• All these lines are not necessarily in adjacent lines!
+
+SAM and BAM
+• Text SAM files (“.sam”): human readable • Binary SAM files (“.bam”): smaller, quicker to read
+Use samtools for conversion.
+
+SAMtools
+A small program to • convert between .bam and .sam • sort and merge SAM files • index SAM and FASTA files for fast access • calculate tallies (“flagstat”) •…
+The SAMtools C API is a library for tool development.
+
+Visually inspecting SAM files
+Look at all your big files! Learn to use text views and graphical tools. For SAM, use e.g. the Integrated Genome Viewer (IGV).
+
+IGV
+
+Aligning multiple files
+Sample table:
+
+Library_ID Cell_line Treatment
+
+1 SRR1039508
+
+N61311
+
+none
+
+2 SRR1039509
+
+N61311
+
+dexa
+
+3 SRR1039512 N052611
+
+none
+
+4 SRR1039513 N052611
+
+dexa
+
+5 SRR1039516 N080611
+
+none
+
+6 SRR1039517 N080611
+
+dexa
+
+7 SRR1039520 N061011
+
+none
+
+8 SRR1039521 N061011
+
+dexa
+
+Generating multiple alignment commands with R
+sample_table <- read.csv( "reads/sample_table.csv" )
+command <- paste0( "STAR --runThreadN 2 --genomeDir GRCh38.84 \\\n", " --readFilesIn reads/###_1.fastq \\\n”, " reads/###_2.fastq \\\n", " --outSAMtype BAM SortedByCoordinate \\\n", " --outFileNamePrefix star_out/###_ \\\n", " --quantMode GeneCounts\n”, "\n" )
+f <- file( "aligner_commands.sh", open="w" ) for( sampleID in sample_table$Library_ID ) {
+cat( gsub( "###", sampleID, command, fixed=TRUE ), file=f )
+} close( f )
+
+Next step: Using the alignments
+RNA-Seq: • What transcripts are there? • Which genes change expression due to treatment?
+ Mike’s talk and this afternoon’s lab
+ChIP-Seq: • Peak finding and comparing
+ Thursday lab
+In general: • The real work starts only now.
+So far, this was just preparation.
+
+*
+

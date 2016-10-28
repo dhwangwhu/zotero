@@ -1,0 +1,24 @@
+导入公钥
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 8D5A09DC9B929006
+
+bowtie2 mapping工具
+nohup 命令 & 后台
+zcat chr1.fa.gz | head 查看压缩包内信息
+在普通用户里建立PATH
+vi ~/.bashrc
+export PATH=$HOME/bin:$PATH
+source .bashrc
+
+读前几行 head -n 100 filename
+读后几行 tail -n 100 filename
+查找文件中的内容 grep -n 正则表达式 文件名
+读文件中间几行 sed -n 'fome,top' 文件名
+
+合并文件：
+文件1加在文件2后面 cat -n textfile1 > textfile2
+几个文件合成一个 cat textfile1 textfile2 >> textfile3
+
+统计行数：wc -l 文件名
+
+批量解压缩
+ls *.tar.gz | xargs -n1 tar xzvf

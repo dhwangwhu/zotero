@@ -1,0 +1,569 @@
+ 1. Create a masked BLAST database
+1.1 Create masking information
+1.1.1 by using dustmasker
+æè¿°ï¼šåŸºäºŽ Symmetric DUST ç®—æ³•çš„å¯¹ä½Žå¤æ‚åº¦åŒºåŸŸçš„é®è”½å™¨
+ç”¨æ³•ï¼š
+éž FASTA æ–‡ä»¶
+$ dustmasker -in hs_chr -infmt blastdb -parse_seqids \
+  -outfmt maskinfo_asn1_bin -out hs_chr_dust.asnb
+FASTA æ–‡ä»¶
+$ dustmasker -in hs_chr.fa -infmt fasta -parse_seqids \
+  -outfmt maskinfo_asn1_bin -out hs_chr_dust.asnb
+å‚æ•°è¯´æ˜Žï¼š
+-in <File_In> è¾“å…¥çš„æ–‡ä»¶å
+-out <File_Out> è¾“å‡ºçš„æ–‡ä»¶å
+-window <Integer> DUST window é•¿åº¦ Default = `64'
+-level <Integer> DUST level Default = `20'
+-linker <Integer> DUST linker Default = `1'
+-infmt <String> è¾“å…¥æ ¼å¼ (fasta, blastdb)
+-outfmt <String> è¾“å‡ºæ ¼å¼
+ï¼ˆ`acclist',`fasta',`interval',`maskinfo_asn1_bin',`maskinfo_asn1_text',
+`maskinfo_xml',`seqloc_asn1_bin',`seqloc_asn1_text',`seqloc_xml'ï¼‰
+-parse_seqids åœ¨FASTAè¾“å…¥æ–‡ä»¶ä¸­è§£æžåºåˆ—ID
+
+1.1.2 by using windowmasker
+æè¿°ï¼šåŸºäºŽçª—å£çš„åºåˆ—é®è”½å™¨
+ç”¨æ³•ï¼š
+step1:
+ä¸åŒ…å« masking information
+$ windowmasker -in hs_chr -infmt blastdb -mk_counts \
+  -parse_seqids -out hs_chr_mask.counts â€“sformat obinary
+FASTA æ–‡ä»¶
+$ windowmasker -in hs_chr.fa -infmt fasta -mk_counts \
+  -parse_seqids -out hs_chr_mask.counts â€“sformat obinary
+step2:
+åŒ…å« masking information
+$ windowmasker -in hs_chr -infmt blastdb -ustat hs_chr_mask.counts \
+  -outfmt maskinfo_asn1_bin -parse_seqids -out hs_chr_mask.asnb
+FASTA æ–‡ä»¶
+$ windowmasker -in hs_chr.fa -infmt fasta -ustat hs_chr.counts \
+  -outfmt maskinfo_asn1_bin -parse_seqids -out hs_chr_mask.asnb
+å‚æ•°è¯´æ˜Žï¼š
+-ustat <String> file with unit counts
+-in <File_In> è¾“å…¥çš„æ–‡ä»¶å
+-out <File_Out> è¾“å‡ºçš„æ–‡ä»¶å
+-checkdup <Boolean> æ£€æŸ¥é‡å¤é¡¹ Default = `false'
+-fa_list <Boolean> è¾“å…¥çš„æ˜¯ä¸€ä¸ªlist Default = `false'
+-mem <Integer, greater or equal to 1> å¯ç”¨çš„å†…å­˜ Default = `1536'
+-meta <String> æ·»åŠ å…ƒæ•°æ®
+-unit <Integer, 1..16> å•ä½
+-genome_size <Integer> åŸºå› æ€»å¤§å°
+-window <Integer, greater or equal to 1> çª—å£å¤§å°
+-parse_seqids åœ¨FASTAè¾“å…¥æ–‡ä»¶ä¸­è§£æžåºåˆ—ID
+-outfmt <String> è¾“å‡ºæ ¼å¼
+ï¼ˆ`fasta', `interval', `maskinfo_asn1_bin',`maskinfo_asn1_text', `maskinfo_xml',`seqloc_asn1_bin',`seqloc_asn1_text', `seqloc_xml'ï¼‰
+-infmt <String, `blastdb', `fasta', `seqids'> è¾“å…¥æ ¼å¼
+-exclude_ids <String> åœ¨è¿™ä¸ªé‡Œé¢çš„IDçš„æ•°æ®è¢«æŽ’é™¤
+-ids <String> åªè¿›è¡Œè¿™äº›IDé‡Œé¢çš„æ•°æ®
+-sformat <String, `ascii', `binary', `oascii', `obinary'> è¾“å‡ºæ–‡ä»¶unit countsçš„ç±»åž‹
+-smem <Integer> è¾“å‡ºæ–‡ä»¶çš„å¤§å°
+-mk_counts ç”Ÿæˆé¢‘çŽ‡è®¡æ•°
+
+1.1.3 by using segmasker
+æè¿°ï¼šåŸºäºŽSEGç®—æ³•çš„å¯¹ä½Žå¤æ‚åº¦åŒºåŸŸçš„é®è”½å™¨
+ç”¨æ³•ï¼š
+éž FASTA æ–‡ä»¶
+$ segmasker -in refseq_protein -infmt blastdb -parse_seqids \
+  -outfmt maskinfo_asn1_bin -out refseq_seg.asnb
+FASTA æ–‡ä»¶
+$ segmasker -in refseq_protein.fa -infmt fasta -parse_seqids \
+  -outfmt maskinfo_asn1_bin -out refseq_seg.asnb
+å‚æ•°è¯´æ˜Žï¼š
+-in <File_In> è¾“å…¥æ–‡ä»¶
+-out <File_Out> è¾“å‡ºæ–‡ä»¶
+-infmt <String, `blastdb', `fasta'> è¾“å…¥æ ¼å¼
+-parse_seqids åœ¨FASTAè¾“å…¥æ–‡ä»¶ä¸­è§£æžåºåˆ—ID
+-outfmt <String> è¾“å‡ºæ ¼å¼
+(`fasta', `interval', `maskinfo_asn1_bin',`maskinfo_asn1_text', `maskinfo_xml',`seqloc_asn1_bin',`seqloc_asn1_text', `seqloc_xml') 
+
+1.2 Create BLAST database with the masking information
+1.2.1 Create BLAST database with masking information using an existing BLAST database or FASTA sequence file as input
+ç”¨æ³•ï¼š
+ä½¿ç”¨å·²ç»å­˜åœ¨çš„ BLAST database
+$ makeblastdb -in hs_chr â€“input_type blastdb -dbtype nucl -parse_seqids \
+ -mask_data hs_chr_mask.asnb -out hs_chr -title \
+ "Human Chromosome, Ref B37.1"
+æ£€æŸ¥é‡æ–°åˆ›å»ºçš„æ•°æ®åº“æ˜¯å¦åŠ å…¥äº†æ–°çš„masking information 
+$ blastdbcmd -db hs_chr -info
+å‚æ•°è¯´æ˜Žï¼š
+-dbtype <String, `nucl', `prot'> æ•°æ®åº“ç±»åž‹
+-in <File_In> è¾“å…¥æ–‡ä»¶/æ•°æ®åº“åç§°
+-input_type <String, `asn1_bin', `asn1_txt', `blastdb', `fasta'> è¾“å…¥æ–‡ä»¶ç±»åž‹
+-title <String> æ•°æ®åº“title
+-parse_seqids åœ¨FASTAè¾“å…¥æ–‡ä»¶ä¸­è§£æžåºåˆ—ID
+-hash_index Create index oblf sequence hash values
+-mask_data <String> maskæ–‡ä»¶å
+-mask_id <String> 
+-mask_desc <String>
+-gi_mask å»ºç«‹ GI ç´¢å¼• masking data
+-gi_mask_name <String>
+-out <String> BLAST database åç§°
+-max_file_sz <String> æ•°æ®åº“å¤§å°ä¸Šé™ Default = `1GB'
+-logfile <File_Out> æ—¥å¿—æ–‡ä»¶
+
+1.2.2 Create a protein BLAST database with masking information
+ç”¨æ³•ï¼š
+å»ºåº“
+$ makeblastdb -in refseq_protein â€“input_type blastdb -dbtype prot -parse_seqids \
+ -mask_data refseq_seg.asnb -out refseq_protein -title \
+ "RefSeq Protein Database"
+æ£€æŸ¥
+$ blastdbcmd -db refseq_protein -info
+
+1.2.3 Create a nucleotide BLAST database using the masking information extracted from lower case masked FASTA file
+$ makeblastdb -in hs_chr.mfa -dbtype nucl -parse_seqids \
+  -mask_data hs_chr_mfa.asnb -out hs_chr_mfa -title "Human chromosomes (mfa)"
+
+2. Search with database masking enabled
+2.1 ç”¨æ³•
+æœ€çŸ­å‘½ä»¤
+blastn â€“db nt â€“query nt.fsa â€“out results.out
+è¿œç¨‹blast
+blastn â€“db nt â€“query nt.fsa â€“out results.out -remote
+ä½¿ç”¨ soft_mask
+ä½¿ç”¨4ä¸ªè¿›ç¨‹åœ¨ hs_chr æ•°æ®åº“ä¸­ç”¨ megablast ç®—æ³•æŸ¥æ‰¾ DNA ç‰‡æ®µ ä»¥å…·æœ‰æ³¨é‡Šè¡Œçš„è¡¨æ ¼å½¢å¼è¾“å‡ºåˆ° HTT_megablast_softmask.tab
+$ blastn -query HTT_gene -task megablast -db hs_chr -db_soft_mask 30 \
+  -outfmt 7 -out HTT_megablast_softmask.out -num_threads 4
+ä½¿ç”¨ hard_mask
+$ blastn -query HTT_gene -task megablast -db hs_chr -db_hard_mask 30 \
+  -outfmt 7 -out HTT_megablast_hardmask.out -num_threads 4
+
+2.2 blastn å‚æ•°è¯´æ˜Žï¼š
+-query <File_In> queryæ–‡ä»¶å
+-query_loc <String> åœ¨queryæ–‡ä»¶ä¸­çš„ä½ç½®(Format: start-stop)
+-strand <String, `both', `minus', `plus'> æœç´¢æ–¹å‘ Default = `both'
+é€šç”¨é€‰é¡¹ï¼š
+-task <String, Permissible values: 'blastn' 'blastn-short' 'dc-megablast' 'megablast' 'rmblastn' > è¦æ‰§è¡Œçš„æ¨¡å¼ Default = `megablast'
+-db <String> blastæ•°æ®åº“å
+-out <File_Out> è¾“å‡ºæ–‡ä»¶å
+-evalue <Real> Eé˜ˆå€¼ Default = `10'
+-word_size <Integer, >=4> åŒ¹é…æœç´¢æ¡†å¤§å°
+-gapopen <Integer> å‡ºçŽ°ä¸€ä¸ª gap çš„ä»£ä»·åˆ†æ•°
+-gapextend <Integer> å¢žå¤§ä¸€ä¸ª gap çš„ä»£ä»·åˆ†æ•°
+-penalty <Integer, <=0> ä¸€ä¸ªæ ¸è‹·é…¸é”™é…çš„ç½šåˆ†
+-reward <Integer, >=0> ä¸€ä¸ªæ ¸è‹·é…¸é…å¯¹çš„å¥–åŠ±åˆ†
+-use_index <Boolean> ä½¿ç”¨ MegaBLAST æ•°æ®åº“ç´¢å¼• Default = `false'
+BLAST-2-Sequences é€‰é¡¹ï¼š
+-subject <File_In> subjectæ–‡ä»¶å
+-subject_loc <String> åœ¨subjectæ–‡ä»¶ä¸­çš„ä½ç½®(Format: start-stop)
+æ ¼å¼é€‰é¡¹ï¼š
+-outfmt <String> è¾“å‡ºæ ¼å¼ Default = `0'
+     0 = Pairwise
+     1 = Query-anchored showing identities, 
+     2 = Query-anchored no identities,
+     3 = Flat query-anchored showing identities,
+     4 = Flat query-anchored no identities,
+     5 = BLAST XML,
+     6 = Tabular,
+     7 = Tabular with comment lines,
+     8 = Seqalign (Text ASN.1),
+     9 = Seqalign (Binary ASN.1),
+    10 = Comma-separated values,
+    11 = BLAST archive (ASN.1),
+    12 = Seqalign (JSON),
+    13 = Multiple-file BLAST JSON,
+    14 = Multiple-file BLAST XML2,
+    15 = Single-file BLAST JSON,
+    16 = Single-file BLAST XML2,
+    17 = Sequence Alignment/Map (SAM)
+-show_gis æ˜¾ç¤º NCBI GIs
+-num_descriptions <Integer, >=0> Number of database sequences to show one-line descriptions for Default = `500' ï¼Ÿ
+-num_alignments <Integer, >=0> Number of database sequences to show alignments for Default = `250' ï¼Ÿ
+-line_length <Integer, >=1> æ¯è¡Œæ®‹åŸºæ•° Default = `60' 
+-html ç”Ÿäº§ HTML ç»“æžœ
+Query è¿‡æ»¤å™¨é€‰é¡¹ï¼š
+-dust <String> Filter query sequence with DUST (Format: 'yes', 'level window linker', or 'no' to disable) Default = `20 64 1' ï¼Ÿ
+-filtering_db <String> BLAST database containing filtering elements (i.e.: repeats) ï¼Ÿ
+-window_masker_taxid <Integer> ä½¿ç”¨ Taxonomic ID è¿›è¡Œç­›é€‰
+-window_masker_db <String> ä½¿ç”¨è¿™ä¸ªæ–‡ä»¶çš„ä¿¡æ¯è¿›è¡Œæ£€ç´¢
+-soft_masking <Boolean> Apply filtering locations as soft masks Default = `true' ï¼Ÿ
+-lcase_masking Use lower case filtering in query and subject sequence(s) ï¼Ÿ
+æœç´¢/ç»“æžœé™åˆ¶ï¼š
+-gilist <String> åœ¨åˆ—å‡ºçš„ GI å·ä¸­æœç´¢
+-seqidlist <String> åœ¨åˆ—å‡ºçš„ SeqId ä¸­æœç´¢
+-negative_gilist <String> æŽ’é™¤è¿™äº› GI æœç´¢
+-entrez_query <String> Restrict search with the given Entrez query ï¼Ÿ
+-db_soft_mask <String> Filtering algorithm ID to apply to the BLAST database as soft masking ï¼Ÿ
+-db_hard_mask <String> Filtering algorithm ID to apply to the BLAST database as hard masking ï¼Ÿ
+-perc_identity <Real, 0..100> Percent identity ï¼Ÿ
+-qcov_hsp_perc <Real, 0..100> é«˜åˆ†é…å¯¹æ¯”ä¾‹
+-max_hsps <Integer, >=1> Set maximum number of HSPs per subject sequence to save for each query ï¼Ÿ
+-culling_limit <Integer, >=0> If the query range of a hit is enveloped by that of at least this many higher-scoring hits, delete the hit ï¼Ÿ
+-best_hit_overhang <Real, (>0 and <0.5)> Best Hit algorithm overhang value (recommended value: 0.1) ï¼Ÿ
+-best_hit_score_edge <Real, (>0 and <0.5)> Best Hit algorithm score edge value (recommended value: 0.1) ï¼Ÿ
+-max_target_seqs <Integer, >=1> æœ€å¤§æ˜¾ç¤ºåŒ¹é…æ•° Default = `500'
+ä¸è¿žç»­ MegaBLAST é€‰é¡¹ï¼š
+-template_type <String, `coding', `coding_and_optimal', `optimal'> ä¸è¿žç»­ MegaBLAST æ¨¡æ¿ç±»åž‹
+-template_length <Integer, Permissible values: '16' '18' '21' > æ¨¡æ¿é•¿åº¦
+æœç´¢ç­–ç•¥é€‰é¡¹ï¼š
+-import_search_strategy <File_In> æœç´¢ç­–ç•¥çš„æ–‡ä»¶å
+-export_search_strategy <File_Out> å‚¨å­˜æœç´¢ç­–ç•¥çš„æ–‡ä»¶å
+å…¶ä»–é€‰é¡¹ï¼š
+-parse_deflines è§£æž
+-num_threads <Integer, >=1> å¤šè¿›ç¨‹
+-remote è¿œç¨‹æ‰§è¡Œï¼Ÿ
+
+## åœ¨ tblastx ä¸­è¦è®¾ç½® -db_gencode ä¸ºæ‰€ç”¨çš„å¯†ç è¡¨ 
+id	name
+1	Standard
+2	Vertebrate Mitochondrial
+3	Yeast Mitochondrial
+4	Mold Mitochondrial; Protozoan Mitochondrial; Coelenterate
+ Mitochondrial; Mycoplasma; Spiroplasma
+5	Invertebrate Mitochondrial
+6	Ciliate Nuclear; Dasycladacean Nuclear; Hexamita Nuclear
+9	Echinoderm Mitochondrial; Flatworm Mitochondrial
+10	Euplotid Nuclear
+11	Bacterial, Archaeal and Plant Plastid
+12	Alternative Yeast Nuclear
+13	Ascidian Mitochondrial
+14	Alternative Flatworm Mitochondrial
+15	Blepharisma Macronuclear
+16	Chlorophycean Mitochondrial
+21	Trematode Mitochondrial
+22	Scenedesmus obliquus Mitochondrial
+23	Thraustochytrium Mitochondrial
+24	Pterobranchia Mitochondrial
+25	Candidate Division SR1 and Gracilibacteria
+26	Pachysolen tannophilus Nuclear
+
+Display BLAST search results with custom output format
+
+3 åŒåºåˆ—æ¯”å¯¹
+ç”¨æ³•ï¼š
+$ blastn -query test_q.fa -subject test_s.fa -dust no -outfmt "6 
+qseqid sseqid btop" -parse_deflines
+ç»“æžœï¼š
+BLASTN 2.2.24+
+
+Query= query1 
+Length=47
+
+Subject=  
+Length=142
+
+ Score = 82.4 bits (44),  Expect = 9e-22
+ Identities = 46/47 (97%), Gaps = 0/47 (0%)
+ Strand=Plus/Plus
+
+Query  1   ACGTCCGAGACGCGAGCAGCGAGCAGCAGAGCGACGAGCAGCGACGA  47
+           ||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  47  ACGTCCGGGACGCGAGCAGCGAGCAGCAGAGCGACGAGCAGCGACGA  93
+
+
+ Score = 80.5 bits (43),  Expect = 3e-21
+ Identities = 46/47 (97%), Gaps = 1/47 (2%)
+ Strand=Plus/Plus
+
+Query  1   ACGTCCGAGACGCGAGCAGCGAGCAGCAGAGCGACGAGCAGCGACGA  47
+           ||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  1   ACGTCCG-GACGCGAGCAGCGAGCAGCAGAGCGACGAGCAGCGACGA  46
+
+
+ Score = 78.7 bits (42),  Expect = 1e-20
+ Identities = 47/49 (95%), Gaps = 2/49 (4%)
+ Strand=Plus/Plus
+
+Query  1    ACGTCC--GAGACGCGAGCAGCGAGCAGCAGAGCGACGAGCAGCGACGA  47
+            ||||||  |||||||||||||||||||||||||||||||||||||||||
+Sbjct  94   ACGTCCGAGAGACGCGAGCAGCGAGCAGCAGAGCGACGAGCAGCGACGA  142
+
+4. Use blastdb_aliastool to manage the BLAST databases
+4.1 å°†å¤šä¸ªblaståº“æ±‡æ€»
+$ blastdb_aliastool -dblist "nematode_mrna nematode_genomic" -dbtype nucl \
+  -out nematode_all -title "Nematode RefSeq mRNA + Genomic" 
+4.2 åˆ›å»ºå­åº“ è¦æ±‚å»ºåº“çš„æ—¶å€™æœ‰ -parse_seqids
+$ blastdb_aliastool -db nematode_mrna -gilist c_elegance_mrna.gi -dbtype \
+  nucl -out c_elegance_mrna -title "C. elegans refseq mRNA entries"
+4.3 å‚æ•°è¯´æ˜Ž
+4.3.1 GI æ–‡ä»¶è½¬åŒ–é€‰é¡¹
+-gi_file_in <File_In> è¾“å…¥çš„ GI æ–‡ä»¶å
+-gi_file_out <File_Out> è¾“å‡ºçš„ GI æ–‡ä»¶å
+4.3.2 åˆ›å»ºåˆ«åæ–‡ä»¶
+-db <String> blast æ•°æ®åº“ åç§°
+-dbtype <String, `nucl', `prot'> blast æ•°æ®åº“ç±»åž‹
+-title <String> blast æ•°æ®åº“æ³¨é‡Š
+-gilist <File_In> GI æ–‡ä»¶ï¼Œç”¨äºŽé™åˆ¶ blast å­—åº“
+-out <String> æ–°åº“çš„åå­—
+-dblist <String> åˆå¹¶çš„åº“çš„åå­—
+-dblist_file <File_In> å«æœ‰åˆå¹¶åº“åå­—çš„æ–‡ä»¶
+-vdblist <String> A space separated list of VDB names to aggregate ï¼Ÿ
+-vdblist_file <File_In> A file containing a list of vdb names to aggregate, one per line ï¼Ÿ
+-num_volumes <Integer, >=1> åˆå¹¶åº“çš„å¤§å°
+-logfile <File_Out> æ—¥å¿—æ–‡ä»¶
+
+5. Reformat BLAST reports with blast_formatter
+5.1 ç”¨æ³•
+$ blast_formatter -archive out.1786181.asn -outfmt "7 qacc sacc evalue \
+qstart qend sstart send"
+5.2 å‚æ•°è¯´æ˜Ž
+è¾“å…¥é€‰é¡¹ï¼š
+-rid <String> BLAST Request ID (RID)ï¼Ÿ
+-archive <File_In> blast ç»“æžœæ–‡ä»¶
+æ ¼å¼é€‰é¡¹ï¼š
+-outfmt <String> è¾“å‡ºæ ¼å¼
+-show_gis æ˜¾ç¤º NCBI GI ä¿¡æ¯
+-num_descriptions <Integer, >=0> outfmt 0-4 è¾“å‡ºçš„åºåˆ—æ•° for Default = `500' ï¼Ÿ
+-num_alignments <Integer, >=0> Number of database sequences to show alignments for Default = `250' ï¼Ÿ
+-line_length <Integer, >=1> æ¯è¡Œæ®‹åŸºæ•° Default = `60' 
+-html ç”Ÿäº§ HTML ç»“æžœ
+é™åˆ¶é€‰é¡¹ï¼š
+-max_target_seqs <Integer, >=1> æœ€å¤§æ˜¾ç¤ºåŒ¹é…æ•° Default = `500'
+è¾“å‡ºé€‰é¡¹ï¼š
+-out <File_Out> è¾“å‡ºæ–‡ä»¶å
+å…¶ä»–é€‰é¡¹ï¼š
+-parse_deflines æ˜¯å¦éœ€è¦è§£æž
+
+6. Extracting data from BLAST databases with blastdbcmd
+6.1 Extract lowercase masked FASTA from a BLAST database with masking information
+æŸ¥çœ‹æ•°æ®åº“ä¿¡æ¯
+$ blastdbcmd -info -db mask-data-db
+ç»“æžœï¼š
+Database: Mask data test
+        10 sequences; 12,609 total residues
+
+Date: Feb 17, 2009  5:10 PM     Longest sequence: 1,694 residues
+
+Available filtering algorithms applied to database sequences:
+
+Algorithm ID  Algorithm name      Algorithm options                       
+    20        seg                 default options used                    
+    40        repeat              -species Desmodus_rotundus              
+
+Volumes:
+        mask-data-db
+æŸ¥çœ‹ GI å·ä¸º 71022837 çš„åºåˆ—
+$ blastdbcmd -db mask-data-db -mask_sequence_with 20 -entry 71022837
+ç»“æžœï¼š
+>gi|71022837|ref|XP_761648.1| hypothetical protein UM05501.1 [Ustilago maydis 521]
+MPPSARHSAHPSHHPHAGGRDLHHAAGGPPPQGGPGMPPGPGNGPMHHPHSSYAQSMPPPPGLPPHAMNGINGPPPSTHG
+...
+6.2 Extract all human sequences from the nr database
+ç”¨æ³•ï¼š
+$ blastdbcmd -db nr -entry all -outfmt "%g %T" | \
+   awk ' { if ($2 == 9606) { print $1 } } ' | \
+   blastdbcmd -db nr -entry_batch - -out human_sequences.txt
+ç¬¬ä¸€ä¸ª blastdbcmd å¯¹æ¯ä¸ªåºåˆ—ç”Ÿæˆäº†ä¸¤æ¡è®°å½•ï¼ˆGI å’Œ taxonomy IDï¼‰
+awkå‘½ä»¤é€‰å–çš„æ‰€æœ‰ taxonomy ID ä¸º9606(human)çš„åºåˆ—å¹¶è¾“å‡º GI å·
+ç¬¬äºŒä¸ª blastdbcmd è¾“å‡º nt æ•°æ®åº“ä¸­äººç±»åˆ° human_sequences.txt æ–‡ä»¶
+6.3 Custom data extraction and formatting from a BLAST database
+ä»Ž GI 71022837 ä¸­æå– accession, sequence length, and masked locations
+$ blastdbcmd -entry 71022837 -db Test/mask-data-db  -outfmt "%a %l %m"
+6.4 Extract different sequence ranges from the BLAST databases
+æå– human chromosome Y (GI 13626247) 40-80ä½ç½®çš„åºåˆ—ä¸Žhuman chromosome 20 (GI 14772189) 1-10 ä½ç½®çš„åºåˆ—
+$ printf "%s %s %s %s\n%s %s %s\n" 13626247 40-80 plus 30 14772189 1-10 minus \
+| blastdbcmd -db GPIPE/9606/current/all_contig -entry_batch -
+6.5 Display the locations where BLAST will search for BLAST databases
+ç”¨æ³•ï¼š
+$ blastdbcmd -show_blastdb_search_path
+6.6 Display the available BLAST databases at a given directory
+ç”¨æ³•ï¼š
+$ blastdbcmd -list repeat  -recursive
+6.7 å‚æ•°è¯´æ˜Ž
+blast æ•°æ®åº“é€‰é¡¹ï¼š
+-db <String> blast æ•°æ®åº“åç§°
+-dbtype <String, `guess', `nucl', `prot'> blast æ•°æ®åº“ç±»åž‹
+æ£€ç´¢é€‰é¡¹ï¼š
+-entry <String> æ£€ç´¢å†…å®¹ï¼Œé€—å·åˆ†éš” e.g.: 555, AC147927, 'gnl|dbname|tag', or 'all' to select all sequences in the database
+-entry_batch <File_In> æ‰¹å¤„ç†æ–‡ä»¶åï¼Œæ–‡ä»¶æ ¼å¼[range|strand|mask_algo_id]
+-pig <Integer, >=0> PIG(protein identity group) to retrieve
+-info æ‰“å° blast æ•°æ®åº“ä¿¡æ¯
+åºåˆ—æ£€ç´¢é…ç½®é€‰é¡¹ï¼š
+-range <String> æœç´¢èŒƒå›´ egï¼š 20-70
+-strand <String, `minus', `plus'> æœç´¢çš„é“¾ Default = `plus'
+-mask_sequence_with <String> mask ç®—æ³•ID
+è¾“å‡ºé…ç½®é€‰é¡¹ï¼š
+-out <File_Out> è¾“å‡ºçš„æ–‡ä»¶
+-outfmt <String> è¾“å‡ºæ ¼å¼
+   		%f means sequence in FASTA format
+   		%s means sequence data (without defline)
+   		%a means accession
+   		%g means gi
+   		%o means ordinal id (OID)
+   		%i means sequence id
+   		%t means sequence title
+   		%l means sequence length
+   		%h means sequence hash value
+   		%T means taxid
+   		%X means leaf-node taxids
+   		%e means membership integer
+   		%L means common taxonomic name
+   		%C means common taxonomic names for leaf-node taxids
+   		%S means scientific name
+   		%N means scientific names for leaf-node taxids
+   		%B means BLAST name
+   		%K means taxonomic super kingdom
+   		%P means PIG
+   		%m means sequence masking data.
+-target_only Definition line should contain target entry only
+-get_dups æ£€ç´¢é‡å¤
+FASTA æ ¼å¼è¾“å‡ºé…ç½®é€‰æ‹©ï¼š
+-line_length <Integer, >=1> æ¯è¡Œæ®‹åŸºæ•° Default = `80'
+-ctrl_a ä½¿ç”¨ Ctrl-A ä½œä¸ºéžå†—ä½™åˆ†éš”ç¬¦
+blast æ•°æ®åº“ é…ç½®é€‰é¡¹ï¼š
+-show_blastdb_search_path æ˜¾ç¤º blast æ•°æ®åº“çš„é»˜è®¤è·¯å¾„
+-list <String> æ˜¾ç¤ºåœ¨åˆ¶å®šä½ç½®çš„ blast æ•°æ®åº“çš„åç§°
+-remove_redundant_dbs åˆ é™¤å†—ä½™çš„æ•°æ®åº“
+-list_outfmt <String> è¾“å‡ºæ ¼å¼  Default = `%f %p'
+   		%f means the BLAST database absolute file name path
+   		%p means the BLAST database molecule type
+   		%t means the BLAST database title
+   		%d means the date of last update of the BLAST database
+   		%l means the number of bases/residues in the BLAST database
+   		%n means the number of sequences in the BLAST database
+   		%U means the number of bytes used by the BLAST database
+-exact_length å¾—åˆ°é¢å¤–çš„ä¿¡æ¯ Requires:  info
+-logfile <File_Out> æ—¥å¿—æ–‡ä»¶
+
+7 Use Windowmasker to filter the query sequence(s) in a BLAST search
+ç”¨æ³•ï¼š
+ç­›é€‰ taxid ä¸º9606(human)çš„æ•°æ®
+$ blastn -query input -db database -window_masker_taxid 9606 -out results.txt
+ç­›é€‰ windowmasker æ–‡ä»¶ä¸­çš„ç­›é€‰è§„åˆ™
+$ blastn â€“query input â€“db database â€“window_masker_db 9606/wmasker.obinary
+
+8 Building a BLAST database with local sequences
+ç”¨æ³•ï¼š
+$ makeblastdb -in mydb.fsa -parse_seqids -dbtype nucl
+
+8 Multiple databases vs. spaces in filenames and paths
+windowsè·¯å¾„ä¸­å¸¦ç©ºæ ¼çš„è¦ä½¿ç”¨ä¸¤å¯¹å¼•å·ï¼Œç¬¬ä¸€å¯¹å¼•å·æ‹¬ä¸Šå…¨éƒ¨å­—ç¬¦ä¸²ï¼Œç¬¬äºŒå¯¹å¼•å·æ‰©ä¸Šæ‰€åœ¨æ–‡ä»¶å¤¹è·¯å¾„
+blastdbcmd -db "\"Users\joeuser\My Documents\Downloads\mydb\"" -info
+blastdbcmd -db "\"Users\joeuser\My Documents\Downloads\mydb\" myotherdb" -info
+UNIX like ç³»ç»Ÿä½¿ç”¨å•å¼•å·+åŒå¼•å·çš„å½¢å¼è¡¨ç¤º
+blastdbcmd -db â€˜ "path with spaces/mydb" â€™ -info
+å¤šä¸ªæ•°æ®åº“åŒæ—¶ä½¿ç”¨
+-db '"db1" "db2"'
+
+9 Specifying a sequence as the multiple sequence alignment master in psiblast ?
+ç”¨æ³•ï¼š
+psiblast -in_msa align1 -db pataa -msa_master_idx 3
+
+10 Ignoring the consensus sequence in the multiple sequence alignment in psiblast ï¼Ÿ
+ç”¨æ³•ï¼š
+psiblast -in_msa align1 -db pataa -ignore_msa_master 
+
+
+outfmtç»“æžœ
+---1---
+Query= <unknown id> <unknown description>
+
+Length=1692
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+AP013063.1  Serratia marcescens SM39 DNA, complete genome             193     3e-45
+CP011642.1  Serratia marcescens strain CAV1492, complete genome       193     3e-45
+...
+Query  1424     TCGGCATAGGCGCCGGCAATGCCGTTGAGGGCGCTCAGGTCGCCCACCCCGTAGGTCGTC  1483
+                ||||| |||  |||||| |  ||||| |  |||||||| || ||||| ||| |||| || 
+Sbjct  2431567  TCGGCGTAGCTGCCGGCCACCCCGTTCAACGCGCTCAGCTCCCCCACGCCGAAGGTGGTG  2431508
+
+Query  1484     AGTACCGCGCCAAAGCCCTGGGTGC-G-G-GCGTAGCCGTCGGCGGCATAGGCGGCGTTG  1540
+                || | |||| |   | || |  ||| | | || |||||||| || |||||||||||||| 
+Sbjct  2431507  AGCAGCGCGGCC--G-CCGGTTTGCAGCGCGCATAGCCGTCAGCCGCATAGGCGGCGTTC  2431451
+...
+
+---2---
+Query= <unknown id> <unknown description>
+
+Length=1692
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+AP013063.1  Serratia marcescens SM39 DNA, complete genome             193     3e-45
+CP011642.1  Serratia marcescens strain CAV1492, complete genome       193     3e-45
+CP012685.1  Serratia marcescens strain SmUNAM836, complete genome     187     1e-43
+...
+Query_1     82        CTCCGGTGCGTCCATGCGTTCCATCACCACTTCAATGAACACCAGGGTGTCAGCGCCTTC  141
+CP003422.2  4812009   CTCCGGGGCGTCCGTCCGATCCATGACGACTTCGATGAACACCAGG                4811964
+CP003235.1  4653411   CTCCGGGGCGTCCGTCCGATCCATGACGACTTCGATGAACACCAGG                4653366
+...
+
+---3---
+Query= <unknown id> <unknown description>
+
+Length=1692
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+AP013063.1  Serratia marcescens SM39 DNA, complete genome             193     3e-45
+CP011642.1  Serratia marcescens strain CAV1492, complete genome       193     3e-45
+CP012685.1  Serratia marcescens strain SmUNAM836, complete genome     187     1e-43
+...
+Query_1     82        CTCCGGTGCGTCCATGCGTTCCATCACCACTTCAATGAACACCAGGGTGTCAGCGCCTTC  141
+CP003422.2  4812009   ......G......G.C..A.....G..G.....G............                4811964
+CP003235.1  4653411   ......G......G.C..A.....G..G.....G............                4653366
+...
+
+---4---
+Query= <unknown id> <unknown description>
+
+Length=1692
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+AP013063.1  Serratia marcescens SM39 DNA, complete genome             193     3e-45
+CP011642.1  Serratia marcescens strain CAV1492, complete genome       193     3e-45
+CP012685.1  Serratia marcescens strain SmUNAM836, complete genome     187     1e-43
+...
+Query_1     82        CTCCGGTGCGTCCATGCGTTCCATCACCACTTCAATGAACACCAGGGTGTCAGCGCCTTC  141
+CP003422.2  4812009   CTCCGGGGCGTCCGTCCGATCCATGACGACTTCGATGAACACCAGG                4811964
+CP003235.1  4653411   CTCCGGGGCGTCCGTCCGATCCATGACGACTTCGATGAACACCAGG                4653366
+
+---5---
+XML
+
+---6---
+<unknown	AP013063.1	78.451	297	62	2	224	519	330466	330761	2.81e-45	193
+<unknown	AP013063.1	74.448	317	67	13	1318	1627	331557	331866	1.04e-24	124
+<unknown	AP013063.1	75.694	144	27	6	1507	1646	3099531	3099670	6.39e-07	65.8
+...
+
+---7---
+# BLASTN 2.4.0+
+# Query: <unknown id> <unknown description>
+# Database: /data/zhoulab/dhwang/blastdb/bct
+# Fields: query id, subject id, % identity, alignment length, mismatches, gap opens, q. start, q. end, s. start, s. end, evalue, bit score
+# 912 hits found
+<unknown	AP013063.1	78.451	297	62	2	224	519	330466	330761	2.81e-45	193
+<unknown	AP013063.1	74.448	317	67	13	1318	1627	331557	331866	1.04e-24	124
+<unknown	AP013063.1	75.694	144	27	6	1507	1646	3099531	3099670	6.39e-07	65.8
+...
+
+---8---
+pass
+
+---9---
+äºŒè¿›åˆ¶
+
+---10---
+<unknown,AP013063.1,78.451,297,62,2,224,519,330466,330761,2.81e-45,193
+<unknown,AP013063.1,74.448,317,67,13,1318,1627,331557,331866,1.04e-24,124
+<unknown,AP013063.1,75.694,144,27,6,1507,1646,3099531,3099670,6.39e-07,65.8
+...
+
+---11---
+---12---
+pass
+
+---13---
+json
+
+---14---
+XML
+
+---15---
+pass
+
+---16---
+HML
+
+---17---
+@HD	VN:1.2	SO:coordinate	GO:reference
+@SQ	SN:Query_1	LN:1692
+@PG	ID:0	VN:2.4.0+	CL:blastn -db /data/zhoulab/dhwang/blastdb/bct -query orf_6.fasta -word_size 11 -max_target_seqs 10000 -show_gis -out orf_6n11_17 -outfmt 17 -num_threads 6 	PN:blastn
+CP003422.2	16	Query_1	82	255	4007191H46M4811963H	*	0	0	*	*	AS:i:25	EV:f:0.231467	NM:i:0	PI:f:84.78	BS:f:47.2865
+CP003235.1	16	Query_1	82	255	4085637H46M4653365H	*	0	0	*	*	AS:i:25	EV:f:0.231467	NM:i:0	PI:f:84.78	BS:f:47.2865
+CP002869.1	16	Query_1	82	255	3760230H46M4903545H	*	0	0	*	*	AS:i:25	EV:f:0.231467	NM:i:0	PI:f:84.78	BS:f:47.2865
+
